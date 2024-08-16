@@ -1,6 +1,6 @@
-<!-- /includes/header.php -->
-<header class="header-bg p-2">
-    <div class="container d-flex align-items-center">
+ <!-- /includes/header.php -->
+ <header class="header header-bg p-2">
+    <div class="container-fluid d-flex align-items-center">
         <div class="d-flex align-items-center">
             <img src="./assets/icons/LNHS-icon.png" alt="icon" class="rounded-circle ms-3 me-3 header-icon">
             <div>

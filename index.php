@@ -18,21 +18,7 @@
             height: 100vh;
             margin: 0;
         }
-
-        /* Styling for the login form to be positioned at the left center */
-        .login-form {
-            position: absolute;
-            top: 50%;
-            left: 0;
-            transform: translateY(-50%);
-            color: white;
-            background: transparent;
-            width: 350px;
-            padding: 20px;
-            border: 2px solid white;
-            box-shadow: 5px 5px 10px black;
-            border-radius: 20px;
-        }
+        
     </style>
 </head>
 
@@ -44,15 +30,19 @@
 
     <main>
         <!-- Hero Section -->
-        <section class="hero-section">
-            <div class="login-form ms-5">
-                <h3 class="text-center mb-4 mt-4">MEMBER LOGIN</h3>
-                <div class="d-grid gap-2">
-                    <a href="login.php" class="btn btn-primary" role="button">Login</a>
-                    <a href="#" class="btn btn-secondary" role="button">Register</a>
+        <div class="container">
+            <div class="row">
+                <div class="content">
+                    <div class="login-form ms-5">
+                        <h3 class="text-center mb-4 mt-4">MEMBER LOGIN</h3>
+                        <div class="d-grid gap-2">
+                            <a href="login.php" class="btn btn-primary" role="button">Login</a>
+                            <a href="register.php" class="btn btn-secondary" role="button">Register</a>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </section>
+        </div>
 
     </main>
 
