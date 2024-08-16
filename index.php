@@ -38,17 +38,6 @@
 
 <body>
     <!-- Header -->
-    <!-- <header class="hero-header-bg p-2">
-        <div class="container d-flex align-items-center">
-            <div class="d-flex align-items-center">
-                <img src="./assets/icons/LNHS-icon.png" alt="icon" class="rounded-circle ms-3 me-3 hero-header-icon">
-                <div>
-                    <h1 class="hero-header-title mb-0">Ligao National High School</h1>
-                    <h2 class="hero-header-title mb-0">Research Hub</h2>
-                </div>
-            </div>
-        </div>
-    </header> -->
     <?php
         include 'includes/header.php';
     ?>
