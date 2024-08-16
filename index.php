@@ -1,3 +1,5 @@
+<?php include_once "includes\db.php"; ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -18,14 +20,13 @@
             height: 100vh;
             margin: 0;
         }
-        
     </style>
 </head>
 
 <body>
     <!-- Header -->
     <?php
-        include 'includes/header.php';
+    include 'includes/header.php';
     ?>
 
     <main>
