@@ -2,7 +2,7 @@
 include_once "..\includes\db.php";
 
 // checks if value of name="lrn" is set
-if (isset($_POST['lrn']) && $_FILES['idImage']['error'] == '0') {
+if ((isset($_POST['lrn']) || isset($_POST['email'])) && $_FILES['idImage']['error'] == '0') {
 
     //transfers value of name="" from form to variable
     $r_role = $_POST['role'];
@@ -67,13 +67,15 @@ if (isset($_POST['lrn']) && $_FILES['idImage']['error'] == '0') {
         'user_status' => 'A'
     ];
 
+    $role = ($r_role == 'S') ? "Student" : "Guest";
+
     //checks if $r_lrn exists in table `lrn`
     $sql = "SELECT `lrn_id`, `lrn_lrnid` FROM `lrn` WHERE `lrn_lrnid` = ?";
     $result = query($conn, $sql, $filter);
 
     //if $r_lrn does not exist in table `lrn`, then go back to registration page, else proceed
-    if (empty($result)) {
-        header("location: ../registerStudent.php?registration=wronglrn");
+    if (empty($result) && $r_role == 'S') {
+        header("location: ../register{$role}.php?registration=wronglrn");
         exit();
     } else {
 
@@ -94,20 +96,26 @@ if (isset($_POST['lrn']) && $_FILES['idImage']['error'] == '0') {
             if (move_uploaded_file($temp, $r_idImage)) {
                 // if data is successfully inserted to database, then proceed, else go back to registration page
                 if (insert($conn, $table, $fields)) {
-                    header("location: ../pages/user/index.php?login=success");
-                    exit();
+
+                    if ($r_role == 'G') {
+                        header("location: ../index.php?registration=success");
+                        exit();
+                    } else {
+                        header("location: ../pages/user/index.php?login=success");
+                        exit();
+                    }
                 } else {
-                    header("location: ../registerStudent.php?registration=failed");
+                    header("location: ../register{$role}.php?registration=failed");
                     exit();
                 }
             } else {
-                header("location: ../registerStudent.php?registration=failed");
+                header("location: ../register{$role}.php?registration=failed");
                 exit();
             }
         }
         //if $result is not empty
         else {
-            header("location: ../registerStudent.php?registration=existing");
+            header("location: ../register{$role}.php?registration=existing");
             exit();
         }
     }

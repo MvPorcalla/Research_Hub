@@ -32,12 +32,12 @@
                             <div class="card bg-transparent">
                                 
                             <div class="card-body ms-5 me-5">
-                                <form action="#" method="POST" enctype="multipart/form-data">
+                                <form action="backend\register.php" method="POST" enctype="multipart/form-data">
                                     <!-- Role -->
                                     <div class="row mb-3" hidden>
                                         <label for="role" class="form-label">Role</label>
                                         <input type="text" class="form-control" id="role" name="role"
-                                            required value="G" disabled>
+                                            required value="G">
                                     </div>
 
                                     <!-- Name, Last Name, M.I. -->

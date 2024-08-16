@@ -58,6 +58,21 @@
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const urlParams = new URLSearchParams(window.location.search);
+            const registrationStatus = urlParams.get('registration');
+
+            if (registrationStatus === 'success') {
+                Swal.fire({
+                    icon: "success",
+                    title: "Registration Complete!",
+                    text: "Your registration is pending for approval by the admin."
+                });
+            }
+        });
+    </script>
 </body>
 
 </html>
