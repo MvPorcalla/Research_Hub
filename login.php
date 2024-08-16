@@ -28,14 +28,14 @@
             <div class="card login-card" style="width: 100%; max-width: 400px;">
                 <div class="card-body p-4">
                     <h3 class="login_card-title text-center mb-4">Login</h3>
-                    <form>
+                    <form action="backend\login.php" method="POST">
                         <div class="mb-3">
                             <label for="username" class="form-label">Username</label>
-                            <input type="text" class="form-control" id="username" placeholder="Enter username" required>
+                            <input type="text" class="form-control" id="username" name="username" placeholder="Enter username" required>
                         </div>
                         <div class="mb-3">
                             <label for="password" class="form-label">Password</label>
-                            <input type="password" class="form-control" id="password" placeholder="Enter password" required>
+                            <input type="password" class="form-control" id="password" name="password" placeholder="Enter password" required>
                         </div>
                         <div class="d-grid">
                             <button type="submit" class="btn btn-primary">Login</button>
@@ -53,6 +53,30 @@
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const urlParams = new URLSearchParams(window.location.search);
+            const loginStatus = urlParams.get('login');
+
+            switch (loginStatus) {
+                case "failed":
+                    Swal.fire({
+                        icon: "error",
+                        title: "Incorrect username or password.",
+                        text: "Please try again."
+                    });
+                    break;
+                case "inactive":
+                    Swal.fire({
+                        icon: "error",
+                        title: "Oops!",
+                        text: "Account deactivated."
+                    });
+                    break;
+            }
+        });
+    </script>
 </body>
 
 </html>

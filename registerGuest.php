@@ -1,3 +1,5 @@
+<?php include_once "includes\db.php"; ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -13,7 +15,7 @@
 <body>
     <!-- Header -->
     <?php
-        include 'includes/header.php';
+    include 'includes/header.php';
     ?>
 
     <main>
@@ -30,20 +32,30 @@
                             <div class="card bg-transparent">
                                 
                             <div class="card-body ms-5 me-5">
-                                <form action="#" method="POST" enctype="multipart/form-data">
-                                     <!-- Name, Last Name, M.I. -->
-                                     <div class="row mb-3">
+                                <form action="backend\register.php" method="POST" enctype="multipart/form-data">
+                                    <!-- Role -->
+                                    <div class="row mb-3" hidden>
+                                        <label for="role" class="form-label">Role</label>
+                                        <input type="text" class="form-control" id="role" name="role"
+                                            required value="G">
+                                    </div>
+
+                                    <!-- Name, Last Name, M.I. -->
+                                    <div class="row mb-3">
                                         <div class="col-md-5">
                                             <label for="firstName" class="form-label">First Name</label>
-                                            <input type="text" class="form-control" id="firstName" name="firstName" required>
+                                            <input type="text" class="form-control" id="firstName" name="firstName"
+                                                required>
                                         </div>
                                         <div class="col-md-5">
                                             <label for="lastName" class="form-label">Last Name</label>
-                                            <input type="text" class="form-control" id="lastName" name="lastName" required>
+                                            <input type="text" class="form-control" id="lastName" name="lastName"
+                                                required>
                                         </div>
                                         <div class="col-md-2">
                                             <label for="middleInitial" class="form-label">M.I.</label>
-                                            <input type="text" class="form-control" id="middleInitial" name="middleInitial" maxlength="1">
+                                            <input type="text" class="form-control" id="middleInitial"
+                                                name="middleInitial" maxlength="1">
                                         </div>
                                     </div>
 
@@ -66,18 +78,21 @@
                                     <!-- Upload ID Image -->
                                     <div class="mb-3">
                                         <label for="idImage" class="form-label">Upload ID Image</label>
-                                        <input type="file" class="form-control" id="idImage" name="idImage" accept="image/*" required>
+                                        <input type="file" class="form-control" id="idImage" name="idImage"
+                                            accept="image/*" required>
                                     </div>
 
                                     <!-- Password and Confirm Password -->
                                     <div class="row mb-3">
                                         <div class="col-md-6">
                                             <label for="password" class="form-label">Password</label>
-                                            <input type="password" class="form-control" id="password" name="password" required>
+                                            <input type="password" class="form-control" id="password" name="password"
+                                                required>
                                         </div>
                                         <div class="col-md-6">
                                             <label for="confirmPassword" class="form-label">Confirm Password</label>
-                                            <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" required>
+                                            <input type="password" class="form-control" id="confirmPassword"
+                                                name="confirmPassword" required>
                                         </div>
                                     </div>
 
@@ -85,7 +100,8 @@
                                     <div class="row mb-3">
                                         <div class="col-md-12">
                                             <label for="reason" class="form-label">Reason</label>
-                                            <textarea class="form-control" id="reason" name="reason" rows="4" required></textarea>
+                                            <textarea class="form-control" id="reason" name="reason" rows="4"
+                                                required></textarea>
                                         </div>
                                     </div>
 

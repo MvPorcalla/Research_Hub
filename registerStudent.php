@@ -1,3 +1,5 @@
+<?php include_once "includes\db.php"; ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -13,39 +15,42 @@
 <body>
     <!-- Header -->
     <?php
-        include 'includes/header.php';
+    include 'includes/header.php';
     ?>
 
     <main>
         <!-- Register Section -->
-
-        <div class="container ">
-            <div class="row">
-                <div class="">
-
-                    <div class="text-center m-3">
-                        <h3>Sign Up</h3>
-                    </div>
-                    <div class="row justify-content-center">
-                        <div class="col-md-10">
-                            <div class="card bg-transparent">
-                                <div class="card-body ms-5 me-5">
-                                    <form action="#" method="POST" enctype="multipart/form-data">
-                                        <!-- Name, Last Name, M.I. -->
-                                        <div class="row mb-3">
-                                            <div class="col-md-5">
-                                                <label for="firstName" class="form-label">First Name</label>
-                                                <input type="text" class="form-control" id="firstName" name="firstName" required>
-                                            </div>
-                                            <div class="col-md-5">
-                                                <label for="lastName" class="form-label">Last Name</label>
-                                                <input type="text" class="form-control" id="lastName" name="lastName" required>
-                                            </div>
-                                            <div class="col-md-2">
-                                                <label for="middleInitial" class="form-label">M.I.</label>
-                                                <input type="text" class="form-control" id="middleInitial" name="middleInitial" maxlength="1">
-                                            </div>
+        <section class="register-section">
+            <div class="container mt-5">
+                <div class="row justify-content-center">
+                    <div class="col-md-8">
+                        <div class="card">
+                            <div class="card-header text-center">
+                                <h3>Sign Up</h3>
+                            </div>
+                            <div class="card-body">
+                                <form action="backend\register.php" method="POST" enctype="multipart/form-data">
+                                    <!-- Role -->
+                                    <div class="row mb-3" hidden>
+                                        <label for="role" class="form-label">Role</label>
+                                        <input type="text" class="form-control" id="role" name="role" required
+                                            value="S">
+                                    </div>
+                                    <!-- Name, Last Name, M.I. -->
+                                    <div class="row mb-3">
+                                        <div class="col-md-5">
+                                            <label for="firstName" class="form-label">First Name</label>
+                                            <input type="text" class="form-control" id="firstName" name="firstName" required>
                                         </div>
+                                        <div class="col-md-5">
+                                            <label for="lastName" class="form-label">Last Name</label>
+                                            <input type="text" class="form-control" id="lastName" name="lastName" required>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <label for="middleInitial" class="form-label">M.I.</label>
+                                            <input type="text" class="form-control" id="middleInitial" name="middleInitial" maxlength="1">
+                                        </div>
+                                    </div>
 
                                         <!-- Username and Email -->
                                         <div class="row mb-3">
@@ -119,6 +124,52 @@
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const form = document.querySelector('form');
+            form.addEventListener('submit', function (e) {
+                const password = document.getElementById('password').value;
+                const confirmPassword = document.getElementById('confirmPassword').value;
+
+                if (password !== confirmPassword) {
+                    e.preventDefault(); // Prevent form submission
+                    Swal.fire({
+                        icon: "error",
+                        title: "Passwords do not match.",
+                        text: "Please try again."
+                    });
+                }
+            });
+
+            const urlParams = new URLSearchParams(window.location.search);
+            const registrationStatus = urlParams.get('registration');
+
+            switch (registrationStatus) {
+                case "wronglrn":
+                    Swal.fire({
+                        icon: "error",
+                        title: "Wrong LRN.",
+                        text: "Your LRN does not exist in the database."
+                    });
+                    break;
+                case "existing":
+                    Swal.fire({
+                        icon: "error",
+                        title: "LRN already registered.",
+                        text: "Your LRN has already been registered to an account."
+                    });
+                    break;
+                case "failed":
+                    Swal.fire({
+                        icon: "error",
+                        title: "Oops!",
+                        text: "Your registration failed. Please try again."
+                    });
+                    break;
+            }
+        });
+    </script>
 </body>
 
 </html>
