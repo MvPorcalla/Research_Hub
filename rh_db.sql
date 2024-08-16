@@ -87,7 +87,7 @@ CREATE TABLE `likes` (
 --
 
 CREATE TABLE `lrn` (
-  `lrrn_id` int(11) NOT NULL,
+  `lrn_id` int(11) NOT NULL,
   `lrn_student` varchar(256) NOT NULL,
   `lrn_lrnid` varchar(12) NOT NULL,
   `lrn_status` char(1) NOT NULL COMMENT 'A = Active / I = Inactive'
@@ -129,7 +129,7 @@ CREATE TABLE `users` (
   `user_idpicture_imgdir` varchar(256) NOT NULL,
   `user_school` varchar(128) DEFAULT NULL,
   `user_reason` varchar(512) DEFAULT NULL,
-  `usere_pwdhash` int(128) NOT NULL,
+  `user_pwdhash` varchar(128) NOT NULL,
   `user_type` char(1) NOT NULL COMMENT 'A = Admin / S = Student / G = Guest',
   `user_status` char(1) NOT NULL DEFAULT 'A' COMMENT 'A = Active / P = Pending / I = Inactive'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -175,7 +175,7 @@ ALTER TABLE `likes`
 -- Indexes for table `lrn`
 --
 ALTER TABLE `lrn`
-  ADD PRIMARY KEY (`lrrn_id`);
+  ADD PRIMARY KEY (`lrn_id`);
 
 --
 -- Indexes for table `records`
@@ -222,7 +222,7 @@ ALTER TABLE `likes`
 -- AUTO_INCREMENT for table `lrn`
 --
 ALTER TABLE `lrn`
-  MODIFY `lrrn_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `lrn_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `records`
@@ -273,7 +273,7 @@ ALTER TABLE `likes`
 -- Constraints for table `users`
 --
 ALTER TABLE `users`
-  ADD CONSTRAINT `users_ibfk_1` FOREIGN KEY (`lrn_id`) REFERENCES `lrn` (`lrrn_id`) ON UPDATE CASCADE;
+  ADD CONSTRAINT `users_ibfk_1` FOREIGN KEY (`lrn_id`) REFERENCES `lrn` (`lrn_id`) ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
