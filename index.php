@@ -38,7 +38,7 @@
 
 <body>
     <!-- Header -->
-    <header class="hero-header-bg p-2">
+    <!-- <header class="hero-header-bg p-2">
         <div class="container d-flex align-items-center">
             <div class="d-flex align-items-center">
                 <img src="./assets/icons/LNHS-icon.png" alt="icon" class="rounded-circle ms-3 me-3 hero-header-icon">
@@ -48,7 +48,10 @@
                 </div>
             </div>
         </div>
-    </header>
+    </header> -->
+    <?php
+        include 'includes/header.php';
+    ?>
 
     <main>
         <!-- Hero Section -->

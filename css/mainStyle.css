@@ -46,9 +46,9 @@
 }
 
 .container{
-    max-width: 1440px;
-    width: 100%;
-    margin: auto;
+  max-width: 1440px;
+  width: 100%;
+  margin: auto;
 }
 
 body {
@@ -58,16 +58,16 @@ body {
 
 /* ======================================== Hero Page (index) ======================================== */
 
-.hero-header-bg {
+.header-bg {
   background-color: var(--color-primary);
 }
 
-.hero-header-icon {
+.header-icon {
     width: 65px;
     height: 65px;
 }
 
-.hero-header-title {
+.header-title {
   font-family: var(--font-primary);
   font-size: var(--fs-2xl);
   font-weight: var(--fw-normal);
