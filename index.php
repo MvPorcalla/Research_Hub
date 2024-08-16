@@ -19,6 +19,13 @@
             margin: 0;
         }
 
+        /* .login-card {
+
+        } */
+
+        /* .container {
+            height: 80vh;
+        } */
     </style>
 </head>
 
@@ -31,7 +38,7 @@
     <main>
     <!-- Hero Section -->
     <div class="container py-5">
-        <div class="row justify-content-start mt-5">
+        <div class="justify-content-start mt-5">
             <div class="col-lg-4 col-md-6 d-flex align-items-center">
                 <div class="login-card mx-auto">
                     <h3 class="text-center mb-4">MEMBER LOGIN</h3>

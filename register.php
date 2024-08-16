@@ -8,37 +8,7 @@
     <link rel="icon" href="./assets/icons/LNHS-icon.png" type="image/png">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/mainStyle.css">
-    <style>
-        .register-icon {
-            width: 65px;
-            height: 65px;
-        }
 
-        .register-text {
-            font-size: var(--fs-3xl);
-            font-family: var(--font-secondary);
-            color: var(--text-base-lt);
-        }
-
-        .register_card {
-            color: var(--text-base);
-            background: var(--bg-base-lt);
-            padding: 80px;
-            border: 2px solid var(--color-primary);
-            border-radius: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 5px 5px 10px black;
-        }
-
-        .register_card-text {
-            color: var(--text-base);
-            font-family: var(--font-secondary);
-            font-size: var(--fs-2xl);
-            font-weight: var(--fw-bold);
-        }
-    </style>
 </head>
 
 <body>

@@ -111,6 +111,38 @@ body {
 
 /* ======================================== Register ======================================== */
 
+.register-icon {
+  width: 65px;
+  height: 65px;
+}
+
+.register-text {
+  font-size: var(--fs-3xl);
+  font-family: var(--font-secondary);
+  color: var(--text-base-lt);
+}
+
+.register_card {
+  color: var(--text-base);
+  background: var(--bg-base-lt);
+  padding: 80px;
+  border: 2px solid var(--color-primary);
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 5px 5px 10px black;
+}
+
+.register_card-text {
+  color: var(--text-base);
+  font-family: var(--font-secondary);
+  font-size: var(--fs-2xl);
+  font-weight: var(--fw-bold);
+}
+
+
+/* ======================================== Register Student/Guest ======================================== */
 
 .card-body {
   color: var(--text-base-lt);
