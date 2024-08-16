@@ -56,11 +56,12 @@
             <div class="login-form ms-5">
                 <h3 class="text-center mb-4 mt-4">MEMBER LOGIN</h3>
                 <div class="d-grid gap-2">
-                    <button type="button" class="btn btn-primary" name="login">Login</button>
-                    <button type="button" class="btn btn-secondary" name="register">Register</button>
+                    <a href="login.php" class="btn btn-primary" role="button">Login</a>
+                    <a href="#" class="btn btn-secondary" role="button">Register</a>
                 </div>
             </div>
         </section>
+
     </main>
 
     <!-- Bootstrap JS -->
