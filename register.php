@@ -8,63 +8,83 @@
     <link rel="icon" href="./assets/icons/LNHS-icon.png" type="image/png">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/mainStyle.css">
+    <style>
+        .register-icon {
+            width: 65px;
+            height: 65px;
+        }
+
+        .register-text {
+            font-size: var(--fs-3xl);
+            font-family: var(--font-secondary);
+            color: var(--text-base-lt);
+        }
+
+        .register_card {
+            color: var(--text-base);
+            background: var(--bg-base-lt);
+            padding: 80px;
+            border: 2px solid var(--color-primary);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 5px 5px 10px black;
+        }
+
+        .register_card-text {
+            color: var(--text-base);
+            font-family: var(--font-secondary);
+            font-size: var(--fs-2xl);
+            font-weight: var(--fw-bold);
+        }
+    </style>
 </head>
+
 <body>
     <!-- Header -->
-    <?php
-        include 'includes/header.php';
-    ?>
+    <?php include 'includes/header.php'; ?>
     
     <main>
-        <div class="container">
-            <div class="row">
-                <div class="content d-flex align-items-center justify-content-center">
-                    <div class="row">
-                        <div>
-                            <img class="register-icon" src="./assets/icons/Vector.png" alt="icon">
+        <div class="container py-5 mt-5">
+            <div class="row justify-content-center">
+            <div class="col-md-6 text-center">
+                <img class="register-icon mb-4" src="./assets/icons/Vector.png" alt="icon">
+                <h1 class="register-text mb-5">Register</h1>
+            </div>
+            <div class="row d-flex item-align-center justify-content-center">
+                <!-- Student Card -->
+                <div class="col-md-4">
+                    <a href="./registerStudent.php" class="text-decoration-none">
+                        <div class="register_card">
+                            <h1 class="register_card-text mb-0">Student</h1>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="m-3">
-                            <h1 class="register-text">Register</h1>
+                    </a>
+                </div>
+                
+                <!-- Admin Card -->
+                <div class="col-md-4">
+                    <a href="#" class="text-decoration-none">
+                        <div class="register_card">
+                            <h1 class="register_card-text mb-0">Admin</h1>
                         </div>
-                    </div>
-                    <div class="row g-5">
-                        <!-- Student Card -->
-                        <div class="col-md-4">
-                            <a href="./registerStudent.php" class="text-decoration-none">
-                                <div class="register_card d-flex align-items-center justify-content-center p-4">
-                                    <h1 class="register_card-text mb-0">Student</h1>
-                                </div>
-                            </a>
-                        </div>
+                    </a>
+                </div>
 
-                         <!-- Guest Card -->
-                         <div class="col-md-4">
-                            <a href="#" class="text-decoration-none">
-                                <div class="register_card d-flex align-items-center justify-content-center p-4">
-                                    <h1 class="register_card-text mb-0">Admin</h1>
-                                </div>
-                            </a>
+                 <!-- Guest Card -->
+                 <div class="col-md-4">
+                    <a href="./registerGuest.php" class="text-decoration-none">
+                        <div class="register_card">
+                            <h1 class="register_card-text mb-0">Guest</h1>
                         </div>
-                        
-                        <!-- Guest Card -->
-                        <div class="col-md-4">
-                            <a href="./registerGuest.php" class="text-decoration-none">
-                                <div class="register_card d-flex align-items-center justify-content-center p-4">
-                                    <h1 class="register_card-text mb-0">Guest</h1>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
+                    </a>
                 </div>
             </div>
         </div>
     </main>
 
-
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
 </body>
 </html>

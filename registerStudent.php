@@ -19,13 +19,12 @@
     <main>
         <!-- Register Section -->
 
-        <div class="container">
+        <div class="container ">
             <div class="row">
                 <div class="">
-                    <div class="row">
-                        <div class="text-center m-3">
-                            <h3>Sign Up</h3>
-                        </div>
+
+                    <div class="text-center m-3">
+                        <h3>Sign Up</h3>
                     </div>
                     <div class="row justify-content-center">
                         <div class="col-md-10">

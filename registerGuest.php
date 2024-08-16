@@ -22,10 +22,8 @@
         <div class="container">
             <div class="row">
                 <div class="">
-                    <div class="row">
-                        <div class="text-center m-3">
-                            <h3>Sign Up</h3>
-                        </div>
+                    <div class="text-center m-3">
+                        <h3>Sign Up</h3>
                     </div>
                     <div class="row justify-content-center">
                         <div class="col-md-10">
@@ -90,7 +88,11 @@
                                             <textarea class="form-control" id="reason" name="reason" rows="4" required></textarea>
                                         </div>
                                     </div>
-                            
+
+                                    <!-- Submit Button -->
+                                    <div class="d-grid">
+                                        <button type="submit" class="btn btn-primary">Register</button>
+                                    </div>
 
                                 <div class="card-footer text-center">
                                     <small>Already have an account? <a href="./login.php">Login here</a></small>
