@@ -48,6 +48,20 @@
 
 } 
 
+/* Custom scrollbar styles for WebKit browsers */
+body::-webkit-scrollbar {
+  width: 0.25rem;
+}
+body::-webkit-scrollbar-track {
+  background: var(--bg-base-ltr);
+}
+body::-webkit-scrollbar-thumb {
+  background: var(--text-base-lt);
+}
+body::-webkit-scrollbar-thumb:hover {
+  background: var(--text-base)
+}
+
 body {
   background-color: var(--bg-base);
   font-family: var(--font-primary);
@@ -58,17 +72,20 @@ body {
 }
 
 .content {
-  height: 90vh; /* 90% of viewport height */
-  overflow-y: auto; /* Scrollable content if it overflows */
+  height: 90vh;
+  overflow-y: auto;
   display: flex;
   flex-direction: column;
-  justify-content: center; /* Center content vertically */
+  justify-content: center;
+}
+main {
+  min-height: 90vh;
 }
 
 /* ======================================== Header ======================================== */
 
 .header {
-  height: 10vh; /* 10% of viewport height */
+  min-height: 10vh; /* 10% of viewport height */
 }
 .header-bg {
   background-color: var(--color-primary);

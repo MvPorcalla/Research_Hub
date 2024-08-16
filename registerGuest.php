@@ -7,7 +7,7 @@
     <title>REGISTER - LNHS Research Hub</title>
     <link rel="icon" href="./assets/icons/LNHS-icon.png" type="image/png">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="css/mainStyle.css"> 
+    <link rel="stylesheet" href="css/mainStyle.css">
 </head>
 
 <body>
@@ -18,15 +18,20 @@
 
     <main>
         <!-- Register Section -->
-        <section class="register-section">
-            <div class="container mt-5">
-                <div class="row justify-content-center">
-                    <div class="col-md-8">
-                        <div class="card">
-                            <div class="card-header text-center">
-                                <h3>Sign Up</h3>
-                            </div>
-                            <div class="card-body">
+
+        <div class="container">
+            <div class="row">
+                <div class="">
+                    <div class="row">
+                        <div class="text-center m-3">
+                            <h3>Sign Up</h3>
+                        </div>
+                    </div>
+                    <div class="row justify-content-center">
+                        <div class="col-md-10">
+                            <div class="card bg-transparent">
+                                
+                            <div class="card-body ms-5 me-5">
                                 <form action="#" method="POST" enctype="multipart/form-data">
                                     <!-- Name, Last Name, M.I. -->
                                     <div class="row mb-3">
@@ -77,7 +82,7 @@
                                             <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" required>
                                         </div>
                                     </div>
-                                    
+
                                     <!-- Reason -->
                                     <div class="row mb-3">
                                         <div class="col-md-12">
@@ -85,22 +90,18 @@
                                             <textarea class="form-control" id="reason" name="reason" rows="4" required></textarea>
                                         </div>
                                     </div>
+                            
 
-
-                                    <!-- Submit Button -->
-                                    <div class="d-grid">
-                                        <button type="submit" class="btn btn-primary">Register</button>
-                                    </div>
-                                </form>
-                            </div>
-                            <div class="card-footer text-center">
-                                <small>Already have an account? <a href="#">Login here</a></small>
+                                <div class="card-footer text-center">
+                                    <small>Already have an account? <a href="./login.php">Login here</a></small>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
+
     </main>
 
     <!-- Bootstrap JS -->
