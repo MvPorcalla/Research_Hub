@@ -78,9 +78,6 @@
                                                 <option value="STEM">STEM (Science, Technology, Engineering, and Mathematics)</option>
                                                 <option value="ABM">ABM (Accountancy, Business, and Management)</option>
                                                 <option value="HUMSS">HUMSS (Humanities and Social Sciences)</option>
-                                                <option value="GAS">GAS (General Academic Strand)</option>
-                                                <option value="ICT">ICT (Information and Communications Technology)</option>
-                                                <option value="HE">HE (Home Economics)</option>
                                             </select>
                                         </div>
 

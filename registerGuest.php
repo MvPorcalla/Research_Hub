@@ -82,20 +82,6 @@
                                             accept="image/*" required>
                                     </div>
 
-                                    <!-- Password and Confirm Password -->
-                                    <div class="row mb-3">
-                                        <div class="col-md-6">
-                                            <label for="password" class="form-label">Password</label>
-                                            <input type="password" class="form-control" id="password" name="password"
-                                                required>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <label for="confirmPassword" class="form-label">Confirm Password</label>
-                                            <input type="password" class="form-control" id="confirmPassword"
-                                                name="confirmPassword" required>
-                                        </div>
-                                    </div>
-
                                     <!-- Reason -->
                                     <div class="row mb-3">
                                         <div class="col-md-12">

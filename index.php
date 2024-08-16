@@ -23,7 +23,7 @@
         .login-card {
             position: absolute;
             top: 50%;
-            left: 50px;
+            left: 100px;
             transform: translateY(-40%);
         }
         
@@ -43,8 +43,8 @@
             <div class="justify-content-start mt-5">
                 <div class="col-lg-4 col-md-6 d-flex align-items-center">
                     <div class="login-card py-5">
-                        <h3 class="text-center mb-4">MEMBER LOGIN</h3>
-                        <div class="d-grid gap-2">
+                        <h3 class="text-center mb-5">MEMBER LOGIN</h3>
+                        <div class="d-grid gap-3">
                             <a href="./login.php" class="btn btn-primary" role="button" aria-label="Login">Login</a>
                             <a href="./register.php" class="btn btn-secondary" role="button" aria-label="Register">Register</a>
                         </div>
