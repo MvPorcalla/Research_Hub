@@ -1,12 +1,14 @@
 /* Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Clicker+Script&family=Poppins:wght@200;300;400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Abhaya+Libre:wght@400;500;600;700;800&display=swap');
 
 /* Fonts */
 :root {
   /* Font Families */
   --font-primary: 'Poppins', sans-serif;
-  --font-secondary: 'Times New Roman', Times, serif;
+  --font-secondary: 'Abhaya Libre', Times, serif;
   --font-cursive: 'Clicker Script', cursive;
+  
 
   /* heading font sizes */
   --fs-xs: 0.75rem; /* 12px */
@@ -44,13 +46,7 @@
 
   --color-primary: #C1D1E5;
 
-}
-/* 
-.container-fluid{
-  max-width: 1440px;
-  width: 100%;
-  margin: auto;
-} */
+} 
 
 body {
   background-color: var(--bg-base);
@@ -58,6 +54,7 @@ body {
   font-size: var(--fs-base);
   font-weight: var(--fw-normal);
   color: var(--text-base);
+  margin: auto;
 }
 
 .content {
@@ -73,16 +70,13 @@ body {
 .header {
   height: 10vh; /* 10% of viewport height */
 }
-
 .header-bg {
   background-color: var(--color-primary);
 }
-
 .header-icon {
     width: 65px;
     height: 65px;
 }
-
 .header-title {
   font-family: var(--font-primary);
   font-size: var(--fs-2xl);
@@ -103,4 +97,35 @@ body {
   border: 2px solid white;
   box-shadow: 5px 5px 10px black;
   border-radius: 20px;
+}
+
+/* ======================================== Register ======================================== */
+.register-icon {
+  width: 65px;
+  height: 65px;
+}
+
+.register-text {
+  font-size: var(--fs-2xl);
+  font-family: var(--font-secondary);
+  color: var(--text-base-lt);
+}
+
+.register_card {
+  color: var(--text-base);
+  background: var(--bg-base-lt);
+  width: 300px;
+  height: 150px;
+  padding: 20px;
+  border: 2px solid var(--bg-base-lt);
+  /* box-shadow: 5px 5px 10px black; */
+  border: solid var(--color-primary);
+  border-radius: 20px;
+}
+
+.register_card-text {
+  color: var(--text-base);
+  font-family: var(--font-secondary);
+  font-size: var(--fs-2xl);
+  font-weight: var(--fw-bold);
 }

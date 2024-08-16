@@ -15,32 +15,54 @@
         include 'includes/header.php';
     ?>
     
-   <main>
+    <main>
+        <div class="container">
+            <div class="row">
+                <div class="content d-flex align-items-center justify-content-center">
+                    <div class="row">
+                        <div>
+                            <img class="register-icon" src="./assets/icons/Vector.png" alt="icon">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="m-3">
+                            <h1 class="register-text">Register</h1>
+                        </div>
+                    </div>
+                    <div class="row g-5">
+                        <!-- Student Card -->
+                        <div class="col-md-4">
+                            <a href="./registerStudent.php" class="text-decoration-none">
+                                <div class="register_card d-flex align-items-center justify-content-center p-4">
+                                    <h1 class="register_card-text mb-0">Student</h1>
+                                </div>
+                            </a>
+                        </div>
 
-    <div class="container">
-        <div class="row">
-            <div class="content d-flex align-items-center justify-content-center">
-                <div class="row">
-                    <div class="col">
-                        <h2>Main Content 1</h2>
-                        <p>This section takes up 90% of the viewport height.</p>
-                    </div>
-                    <div class="col">
-                        <h2>Main Content 2</h2>
-                        <p>This section appears below the first content section.</p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col">
-                        <h2>Main Content 2</h2>
-                        <p>This section appears below the first content section.</p>
+                         <!-- Guest Card -->
+                         <div class="col-md-4">
+                            <a href="#" class="text-decoration-none">
+                                <div class="register_card d-flex align-items-center justify-content-center p-4">
+                                    <h1 class="register_card-text mb-0">Admin</h1>
+                                </div>
+                            </a>
+                        </div>
+                        
+                        <!-- Guest Card -->
+                        <div class="col-md-4">
+                            <a href="./registerGuest.php" class="text-decoration-none">
+                                <div class="register_card d-flex align-items-center justify-content-center p-4">
+                                    <h1 class="register_card-text mb-0">Guest</h1>
+                                </div>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    </main>
 
-   </main>
+
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

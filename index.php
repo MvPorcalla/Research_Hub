@@ -18,7 +18,7 @@
             height: 100vh;
             margin: 0;
         }
-        
+
     </style>
 </head>
 
@@ -36,14 +36,13 @@
                     <div class="login-form ms-5">
                         <h3 class="text-center mb-4 mt-4">MEMBER LOGIN</h3>
                         <div class="d-grid gap-2">
-                            <a href="login.php" class="btn btn-primary" role="button">Login</a>
-                            <a href="register.php" class="btn btn-secondary" role="button">Register</a>
+                            <a href="./login.php" class="btn btn-primary" role="button">Login</a>
+                            <a href="./register.php" class="btn btn-secondary" role="button">Register</a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
     </main>
 
     <!-- Bootstrap JS -->
