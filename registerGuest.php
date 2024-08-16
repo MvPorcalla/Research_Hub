@@ -20,15 +20,18 @@
 
     <main>
         <!-- Register Section -->
-        <section class="register-section">
-            <div class="container mt-5">
-                <div class="row justify-content-center">
-                    <div class="col-md-8">
-                        <div class="card">
-                            <div class="card-header text-center">
-                                <h3>Sign Up</h3>
-                            </div>
-                            <div class="card-body">
+
+        <div class="container">
+            <div class="row">
+                <div class="">
+                    <div class="text-center m-3">
+                        <h3>Sign Up</h3>
+                    </div>
+                    <div class="row justify-content-center">
+                        <div class="col-md-10">
+                            <div class="card bg-transparent">
+                                
+                            <div class="card-body ms-5 me-5">
                                 <form action="#" method="POST" enctype="multipart/form-data">
                                     <!-- Role -->
                                     <div class="row mb-3" hidden>
@@ -102,21 +105,23 @@
                                         </div>
                                     </div>
 
-
                                     <!-- Submit Button -->
                                     <div class="d-grid">
                                         <button type="submit" class="btn btn-primary">Register</button>
                                     </div>
+                                        
                                 </form>
-                            </div>
-                            <div class="card-footer text-center">
-                                <small>Already have an account? <a href="#">Login here</a></small>
+
+                                <div class="card-footer text-center">
+                                    <small>Already have an account? <a href="./login.php">Login here</a></small>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
+
     </main>
 
     <!-- Bootstrap JS -->

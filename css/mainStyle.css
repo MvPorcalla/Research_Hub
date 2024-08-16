@@ -1,12 +1,14 @@
 /* Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Clicker+Script&family=Poppins:wght@200;300;400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Abhaya+Libre:wght@400;500;600;700;800&display=swap');
 
 /* Fonts */
 :root {
   /* Font Families */
   --font-primary: 'Poppins', sans-serif;
-  --font-secondary: 'Times New Roman', Times, serif;
+  --font-secondary: 'Abhaya Libre', Times, serif;
   --font-cursive: 'Clicker Script', cursive;
+  
 
   /* heading font sizes */
   --fs-xs: 0.75rem; /* 12px */
@@ -44,13 +46,21 @@
 
   --color-primary: #C1D1E5;
 
+} 
+
+/* Custom scrollbar styles for WebKit browsers */
+body::-webkit-scrollbar {
+  width: 0.25rem;
 }
-/* 
-.container-fluid{
-  max-width: 1440px;
-  width: 100%;
-  margin: auto;
-} */
+body::-webkit-scrollbar-track {
+  background: var(--bg-base-ltr);
+}
+body::-webkit-scrollbar-thumb {
+  background: var(--text-base-lt);
+}
+body::-webkit-scrollbar-thumb:hover {
+  background: var(--text-base)
+}
 
 body {
   background-color: var(--bg-base);
@@ -58,31 +68,35 @@ body {
   font-size: var(--fs-base);
   font-weight: var(--fw-normal);
   color: var(--text-base);
+  margin: auto;
 }
 
-.content {
-  height: 90vh; /* 90% of viewport height */
-  overflow-y: auto; /* Scrollable content if it overflows */
-  display: flex;
-  flex-direction: column;
-  justify-content: center; /* Center content vertically */
+.login-card {
+  color: var(--text-base-ltr);
+  background: transparent;
+  width: 350px;
+  padding: 20px;
+  border: 1px solid black;
+  box-shadow: 5px 5px 10px black;
+  border-radius: 20px;
+}
+
+.container {
+  height: 80vh;
 }
 
 /* ======================================== Header ======================================== */
 
 .header {
-  height: 10vh; /* 10% of viewport height */
+  min-height: 10vh;
 }
-
 .header-bg {
   background-color: var(--color-primary);
 }
-
 .header-icon {
     width: 65px;
     height: 65px;
 }
-
 .header-title {
   font-family: var(--font-primary);
   font-size: var(--fs-2xl);
@@ -91,16 +105,49 @@ body {
   letter-spacing: 1px;
 }
 
+
 /* ======================================== Hero Page (index) ======================================== */
 
-.login-form {
-  top: 50%;
-  left: 50px;
-  color: var(--text-base-ltr);
-  background: transparent;
-  width: 350px;
-  padding: 20px;
-  border: 2px solid white;
-  box-shadow: 5px 5px 10px black;
+
+/* ======================================== Register ======================================== */
+
+.register-icon {
+  width: 65px;
+  height: 65px;
+}
+
+.register-text {
+  font-size: var(--fs-3xl);
+  font-family: var(--font-secondary);
+  color: var(--text-base-lt);
+}
+
+.register_card {
+  color: var(--text-base);
+  background: var(--bg-base-lt);
+  padding: 80px;
+  border: 2px solid var(--color-primary);
   border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 5px 5px 10px black;
+}
+
+.register_card-text {
+  color: var(--text-base);
+  font-family: var(--font-secondary);
+  font-size: var(--fs-2xl);
+  font-weight: var(--fw-bold);
+}
+
+
+/* ======================================== Register Student/Guest ======================================== */
+
+.card-body {
+  color: var(--text-base-lt);
+}
+
+.login_card-title {
+  font-size: var(--fs-3xl);
 }
