@@ -71,7 +71,7 @@ if (isset($_POST['lrn']) && $_FILES['idImage']['error'] == '0') {
     $sql = "SELECT `lrn_id`, `lrn_lrnid` FROM `lrn` WHERE `lrn_lrnid` = ?";
     $result = query($conn, $sql, $filter);
 
-    //if $r_lrn does not exist in table `lrn`, then go back to landing page, else proceed
+    //if $r_lrn does not exist in table `lrn`, then go back to registration page, else proceed
     if (empty($result)) {
         header("location: ../registerStudent.php?registration=wronglrn");
         exit();
@@ -87,14 +87,14 @@ if (isset($_POST['lrn']) && $_FILES['idImage']['error'] == '0') {
         $result = query($conn, $sql, $filter);
 
 
-        //if $r_lrn does not exist in table `users`, then proceed, else go back to landing page
+        //if $r_lrn does not exist in table `users`, then proceed, else go back to registration page
         if (empty($result)) {
 
-            // if uploaded file is successfully moved, then proceed, else go back to landing page
+            // if uploaded file is successfully moved, then proceed, else go back to registration page
             if (move_uploaded_file($temp, $r_idImage)) {
-                // if data is successfully inserted to database, then proceed, else go back to landing page
+                // if data is successfully inserted to database, then proceed, else go back to registration page
                 if (insert($conn, $table, $fields)) {
-                    header("location: ../pages/user/index.php?registration=success");
+                    header("location: ../pages/user/index.php?login=success");
                     exit();
                 } else {
                     header("location: ../registerStudent.php?registration=failed");

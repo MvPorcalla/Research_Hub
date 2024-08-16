@@ -136,7 +136,7 @@
                     e.preventDefault(); // Prevent form submission
                     Swal.fire({
                         icon: "error",
-                        title: "Passwords do not match!",
+                        title: "Passwords do not match.",
                         text: "Please try again."
                     });
                 }
@@ -149,14 +149,14 @@
                 case "wronglrn":
                     Swal.fire({
                         icon: "error",
-                        title: "Wrong LRN!",
+                        title: "Wrong LRN.",
                         text: "Your LRN does not exist in the database."
                     });
                     break;
                 case "existing":
                     Swal.fire({
                         icon: "error",
-                        title: "LRN already registered!",
+                        title: "LRN already registered.",
                         text: "Your LRN has already been registered to an account."
                     });
                     break;
