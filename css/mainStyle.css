@@ -1,0 +1,76 @@
+/* Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Clicker+Script&family=Poppins:wght@200;300;400&display=swap');
+
+/* Fonts */
+:root {
+  /* Font Families */
+  --font-primary: 'Poppins', sans-serif;
+  --font-secondary: 'Times New Roman', Times, serif;
+  --font-cursive: 'Clicker Script', cursive;
+
+  /* heading font sizes */
+  --fs-xs: 0.75rem; /* 12px */
+  --fs-sm: 0.875rem; /* 14px */
+  --fs-base: 1rem; /* 16px */
+  --fs-lg: 1.125rem; /* 18px */
+  --fs-xl: 1.25rem; /* 20px */
+  --fs-2xl: 1.5rem; /* 24px */
+  --fs-3xl: 1.875rem; /* 30px */
+  --fs-4xl: 2.25rem; /* 36px */
+  --fs-5xl: 3rem; /* 48px */
+  --fs-6xl: 3.75rem; /* 60px */
+  --fs-7xl: 4.5rem; /* 72px */
+  --fs-8xl: 6rem; /* 96px */
+  --fs-9xl: 8rem; /* 128px */
+
+  /* Font Weights */
+  --fw-normal: 400;
+  --fw-medium: 500;
+  --fw-semibold: 600;
+  --fw-bold: 700;
+  --fw-extrabold: 800;
+}
+
+/* Colors */
+:root {
+  /* Background Colors */
+  --bg-base: #e8dfec; 
+  --bg-base-lt: #f2f2f2;
+  
+  /* Text Colors */
+  --text-base: #111111;
+  --text-base-lt: #393939;
+
+  --color-primary: #C1D1E5;
+
+}
+
+.container{
+    max-width: 1440px;
+    width: 100%;
+    margin: auto;
+}
+
+body {
+  background-color: var(--bg-base);
+}
+
+
+/* ======================================== Hero Page (index) ======================================== */
+
+.hero-header-bg {
+  background-color: var(--color-primary);
+}
+
+.hero-header-icon {
+    width: 65px;
+    height: 65px;
+}
+
+.hero-header-title {
+  font-family: var(--font-primary);
+  font-size: var(--fs-2xl);
+  font-weight: var(--fw-normal);
+  color: var(--text-base);
+  letter-spacing: 1px;
+}
