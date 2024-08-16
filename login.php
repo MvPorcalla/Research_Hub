@@ -41,9 +41,12 @@
                             <button type="submit" class="btn btn-primary">Login</button>
                         </div>
                     </form>
+                    <div class="card-footer text-center">
+                        <small>Don't have an account? <a href="./register.php">Register here</a></small>
+                    </div>
                 </div>
             </div>
-</div>
+        </div>
 
     </main>
 

@@ -31,8 +31,8 @@
                                 
                             <div class="card-body ms-5 me-5">
                                 <form action="#" method="POST" enctype="multipart/form-data">
-                                    <!-- Name, Last Name, M.I. -->
-                                    <div class="row mb-3">
+                                     <!-- Name, Last Name, M.I. -->
+                                     <div class="row mb-3">
                                         <div class="col-md-5">
                                             <label for="firstName" class="form-label">First Name</label>
                                             <input type="text" class="form-control" id="firstName" name="firstName" required>
@@ -93,6 +93,8 @@
                                     <div class="d-grid">
                                         <button type="submit" class="btn btn-primary">Register</button>
                                     </div>
+                                        
+                                </form>
 
                                 <div class="card-footer text-center">
                                     <small>Already have an account? <a href="./login.php">Login here</a></small>
