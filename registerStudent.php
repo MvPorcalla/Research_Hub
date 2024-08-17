@@ -169,6 +169,9 @@
                     });
                     break;
             }
+            let url = new URL(window.location.href);
+            url.searchParams.delete('registration');
+            window.history.replaceState({}, document.title, url.toString());
         });
     </script>
 </body>

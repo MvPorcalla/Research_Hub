@@ -127,6 +127,9 @@
                     title: "Welcome to Research Hub!"
                 });
             }
+            let url = new URL(window.location.href);
+            url.searchParams.delete('login');
+            window.history.replaceState({}, document.title, url.toString());
 
         });
     </script>
