@@ -1,6 +1,6 @@
 <?php
     // Simulated user data
-    $user_name = "Shesh";
+    $user_name = "admin melvs";
 ?>
 
 
@@ -10,20 +10,16 @@
     </div>
     <ul class="nav flex-column mx-4">
         <li class="nav-item">
-            <a class="nav-link active" href="#">Library</a>
+            <a class="nav-link active" href="#">Research Record</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#">Favorites</a>
+            <a class="nav-link" href="#">User List</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#">History</a>
+            <a class="nav-link" href="#">Pending Request</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#">Research Hub Forum</a>
+            <a class="nav-link" href="#">Settings</a>
         </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#">Account Setting</a>
-        </li>
-        
     </ul>
 </nav>
