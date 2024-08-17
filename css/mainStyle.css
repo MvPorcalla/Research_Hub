@@ -54,12 +54,13 @@ body::-webkit-scrollbar {
 }
 body::-webkit-scrollbar-track {
   background: var(--bg-base-ltr);
+  
 }
 body::-webkit-scrollbar-thumb {
   background: var(--text-base-lt);
 }
 body::-webkit-scrollbar-thumb:hover {
-  background: var(--text-base)
+  background: var(--text-base);
 }
 
 body {
@@ -104,6 +105,34 @@ body {
   color: var(--text-base);
   letter-spacing: 1px;
 }
+
+/* ======================================== Sidebar ======================================== */
+
+.sidebar {
+  position: sticky;
+  top: 0;
+  padding-top: 20px;
+  }
+
+  .sidebar a {
+      text-decoration: none;
+      padding: 30px;
+      display: block;
+      color: var(--text-base);
+      border: 1px solid var(--color-primary);
+      background-color: var(--color-primary);
+      border-radius: 20px;
+      margin: 5px;
+  }
+
+  .sidebar a:hover {
+      background-color: white; /* Optional: background change on hover */
+  }
+
+  .sidebar-text {
+    font-family: var(--font-secondary);
+      font-size: var(--fs-3xl);
+  }
 
 
 /* ======================================== Hero Page (index) ======================================== */

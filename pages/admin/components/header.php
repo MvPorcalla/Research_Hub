@@ -1,4 +1,4 @@
- <!-- /components/header.php -->
+ <!-- /includes/header.php -->
  <header class="header header-bg p-2">
     <div class="container-fluid d-flex align-items-center">
         <div class="d-flex align-items-center">
