@@ -5,14 +5,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HOME PAGE - LNHS Research Hub</title>
-    <link rel="icon" href="assets/icons/LNHS-icon.png" type="image/png">
+    <link rel="icon" href="../../assets/icons/LNHS-icon.png" type="image/png">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="css/mainStyle.css">
+    <link rel="stylesheet" href="../../css/mainStyle.css">
+
+    <style>
+        
+    </style>
+
 </head>
 
 <body>
+    <!-- header -->
+    <?php include './../user/components/header.php' ?>
 
-    LOGGED IN
+    <!-- main content -->
+    <main>
+        <div class="container d-flex align-items-center justify-content-center">
+            <div class="row text-center text-danger">
+                <h1> BMO Always Bounces Back</h1>
+                <hr>
+                <h1 class="text-primary">Home Page for User test run</h1>
+            </div>
+        </div>
+    </main>
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
