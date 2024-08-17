@@ -17,14 +17,7 @@
             background-size: cover;
             background-position: center;
             background-repeat: repeat;
-            margin: 0;
-        }
-
-        .login-card {
-            position: absolute;
-            top: 50%;
-            left: 100px;
-            transform: translateY(-40%);
+            /* margin: 0; */
         }
         
     </style>
@@ -33,27 +26,24 @@
 <body>
     <!-- Header -->
     <?php
-    include 'includes/header.php';
+        include 'includes/header.php';
     ?>
 
-    <main>
     <!-- Hero Section -->
-    <div class="container py-5">
-        <div class="row">
-            <div class="justify-content-start mt-5">
-                <div class="col-lg-4 col-md-6 d-flex align-items-center">
-                    <div class="login-card py-5">
-                        <h3 class="text-center mb-5">MEMBER LOGIN</h3>
-                        <div class="d-grid gap-3">
-                            <a href="./login.php" class="btn btn-primary" role="button" aria-label="Login">Login</a>
-                            <a href="./register.php" class="btn btn-secondary" role="button" aria-label="Register">Register</a>
-                        </div>
+    <!-- main content -->
+    <main>
+        <div class="container d-flex align-items-center justfy-content-center">
+            <div class="row ms-3 mt-5">
+                <div class="login-card py-5">
+                    <h3 class="text-center mb-5">MEMBER LOGIN</h3>
+                    <div class="d-grid gap-3">
+                        <a href="./login.php" class="btn btn-primary" role="button" aria-label="Login">Login</a>
+                        <a href="./register.php" class="btn btn-secondary" role="button" aria-label="Register">Register</a>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</main>
+    </main>
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>

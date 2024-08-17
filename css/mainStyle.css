@@ -127,7 +127,7 @@ body {
   background: var(--bg-base-lt);
   padding: 80px;
   border: 2px solid var(--color-primary);
-  border-radius: 20px;
+  border-radius: 30px;
   display: flex;
   align-items: center;
   justify-content: center;

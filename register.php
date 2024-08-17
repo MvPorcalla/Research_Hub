@@ -31,21 +31,21 @@
                         </div>
                     </a>
                 </div>
-                
-                <!-- Admin Card -->
-                <div class="col-md-4">
-                    <a href="#" class="text-decoration-none">
-                        <div class="register_card">
-                            <h1 class="register_card-text mb-0">Admin</h1>
-                        </div>
-                    </a>
-                </div>
 
                  <!-- Guest Card -->
                  <div class="col-md-4">
                     <a href="./registerGuest.php" class="text-decoration-none">
                         <div class="register_card">
                             <h1 class="register_card-text mb-0">Guest</h1>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Admin Card -->
+                <div class="col-md-4">
+                    <a href="#" class="text-decoration-none">
+                        <div class="register_card">
+                            <h1 class="register_card-text mb-0">Admin</h1>
                         </div>
                     </a>
                 </div>

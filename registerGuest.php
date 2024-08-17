@@ -15,7 +15,7 @@
 <body>
     <!-- Header -->
     <?php
-    include 'includes/header.php';
+        include 'includes/header.php';
     ?>
 
     <main>
@@ -31,77 +31,77 @@
                         <div class="col-md-10">
                             <div class="card bg-transparent">
                                 
-                            <div class="card-body ms-5 me-5">
-                                <form action="backend\register.php" method="POST" enctype="multipart/form-data">
-                                    <!-- Role -->
-                                    <div class="row mb-3" hidden>
-                                        <label for="role" class="form-label">Role</label>
-                                        <input type="text" class="form-control" id="role" name="role"
-                                            required value="G">
-                                    </div>
-
-                                    <!-- Name, Last Name, M.I. -->
-                                    <div class="row mb-3">
-                                        <div class="col-md-5">
-                                            <label for="firstName" class="form-label">First Name</label>
-                                            <input type="text" class="form-control" id="firstName" name="firstName"
-                                                required>
+                                <div class="card-body mx-5">
+                                    <form action="backend\register.php" method="POST" enctype="multipart/form-data">
+                                        <!-- Role -->
+                                        <div class="row mb-3" hidden>
+                                            <label for="role" class="form-label">Role</label>
+                                            <input type="text" class="form-control" id="role" name="role"
+                                                required value="G">
                                         </div>
-                                        <div class="col-md-5">
-                                            <label for="lastName" class="form-label">Last Name</label>
-                                            <input type="text" class="form-control" id="lastName" name="lastName"
-                                                required>
+
+                                        <!-- Name, Last Name, M.I. -->
+                                        <div class="row mb-3">
+                                            <div class="col-md-5">
+                                                <label for="firstName" class="form-label">First Name</label>
+                                                <input type="text" class="form-control" id="firstName" name="firstName"
+                                                    required>
+                                            </div>
+                                            <div class="col-md-5">
+                                                <label for="lastName" class="form-label">Last Name</label>
+                                                <input type="text" class="form-control" id="lastName" name="lastName"
+                                                    required>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <label for="middleInitial" class="form-label">M.I.</label>
+                                                <input type="text" class="form-control" id="middleInitial"
+                                                    name="middleInitial" maxlength="1">
+                                            </div>
                                         </div>
-                                        <div class="col-md-2">
-                                            <label for="middleInitial" class="form-label">M.I.</label>
-                                            <input type="text" class="form-control" id="middleInitial"
-                                                name="middleInitial" maxlength="1">
+
+                                        <!-- Email -->
+                                        <div class="row mb-3">
+                                            <div class="col-md-12">
+                                                <label for="email" class="form-label">Email Address</label>
+                                                <input type="email" class="form-control" id="email" name="email" required>
+                                            </div>
                                         </div>
-                                    </div>
 
-                                    <!-- Email -->
-                                    <div class="row mb-3">
-                                        <div class="col-md-12">
-                                            <label for="email" class="form-label">Email Address</label>
-                                            <input type="email" class="form-control" id="email" name="email" required>
+                                        <!-- School -->
+                                        <div class="row mb-3">
+                                            <div class="col-md-12">
+                                                <label for="text" class="form-label">School</label>
+                                                <input type="text" class="form-control" id="school" name="school" required>
+                                            </div>
                                         </div>
-                                    </div>
 
-                                    <!-- School -->
-                                    <div class="row mb-3">
-                                        <div class="col-md-12">
-                                            <label for="text" class="form-label">School</label>
-                                            <input type="text" class="form-control" id="school" name="school" required>
+                                        <!-- Upload ID Image -->
+                                        <div class="mb-3">
+                                            <label for="idImage" class="form-label">Upload ID Image</label>
+                                            <input type="file" class="form-control" id="idImage" name="idImage"
+                                                accept="image/*" required>
                                         </div>
-                                    </div>
 
-                                    <!-- Upload ID Image -->
-                                    <div class="mb-3">
-                                        <label for="idImage" class="form-label">Upload ID Image</label>
-                                        <input type="file" class="form-control" id="idImage" name="idImage"
-                                            accept="image/*" required>
-                                    </div>
-
-                                    <!-- Reason -->
-                                    <div class="row mb-3">
-                                        <div class="col-md-12">
-                                            <label for="reason" class="form-label">Reason</label>
-                                            <textarea class="form-control" id="reason" name="reason" rows="4"
-                                                required></textarea>
+                                        <!-- Reason -->
+                                        <div class="row mb-3">
+                                            <div class="col-md-12">
+                                                <label for="reason" class="form-label">Reason</label>
+                                                <textarea class="form-control" id="reason" name="reason" rows="4"
+                                                    required></textarea>
+                                            </div>
                                         </div>
-                                    </div>
 
-                                    <!-- Submit Button -->
-                                    <div class="d-grid">
-                                        <button type="submit" class="btn btn-primary">Register</button>
-                                    </div>
-                                        
-                                </form>
+                                        <!-- Submit Button -->
+                                        <div class="d-grid">
+                                            <button type="submit" class="btn btn-primary">Register</button>
+                                        </div>
+                                            
+                                    </form>
 
-                                <div class="card-footer text-center">
-                                    <small>Already have an account? <a href="./login.php">Login here</a></small>
+                                    <div class="card-footer text-center">
+                                        <small>Already have an account? <a href="./login.php">Login here</a></small>
+                                    </div>
                                 </div>
-                            </div>
                         </div>
                     </div>
                 </div>
