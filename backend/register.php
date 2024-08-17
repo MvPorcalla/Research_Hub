@@ -88,30 +88,28 @@ if ((isset($_POST['lrn']) || isset($_POST['email'])) && $_FILES['idImage']['erro
                 WHERE lrn.lrn_lrnid = ?";
         $result = query($conn, $sql, $filter);
 
+        $fields['user_status'] = ($r_role == 'G') ? 'P' : 'A';
 
         //if $r_lrn does not exist in table `users`, then proceed, else go back to registration page
         if (empty($result)) {
-
-            // if uploaded file is successfully moved, then proceed, else go back to registration page
-            if (move_uploaded_file($temp, $r_idImage)) {
-                // if data is successfully inserted to database, then proceed, else go back to registration page
-                if (insert($conn, $table, $fields)) {
-
-                    if ($r_role == 'G') {
-                        header("location: ../index.php?registration=success");
-                        exit();
-                    } else {
-                        header("location: ../pages/user/index.php?login=success");
-                        exit();
-                    }
-                } else {
-                    header("location: ../register{$role}.php?registration=failed");
-                    exit();
-                }
-            } else {
-                header("location: ../register{$role}.php?registration=failed");
-                exit();
-            }
+            // Move the uploaded file and check if it succeeded
+            move_uploaded_file($temp, $r_idImage)
+                // If the file move was successful, attempt to insert data into the database
+                ? (
+                    insert($conn, $table, $fields)
+                    // If data insertion was successful, check the user's role and redirect accordingly
+                    ? (
+                        ($r_role == 'G') 
+                        ? header("location: ../index.php?registration=success")
+                        : header("location: ../login.php?login=success")
+                    )
+                    // If data insertion failed, redirect back to the registration page with a failure message
+                    : header("location: ../register{$role}.php?registration=failed")
+                )
+                // If the file move failed, redirect back to the registration page with a failure message
+                : header("location: ../register{$role}.php?registration=failed");
+            
+            exit;
         }
         //if $result is not empty
         else {

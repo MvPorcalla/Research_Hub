@@ -67,6 +67,13 @@
             const loginStatus = urlParams.get('login');
 
             switch (loginStatus) {
+                case "success":
+                    Swal.fire({
+                        icon: "success",
+                        title: "Registration Complete!",
+                        text: "Please log in to proceed."
+                    });
+                    break;
                 case "failed":
                     Swal.fire({
                         icon: "error",
@@ -82,6 +89,9 @@
                     });
                     break;
             }
+            let url = new URL(window.location.href);
+            url.searchParams.delete('login');
+            window.history.replaceState({}, document.title, url.toString());
         });
     </script>
 </body>
