@@ -8,6 +8,13 @@
     <link rel="icon" href="../../assets/icons/LNHS-icon.png" type="image/png">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../../css/mainStyle.css">
+    <style>
+        .table-container {
+            max-height: 500px; /* Adjust as needed */
+            overflow-y: auto;
+        }
+
+    </style>
 </head>
 
 <body>
@@ -20,13 +27,12 @@
             <!-- sidebar -->
             <?php include './../admin/components/sidebar.php'; ?>
             
-
             <!-- Main content area -->
             <main class="col-md-9 ms-sm-auto col-lg-9 px-md-4">
                 <div class="container">
                     <div class="row">
                         <div class="my-3">
-                            <h1>Research Records</h1>
+                            <h1 class="admin_title">Research Records</h1>
                         </div>
                         
                         <!-- Search Bar -->
@@ -37,36 +43,84 @@
 
                             <div class="col-md-7">
                                 <div class="d-flex justify-content-end">
-                                    
-                                <form class="d-flex w-100">
-                                    <div class="input-group">
-                                        <input class="form-control rounded-pill" type="search" placeholder="Search" aria-label="Search">
+                                    <form class="d-flex w-100">
+                                        <div class="input-group">
+                                            <input class="form-control rounded-pill" type="search" placeholder="Search" aria-label="Search">
                                             <button class="btn rounded-pill" type="submit" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%);">
-                                            <i class="fas fa-search"></i>
-                                        </button>
-                                    </div>
-                                </form>
-
+                                                <i class="fas fa-search"></i>
+                                            </button>
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
+                        </div>
 
-                            <!-- Content Table -->
+                        <!-- Content Table -->
+                        <div class="container mt-3 table-container">
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-striped">
+                                    <thead class="table-dark">
+                                        <tr>
+                                            <th>Title</th>
+                                            <th>Year</th>
+                                            <th>Month</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!-- Example static row -->
+                                        <tr>
+                                            <td>Sample Research Title</td>
+                                            <td>2024</td>
+                                            <td>August</td>
+                                            <td>
+                                                <a href="./editRecord.php?id=1" class="btn btn-warning btn-sm">
+                                                    <i class="fas fa-edit"></i>
+                                                </a>
+                                                <a href="./deleteRecord.php?id=1" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this record?');">
+                                                    <i class="fas fa-trash-alt"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>I still miss U</td>
+                                            <td>2023</td>
+                                            <td>June</td>
+                                            <td>
+                                                <a href="./editRecord.php?id=1" class="btn btn-warning btn-sm">
+                                                    <i class="fas fa-edit"></i>
+                                                </a>
+                                                <a href="./deleteRecord.php?id=1" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this record?');">
+                                                    <i class="fas fa-trash-alt"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                        
 
-                                <div class="container mt-2">
-                                    <table class="table table-bordered custom-table" id="research-table">
-                                        <thead class="thead-dark">
-                                            <tr>
-                                                
-                                                <th>Title</th>
-                                                <th>Actions</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <!-- Data will be inserted here by JavaScript -->
-                                        </tbody>
-                                    </table>
-                                </div>
+                                        <!-- PHP loop to display dynamic rows here -->
+                                        <?php
+                                        // Example: Assuming you have an array of records from a database
+                                        // $records = fetchRecordsFromDatabase();
 
+                                        // foreach ($records as $record) {
+                                        //     echo "<tr>";
+                                        //     echo "<td>{$record['record_title']}</td>";
+                                        //     echo "<td>{$record['record_year']}</td>";
+                                        //     echo "<td>{$record['record_month']}</td>";
+                                        //     echo "<td>";
+                                        //     echo "<a href='./editRecord.php?id={$record['record_id']}' class='btn btn-warning btn-sm'>";
+                                        //     echo "<i class='fas fa-edit'></i>";
+                                        //     echo "</a> ";
+                                        //     echo "<a href='./deleteRecord.php?id={$record['record_id']}' class='btn btn-danger btn-sm' onclick='return confirm(\"Are you sure you want to delete this record?\");'>";
+                                        //     echo "<i class='fas fa-trash-alt'></i>";
+                                        //     echo "</a>";
+                                        //     echo "</td>";
+                                        //     echo "</tr>";
+                                        // }
+                                        ?>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
