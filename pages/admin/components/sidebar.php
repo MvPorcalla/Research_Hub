@@ -9,16 +9,19 @@
         <h1 class="sidebar-text">Welcome, <?php echo htmlspecialchars($user_name); ?>!</h1>
     </div>
     <ul class="nav flex-column mx-4">
-        <li class="nav-item">
-            <a class="nav-link active" href="#">Research Record</a>
+        <li class="nav-item mb-1">
+            <a class="nav-link active" href="./index.php">Research Record</a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item mb-1">
             <a class="nav-link" href="#">User List</a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item mb-1">
+            <a class="nav-link" href="#">LRN List</a>
+        </li>
+        <li class="nav-item mb-1">
             <a class="nav-link" href="#">Pending Request</a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item mb-1">
             <a class="nav-link" href="#">Settings</a>
         </li>
     </ul>

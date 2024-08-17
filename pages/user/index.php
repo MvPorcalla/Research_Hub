@@ -34,20 +34,74 @@
                             </div>
                         </div>
 
-                        <!-- Content Table -->
-                        <div class="container mt-5">
-                            <table class="table table-bordered custom-table" id="research-table">
-                                <thead class="thead-dark">
-                                    <tr>
-                                        <th>File</th>
-                                        <th>Title</th>
-                                        <th>Actions</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <!-- Data will be inserted here by JavaScript -->
-                                </tbody>
-                            </table>
+                         <!-- Content Table -->
+                         <div class="container mt-3 table-container">
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-striped">
+                                    <thead class="table-dark">
+                                        <tr>
+                                            <th></th>
+                                            <th>Title</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!-- Example static row -->
+                                        <tr>
+                                            <td><i class="fas fa-file-pdf"></i></td>
+                                            <td>Sample Research Title</td>
+                                            
+                                            <td>
+                                                <a href="./#?id=1" class="btn btn-warning btn-sm">
+                                                    <i class="fas fa-comment"></i>
+                                                </a>
+                                                <a href="./#?id=1" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this record?');">
+                                                    <i class="fas fa-heart"></i>
+                                                </a>
+                                                <a href="./#?id=1" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this record?');">
+                                                    <i class="fas fa-download"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><i class="fas fa-file-pdf"></i></td>
+                                            <td>I still miss U</td>
+                                            <td>
+                                                <a href="./#?id=1" class="btn btn-warning btn-sm">
+                                                    <i class="fas fa-comment"></i>
+                                                </a>
+                                                <a href="./#?id=1" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this record?');">
+                                                    <i class="fas fa-heart"></i>
+                                                </a>
+                                                <a href="./#?id=1" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this record?');">
+                                                    <i class="fas fa-download"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                        
+
+                                        <!-- PHP loop to display dynamic rows here -->
+                                        <?php
+                                        // Example: Assuming you have an array of records from a database
+                                        // $records = fetchRecordsFromDatabase();
+
+                                        // foreach ($records as $record) {
+                                        //     echo "<tr>";
+                                        //     echo "<td>{$record['record_title']}</td>";
+                                        //     echo "<td>";
+                                        //     echo "<a href='./editRecord.php?id={$record['record_id']}' class='btn btn-warning btn-sm'>";
+                                        //     echo "<i class='fas fa-edit'></i>";
+                                        //     echo "</a> ";
+                                        //     echo "<a href='./deleteRecord.php?id={$record['record_id']}' class='btn btn-danger btn-sm' onclick='return confirm(\"Are you sure you want to delete this record?\");'>";
+                                        //     echo "<i class='fas fa-trash-alt'></i>";
+                                        //     echo "</a>";
+                                        //     echo "</td>";
+                                        //     echo "</tr>";
+                                        // }
+                                        ?>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
 
                     </div>
@@ -74,37 +128,6 @@
                 });
             }
 
-            // Sample data
-            const sampleData = [
-                { title: 'Advancements in AI Algorithms' },
-                { title: 'Optimization Techniques for Data Processing' },
-                { title: 'Impact of Blockchain on Financial Transactions' },
-                { title: 'Machine Learning in Healthcare' },
-                { title: 'Efficient Algorithms for Large Data Sets' }
-            ];
-
-            // Function to populate table
-            function populateTable(data) {
-                const tableBody = document.querySelector('#research-table tbody');
-                tableBody.innerHTML = ''; // Clear existing rows
-
-                data.forEach(item => {
-                    const row = document.createElement('tr');
-                    row.innerHTML = `
-                        <td><i class="fas fa-file-pdf"></i></td>
-                        <td>${item.title}</td>
-                        <td class="action-buttons">
-                            <button class="btn btn-info" title="Comment"><i class="fas fa-comment"></i></button>
-                            <button class="btn btn-warning" title="Favorite"><i class="fas fa-heart"></i></button>
-                            <button class="btn btn-success" title="Download"><i class="fas fa-download"></i></button>
-                        </td>
-                    `;
-                    tableBody.appendChild(row);
-                });
-            }
-
-            // Populate table with sample data
-            populateTable(sampleData);
         });
     </script>
 </body>

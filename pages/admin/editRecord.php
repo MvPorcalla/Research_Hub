@@ -27,7 +27,7 @@
                 <div class="container">
                     <div class="row">
                         <div class="mt-5 mb-3">
-                            <h1 class='addRecord-title'>Add Record</h1>
+                            <h1 class='addRecord-title'>Edit Record</h1>
                         </div>
                         <div class="row justify-content-center">
                             <div class="col-md-10">

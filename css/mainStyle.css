@@ -180,3 +180,24 @@ body {
 .login_card-title {
   font-size: var(--fs-3xl);
 }
+
+/* ======================================== admin landing page ======================================== */
+
+.admin_title {
+  font-family: var(--font-secondary);
+  font-size: var(--fs-6xl);
+  color: var(--text-base-lt);
+}
+
+/* ======================================== admin addRecord ======================================== */
+
+.addRecord-title {
+  font-size: var(--fs-xl);
+  font-weight: var(--fw-semibold);
+  font-family: var(--font-secondary);
+  background-color: var(--bg-base-lt);
+  border: 2px solid var(--color-primary);
+  border-radius: 15px;
+  padding: 5px 150px;
+  display: inline-block;
+}
