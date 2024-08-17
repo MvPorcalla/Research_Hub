@@ -69,7 +69,7 @@
                                             <!-- LRN / Student Number -->
                                             <div class="mb-3">
                                                 <label for="lrn" class="form-label">LRN / Student Number</label>
-                                                <input type="text" class="form-control" id="lrn" name="lrn" required>
+                                                <input type="text" class="form-control" id="lrn" name="lrn" maxlength="12" required>
                                             </div>
 
                                         <!-- Track/Strand -->
