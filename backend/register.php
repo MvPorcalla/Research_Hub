@@ -21,7 +21,7 @@ if ((isset($_POST['lrn']) || isset($_POST['email'])) && $_FILES['idImage']['erro
     $file = $_FILES['idImage']['name']; //[basename.ext]
     $fileext = pathinfo($file, PATHINFO_EXTENSION); //[ext]
     $temp = $_FILES['idImage']['tmp_name']; //temporary location
-    $r_idImage = "../idImages/{$fileName}.{$fileext}"; //target location
+    $r_idImage = "../uploads/idImages/{$fileName}.{$fileext}"; //target location
 
     //hashes value of name="reg_password" from form then transfered to variable
     $r_pwdhash = password_hash($_POST['password'], PASSWORD_ARGON2ID);

@@ -39,7 +39,7 @@
                                 <div class="card admin-card bg-transparent">
                                     
                                     <div class="card-body mx-5 text-start">
-                                        <form action="" method="POST" enctype="multipart/form-data">
+                                        <form action="..\..\backend\add_record.php" method="POST" enctype="multipart/form-data">
                                             <!-- Title -->
                                             <div class="row mb-3">
                                                 <div class="col-md-12">
@@ -51,8 +51,8 @@
                                             <!-- Author -->
                                             <div class="row mb-3">
                                                 <div class="col-md-12">
-                                                    <label for="author" class="form-label">Author</label>
-                                                    <input type="text" class="form-control" id="school" name="school" required>
+                                                    <label for="authors" class="form-label">Authors</label>
+                                                    <input type="text" class="form-control" id="authors" name="authors" required>
                                                 </div>
                                             </div>
 
@@ -60,7 +60,7 @@
                                             <div class="row mb-3">
                                                 <div class="col-md-12">
                                                     <label for="year" class="form-label">Year</label>
-                                                    <input type="date" class="form-control" id="year" name="year" required>
+                                                    <input type="month" class="form-control" id="monthYear" name="monthYear" required>
                                                 </div>
                                             </div>
 
@@ -78,7 +78,7 @@
                                             <!-- Upload Research File -->
                                             <div class="mb-3">
                                                 <label for="file" class="form-label">Upload Research</label>
-                                                <input type="file" class="form-control" id="file" name="file" accept=".pdf,.doc,.docx" required>
+                                                <input type="file" class="form-control" id="file" name="file" accept=".pdf" required>
                                             </div>
 
                                             <!-- Submit Button -->
@@ -103,18 +103,11 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
-
+    <script src="..\..\includes\functions.js"></script>
+    
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            const urlParams = new URLSearchParams(window.location.search);
-            const loginStatus = urlParams.get('login');
-
-            if (loginStatus === 'success') {
-                Swal.fire({
-                    icon: "info",
-                    title: "Welcome to Research Hub!"
-                });
-            }
+            handleStatus('addRecord');
         });
     </script>
 </body>

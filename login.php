@@ -61,37 +61,11 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="includes\functions.js"></script>
+
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            const urlParams = new URLSearchParams(window.location.search);
-            const loginStatus = urlParams.get('login');
-
-            switch (loginStatus) {
-                case "success":
-                    Swal.fire({
-                        icon: "success",
-                        title: "Registration Complete!",
-                        text: "Please log in to proceed."
-                    });
-                    break;
-                case "failed":
-                    Swal.fire({
-                        icon: "error",
-                        title: "Incorrect username or password.",
-                        text: "Please try again."
-                    });
-                    break;
-                case "inactive":
-                    Swal.fire({
-                        icon: "error",
-                        title: "Oops!",
-                        text: "Account deactivated."
-                    });
-                    break;
-            }
-            let url = new URL(window.location.href);
-            url.searchParams.delete('login');
-            window.history.replaceState({}, document.title, url.toString());
+            handleStatus('login');
         });
     </script>
 </body>
