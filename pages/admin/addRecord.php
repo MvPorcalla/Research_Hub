@@ -98,31 +98,11 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
-
+    <script src="..\..\includes\functions.js"></script>
+    
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            const urlParams = new URLSearchParams(window.location.search);
-            const addRecordStatus = urlParams.get('addRecord');
-
-            switch (addRecordStatus) {
-                case "success":
-                    Swal.fire({
-                        icon: "success",
-                        title: "Record Added!",
-                        text: "Successfully added a new record to the list."
-                    });
-                    break;
-                case "failed":
-                    Swal.fire({
-                        icon: "error",
-                        title: "Oops!",
-                        text: "Failed to add new record."
-                    });
-                    break;
-            }
-            let url = new URL(window.location.href);
-            url.searchParams.delete('addRecord');
-            window.history.replaceState({}, document.title, url.toString());
+            handleStatus('addRecord');
         });
     </script>
 </body>

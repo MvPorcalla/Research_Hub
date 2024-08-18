@@ -53,30 +53,11 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="includes\functions.js"></script>
+
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            const urlParams = new URLSearchParams(window.location.search);
-            const resetStatus = urlParams.get('reset');
-
-            switch (resetStatus) {
-                case "success":
-                    Swal.fire({
-                        icon: "success",
-                        title: "Password Reset Link Sent!",
-                        text: "The link will be sent you shortly. Please check your email."
-                    });
-                    break;
-                case "failed":
-                    Swal.fire({
-                        icon: "error",
-                        title: "Password Reset Failed",
-                        text: "No account found with that email address."
-                    });
-                    break;
-            }
-            let url = new URL(window.location.href);
-            url.searchParams.delete('reset');
-            window.history.replaceState({}, document.title, url.toString());
+            handleStatus('reset');
         });
     </script>
 </body>

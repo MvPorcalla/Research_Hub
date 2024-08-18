@@ -126,6 +126,8 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="includes\functions.js"></script>
+
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             const form = document.querySelector('form');
@@ -142,36 +144,8 @@
                     });
                 }
             });
-
-            const urlParams = new URLSearchParams(window.location.search);
-            const registrationStatus = urlParams.get('registration');
-
-            switch (registrationStatus) {
-                case "wronglrn":
-                    Swal.fire({
-                        icon: "error",
-                        title: "Wrong LRN.",
-                        text: "Your LRN does not exist in the database."
-                    });
-                    break;
-                case "existing":
-                    Swal.fire({
-                        icon: "error",
-                        title: "LRN already registered.",
-                        text: "Your LRN has already been registered to an account."
-                    });
-                    break;
-                case "failed":
-                    Swal.fire({
-                        icon: "error",
-                        title: "Oops!",
-                        text: "Your registration failed. Please try again."
-                    });
-                    break;
-            }
-            let url = new URL(window.location.href);
-            url.searchParams.delete('registration');
-            window.history.replaceState({}, document.title, url.toString());
+            
+            handleStatus('registration');
         });
     </script>
 </body>
