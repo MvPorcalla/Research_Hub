@@ -75,10 +75,9 @@
                                         $lrns = query($conn, "SELECT * FROM `lrn` JOIN `users` u ON lrn.lrn_id = u.lrn_id WHERE `user_status` != 'I'");
 
                                         foreach ($lrns as $key => $lrn) {
-                                            // Concatenate the name
+                                            
+                                            $id = $lrn['lrn_id'];
                                             $fullName = $lrn['user_firstname'] . ' ' . $lrn['user_mi'] . '. ' . $lrn['user_lastname'];
-
-                                            // Get the LRN
                                             $lrn = $lrn['lrn_lrnid'];
 
                                             echo "<tr>
@@ -86,7 +85,7 @@
                                                     <td>{$lrn}</td>
                                                     <td>
                                                         <a href='#' class='btn btn-primary btn-sm'><i class='fas fa-edit'></i></a>
-                                                        <a href='#' class='btn btn-danger btn-sm'><i class='fas fa-trash-alt'></i></a>
+                                                        <a href='..\..\backend\delete.php?lrnId={$id}' class='btn btn-danger btn-sm delete-button'><i class='fas fa-trash-alt'></i></a>
                                                     </td>
                                                 </tr>";
 
@@ -106,7 +105,23 @@
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
+    <script src="..\..\includes\functions.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            handleStatus('deleteLrn');
+        });
+
+        // =====================================================================
+
+        setupConfirmationDialog('.delete-button', {
+            multiTd: false,
+            actionText: "You are about to delete the LRN of:",
+            confirmButtonText: "Delete"
+        });
+    </script>
 </body>
 
 </html>

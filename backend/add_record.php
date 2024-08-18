@@ -36,7 +36,8 @@ if (isset($_POST['title']) && $_FILES['file']['error'] == '0') {
         'record_year' => $year,
         'record_month' => $month,
         'record_filedir' => $ar_abstract,
-        'record_trackstrand' => $ar_trackStrand
+        'record_trackstrand' => $ar_trackStrand,
+        'record_status' => 'A'
     ];
 
     //checks if $ar_title exists in table `records`

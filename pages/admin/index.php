@@ -67,10 +67,11 @@
                                     <tbody>
                                         <?php
 
-                                        $records = query($conn, "SELECT * FROM `records`");
+                                        $records = query($conn, "SELECT * FROM `records` WHERE `record_status` = 'A'");
 
                                         foreach ($records as $key => $record) {
 
+                                            $id = $record['record_id'];
                                             $title = $record['record_title'];
                                             $year = $record['record_year'];
                                             $monthNumber = $record['record_month'];
@@ -98,7 +99,7 @@
                                                     <td>{$month}</td>
                                                     <td>
                                                         <a href='#' class='btn btn-primary btn-sm'><i class='fas fa-edit'></i></a>
-                                                        <a href='#' class='btn btn-danger btn-sm'><i class='fas fa-trash-alt'></i></a>
+                                                        <a href='..\..\backend\delete.php?recordId={$id}' class='btn btn-danger btn-sm delete-button'><i class='fas fa-trash-alt'></i></a>
                                                     </td>
                                                 </tr>";
 
@@ -124,6 +125,15 @@
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             handleStatus('login');
+            handleStatus('deleteRecord');
+        });
+
+        // =====================================================================
+
+        setupConfirmationDialog('.delete-button', {
+            multiTd: false,
+            actionText: "You are about to delete",
+            confirmButtonText: "Delete"
         });
     </script>
 </body>

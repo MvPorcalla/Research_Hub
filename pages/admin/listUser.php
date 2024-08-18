@@ -92,6 +92,7 @@
 
                                                             foreach ($students as $key => $student) {
 
+                                                                $id = $student['user_id'];
                                                                 $fname = $student['user_firstname'];
                                                                 $mi = $student['user_mi'];
                                                                 $lname = $student['user_lastname'];
@@ -106,7 +107,7 @@
                                                                         <td>{$track}</td>
                                                                         <td>
                                                                             <a href='#' class='btn btn-primary btn-sm'><i class='fas fa-edit'></i></a>
-                                                                            <a href='#' class='btn btn-danger btn-sm'><i class='fas fa-trash-alt'></i></a>
+                                                                            <a href='..\..\backend\delete.php?userId={$id}' class='btn btn-danger btn-sm delete-button'><i class='fas fa-trash-alt'></i></a>
                                                                         </td>
                                                                     </tr>";
                                                             }
@@ -145,6 +146,7 @@
 
                                                             foreach ($guests as $key => $guest) {
 
+                                                                $id = $guest['user_id'];
                                                                 $fname = $guest['user_firstname'];
                                                                 $mi = $guest['user_mi'];
                                                                 $lname = $guest['user_lastname'];
@@ -157,7 +159,7 @@
                                                                             <td>{$school}</td>
                                                                             <td>
                                                                                 <a href='#' class='btn btn-primary btn-sm'><i class='fas fa-edit'></i></a>
-                                                                                <a href='#' class='btn btn-danger btn-sm'><i class='fas fa-trash-alt'></i></a>
+                                                                                <a href='..\..\backend\delete.php?userId={$id}' class='btn btn-danger btn-sm delete-button'><i class='fas fa-trash-alt'></i></a>
                                                                             </td>
                                                                         </tr>";
                                                             }
@@ -184,7 +186,24 @@
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
+    <script src="..\..\includes\functions.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            handleStatus('deleteUser');
+        });
+
+        // =====================================================================
+
+        setupConfirmationDialog('.delete-button', {
+            multiTd: true,
+            tdCount: 3, // Number of <td> elements to extract text from
+            actionText: "You are about to deactivate the account of",
+            confirmButtonText: "Deactivate"
+        });
+    </script>
 </body>
 
 </html>
