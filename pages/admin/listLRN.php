@@ -10,10 +10,10 @@
     <link rel="stylesheet" href="../../css/mainStyle.css">
 
     <style>
-        .sidebar {
-            position: sticky;
-            top: 0;
-        }
+        
+        /* .table-container {
+            overflow-x: auto;
+        } */
     </style>
     
 </head>
@@ -26,12 +26,8 @@
     <div class="container-fluid">
         <div class="row text-center">
             <!-- sidebar -->
-            <?php 
-                include './../admin/components/sidebar.php'; 
-            ?>
+            <?php include './../admin/components/sidebar.php'; ?>
             
-            
-
             <!-- Main content area -->
             <main class="col-md-9 ms-sm-auto col-lg-9 px-md-4">
                 <div class="container">
@@ -43,7 +39,7 @@
                         <!-- Search Bar -->
                         <div class="row">
                             <div class="col-md-5 d-flex justify-content-start">
-                                <a href="#" class="btn btn-secondary px-3">Add</a>
+                                <a href="addStudentLRN.php" class="btn btn-secondary px-3">Add</a>
                             </div>
 
                             <div class="col-md-7">
@@ -61,7 +57,7 @@
                         </div>
 
                         <!-- Content Table -->
-                        <div class="container mt-3 table-container">
+                        <div class="container mt-3 admin-table-container">
                             <div class="table-responsive">
                                 <table class="table table-bordered table-striped">
                                     <thead class="table-dark">

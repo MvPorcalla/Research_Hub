@@ -27,7 +27,7 @@
                 <div class="container">
                     <div class="row">
                         <div class="my-3">
-                            <h1 class="admin_title">User List</h1>
+                            <h1 class="admin_title">Student List</h1>
                         </div>
                         
                         <!-- Search Bar -->
@@ -50,6 +50,7 @@
                             </div>
                         </div>
 
+                        
                         <!-- Content Table -->
                         <div class="container mt-3 table-container">
                             <div class="table-responsive">
@@ -103,6 +104,7 @@
                     </div>
                 </div>
             </main>
+
         </div>
     </div>
 

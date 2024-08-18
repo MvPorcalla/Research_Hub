@@ -32,7 +32,7 @@
                 <div class="container">
                     <div class="row">
                         <div class="mt-5 mb-3">
-                            <h1 class='admin-subtitle'>Add Record</h1>
+                            <h1 class='admin-subtitle'>Add Student LRN</h1>
                         </div>
                         <div class="row justify-content-center">
                             <div class="col-md-10">
@@ -40,47 +40,38 @@
                                     
                                     <div class="card-body mx-5 text-start">
                                         <form action="" method="POST" enctype="multipart/form-data">
-                                            <!-- Title -->
+                                            
+                                            <!-- First name -->
                                             <div class="row mb-3">
                                                 <div class="col-md-12">
-                                                    <label for="title" class="form-label">Title</label>
-                                                    <input type="text" class="form-control" id="title" name="title" required>
+                                                    <label for="firstName" class="form-label">First Name</label>
+                                                    <input type="text" class="form-control" id="firstName" name="firstName" required>
                                                 </div>
                                             </div>
 
-                                            <!-- Author -->
+                                            <!-- Last name -->
                                             <div class="row mb-3">
                                                 <div class="col-md-12">
-                                                    <label for="author" class="form-label">Author</label>
-                                                    <input type="text" class="form-control" id="school" name="school" required>
+                                                    <label for="firstName" class="form-label">First Name</label>
+                                                    <input type="text" class="form-control" id="firstName" name="firstName" required>
                                                 </div>
                                             </div>
 
-                                            <!-- year -->
+                                            <!-- Middle initial -->
                                             <div class="row mb-3">
                                                 <div class="col-md-12">
-                                                    <label for="year" class="form-label">Year</label>
-                                                    <input type="date" class="form-control" id="year" name="year" required>
+                                                    <label for="firstName" class="form-label">First Name</label>
+                                                    <input type="text" class="form-control" id="firstName" name="firstName" required>
                                                 </div>
                                             </div>
-
-                                            <!-- Track/Strand -->
+                                            
+                                            <!-- LRN / Student Number -->
                                             <div class="mb-3">
-                                                <label for="trackStrand" class="form-label">Track/Strand</label>
-                                                <select class="form-control" id="trackStrand" name="trackStrand" required>
-                                                    <option value="" disabled selected>Select your Track/Strand</option>
-                                                    <option value="STEM">STEM (Science, Technology, Engineering, and Mathematics)</option>
-                                                    <option value="ABM">ABM (Accountancy, Business, and Management)</option>
-                                                    <option value="HUMSS">HUMSS (Humanities and Social Sciences)</option>
-                                                </select>
+                                                <label for="lrn" class="form-label">LRN / Student Number</label>
+                                                <input type="text" class="form-control" id="lrn" name="lrn" maxlength="12" required>
                                             </div>
 
-                                            <!-- Upload Research File -->
-                                            <div class="mb-3">
-                                                <label for="file" class="form-label">Upload Research</label>
-                                                <input type="file" class="form-control" id="file" name="file" accept=".pdf,.doc,.docx" required>
-                                            </div>
-
+                                           
                                             <!-- Submit Button -->
                                             <div class="d-grid my-3">
                                                 <button type="submit" class="btn btn-primary">Submit</button>
