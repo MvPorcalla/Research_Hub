@@ -13,13 +13,14 @@
             <a class="nav-link active" href="./index.php">Research Record</a>
         </li>
         <li class="nav-item mb-1">
-            <a class="nav-link" href="./userList.php">User List</a>
+            <a class="nav-link" href="./listUser.php">User List</a>
+        </li>
+
+        <li class="nav-item mb-1">
+            <a class="nav-link" href="./listLRN.php">LRN List</a>
         </li>
         <li class="nav-item mb-1">
-            <a class="nav-link" href="./lrnList.php">LRN List</a>
-        </li>
-        <li class="nav-item mb-1">
-            <a class="nav-link" href="#">Pending Request</a>
+            <a class="nav-link" href="./pendingRequest.php">Pending Request</a>
         </li>
         <li class="nav-item mb-1">
             <a class="nav-link" href="#">Settings</a>

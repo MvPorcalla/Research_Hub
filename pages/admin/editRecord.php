@@ -8,7 +8,12 @@
     <link rel="icon" href="../../assets/icons/LNHS-icon.png" type="image/png">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../../css/mainStyle.css">
-    
+    <style>
+        .admin-card {
+            border-radius: 20px;
+            border:1px solid #000;
+        }
+    </style>
 </head>
 
 <body>
@@ -27,11 +32,11 @@
                 <div class="container">
                     <div class="row">
                         <div class="mt-5 mb-3">
-                            <h1 class='addRecord-title'>Edit Record</h1>
+                            <h1 class='admin-subtitle'>Edit Record</h1>
                         </div>
                         <div class="row justify-content-center">
                             <div class="col-md-10">
-                                <div class="card bg-transparent">
+                                <div class="card admin-card bg-transparent">
                                     
                                     <div class="card-body mx-5 text-start">
                                         <form action="" method="POST" enctype="multipart/form-data">

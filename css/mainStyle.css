@@ -108,25 +108,25 @@ body {
 
 /* ======================================== Sidebar ======================================== */
 
-.sidebar {
-  position: sticky;
-  top: 0;
-  padding-top: 20px;
+  .sidebar {
+    position: sticky;
+    top: 0;
+    padding-top: 20px;
   }
 
   .sidebar a {
-      text-decoration: none;
-      padding: 30px;
-      display: block;
-      color: var(--text-base);
-      border: 1px solid var(--color-primary);
-      background-color: var(--color-primary);
-      border-radius: 20px;
-      margin: 5px;
+    text-decoration: none;
+    padding: 30px;
+    display: block;
+    color: var(--text-base);
+    border: 1px solid var(--color-primary);
+    background-color: var(--color-primary);
+    border-radius: 20px;
+    margin: 5px;
   }
 
   .sidebar a:hover {
-      background-color: white; /* Optional: background change on hover */
+    background-color: white; /* Optional: background change on hover */
   }
 
   .sidebar-text {
@@ -170,6 +170,30 @@ body {
   font-weight: var(--fw-bold);
 }
 
+/* ======================================== admin  ======================================== */
+
+
+.admin-table-container {
+  max-height: 500px;
+  overflow-y: auto;
+}
+
+.admin_title {
+  font-family: var(--font-secondary);
+  font-size: var(--fs-6xl);
+  color: var(--text-base-lt);
+}
+
+.admin-subtitle {
+  font-size: var(--fs-xl);
+  font-weight: var(--fw-semibold);
+  font-family: var(--font-secondary);
+  background-color: var(--bg-base-lt);
+  border: 2px solid var(--color-primary);
+  border-radius: 15px;
+  padding: 5px 150px;
+  display: inline-block;
+}
 
 /* ======================================== Register Student/Guest ======================================== */
 
@@ -179,25 +203,4 @@ body {
 
 .login_card-title {
   font-size: var(--fs-3xl);
-}
-
-/* ======================================== admin landing page ======================================== */
-
-.admin_title {
-  font-family: var(--font-secondary);
-  font-size: var(--fs-6xl);
-  color: var(--text-base-lt);
-}
-
-/* ======================================== admin addRecord ======================================== */
-
-.addRecord-title {
-  font-size: var(--fs-xl);
-  font-weight: var(--fw-semibold);
-  font-family: var(--font-secondary);
-  background-color: var(--bg-base-lt);
-  border: 2px solid var(--color-primary);
-  border-radius: 15px;
-  padding: 5px 150px;
-  display: inline-block;
 }
