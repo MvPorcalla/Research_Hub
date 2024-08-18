@@ -1,3 +1,5 @@
+<?php include_once "..\..\includes\db.php"; ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -20,7 +22,7 @@
         <div class="row text-center">
             <!-- sidebar -->
             <?php include './../admin/components/sidebar.php'; ?>
-            
+
             <!-- Main content area -->
             <main class="col-md-9 ms-sm-auto col-lg-9 px-md-4">
                 <div class="container">
@@ -28,7 +30,7 @@
                         <div class="my-2">
                             <h1 class="admin_title">Research Records</h1>
                         </div>
-                        
+
                         <!-- Search Bar -->
                         <div class="row">
                             <div class="col-md-5 d-flex justify-content-start">
@@ -61,25 +63,34 @@
                                             <th>Actions</th>
                                         </tr>
                                     </thead>
-                            
+
                                     <tbody>
-                                        <!-- PHP loop to display dynamic rows here -->
                                         <?php
-                                        // Example: Assuming you have a database connection established and you are fetching records
-                                        // Replace $records with your actual database query results
 
-                                        // mock up data  
-                                        $records = [
-                                            ['record_title' => 'Sample Research Title', 'record_year' => '2024', 'record_month' => 'June'],
-                                            ['record_title' => 'i still miss u', 'record_year' => '2024', 'record_month' => 'july'],
-                                            // Add more records as needed
-                                        ];
+                                        $records = query($conn, "SELECT * FROM `records`");
 
-                                        foreach ($records as $record) {
-                                            // Concatenate the name
-                                            $title = $record['record_title'] ;
-                                            $year = $record['record_year'] ;
-                                            $month = $record['record_month'];
+                                        foreach ($records as $key => $record) {
+
+                                            $title = $record['record_title'];
+                                            $year = $record['record_year'];
+                                            $monthNumber = $record['record_month'];
+
+                                            $months = [
+                                                1 => "January",
+                                                2 => "February",
+                                                3 => "March",
+                                                4 => "April",
+                                                5 => "May",
+                                                6 => "June",
+                                                7 => "July",
+                                                8 => "August",
+                                                9 => "September",
+                                                10 => "October",
+                                                11 => "November",
+                                                12 => "December"
+                                            ];
+
+                                            $month = $months[$monthNumber] ?? null;
 
                                             echo "<tr>
                                                     <td>{$title}</td>
@@ -109,7 +120,7 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
     <script src="..\..\includes\functions.js"></script>
-    
+
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             handleStatus('login');

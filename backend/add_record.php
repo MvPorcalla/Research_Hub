@@ -44,13 +44,10 @@ if (isset($_POST['title']) && $_FILES['file']['error'] == '0') {
     $filter = [$ar_title];
     $result = query($conn, $sql, $filter);
 
-    //if $ar_title does not exist in table `records`, then proceed, else go back to 'Add Record' page
     empty($result)
         ? (
-            // if uploaded file is successfully moved, then proceed, else go back to registration page
             move_uploaded_file($temp, $ar_abstract)
             ? (
-                // if data is successfully inserted to database, then proceed, else go back to registration page
                 insert($conn, $table, $fields)
                 ? header("location: ..\pages\admin\addRecord.php?addRecord=success")
                 : header("location: ..\pages\admin\addRecord.php?addRecord=failed")

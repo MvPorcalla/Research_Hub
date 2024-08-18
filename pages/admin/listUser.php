@@ -1,3 +1,5 @@
+<?php include_once "..\..\includes\db.php"; ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -8,7 +10,7 @@
     <link rel="icon" href="../../assets/icons/LNHS-icon.png" type="image/png">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../../css/mainStyle.css">
-    
+
 
 </head>
 
@@ -21,7 +23,7 @@
         <div class="row text-center">
             <!-- sidebar -->
             <?php include './../admin/components/sidebar.php'; ?>
-            
+
 
             <!-- Main content area -->
             <main class="col-md-9 ms-sm-auto col-lg-9 px-md-4">
@@ -30,7 +32,7 @@
                         <div class="my-3">
                             <h1 class="admin_title">User List</h1>
                         </div>
-                        
+
                         <!-- Search Bar -->
                         <div class="row">
                             <div class="col-md-5 d-flex justify-content-start">
@@ -58,7 +60,7 @@
                             </div>
                         </div>
 
-                        
+
                         <!-- Content Table -->
 
                         <div class="container mt-3 admin-table-container text-light mt-1">
@@ -83,26 +85,20 @@
                                                                 <th>Actions</th>
                                                             </tr>
                                                         </thead>
-                                
+
                                                         <tbody>
-                                                            <!-- PHP loop to display dynamic rows here -->
                                                             <?php
-                                                            // Example: Assuming you have a database connection established and you are fetching records
-                                                            // Replace $user with your actual database query results
-                                                            $user = [
-                                                                ['user_firstname' => 'Shesh', 'user_mi' => 'S', 'user_lastname' => 'Das', 'rn_lrnid' => '123456789098', 'user_trackstrand'  => 'S'],
-                                                                // Add more user as needed
-                                                                ];
+                                                            $students = query($conn, "SELECT * FROM `users` u JOIN `lrn` ON u.lrn_id = lrn.lrn_id WHERE `user_type` = 'S' AND `user_status` != 'I'");
 
-                                                                foreach ($user as $user) {
+                                                            foreach ($students as $key => $student) {
 
-                                                                    $fname = $user['user_firstname'];
-                                                                    $mi = $user['user_mi'];
-                                                                    $lname = $user['user_lastname'];
-                                                                    $lrn = $user['rn_lrnid'];
-                                                                    $track = $user['user_trackstrand'];
+                                                                $fname = $student['user_firstname'];
+                                                                $mi = $student['user_mi'];
+                                                                $lname = $student['user_lastname'];
+                                                                $lrn = $student['lrn_lrnid'];
+                                                                $track = $student['user_trackstrand'];
 
-                                                                    echo "<tr>
+                                                                echo "<tr>
                                                                         <td>{$fname}</td>
                                                                         <td>{$mi}</td>
                                                                         <td>{$lname}</td>
@@ -113,7 +109,7 @@
                                                                             <a href='#' class='btn btn-danger btn-sm'><i class='fas fa-trash-alt'></i></a>
                                                                         </td>
                                                                     </tr>";
-                                                                }
+                                                            }
                                                             ?>
                                                         </tbody>
                                                     </table>
@@ -130,8 +126,8 @@
                                     <div class="row">
                                         <div class="col">
                                             <div class="card bg-transparent">
-                                                
-                                            <div class="table-responsive">
+
+                                                <div class="table-responsive">
                                                     <table class="table table-bordered table-striped">
                                                         <thead class="table-dark">
                                                             <tr>
@@ -142,25 +138,19 @@
                                                                 <th>Actions</th>
                                                             </tr>
                                                         </thead>
-                                
+
                                                         <tbody>
-                                                            <!-- PHP loop to display dynamic rows here -->
                                                             <?php
-                                                            // Example: Assuming you have a database connection established and you are fetching records
-                                                            // Replace $user with your actual database query results
-                                                            $user = [
-                                                                ['user_firstname' => 'Pogi', 'user_mi' => 'S', 'user_lastname' => 'ko', 'user_school' => 'MORMS', 'user_trackstrand'  => 'S'],
-                                                                // Add more user as needed
-                                                                ];
+                                                            $guests = query($conn, "SELECT * FROM `users` u WHERE `user_type` = 'G' AND `user_status` != 'I'");
 
-                                                                foreach ($user as $user) {
+                                                            foreach ($guests as $key => $guest) {
 
-                                                                    $fname = $user['user_firstname'];
-                                                                    $mi = $user['user_mi'];
-                                                                    $lname = $user['user_lastname'];
-                                                                    $school = $user['user_school'];
+                                                                $fname = $guest['user_firstname'];
+                                                                $mi = $guest['user_mi'];
+                                                                $lname = $guest['user_lastname'];
+                                                                $school = $guest['user_school'];
 
-                                                                    echo "<tr>
+                                                                echo "<tr>
                                                                             <td>{$fname}</td>
                                                                             <td>{$mi}</td>
                                                                             <td>{$lname}</td>
@@ -170,7 +160,7 @@
                                                                                 <a href='#' class='btn btn-danger btn-sm'><i class='fas fa-trash-alt'></i></a>
                                                                             </td>
                                                                         </tr>";
-                                                                }
+                                                            }
                                                             ?>
                                                         </tbody>
                                                     </table>
@@ -181,8 +171,8 @@
                                     </div>
                                 </div>
 
-                                
-                            </div> 
+
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -194,22 +184,7 @@
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const urlParams = new URLSearchParams(window.location.search);
-            const loginStatus = urlParams.get('login');
-
-            if (loginStatus === 'success') {
-                Swal.fire({
-                    icon: "info",
-                    title: "Welcome to Research Hub!"
-                });
-            }
-        });
-    </script>
 </body>
 
 </html>
