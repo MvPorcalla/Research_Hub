@@ -4,17 +4,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HOME PAGE - LNHS Research Hub</title>
+    <title>User List - LNHS Research Hub</title>
     <link rel="icon" href="../../assets/icons/LNHS-icon.png" type="image/png">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../../css/mainStyle.css">
-    <style>
-        .table-container {
-            max-height: 500px; /* Adjust as needed */
-            overflow-y: auto;
-        }
 
+    <style>
+        .sidebar {
+            position: sticky;
+            top: 0;
+        }
     </style>
+    
 </head>
 
 <body>
@@ -25,20 +26,24 @@
     <div class="container-fluid">
         <div class="row text-center">
             <!-- sidebar -->
-            <?php include './../admin/components/sidebar.php'; ?>
+            <?php 
+                include './../admin/components/sidebar.php'; 
+            ?>
             
+            
+
             <!-- Main content area -->
             <main class="col-md-9 ms-sm-auto col-lg-9 px-md-4">
                 <div class="container">
                     <div class="row">
                         <div class="my-3">
-                            <h1 class="admin_title">Research Records</h1>
+                            <h1 class="admin_title">LRN List</h1>
                         </div>
                         
                         <!-- Search Bar -->
                         <div class="row">
                             <div class="col-md-5 d-flex justify-content-start">
-                                <a href="./addRecord.php" class="btn btn-secondary px-3">Add</a>
+                                <a href="#" class="btn btn-secondary px-3">Add</a>
                             </div>
 
                             <div class="col-md-7">
@@ -61,36 +66,52 @@
                                 <table class="table table-bordered table-striped">
                                     <thead class="table-dark">
                                         <tr>
-                                            <th>Title</th>
-                                            <th>Year</th>
-                                            <th>Month</th>
+                                            <th>Name</th>
+                                            <th>LRN</th>
                                             <th>Actions</th>
                                         </tr>
                                     </thead>
-                            
+                                    
                                     <tbody>
                                         <!-- PHP loop to display dynamic rows here -->
                                         <?php
                                         // Example: Assuming you have a database connection established and you are fetching records
-                                        // Replace $records with your actual database query results
+                                        // Replace $user with your actual database query results
+                                        $user = [
+                                            ['user_firstname' => 'Shesh', 'user_mi' => 'S', 'user_lastname' => 'Das', 'rn_lrnid' => '123456789098'],
 
-                                        // mock up data  
-                                        $records = [
-                                            ['record_title' => 'Sample Research Title', 'record_year' => '2024', 'record_month' => 'June'],
-                                            ['record_title' => 'i still miss u', 'record_year' => '2024', 'record_month' => 'july'],
-                                            // Add more records as needed
+                                            ['user_firstname' => 'Shesh', 'user_mi' => 'S', 'user_lastname' => 'Das', 'rn_lrnid' => '123456789098'],
+                                            ['user_firstname' => 'Shesh', 'user_mi' => 'S', 'user_lastname' => 'Das', 'rn_lrnid' => '123456789098'],
+                                            ['user_firstname' => 'Shesh', 'user_mi' => 'S', 'user_lastname' => 'Das', 'rn_lrnid' => '123456789098'],
+                                            ['user_firstname' => 'Shesh', 'user_mi' => 'S', 'user_lastname' => 'Das', 'rn_lrnid' => '123456789098'],
+                                            ['user_firstname' => 'Shesh', 'user_mi' => 'S', 'user_lastname' => 'Das', 'rn_lrnid' => '123456789098'],
+                                            ['user_firstname' => 'Shesh', 'user_mi' => 'S', 'user_lastname' => 'Das', 'rn_lrnid' => '123456789098'],
+                                            ['user_firstname' => 'Shesh', 'user_mi' => 'S', 'user_lastname' => 'Das', 'rn_lrnid' => '123456789098'],
+                                            ['user_firstname' => 'Shesh', 'user_mi' => 'S', 'user_lastname' => 'Das', 'rn_lrnid' => '123456789098'],
+                                            ['user_firstname' => 'Shesh', 'user_mi' => 'S', 'user_lastname' => 'Das', 'rn_lrnid' => '123456789098'],
+                                            ['user_firstname' => 'Shesh', 'user_mi' => 'S', 'user_lastname' => 'Das', 'rn_lrnid' => '123456789098'],
+                                            ['user_firstname' => 'Shesh', 'user_mi' => 'S', 'user_lastname' => 'Das', 'rn_lrnid' => '123456789098'],
+                                            ['user_firstname' => 'Shesh', 'user_mi' => 'S', 'user_lastname' => 'Das', 'rn_lrnid' => '123456789098'],
+                                            ['user_firstname' => 'Shesh', 'user_mi' => 'S', 'user_lastname' => 'Das', 'rn_lrnid' => '123456789098'],
+                                            ['user_firstname' => 'Shesh', 'user_mi' => 'S', 'user_lastname' => 'Das', 'rn_lrnid' => '123456789098'],
+                                            ['user_firstname' => 'Shesh', 'user_mi' => 'S', 'user_lastname' => 'Das', 'rn_lrnid' => '123456789098'],
+                                            ['user_firstname' => 'Shesh', 'user_mi' => 'S', 'user_lastname' => 'Das', 'rn_lrnid' => '123456789098'],
+                                            ['user_firstname' => 'Shesh', 'user_mi' => 'S', 'user_lastname' => 'Das', 'rn_lrnid' => '123456789098'],
+                                            ['user_firstname' => 'Shesh', 'user_mi' => 'S', 'user_lastname' => 'Das', 'rn_lrnid' => '123456789098'],
+
+                                            // Add more user as needed
                                         ];
 
-                                        foreach ($records as $record) {
+                                        foreach ($user as $user) {
                                             // Concatenate the name
-                                            $title = $record['record_title'] ;
-                                            $year = $record['record_year'] ;
-                                            $month = $record['record_month'];
+                                            $fullName = $user['user_firstname'] . ' ' . $user['user_mi'] . '. ' . $user['user_lastname'];
+
+                                            // Get the LRN
+                                            $lrn = $user['rn_lrnid'];
 
                                             echo "<tr>
-                                                    <td>{$title}</td>
-                                                    <td>{$year}</td>
-                                                    <td>{$month}</td>
+                                                    <td>{$fullName}</td>
+                                                    <td>{$lrn}</td>
                                                     <td>
                                                         <a href='#' class='btn btn-primary btn-sm'><i class='fas fa-edit'></i></a>
                                                         <a href='#' class='btn btn-danger btn-sm'><i class='fas fa-trash-alt'></i></a>
@@ -100,6 +121,7 @@
                                         }
                                         ?>
                                     </tbody>
+
                                 </table>
                             </div>
                         </div>

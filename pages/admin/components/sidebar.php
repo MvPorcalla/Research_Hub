@@ -1,10 +1,10 @@
 <?php
     // Simulated user data
-    $user_name = "admin melvs";
+    $user_name = "Admin";
 ?>
 
 
-<nav class="col-md-3 col-lg-3 d-md-block sidebar">
+<nav class="col-md-3 col-lg-3 d-md-block sidebar sticky-top">
     <div class="text-center my-3">
         <h1 class="sidebar-text">Welcome, <?php echo htmlspecialchars($user_name); ?>!</h1>
     </div>
@@ -13,10 +13,10 @@
             <a class="nav-link active" href="./index.php">Research Record</a>
         </li>
         <li class="nav-item mb-1">
-            <a class="nav-link" href="#">User List</a>
+            <a class="nav-link" href="./userList.php">User List</a>
         </li>
         <li class="nav-item mb-1">
-            <a class="nav-link" href="#">LRN List</a>
+            <a class="nav-link" href="./lrnList.php">LRN List</a>
         </li>
         <li class="nav-item mb-1">
             <a class="nav-link" href="#">Pending Request</a>
