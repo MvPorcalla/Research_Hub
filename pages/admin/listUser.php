@@ -71,7 +71,7 @@
                                 <div class="tab-pane fade show active" id="student-list" role="tabpanel" aria-labelledby="student-list-tab">
                                     <div class="row">
                                         <div class="col">
-                                            <div class="card bg-transparent">
+                                            <div class=" bg-transparent">
 
                                                 <div class="table-responsive">
                                                     <table class="table table-bordered table-striped">
@@ -126,7 +126,7 @@
                                 <div class="tab-pane fade" id="guest-list" role="tabpanel" aria-labelledby="guest-list-tab">
                                     <div class="row">
                                         <div class="col">
-                                            <div class="card bg-transparent">
+                                            <div class=" bg-transparent">
 
                                                 <div class="table-responsive">
                                                     <table class="table table-bordered table-striped">
