@@ -62,6 +62,39 @@ function handleStatus(paramName) {
                 title: "Oops!",
                 text: "Failed to add new record."
             }
+        },
+        'deleteUser': {
+            "success": {
+                icon: "success",
+                title: "User Deleted!"
+            },
+            "failed": {
+                icon: "error",
+                title: "Oops!",
+                text: "Failed to delete user."
+            }
+        },
+        'deleteRecord': {
+            "success": {
+                icon: "success",
+                title: "Record Deleted!"
+            },
+            "failed": {
+                icon: "error",
+                title: "Oops!",
+                text: "Failed to delete record."
+            }
+        },
+        'deleteLrn': {
+            "success": {
+                icon: "success",
+                title: "LRN Deleted!"
+            },
+            "failed": {
+                icon: "error",
+                title: "Oops!",
+                text: "Failed to delete LRN."
+            }
         }
     };
 
@@ -80,4 +113,52 @@ function handleStatus(paramName) {
         url.searchParams.delete(paramName);
         window.history.replaceState({}, document.title, url.toString());
     }
+}
+
+// =========================================================================
+
+function setupConfirmationDialog(buttonSelector, options) {
+    // Get all elements matching the provided selector
+    const buttons = document.querySelectorAll(buttonSelector);
+
+    // Add event listener to each button element
+    buttons.forEach(button => {
+        button.addEventListener('click', function (event) {
+            // Prevent the default action
+            event.preventDefault();
+
+            // Extract relevant information based on options
+            let textContent;
+            if (options.multiTd) {
+                // Traverse the DOM to get the corresponding <tr> element
+                let row = this.closest('tr');
+                // Get the text content from specified <td> elements
+                let tdElements = row.querySelectorAll('td');
+                let contents = Array.from(tdElements).slice(0, options.tdCount).map(td => td.textContent);
+                textContent = contents.join(' ');
+            } else {
+                // Traverse the DOM to get the corresponding single <td> element
+                textContent = this.closest('tr').querySelector('td').textContent;
+            }
+
+            // Customize SweetAlert text
+            let alertText = `${options.actionText} <strong>${textContent}</strong>`;
+
+            // Trigger the SweetAlert
+            Swal.fire({
+                title: 'Are you sure?',
+                html: alertText,
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: options.confirmButtonText
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // If confirmed, proceed to the link
+                    window.location.href = this.href;
+                }
+            });
+        });
+    });
 }

@@ -80,6 +80,7 @@ if ((isset($_POST['lrn']) || isset($_POST['email'])) && $_FILES['idImage']['erro
     } else {
 
         $fields['lrn_id'] = $result[0]['lrn_id'];
+        $fields['user_status'] = ($r_role == 'G') ? 'P' : 'A';
 
         //checks if $r_lrn exists in table `users`
         $sql = "SELECT u.lrn_id, lrn.lrn_id, lrn.lrn_lrnid
@@ -88,25 +89,21 @@ if ((isset($_POST['lrn']) || isset($_POST['email'])) && $_FILES['idImage']['erro
                 WHERE lrn.lrn_lrnid = ?";
         $result = query($conn, $sql, $filter);
 
-        $fields['user_status'] = ($r_role == 'G') ? 'P' : 'A';
-
         //if $r_lrn does not exist in table `users`, then proceed, else go back to registration page
         if (empty($result)) {
-            // Move the uploaded file and check if it succeeded
+            // if uploaded file is successfully moved, then proceed, else go back to registration page
             move_uploaded_file($temp, $r_idImage)
-                // If the file move was successful, attempt to insert data into the database
                 ? (
+                    // if data is successfully inserted to database, then proceed, else go back to registration page
                     insert($conn, $table, $fields)
-                    // If data insertion was successful, check the user's role and redirect accordingly
                     ? (
+                        // if user is a guest, then go back to landing page, else proceed to log in page
                         ($r_role == 'G') 
                         ? header("location: ../index.php?registration=success")
                         : header("location: ../login.php?login=success")
                     )
-                    // If data insertion failed, redirect back to the registration page with a failure message
                     : header("location: ../register{$role}.php?registration=failed")
                 )
-                // If the file move failed, redirect back to the registration page with a failure message
                 : header("location: ../register{$role}.php?registration=failed");
             
             exit;
