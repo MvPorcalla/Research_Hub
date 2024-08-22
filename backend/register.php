@@ -28,7 +28,6 @@ if ((isset($_POST['lrn']) || isset($_POST['email'])) && $_FILES['idImage']['erro
 
     // create session variables
     $_SESSION["username"] = $r_username;
-    $_SESSION["password"] = $r_pwdhash;
 
     // echo "
     //     'user_lastname' => $r_lastName,<br>

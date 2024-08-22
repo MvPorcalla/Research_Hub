@@ -63,6 +63,17 @@ function handleStatus(paramName) {
                 text: "Failed to add new record."
             }
         },
+        'deleteAbstract': {
+            "success": {
+                icon: "success",
+                title: "Record Deleted!"
+            },
+            "failed": {
+                icon: "error",
+                title: "Oops!",
+                text: "Failed to delete record."
+            }
+        },
         'deleteUser': {
             "success": {
                 icon: "success",
@@ -72,17 +83,6 @@ function handleStatus(paramName) {
                 icon: "error",
                 title: "Oops!",
                 text: "Failed to delete user."
-            }
-        },
-        'deleteRecord': {
-            "success": {
-                icon: "success",
-                title: "Record Deleted!"
-            },
-            "failed": {
-                icon: "error",
-                title: "Oops!",
-                text: "Failed to delete record."
             }
         },
         'deleteLrn': {
