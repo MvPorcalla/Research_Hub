@@ -60,7 +60,7 @@
                         <!-- Content Table -->
                         <div class="container mt-3 admin-table-container">
                             <div class="table-responsive">
-                                <table class="table table-bordered table-striped">
+                                <table class="table table-bordered table-striped LRNs">
                                     <thead class="table-dark">
                                         <tr>
                                             <th>Name</th>
@@ -70,27 +70,7 @@
                                     </thead>
 
                                     <tbody>
-                                        <?php
-
-                                        $lrns = query($conn, "SELECT * FROM `lrn` JOIN `users` u ON lrn.lrn_id = u.lrn_id WHERE lrn.lrn_status = 'A'");
-
-                                        foreach ($lrns as $key => $lrn) {
-                                            
-                                            $id = $lrn['lrn_id'];
-                                            $fullName = $lrn['user_firstname'] . ' ' . $lrn['user_mi'] . '. ' . $lrn['user_lastname'];
-                                            $lrn = $lrn['lrn_lrnid'];
-
-                                            echo "<tr>
-                                                    <td>{$fullName}</td>
-                                                    <td>{$lrn}</td>
-                                                    <td>
-                                                        <a href='#' class='btn btn-primary btn-sm'><i class='fas fa-edit'></i></a>
-                                                        <a href='..\..\backend\delete.php?lrnId={$id}' class='btn btn-danger btn-sm delete-button'><i class='fas fa-trash-alt'></i></a>
-                                                    </td>
-                                                </tr>";
-
-                                        }
-                                        ?>
+                                        <!-- Data will be dynamically inserted here -->
                                     </tbody>
 
                                 </table>
@@ -108,6 +88,7 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
     <script src="..\..\includes\functions.js"></script>
+    <script src="./scripts/fetchRecords.js"></script>
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {

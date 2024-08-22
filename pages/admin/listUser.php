@@ -74,7 +74,7 @@
                                             <div class=" bg-transparent">
 
                                                 <div class="table-responsive">
-                                                    <table class="table table-bordered table-striped">
+                                                    <table class="table table-bordered table-striped students">
                                                         <thead class="table-dark">
                                                             <tr>
                                                                 <th>First Name</th>
@@ -87,31 +87,6 @@
                                                         </thead>
 
                                                         <tbody>
-                                                            <?php
-                                                            $students = query($conn, "SELECT * FROM `users` u JOIN `lrn` ON u.lrn_id = lrn.lrn_id WHERE `user_type` = 'S' AND `user_status` = 'A'");
-
-                                                            foreach ($students as $key => $student) {
-
-                                                                $id = $student['user_id'];
-                                                                $fname = $student['user_firstname'];
-                                                                $mi = $student['user_mi'];
-                                                                $lname = $student['user_lastname'];
-                                                                $lrn = $student['lrn_lrnid'];
-                                                                $track = $student['user_trackstrand'];
-
-                                                                echo "<tr>
-                                                                        <td>{$fname}</td>
-                                                                        <td>{$mi}</td>
-                                                                        <td>{$lname}</td>
-                                                                        <td>{$lrn}</td>
-                                                                        <td>{$track}</td>
-                                                                        <td>
-                                                                            <a href='#' class='btn btn-primary btn-sm'><i class='fas fa-edit'></i></a>
-                                                                            <a href='..\..\backend\delete.php?userId={$id}' class='btn btn-danger btn-sm delete-button'><i class='fas fa-trash-alt'></i></a>
-                                                                        </td>
-                                                                    </tr>";
-                                                            }
-                                                            ?>
                                                         </tbody>
                                                     </table>
                                                 </div>
@@ -129,7 +104,7 @@
                                             <div class=" bg-transparent">
 
                                                 <div class="table-responsive">
-                                                    <table class="table table-bordered table-striped">
+                                                    <table class="table table-bordered table-striped guests">
                                                         <thead class="table-dark">
                                                             <tr>
                                                                 <th>First Name</th>
@@ -141,29 +116,7 @@
                                                         </thead>
 
                                                         <tbody>
-                                                            <?php
-                                                            $guests = query($conn, "SELECT * FROM `users` u WHERE `user_type` = 'G' AND `user_status` = 'A'");
-
-                                                            foreach ($guests as $key => $guest) {
-
-                                                                $id = $guest['user_id'];
-                                                                $fname = $guest['user_firstname'];
-                                                                $mi = $guest['user_mi'];
-                                                                $lname = $guest['user_lastname'];
-                                                                $school = $guest['user_school'];
-
-                                                                echo "<tr>
-                                                                            <td>{$fname}</td>
-                                                                            <td>{$mi}</td>
-                                                                            <td>{$lname}</td>
-                                                                            <td>{$school}</td>
-                                                                            <td>
-                                                                                <a href='#' class='btn btn-primary btn-sm'><i class='fas fa-edit'></i></a>
-                                                                                <a href='..\..\backend\delete.php?userId={$id}' class='btn btn-danger btn-sm delete-button'><i class='fas fa-trash-alt'></i></a>
-                                                                            </td>
-                                                                        </tr>";
-                                                            }
-                                                            ?>
+                                                            <!-- Data will be dynamically inserted here -->
                                                         </tbody>
                                                     </table>
                                                 </div>
@@ -189,6 +142,7 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
     <script src="..\..\includes\functions.js"></script>
+    <script src="./scripts/fetchRecords.js"></script>
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {

@@ -54,7 +54,7 @@
                         <!-- Content Table -->
                         <div class="container mt-3 admin-table-container">
                             <div class="table-responsive">
-                                <table class="table table-bordered table-striped">
+                                <table class="table table-bordered table-striped abstracts">
                                     <thead class="table-dark">
                                         <tr>
                                             <th>Title</th>
@@ -65,46 +65,7 @@
                                     </thead>
 
                                     <tbody>
-                                        <?php
-
-                                        $records = query($conn, "SELECT * FROM `records` WHERE `record_status` = 'A'");
-
-                                        foreach ($records as $key => $record) {
-
-                                            $id = $record['record_id'];
-                                            $title = $record['record_title'];
-                                            $year = $record['record_year'];
-                                            $monthNumber = $record['record_month'];
-
-                                            $months = [
-                                                1 => "January",
-                                                2 => "February",
-                                                3 => "March",
-                                                4 => "April",
-                                                5 => "May",
-                                                6 => "June",
-                                                7 => "July",
-                                                8 => "August",
-                                                9 => "September",
-                                                10 => "October",
-                                                11 => "November",
-                                                12 => "December"
-                                            ];
-
-                                            $month = $months[$monthNumber] ?? null;
-
-                                            echo "<tr>
-                                                    <td>{$title}</td>
-                                                    <td>{$year}</td>
-                                                    <td>{$month}</td>
-                                                    <td>
-                                                        <a href='#' class='btn btn-primary btn-sm'><i class='fas fa-edit'></i></a>
-                                                        <a href='..\..\backend\delete.php?recordId={$id}' class='btn btn-danger btn-sm delete-button'><i class='fas fa-trash-alt'></i></a>
-                                                    </td>
-                                                </tr>";
-
-                                        }
-                                        ?>
+                                        <!-- Data will be dynamically inserted here -->
                                     </tbody>
                                 </table>
                             </div>
@@ -121,11 +82,12 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
     <script src="..\..\includes\functions.js"></script>
+    <script src="./scripts/fetchRecords.js"></script>
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             handleStatus('login');
-            handleStatus('deleteRecord');
+            handleStatus('deleteAbstract');
         });
 
         // =====================================================================

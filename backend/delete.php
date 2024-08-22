@@ -1,7 +1,21 @@
 <?php
 include_once "..\includes\db.php";
 
-if (isset($_GET['userId'])) {
+if (isset($_GET['abstractId'])) {
+
+    $table = "records";
+    $fields = ['record_status' => 'I'];
+    $filter = ['record_id' => $_GET['abstractId']];
+
+    if (update($conn, $table, $fields, $filter)) {
+        header("location: ..\pages\admin\index.php?deleteAbstract=success");
+        exit();
+    } else {
+        header("location: ..\pages\admin\index.php?deleteAbstract=failed");
+        exit();
+    }
+
+} else if (isset($_GET['userId'])) {
 
     $table = "users";
     $fields = ['user_status' => 'I'];
@@ -12,20 +26,6 @@ if (isset($_GET['userId'])) {
         exit();
     } else {
         header("location: ..\pages\admin\listUser.php?deleteUser=failed");
-        exit();
-    }
-
-} else if (isset($_GET['recordId'])) {
-
-    $table = "records";
-    $fields = ['record_status' => 'I'];
-    $filter = ['record_id' => $_GET['recordId']];
-
-    if (update($conn, $table, $fields, $filter)) {
-        header("location: ..\pages\admin\index.php?deleteRecord=success");
-        exit();
-    } else {
-        header("location: ..\pages\admin\index.php?deleteRecord=failed");
         exit();
     }
 

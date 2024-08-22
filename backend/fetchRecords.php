@@ -1,35 +1,59 @@
 <?php
 error_reporting(E_ALL);
-ini_set('display_errors', 0); // Turn off display errors in production
+ini_set('display_errors', 0); // Disable error display in production
 ini_set('log_errors', 1); // Enable error logging
-ini_set('error_log', '/path/to/error.log'); // Path to error log file
+ini_set('error_log', '/path/to/error.log'); // Log file path
 
 include_once "../includes/db.php";
 
 header('Content-Type: application/json');
 
-// Initialize the $response variable as an array
+// Initialize $response array
 $response = [];
 
-// Fetch records from the database, ordering by year and month in ascending order
-$records = query($conn, "SELECT * FROM `records` WHERE `record_status` = 'A' ORDER BY `record_year` DESC, `record_month` ASC");
+$queries = [
+    'abstracts' => "SELECT * FROM `records` WHERE `record_status` = 'A' ORDER BY `record_year` DESC, `record_month` ASC",
+    'students' => "SELECT * FROM `users` u JOIN `lrn` ON u.lrn_id = lrn.lrn_id WHERE `user_type` = 'S' AND `user_status` = 'A'",
+    'guests' => "SELECT * FROM `users` u WHERE `user_type` = 'G' AND `user_status` = 'A'",
+    'LRNs' => "SELECT * FROM `lrn` JOIN `users` u ON lrn.lrn_id = u.lrn_id WHERE lrn.lrn_status = 'A'"
+];
 
-// Check if records were returned
-if ($records) {
-    foreach ($records as $record) {
-        // Convert the numeric month to the month name
-        $monthNumber = htmlspecialchars($record['record_month'], ENT_QUOTES, 'UTF-8');
-        $monthName = DateTime::createFromFormat('!m', $monthNumber)->format('F');
-        
-        $response[] = [
-            'id' => htmlspecialchars($record['record_id'], ENT_QUOTES, 'UTF-8'),
-            'title' => htmlspecialchars($record['record_title'], ENT_QUOTES, 'UTF-8'),
-            'year' => htmlspecialchars($record['record_year'], ENT_QUOTES, 'UTF-8'),
-            'month' => $monthName
-        ];
+$fetchType = $_GET['fetch'] ?? '';
+$results = $queries[$fetchType] ? query($conn, $queries[$fetchType]) : null;
+
+if ($results) {
+    foreach ($results as $result) {
+        $response[] = match ($fetchType) {
+            'abstracts' => [
+                'id' => htmlspecialchars($result['record_id'], ENT_QUOTES, 'UTF-8'),
+                'title' => htmlspecialchars($result['record_title'], ENT_QUOTES, 'UTF-8'),
+                'year' => htmlspecialchars($result['record_year'], ENT_QUOTES, 'UTF-8'),
+                'month' => DateTime::createFromFormat('!m', htmlspecialchars($result['record_month'], ENT_QUOTES, 'UTF-8'))->format('F')
+            ],
+            'students' => [
+                'id' => htmlspecialchars($result['user_id'], ENT_QUOTES, 'UTF-8'),
+                'fname' => htmlspecialchars($result['user_firstname'], ENT_QUOTES, 'UTF-8'),
+                'mi' => htmlspecialchars($result['user_mi'], ENT_QUOTES, 'UTF-8'),
+                'lname' => htmlspecialchars($result['user_lastname'], ENT_QUOTES, 'UTF-8'),
+                'lrn' => htmlspecialchars($result['lrn_lrnid'], ENT_QUOTES, 'UTF-8'),
+                'track' => htmlspecialchars($result['user_trackstrand'], ENT_QUOTES, 'UTF-8')
+            ],
+            'guests' => [
+                'id' => htmlspecialchars($result['user_id'], ENT_QUOTES, 'UTF-8'),
+                'fname' => htmlspecialchars($result['user_firstname'], ENT_QUOTES, 'UTF-8'),
+                'mi' => htmlspecialchars($result['user_mi'], ENT_QUOTES, 'UTF-8'),
+                'lname' => htmlspecialchars($result['user_lastname'], ENT_QUOTES, 'UTF-8'),
+                'school' => htmlspecialchars($result['user_school'], ENT_QUOTES, 'UTF-8')
+            ],
+            'LRNs' => [
+                'id' => htmlspecialchars($result['lrn_id'], ENT_QUOTES, 'UTF-8'),
+                'fullname' => htmlspecialchars($result['user_firstname'], ENT_QUOTES, 'UTF-8'),
+                'lrn' => htmlspecialchars($result['lrn_lrnid'], ENT_QUOTES, 'UTF-8')
+            ],
+            default => []
+        };
     }
 }
 
-// Output the response as JSON
 echo json_encode($response);
 ?>
