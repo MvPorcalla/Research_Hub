@@ -88,7 +88,7 @@
 
                                                         <tbody>
                                                             <?php
-                                                            $students = query($conn, "SELECT * FROM `users` u JOIN `lrn` ON u.lrn_id = lrn.lrn_id WHERE `user_type` = 'S' AND `user_status` != 'I'");
+                                                            $students = query($conn, "SELECT * FROM `users` u JOIN `lrn` ON u.lrn_id = lrn.lrn_id WHERE `user_type` = 'S' AND `user_status` = 'A'");
 
                                                             foreach ($students as $key => $student) {
 
@@ -142,7 +142,7 @@
 
                                                         <tbody>
                                                             <?php
-                                                            $guests = query($conn, "SELECT * FROM `users` u WHERE `user_type` = 'G' AND `user_status` != 'I'");
+                                                            $guests = query($conn, "SELECT * FROM `users` u WHERE `user_type` = 'G' AND `user_status` = 'A'");
 
                                                             foreach ($guests as $key => $guest) {
 

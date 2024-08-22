@@ -72,7 +72,7 @@
                                     <tbody>
                                         <?php
 
-                                        $lrns = query($conn, "SELECT * FROM `lrn` JOIN `users` u ON lrn.lrn_id = u.lrn_id WHERE `user_status` != 'I'");
+                                        $lrns = query($conn, "SELECT * FROM `lrn` JOIN `users` u ON lrn.lrn_id = u.lrn_id WHERE lrn.lrn_status = 'A'");
 
                                         foreach ($lrns as $key => $lrn) {
                                             
