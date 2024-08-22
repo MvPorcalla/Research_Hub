@@ -11,7 +11,10 @@
     <style>
         .admin-card {
             border-radius: 20px;
-            border:1px solid #000;
+            border: 1px solid #000;
+        }
+        .form-check-label {
+            margin-bottom: 0;
         }
     </style>
 </head>
@@ -25,7 +28,6 @@
         <div class="row text-center">
             <!-- sidebar -->
             <?php include './../admin/components/sidebar.php'; ?>
-            
 
             <!-- Main content area -->
             <main class="col-md-9 ms-sm-auto col-lg-9 px-md-4">
@@ -37,7 +39,7 @@
                         <div class="row justify-content-center">
                             <div class="col-md-10">
                                 <div class="card admin-card bg-transparent">
-                                    
+
                                     <div class="card-body mx-5 text-start">
                                         <form action="" method="POST" enctype="multipart/form-data">
                                             <!-- Title -->
@@ -52,7 +54,7 @@
                                             <div class="row mb-3">
                                                 <div class="col-md-12">
                                                     <label for="author" class="form-label">Author</label>
-                                                    <input type="text" class="form-control" id="school" name="school" required>
+                                                    <input type="text" class="form-control" id="author" name="author" required>
                                                 </div>
                                             </div>
 
@@ -60,7 +62,7 @@
                                             <div class="row mb-3">
                                                 <div class="col-md-12">
                                                     <label for="year" class="form-label">Year</label>
-                                                    <input type="date" class="form-control" id="year" name="year" required>
+                                                    <input type="month" class="form-control" id="monthYear" name="monthYear" required>
                                                 </div>
                                             </div>
 
@@ -75,17 +77,25 @@
                                                 </select>
                                             </div>
 
-                                            <!-- Upload Research File -->
+                                            <!-- Checkbox and Upload Research File -->
                                             <div class="mb-3">
-                                                <label for="file" class="form-label">Upload Research</label>
-                                                <input type="file" class="form-control" id="file" name="file" accept=".pdf,.doc,.docx" required>
+                                                <div class="row">
+                                                    <div class="col-md-9">
+                                                        <label for="file" class="form-label">Upload Research</label>
+                                                    </div>
+                                                    <div class="col-md-3 d-flex align-items-center">
+                                                        <input type="checkbox" id="enableUpload" class="form-check-input me-2" onchange="toggleFileInput()">
+                                                        <label for="enableUpload" class="form-check-label">Enable</label>
+                                                    </div>
+                                                </div>
+                                                <input type="file" class="form-control mt-2" id="file" name="file" accept=".pdf,.doc,.docx" disabled>
                                             </div>
 
                                             <!-- Submit Button -->
                                             <div class="d-grid my-3">
                                                 <button type="submit" class="btn btn-primary">Submit</button>
                                             </div>
-                                                                                
+
                                         </form>
                                     </div>
                                 </div>
@@ -105,6 +115,19 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
 
     <script>
+        function toggleFileInput() {
+            const checkbox = document.getElementById('enableUpload');
+            const fileInput = document.getElementById('file');
+
+            if (checkbox.checked) {
+                fileInput.disabled = false;
+                fileInput.required = true;
+            } else {
+                fileInput.disabled = true;
+                fileInput.required = false;
+            }
+        }
+
         document.addEventListener('DOMContentLoaded', function () {
             const urlParams = new URLSearchParams(window.location.search);
             const loginStatus = urlParams.get('login');
