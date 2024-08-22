@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pending Approval - LNHS Research Hub</title>
+    <title>Admin Profile - LNHS Research Hub</title>
     <link rel="icon" href="../../assets/icons/LNHS-icon.png" type="image/png">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../../css/mainStyle.css">
@@ -22,11 +22,14 @@
             <?php include './../admin/components/sidebar.php'; ?>
 
             <!-- Main content area -->
-            <main class="col-md-9 ms-sm-auto col-lg-9 px-md-4">
-                <div class="container">
-                    <div class="row">
-                        <h1>shesh taena mo admin</h1>
+            <main class="col-md-9 ms-sm-auto col-lg-9 px-md-4 mt-5">
+                <div class="row">
+                    <div class="card">
+                        <div class="card-body">
+                            This is some text within a card body.
+                        </div>
                     </div>
+                   
                 </div>
             </main>
         </div>
