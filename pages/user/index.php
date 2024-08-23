@@ -24,7 +24,7 @@
             <main class="col-md-9 ms-sm-auto col-lg-9 px-md-4">
                 <div class="container">
                     <div class="row">
-                        <div class="mt-3 d-flex justify-content-end">
+                        <div class="my-4 d-flex justify-content-end">
                             <!-- Search Bar -->
                             <div class="input-group rounded" style="max-width: 800px;">
                                 <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" id="search-bar">
@@ -34,71 +34,20 @@
                             </div>
                         </div>
 
-                         <!-- Content Table -->
-                         <div class="container mt-3 table-container">
+                        <!-- Content Table -->
+                        <div class="container mt-3 admin-table-container">
                             <div class="table-responsive">
-                                <table class="table table-bordered table-striped">
+                                <table class="table table-bordered table-striped abstracts">
                                     <thead class="table-dark">
                                         <tr>
-                                            <th></th>
+                                            <th>File</th>
                                             <th>Title</th>
-                                            <th>Actions</th>
+                                            <th>Action</th>
                                         </tr>
                                     </thead>
+
                                     <tbody>
-                                        <!-- Example static row -->
-                                        <tr>
-                                            <td><i class="fas fa-file-pdf"></i></td>
-                                            <td>Sample Research Title</td>
-                                            
-                                            <td>
-                                                <a href="./#?id=1" class="btn btn-warning btn-sm">
-                                                    <i class="fas fa-comment"></i>
-                                                </a>
-                                                <a href="./#?id=1" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this record?');">
-                                                    <i class="fas fa-heart"></i>
-                                                </a>
-                                                <a href="./#?id=1" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this record?');">
-                                                    <i class="fas fa-download"></i>
-                                                </a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td><i class="fas fa-file-pdf"></i></td>
-                                            <td>I still miss U</td>
-                                            <td>
-                                                <a href="./#?id=1" class="btn btn-warning btn-sm">
-                                                    <i class="fas fa-comment"></i>
-                                                </a>
-                                                <a href="./#?id=1" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this record?');">
-                                                    <i class="fas fa-heart"></i>
-                                                </a>
-                                                <a href="./#?id=1" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this record?');">
-                                                    <i class="fas fa-download"></i>
-                                                </a>
-                                            </td>
-                                        </tr>
-                                        
-
-                                        <!-- PHP loop to display dynamic rows here -->
-                                        <?php
-                                        // Example: Assuming you have an array of records from a database
-                                        // $records = fetchRecordsFromDatabase();
-
-                                        // foreach ($records as $record) {
-                                        //     echo "<tr>";
-                                        //     echo "<td>{$record['record_title']}</td>";
-                                        //     echo "<td>";
-                                        //     echo "<a href='./editRecord.php?id={$record['record_id']}' class='btn btn-warning btn-sm'>";
-                                        //     echo "<i class='fas fa-edit'></i>";
-                                        //     echo "</a> ";
-                                        //     echo "<a href='./deleteRecord.php?id={$record['record_id']}' class='btn btn-danger btn-sm' onclick='return confirm(\"Are you sure you want to delete this record?\");'>";
-                                        //     echo "<i class='fas fa-trash-alt'></i>";
-                                        //     echo "</a>";
-                                        //     echo "</td>";
-                                        //     echo "</tr>";
-                                        // }
-                                        ?>
+                                        <!-- Data will be dynamically inserted here -->
                                     </tbody>
                                 </table>
                             </div>
@@ -120,6 +69,87 @@
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             handleStatus('login');
+
+            // Sample data array
+            const sampleData = [
+                {
+                    file: 'Research_Paper_1.pdf',
+                    title: 'Advancements in Artificial Intelligence',
+                    action: `
+                        <button class="btn btn-outline-primary btn-sm mx-1">
+                            <i class="fas fa-comment"></i>
+                        </button>
+                        <button class="btn btn-outline-danger btn-sm mx-1">
+                            <i class="fas fa-heart"></i>
+                        </button>
+                        <button class="btn btn-outline-success btn-sm mx-1">
+                            <i class="fas fa-download"></i>
+                        </button>
+                    `
+                },
+                {
+                    file: 'Study_Report_2.docx',
+                    title: 'Impact of Climate Change on Agriculture',
+                    action: `
+                        <button class="btn btn-outline-primary btn-sm mx-1">
+                            <i class="fas fa-comment"></i>
+                        </button>
+                        <button class="btn btn-outline-danger btn-sm mx-1">
+                            <i class="fas fa-heart"></i>
+                        </button>
+                        <button class="btn btn-outline-success btn-sm mx-1">
+                            <i class="fas fa-download"></i>
+                        </button>
+                    `
+                },
+                {
+                    file: 'Data_Analysis_3.xlsx',
+                    title: 'Statistical Data on Renewable Energy',
+                    action: `
+                        <button class="btn btn-outline-primary btn-sm mx-1">
+                            <i class="fas fa-comment"></i>
+                        </button>
+                        <button class="btn btn-outline-danger btn-sm mx-1">
+                            <i class="fas fa-heart"></i>
+                        </button>
+                        <button class="btn btn-outline-success btn-sm mx-1">
+                            <i class="fas fa-download"></i>
+                        </button>
+                    `
+                }
+            ];
+
+            // Select the <tbody> of the table with class 'abstracts'
+            const tbody = document.querySelector('.abstracts tbody');
+
+            // Function to populate the table with sample data
+            function populateTable(data) {
+                data.forEach(item => {
+                    // Create a new table row
+                    const tr = document.createElement('tr');
+
+                    // Create and populate the 'File' cell
+                    const tdFile = document.createElement('td');
+                    tdFile.textContent = item.file;
+                    tr.appendChild(tdFile);
+
+                    // Create and populate the 'Title' cell
+                    const tdTitle = document.createElement('td');
+                    tdTitle.textContent = item.title;
+                    tr.appendChild(tdTitle);
+
+                    // Create and populate the 'Action' cell
+                    const tdAction = document.createElement('td');
+                    tdAction.innerHTML = item.action;
+                    tr.appendChild(tdAction);
+
+                    // Append the row to the table body
+                    tbody.appendChild(tr);
+                });
+            }
+
+            // Call the function to populate the table with the sample data
+            populateTable(sampleData);
         });
     </script>
 </body>

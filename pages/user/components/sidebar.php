@@ -10,19 +10,19 @@
     </div>
     <ul class="nav flex-column mx-4">
         <li class="nav-item">
-            <a class="nav-link active" href="#">Library</a>
+            <a class="nav-link active" href="./index.php">Library</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#">Favorites</a>
+            <a class="nav-link" href="./favorites.php">Favorites</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#">History</a>
+            <a class="nav-link" href="./history.php">History</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#">Research Hub Forum</a>
+            <a class="nav-link" href="./forum.php">Research Hub Forum</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#">Account Setting</a>
+            <a class="nav-link" href="./setting.php">Account Setting</a>
         </li>
         
     </ul>
