@@ -112,6 +112,7 @@
         document.addEventListener('DOMContentLoaded', function () {
             handleStatus('addRecord');
             handleStatus('editRecord');
+            clearUrlParam('abstractId');
         });
     </script>
 </body>

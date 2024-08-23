@@ -124,7 +124,10 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            handleStatus('deleteLrn');
+            handleStatus('addRecord');
+            handleStatus('editRecord');
+            handleStatus('deleteRecord');
+            handleStatus('importRecords');
         });
 
         // =====================================================================

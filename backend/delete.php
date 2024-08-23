@@ -8,10 +8,10 @@ if (isset($_GET['abstractId'])) {
     $filter = ['record_id' => $_GET['abstractId']];
 
     if (update($conn, $table, $fields, $filter)) {
-        header("location: ..\pages\admin\index.php?deleteAbstract=success");
+        header("location: ..\pages\admin\index.php?deleteRecord=success");
         exit();
     } else {
-        header("location: ..\pages\admin\index.php?deleteAbstract=failed");
+        header("location: ..\pages\admin\index.php?deleteRecord=failed");
         exit();
     }
 
@@ -22,10 +22,10 @@ if (isset($_GET['abstractId'])) {
     $filter = ['user_id' => $_GET['userId']];
 
     if (update($conn, $table, $fields, $filter)) {
-        header("location: ..\pages\admin\listUser.php?deleteUser=success");
+        header("location: ..\pages\admin\listUser.php?deleteRecord=success");
         exit();
     } else {
-        header("location: ..\pages\admin\listUser.php?deleteUser=failed");
+        header("location: ..\pages\admin\listUser.php?deleteRecord=failed");
         exit();
     }
 
@@ -43,12 +43,12 @@ if (isset($_GET['abstractId'])) {
 
         if (update($conn, $table, $fields, $filter)) {
 
-            header("location: ..\pages\admin\listLRN.php?deleteLrn=success");
+            header("location: ..\pages\admin\listLRN.php?deleteRecord=success");
             exit();
         }
 
     } else {
-        header("location: ..\pages\admin\listLRN.php?deleteLrn=failed");
+        header("location: ..\pages\admin\listLRN.php?deleteRecord=failed");
         exit();
     }
 

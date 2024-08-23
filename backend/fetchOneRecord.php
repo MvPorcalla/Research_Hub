@@ -8,20 +8,23 @@ include_once "../includes/db.php";
 
 header('Content-Type: application/json');
 
-if (isset($_GET['abstractId'])) {
-    $abstractId = $_GET['abstractId'];
-    $sql = "SELECT * FROM `records` WHERE `record_id` = ?";
-    $filter = [$abstractId];
+// Function to fetch record and return as JSON
+function fetchRecord($conn, $table, $idColumn, $idValue) {
+    $sql = "SELECT * FROM `{$table}` WHERE `{$idColumn}` = ?";
+    $filter = [$idValue];
     $result = query($conn, $sql, $filter);
 
     if (!empty($result)) {
-        // Return the data as JSON
-        echo json_encode($result[0]);
-    } else {
-        // Return an error message if no record is found
-        echo json_encode(['error' => 'Record not found']);
+        return json_encode($result[0]);
     }
+    return json_encode(['error' => 'Record not found']);
+}
+
+// Determine which parameter is present and fetch the corresponding record
+if (isset($_GET['abstractId'])) {
+    echo fetchRecord($conn, 'records', 'record_id', $_GET['abstractId']);
+} elseif (isset($_GET['lrnId'])) {
+    echo fetchRecord($conn, 'lrn', 'lrn_id', $_GET['lrnId']);
 } else {
     echo json_encode(['error' => 'No ID provided']);
 }
-?>

@@ -146,7 +146,7 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            handleStatus('deleteUser');
+            handleStatus('deleteRecord');
         });
 
         // =====================================================================

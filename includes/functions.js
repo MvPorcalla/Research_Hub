@@ -23,20 +23,20 @@ function handleStatus(paramName) {
                 title: "Registration Complete!",
                 text: "Your registration is pending for approval by the admin."
             },
-            "wronglrn": {
+            "failed": {
                 icon: "error",
-                title: "Wrong LRN.",
-                text: "Your LRN does not exist in the database."
+                title: "Oops!",
+                text: "Your registration failed. Please try again."
             },
             "existing": {
                 icon: "error",
                 title: "LRN already registered.",
                 text: "Your LRN has already been registered to an account."
             },
-            "failed": {
+            "wronglrn": {
                 icon: "error",
-                title: "Oops!",
-                text: "Your registration failed. Please try again."
+                title: "Wrong LRN.",
+                text: "Your LRN does not exist in the database."
             }
         },
         'reset': {
@@ -80,10 +80,11 @@ function handleStatus(paramName) {
                 text: "Failed to edit record."
             }
         },
-        'deleteAbstract': {
+        'deleteRecord': {
             "success": {
                 icon: "success",
-                title: "Record Deleted!"
+                title: "Record Deleted!",
+                text: "Successfully deleted record."
             },
             "failed": {
                 icon: "error",
@@ -91,26 +92,26 @@ function handleStatus(paramName) {
                 text: "Failed to delete record."
             }
         },
-        'deleteUser': {
+        'importRecords': {
             "success": {
                 icon: "success",
-                title: "User Deleted!"
+                title: "Content Imported!",
+                text: "Successfully imported file contents to the list."
             },
             "failed": {
                 icon: "error",
-                title: "Oops!",
-                text: "Failed to delete user."
-            }
-        },
-        'deleteLrn': {
-            "success": {
-                icon: "success",
-                title: "LRN Deleted!"
+                title: "Error.",
+                text: "Error uploading file. Please try again."
             },
-            "failed": {
+            "invalid": {
+                icon: "error",
+                title: "Invalid.",
+                text: "Invalid file format. Only xls and xlsx files are allowed."
+            },
+            "missing": {
                 icon: "error",
                 title: "Oops!",
-                text: "Failed to delete LRN."
+                text: "No file uploaded."
             }
         }
     };
@@ -124,12 +125,17 @@ function handleStatus(paramName) {
         if (message) {
             Swal.fire(message);
         }
-
-        // Clean up URL
-        let url = new URL(window.location.href);
-        url.searchParams.delete(paramName);
-        window.history.replaceState({}, document.title, url.toString());
+        clearUrlParam(paramName);
     }
+}
+
+// =========================================================================
+
+function clearUrlParam(paramName) {
+    // Clean up URL
+    let url = new URL(window.location.href);
+    url.searchParams.delete(paramName);
+    window.history.replaceState({}, document.title, url.toString());
 }
 
 // =========================================================================
