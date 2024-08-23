@@ -41,7 +41,12 @@
                         <div class="row">
                             <div class="col-md-5 d-flex justify-content-start">
                                 <a href="addStudentLRN.php" class="btn btn-secondary px-3">Add</a>
+                                
+                                <a href="#" class="btn btn-success ms-3 px-3" data-bs-toggle="modal" data-bs-target="#importModal">Import</a>
+
+                               
                             </div>
+                            
 
                             <div class="col-md-7">
                                 <div class="d-flex justify-content-end">
@@ -55,7 +60,34 @@
                                     </form>
                                 </div>
                             </div>
-                        </div>
+
+                           <!-- Modal -->
+                            <div class="modal fade" id="importModal" tabindex="-1" aria-labelledby="importModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-header bg-success text-white">
+                                            <h5 class="modal-title" id="importModalLabel">Import Student LRN</h5>
+                                            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+
+                                        <form id="importForm" action="../../backend/importStudentLRN.php" method="post" enctype="multipart/form-data">
+                                            <div class="mb-3">
+                                                <label for="fileInput" class="form-label">Select Excel file to import</label>
+                                                <input class="form-control" type="file" id="fileInput" name="file" accept=".xlsx, .xls" required>
+                                                <div class="form-text">Only Excel files (.xlsx, .xls) are allowed.</div>
+                                            </div>
+                                            <div class="d-grid gap-2">
+                                                <button type="submit" class="btn btn-success btn-lg" name="save_excel_data">Import</button>
+                                            </div>
+                                        </form>
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
 
                         <!-- Content Table -->
                         <div class="container mt-3 admin-table-container">
