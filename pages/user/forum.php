@@ -25,7 +25,9 @@
                 <div class="container">
                     <div class="row">
                         
-                    <h1>forum</h1>
+                    <div class="mt-5 mb-3">
+                        <h1 class='admin-subtitle'>Forum</h1>
+                    </div>
 
                     </div>
                 </div>
