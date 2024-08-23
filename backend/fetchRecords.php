@@ -12,7 +12,7 @@ header('Content-Type: application/json');
 $response = [];
 
 $queries = [
-    'abstracts' => "SELECT * FROM `records` WHERE `record_status` = 'A' ORDER BY `record_year` DESC, `record_month` ASC",
+    'abstracts' => "SELECT * FROM `records` WHERE `record_status` = 'A' ORDER BY `record_year` DESC, `record_month` DESC",
     'students' => "SELECT * FROM `users` u JOIN `lrn` ON u.lrn_id = lrn.lrn_id WHERE `user_type` = 'S' AND `user_status` = 'A'",
     'guests' => "SELECT * FROM `users` u WHERE `user_type` = 'G' AND `user_status` = 'A'",
     'LRNs' => "SELECT * FROM `lrn` JOIN `users` u ON lrn.lrn_id = u.lrn_id WHERE lrn.lrn_status = 'A'"

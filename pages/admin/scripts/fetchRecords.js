@@ -3,8 +3,10 @@
 document.addEventListener('DOMContentLoaded', () => {
     const classes = ['abstracts', 'students', 'guests', 'LRNs'];
 
-    const escapeHTML = str => str.replace(/&/g, "&amp;").replace(/</g, "&lt;")
-                                 .replace(/>/g, "&gt;").replace(/"/g, "&quot;")
+    const escapeHTML = str => str.replace(/&/g, "&amp;")
+                                 .replace(/</g, "&lt;")
+                                 .replace(/>/g, "&gt;")
+                                 .replace(/"/g, "&quot;")
                                  .replace(/'/g, "&#039;");
     
     const fetchRecords = async () => {
@@ -29,8 +31,8 @@ document.addEventListener('DOMContentLoaded', () => {
                                 <td>${escapeHTML(dataRow.year)}</td>
                                 <td>${escapeHTML(dataRow.month)}</td>
                                 <td>
-                                    <a href="../editRecord.php?id=${encodeURIComponent(dataRow.id)}" class="btn btn-primary btn-sm"><i class='fas fa-edit'></i></a>
-                                    <a href="../delete.php?abstractId=${encodeURIComponent(dataRow.id)}" class="btn btn-danger btn-sm delete-button"><i class='fas fa-trash-alt'></i></a>
+                                    <a href="record.php?abstractId=${encodeURIComponent(dataRow.id)}" class="btn btn-primary btn-sm"><i class='fas fa-edit'></i></a>
+                                    <a href="../../backend/delete.php?abstractId=${encodeURIComponent(dataRow.id)}" class="btn btn-danger btn-sm delete-button"><i class='fas fa-trash-alt'></i></a>
                                 </td>`;
                             break;
                         case 'students':
@@ -67,6 +69,12 @@ document.addEventListener('DOMContentLoaded', () => {
                             break;
                     }
                     tableBody.innerHTML += `<tr>${rowHTML}</tr>`;
+                });
+
+                setupConfirmationDialog('.delete-button', {
+                    multiTd: false,
+                    actionText: "You are about to delete",
+                    confirmButtonText: "Delete"
                 });
             }
         } catch (error) {

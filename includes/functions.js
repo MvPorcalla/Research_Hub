@@ -61,6 +61,23 @@ function handleStatus(paramName) {
                 icon: "error",
                 title: "Oops!",
                 text: "Failed to add new record."
+            },
+            "existing": {
+                icon: "error",
+                title: "Oops!",
+                text: "Record already exists."
+            }
+        },
+        'editRecord': {
+            "success": {
+                icon: "success",
+                title: "Record Edited!",
+                text: "Successfully edited record."
+            },
+            "failed": {
+                icon: "error",
+                title: "Oops!",
+                text: "Failed to edit record."
             }
         },
         'deleteAbstract': {
