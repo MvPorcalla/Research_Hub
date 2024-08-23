@@ -15,7 +15,7 @@ $queries = [
     'abstracts' => "SELECT * FROM `records` WHERE `record_status` = 'A' ORDER BY `record_year` DESC, `record_month` DESC",
     'students' => "SELECT * FROM `users` u JOIN `lrn` ON u.lrn_id = lrn.lrn_id WHERE `user_type` = 'S' AND `user_status` = 'A'",
     'guests' => "SELECT * FROM `users` u WHERE `user_type` = 'G' AND `user_status` = 'A'",
-    'LRNs' => "SELECT * FROM `lrn` JOIN `users` u ON lrn.lrn_id = u.lrn_id WHERE lrn.lrn_status = 'A'"
+    'LRNs' => "SELECT * FROM `lrn` WHERE lrn_status = 'A'"
 ];
 
 $fetchType = $_GET['fetch'] ?? '';
@@ -27,8 +27,8 @@ if ($results) {
             'abstracts' => [
                 'id' => htmlspecialchars($result['record_id'], ENT_QUOTES, 'UTF-8'),
                 'title' => htmlspecialchars($result['record_title'], ENT_QUOTES, 'UTF-8'),
-                'year' => htmlspecialchars($result['record_year'], ENT_QUOTES, 'UTF-8'),
-                'month' => DateTime::createFromFormat('!m', htmlspecialchars($result['record_month'], ENT_QUOTES, 'UTF-8'))->format('F')
+                'yearmonth' => DateTime::createFromFormat('!m', htmlspecialchars($result['record_month'], ENT_QUOTES, 'UTF-8'))->format('F') . ' ' . htmlspecialchars($result['record_year'], ENT_QUOTES, 'UTF-8'),
+                'authors' => htmlspecialchars($result['record_authors'], ENT_QUOTES, 'UTF-8')
             ],
             'students' => [
                 'id' => htmlspecialchars($result['user_id'], ENT_QUOTES, 'UTF-8'),
@@ -47,7 +47,7 @@ if ($results) {
             ],
             'LRNs' => [
                 'id' => htmlspecialchars($result['lrn_id'], ENT_QUOTES, 'UTF-8'),
-                'fullname' => htmlspecialchars($result['user_firstname'], ENT_QUOTES, 'UTF-8'),
+                'fullname' => htmlspecialchars($result['lrn_student'], ENT_QUOTES, 'UTF-8'),
                 'lrn' => htmlspecialchars($result['lrn_lrnid'], ENT_QUOTES, 'UTF-8')
             ],
             default => []

@@ -41,15 +41,15 @@
                                     <div class="card-body mx-5 text-start">
                                         <form action="" method="POST" enctype="multipart/form-data">
                                             
-                                            <!-- First name -->
+                                            <!-- Last name -->
                                             <div class="row mb-3">
                                                 <div class="col-md-12">
-                                                    <label for="firstName" class="form-label">First Name</label>
-                                                    <input type="text" class="form-control" id="firstName" name="firstName" required>
+                                                    <label for="lastName" class="form-label">Last Name</label>
+                                                    <input type="text" class="form-control" id="lastName" name="lastName" required>
                                                 </div>
                                             </div>
 
-                                            <!-- Last name -->
+                                            <!-- First name -->
                                             <div class="row mb-3">
                                                 <div class="col-md-12">
                                                     <label for="firstName" class="form-label">First Name</label>
@@ -60,8 +60,8 @@
                                             <!-- Middle initial -->
                                             <div class="row mb-3">
                                                 <div class="col-md-12">
-                                                    <label for="firstName" class="form-label">First Name</label>
-                                                    <input type="text" class="form-control" id="firstName" name="firstName" required>
+                                                    <label for="mi" class="form-label">Middle Initial</label>
+                                                    <input type="text" class="form-control" id="mi" name="mi" maxlength="1" required>
                                                 </div>
                                             </div>
                                             
@@ -71,7 +71,6 @@
                                                 <input type="text" class="form-control" id="lrn" name="lrn" maxlength="12" required>
                                             </div>
 
-                                           
                                             <!-- Submit Button -->
                                             <div class="d-grid my-3">
                                                 <button type="submit" class="btn btn-primary">Submit</button>

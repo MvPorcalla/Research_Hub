@@ -58,8 +58,8 @@
                                     <thead class="table-dark">
                                         <tr>
                                             <th>Title</th>
-                                            <th>Year</th>
-                                            <th>Month</th>
+                                            <th>Month Year</th>
+                                            <th>Author</th>
                                             <th>Actions</th>
                                         </tr>
                                     </thead>
