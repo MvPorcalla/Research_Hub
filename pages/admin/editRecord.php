@@ -81,12 +81,11 @@
                                             <div class="mb-3">
                                                 <div class="row">
                                                     <div class="col-md-9">
+                                                        <input type="checkbox" id="enableUpload" class="form-check-input border-dark mx-3" onchange="toggleFileInput()">
+                                                        <label for="enableUpload" class="form-check-label">Enable</label>
                                                         <label for="file" class="form-label">Upload Research</label>
                                                     </div>
-                                                    <div class="col-md-3 d-flex align-items-center">
-                                                        <input type="checkbox" id="enableUpload" class="form-check-input me-2" onchange="toggleFileInput()">
-                                                        <label for="enableUpload" class="form-check-label">Enable</label>
-                                                    </div>
+                                                   
                                                 </div>
                                                 <input type="file" class="form-control mt-2" id="file" name="file" accept=".pdf,.doc,.docx" disabled>
                                             </div>

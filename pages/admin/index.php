@@ -27,7 +27,7 @@
             <main class="col-md-9 ms-sm-auto col-lg-9 px-md-4">
                 <div class="container">
                     <div class="row">
-                        <div class="my-2">
+                        <div class="my-3">
                             <h1 class="admin_title">Research Records</h1>
                         </div>
 
