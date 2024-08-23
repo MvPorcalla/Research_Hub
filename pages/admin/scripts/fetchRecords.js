@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                 <td>${escapeHTML(dataRow.yearmonth)}</td>
                                 <td>${escapeHTML(dataRow.authors)}</td>
                                 <td>
-                                    <a href="record.php?abstractId=${encodeURIComponent(dataRow.id)}" class="btn btn-primary btn-sm"><i class='fas fa-edit'></i></a>
+                                    <a href="abstract.php?abstractId=${encodeURIComponent(dataRow.id)}" class="btn btn-primary btn-sm"><i class='fas fa-edit'></i></a>
                                     <a href="../../backend/delete.php?abstractId=${encodeURIComponent(dataRow.id)}" class="btn btn-danger btn-sm delete-button"><i class='fas fa-trash-alt'></i></a>
                                 </td>`;
                             break;
@@ -63,7 +63,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                 <td>${escapeHTML(dataRow.fullname)}</td>
                                 <td>${escapeHTML(dataRow.lrn)}</td>
                                 <td>
-                                    <a href="addStudentLRN.php?lrnId=${encodeURIComponent(dataRow.id)}" class="btn btn-primary btn-sm"><i class='fas fa-edit'></i></a>
+                                    <a href="lrn.php?lrnId=${encodeURIComponent(dataRow.id)}" class="btn btn-primary btn-sm"><i class='fas fa-edit'></i></a>
                                     <a href="../delete.php?lrnId=${encodeURIComponent(dataRow.id)}" class="btn btn-danger btn-sm delete-button"><i class='fas fa-trash-alt'></i></a>
                                 </td>`;
                             break;

@@ -40,7 +40,7 @@
                         <!-- Search Bar -->
                         <div class="row">
                             <div class="col-md-5 d-flex justify-content-start">
-                                <a href="addStudentLRN.php" class="btn btn-secondary px-3">Add</a>
+                                <a href="lrn.php" class="btn btn-secondary px-3">Add</a>
                                 
                                 <a href="#" class="btn btn-success ms-3 px-3" data-bs-toggle="modal" data-bs-target="#importModal">Import</a>
 
@@ -128,6 +128,7 @@
             handleStatus('editRecord');
             handleStatus('deleteRecord');
             handleStatus('importRecords');
+            handleStatus('existingRecords');
         });
 
         // =====================================================================

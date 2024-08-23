@@ -8,7 +8,7 @@ function handleStatus(paramName) {
             },
             "failed": {
                 icon: "error",
-                title: "Incorrect credentials.",
+                title: "Incorrect Credentials",
                 text: "Please try again."
             },
             "inactive": {
@@ -35,7 +35,7 @@ function handleStatus(paramName) {
             },
             "wronglrn": {
                 icon: "error",
-                title: "Wrong LRN.",
+                title: "Wrong LRN",
                 text: "Your LRN does not exist in the database."
             }
         },
@@ -71,7 +71,7 @@ function handleStatus(paramName) {
         'editRecord': {
             "success": {
                 icon: "success",
-                title: "Record Edited!",
+                title: "Record Edited",
                 text: "Successfully edited record."
             },
             "failed": {
@@ -83,7 +83,7 @@ function handleStatus(paramName) {
         'deleteRecord': {
             "success": {
                 icon: "success",
-                title: "Record Deleted!",
+                title: "Record Deleted",
                 text: "Successfully deleted record."
             },
             "failed": {
@@ -100,16 +100,21 @@ function handleStatus(paramName) {
             },
             "failed": {
                 icon: "error",
-                title: "Error.",
+                title: "Import Failed",
+                text: "Error importing file. Please try again."
+            },
+            "error": {
+                icon: "error",
+                title: "Error",
                 text: "Error uploading file. Please try again."
             },
             "invalid": {
-                icon: "error",
-                title: "Invalid.",
+                icon: "warning",
+                title: "Invalid",
                 text: "Invalid file format. Only xls and xlsx files are allowed."
             },
             "missing": {
-                icon: "error",
+                icon: "warning",
                 title: "Oops!",
                 text: "No file uploaded."
             }
@@ -119,14 +124,39 @@ function handleStatus(paramName) {
     const urlParams = new URLSearchParams(window.location.search);
     const status = urlParams.get(paramName);
 
+    let message; // Initialize message variable
+
     if (status) {
-        const paramMessages = messages[paramName] || {};
-        const message = paramMessages[status];
+        if (paramName === 'existingRecords') {
+            const parts = status.split("-");
+            const existingData = parts[0];
+            const totalData = parts[1];
+    
+            if (existingData == totalData) {
+                message = {
+                    icon: "info",
+                    title: "Records Already Exists",
+                    text: `The records within the file already exists in the list.`
+                };
+            } else {
+                message = {
+                    icon: "success",
+                    title: "Records Imported!",
+                    html: `Successfully imported file records to the list.<br><small>There were ${existingData} existing record(s) out of ${totalData} records.</small>`
+                };
+            }
+        } else {
+            const paramMessages = messages[paramName] || {};
+            message = paramMessages[status];
+        }
+        
         if (message) {
             Swal.fire(message);
         }
+    
         clearUrlParam(paramName);
     }
+    
 }
 
 // =========================================================================

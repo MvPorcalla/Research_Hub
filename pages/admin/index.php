@@ -34,7 +34,7 @@
                         <!-- Search Bar -->
                         <div class="row">
                             <div class="col-md-5 d-flex justify-content-start">
-                                <a href="./record.php" class="btn btn-secondary px-3">Add</a>
+                                <a href="./abstract.php" class="btn btn-secondary px-3">Add</a>
                             </div>
 
                             <div class="col-md-7">
@@ -87,9 +87,9 @@
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             handleStatus('login');
-            handleStatus('deleteAbstract');
             handleStatus('addRecord');
             handleStatus('editRecord');
+            handleStatus('deleteRecord');
         });
     </script>
 </body>
