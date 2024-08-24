@@ -31,10 +31,11 @@ if (isset($_POST['username'])) {
 
             //transfers value from db to sessioin variable
             $_SESSION['user_id'] = $row['user_id'];
-            $_SESSION['user_name'] = $row['user_name'];
+            $_SESSION['user_username'] = $row['user_username'];
             $_SESSION['user_type'] = $row['user_type'];
 
-            header("location: ../pages/user/index.php?login=success");
+            $status = $_SESSION['user_type'] == 'A' ? 'admin' : 'user';
+            header("location: ../pages/{$status}/index.php?login=success");
             exit();
         } else {
             header("location: ../login.php?login=failed");

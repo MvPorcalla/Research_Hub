@@ -1,3 +1,8 @@
+<?php
+include_once "..\..\includes\db.php";
+if ($_SESSION['user_type'] != 'A') header("location: ../../index.php");
+?>
+
 <?php include_once "..\..\includes\db.php"; ?>
 
 <!DOCTYPE html>
