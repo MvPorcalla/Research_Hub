@@ -130,14 +130,6 @@
             handleStatus('importRecords');
             handleStatus('existingRecords');
         });
-
-        // =====================================================================
-
-        setupConfirmationDialog('.delete-button', {
-            multiTd: false,
-            actionText: "You are about to delete the LRN of:",
-            confirmButtonText: "Delete"
-        });
     </script>
 </body>
 

@@ -71,11 +71,69 @@ document.addEventListener('DOMContentLoaded', () => {
                     tableBody.innerHTML += `<tr>${rowHTML}</tr>`;
                 });
 
-                setupConfirmationDialog('.delete-button', {
-                    multiTd: false,
-                    actionText: "You are about to delete",
-                    confirmButtonText: "Delete"
+                let options = '';
+                switch (foundClass) {
+                    case 'abstracts':
+                        options = {
+                            multiTd: false,
+                            actionText: "You are about to delete",
+                            confirmButtonText: "Delete"
+                        };
+                        break;
+                    case 'LRNs':
+                        options = {
+                            multiTd: false,
+                            actionText: "You are about to delete the LRN of:",
+                            confirmButtonText: "Delete"
+                        };
+                        break;
+                    default:
+                        options = {
+                            multiTd: true,
+                            tdCount: 3, // Number of <td> elements to extract text from
+                            actionText: "You are about to deactivate the account of",
+                            confirmButtonText: "Deactivate"
+                        };
+                        break;
+
+                }
+                setupConfirmationDialog('.delete-button', options);
+            }
+
+            if (document.getElementById('pendingTiles')) {
+
+                const pendingTiles = document.getElementById('pendingTiles');
+
+                const response = await fetch(`../../backend/fetchRecords.php?fetch=pending`);
+                if (!response.ok) throw new Error('Network response was not ok');
+
+                const data = await response.json();
+                pendingTiles.innerHTML = '';
+
+                data.forEach(dataRow => {
+                    let tileHTML = `
+                        <div class="col-md-6 mb-4">
+                            <div class="card border-dark rounded-4 h-100">
+                                <div class="card-body d-flex flex-column">
+                                    <h5 class="card-title text-center flex-grow-1">${escapeHTML(dataRow.fname)} ${escapeHTML(dataRow.mi)}. ${escapeHTML(dataRow.lname)}</h5>
+                                    <p class="card-text text-center">${escapeHTML(dataRow.email)}</p>
+                                    <p class="card-text text-center">${escapeHTML(dataRow.school)}</p>
+                                    
+                                    <div class="border border-secondary rounded p-2 mb-3">
+                                        <p class="card-text text-center fw-bold mb-1">Reason</p>
+                                        <p class="card-text text-center">${escapeHTML(dataRow.reason)}</p>
+                                    </div>
+                                    <div class="d-flex justify-content-center mt-auto">
+                                        <a href="#" class="btn btn-primary btn-sm me-2">Accept</a>
+                                        <a href="#" class="btn btn-danger btn-sm">Decline</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    pendingTiles.innerHTML += `<tr>${tileHTML}</tr>`;
                 });
+
             }
         } catch (error) {
             console.error('Error fetching records:', error);
