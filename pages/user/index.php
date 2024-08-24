@@ -39,25 +39,54 @@ if (!isset($_SESSION['user_type']) || $_SESSION['user_type'] == 'A') header("loc
                             </div>
                         </div>
 
-                        <!-- Content Table -->
-                        <div class="container mt-3 admin-table-container">
-                            <div class="table-responsive">
-                                <table class="table table-bordered table-striped abstracts">
-                                    <thead class="table-dark">
-                                        <tr>
-                                            <th>File</th>
-                                            <th>Title</th>
-                                            <th>Action</th>
-                                        </tr>
-                                    </thead>
+                        <!-- Content Cards -->
+                        <div class="container mt-3 side-container">
+                            <div class="row">
+                                <?php
+                                // Sample data array
+                                $users = [
+                                    ['title' => 'Advancements in Artificial Intelligence'],
+                                    ['title' => 'Impact of Climate Change on Agriculture'],
+                                    ['title' => 'Statistical Data on Renewable Energy'],
+                                    ['title' => 'Still missing you everyday'],
+                                    ['title' => 'How are you baby girl'],
+                                    ['title' => 'kung ang pusa ay cat, bakit ka tanga?'],
+                                    ['title' => 'Statistical Data on Karupokan'],
+                                    ['title' => 'Impact of Pagiging Delulu'],
+                                    ['title' => 'Advancement in Assuming'],
+                                ];
 
-                                    <tbody>
-                                        <!-- Data will be dynamically inserted here -->
-                                    </tbody>
-                                </table>
+                                // Generate cards from the data
+                                foreach ($users as $user) {
+                                    $file = 'https://via.placeholder.com/55x70';
+                                    $title = htmlspecialchars($user['title']);
+                                    echo '<div class="col-12 mb-2">';
+                                        echo '<div class="card">';
+                                            echo '<div class="card-body">';
+                                                echo '<div class="row text-center">';
+                                                    echo '<div class="col-md-2 d-flex align-items-center justify-content-center border-end">';
+                                                        echo '<img src="' . $file . '" class="img-fluid rounded-1" alt="' . $title . '">';
+                                                    echo '</div>';
+                                                    echo '<div class="col-md-8 d-flex align-items-center justify-content-start border-end">' . $title . '</div>';
+                                                    echo '<div class="col-md-2 d-flex align-items-center justify-content-center">';
+                                                        echo '<button class="btn btn-outline-primary btn-sm mx-1">';
+                                                            echo '<i class="fas fa-comment"></i>';
+                                                        echo '</button>';
+                                                        echo '<button class="btn btn-outline-danger btn-sm mx-1 toggle-heart">';
+                                                            echo '<i class="fas fa-heart"></i>';
+                                                        echo '</button>';
+                                                        echo '<button class="btn btn-outline-success btn-sm mx-1">';
+                                                            echo '<i class="fas fa-download"></i>';
+                                                        echo '</button>';
+                                                    echo '</div>';
+                                                echo '</div>';
+                                            echo '</div>';
+                                        echo '</div>'; 
+                                    echo '</div>';
+                                }
+                                ?>
                             </div>
                         </div>
-
                     </div>
                 </div>
             </main>
@@ -70,93 +99,6 @@ if (!isset($_SESSION['user_type']) || $_SESSION['user_type'] == 'A') header("loc
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
     <script src="..\..\includes\functions.js"></script>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            handleStatus('login');
-
-            // Sample data array
-            const sampleData = [
-                {
-                    file: 'Research_Paper_1.pdf',
-                    title: 'Advancements in Artificial Intelligence',
-                    action: `
-                        <button class="btn btn-outline-primary btn-sm mx-1">
-                            <i class="fas fa-comment"></i>
-                        </button>
-                        <button class="btn btn-outline-danger btn-sm mx-1">
-                            <i class="fas fa-heart"></i>
-                        </button>
-                        <button class="btn btn-outline-success btn-sm mx-1">
-                            <i class="fas fa-download"></i>
-                        </button>
-                    `
-                },
-                {
-                    file: 'Study_Report_2.docx',
-                    title: 'Impact of Climate Change on Agriculture',
-                    action: `
-                        <button class="btn btn-outline-primary btn-sm mx-1">
-                            <i class="fas fa-comment"></i>
-                        </button>
-                        <button class="btn btn-outline-danger btn-sm mx-1">
-                            <i class="fas fa-heart"></i>
-                        </button>
-                        <button class="btn btn-outline-success btn-sm mx-1">
-                            <i class="fas fa-download"></i>
-                        </button>
-                    `
-                },
-                {
-                    file: 'Data_Analysis_3.xlsx',
-                    title: 'Statistical Data on Renewable Energy',
-                    action: `
-                        <button class="btn btn-outline-primary btn-sm mx-1">
-                            <i class="fas fa-comment"></i>
-                        </button>
-                        <button class="btn btn-outline-danger btn-sm mx-1">
-                            <i class="fas fa-heart"></i>
-                        </button>
-                        <button class="btn btn-outline-success btn-sm mx-1">
-                            <i class="fas fa-download"></i>
-                        </button>
-                    `
-                }
-            ];
-
-            // Select the <tbody> of the table with class 'abstracts'
-            const tbody = document.querySelector('.abstracts tbody');
-
-            // Function to populate the table with sample data
-            function populateTable(data) {
-                data.forEach(item => {
-                    // Create a new table row
-                    const tr = document.createElement('tr');
-
-                    // Create and populate the 'File' cell
-                    const tdFile = document.createElement('td');
-                    tdFile.textContent = item.file;
-                    tr.appendChild(tdFile);
-
-                    // Create and populate the 'Title' cell
-                    const tdTitle = document.createElement('td');
-                    tdTitle.textContent = item.title;
-                    tr.appendChild(tdTitle);
-
-                    // Create and populate the 'Action' cell
-                    const tdAction = document.createElement('td');
-                    tdAction.innerHTML = item.action;
-                    tr.appendChild(tdAction);
-
-                    // Append the row to the table body
-                    tbody.appendChild(tr);
-                });
-            }
-
-            // Call the function to populate the table with the sample data
-            populateTable(sampleData);
-        });
-    </script>
 </body>
 
 </html>

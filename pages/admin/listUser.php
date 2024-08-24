@@ -66,7 +66,7 @@ if ($_SESSION['user_type'] != 'A') header("location: ../../index.php");
 
                         <!-- Content Table -->
 
-                        <div class="container mt-3 admin-table-container text-light mt-1">
+                        <div class="container mt-3 side-container text-light mt-1">
 
                             <!-- student list -->
 

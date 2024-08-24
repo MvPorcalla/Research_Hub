@@ -55,7 +55,7 @@ if ($_SESSION['user_type'] != 'A') header("location: ../../index.php");
                         </div>
 
                         <!-- Content Table -->
-                        <div class="container mt-3 admin-table-container">
+                        <div class="container mt-3 side-container">
                             <div class="table-responsive">
                                 <table class="table table-bordered table-striped abstracts">
                                     <thead class="table-dark">
