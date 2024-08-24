@@ -214,3 +214,18 @@ body {
 /* ======================================== admin Setting ======================================== */
 
 
+
+/* ======================================== user Page ======================================== */
+
+.user-subtitle {
+  font-size: var(--fs-xl);
+  font-weight: var(--fw-semibold);
+  font-family: var(--font-secondary);
+  background-color: var(--bg-base-lt);
+  border: 2px solid var(--color-primary);
+  border-radius: 15px;
+  padding: 5px 150px;
+  display: inline-block;
+}
+
+
