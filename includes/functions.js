@@ -118,6 +118,23 @@ function handleStatus(paramName) {
                 title: "Oops!",
                 text: "No file uploaded."
             }
+        },
+        'action': {
+            "accepted": {
+                icon: "success",
+                title: "Guest Accepted!",
+                text: "You can now view guest in the list."
+            },
+            "declined": {
+                icon: "success",
+                title: "Guest Declined",
+                text: "Guest access was declined."
+            },
+            "failed": {
+                icon: "error",
+                title: "Oops!",
+                text: "Please try again."
+            }
         }
     };
 

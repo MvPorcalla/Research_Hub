@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                 <td>${escapeHTML(dataRow.track)}</td>
                                 <td>
                                     <a href="#" class="btn btn-primary btn-sm"><i class='fas fa-edit'></i></a>
-                                    <a href="../delete.php?userId=${encodeURIComponent(dataRow.id)}" class="btn btn-danger btn-sm delete-button"><i class='fas fa-trash-alt'></i></a>
+                                    <a href="../../backend/delete.php?userId=${encodeURIComponent(dataRow.id)}" class="btn btn-danger btn-sm delete-button"><i class='fas fa-trash-alt'></i></a>
                                 </td>`;
                             break;
                         case 'guests':
@@ -55,7 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                 <td>${escapeHTML(dataRow.school)}</td>
                                 <td>
                                     <a href="#" class="btn btn-primary btn-sm"><i class='fas fa-edit'></i></a>
-                                    <a href="../delete.php?userId=${encodeURIComponent(dataRow.id)}" class="btn btn-danger btn-sm delete-button"><i class='fas fa-trash-alt'></i></a>
+                                    <a href="../../backend/delete.php?userId=${encodeURIComponent(dataRow.id)}" class="btn btn-danger btn-sm delete-button"><i class='fas fa-trash-alt'></i></a>
                                 </td>`;
                             break;
                         case 'LRNs':
@@ -64,7 +64,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                 <td>${escapeHTML(dataRow.lrn)}</td>
                                 <td>
                                     <a href="lrn.php?lrnId=${encodeURIComponent(dataRow.id)}" class="btn btn-primary btn-sm"><i class='fas fa-edit'></i></a>
-                                    <a href="../delete.php?lrnId=${encodeURIComponent(dataRow.id)}" class="btn btn-danger btn-sm delete-button"><i class='fas fa-trash-alt'></i></a>
+                                    <a href="../../backend/delete.php?lrnId=${encodeURIComponent(dataRow.id)}" class="btn btn-danger btn-sm delete-button"><i class='fas fa-trash-alt'></i></a>
                                 </td>`;
                             break;
                     }
@@ -124,8 +124,8 @@ document.addEventListener('DOMContentLoaded', () => {
                                         <p class="card-text text-center">${escapeHTML(dataRow.reason)}</p>
                                     </div>
                                     <div class="d-flex justify-content-center mt-auto">
-                                        <a href="#" class="btn btn-primary btn-sm me-2">Accept</a>
-                                        <a href="#" class="btn btn-danger btn-sm">Decline</a>
+                                        <a href="../../backend/pending_actions.php?accept=${escapeHTML(dataRow.id)}" class="btn btn-primary btn-sm me-2">Accept</a>
+                                        <a href="../../backend/pending_actions.php?decline=${escapeHTML(dataRow.id)}" class="btn btn-danger btn-sm">Decline</a>
                                     </div>
                                 </div>
                             </div>
