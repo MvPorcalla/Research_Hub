@@ -135,6 +135,18 @@ function handleStatus(paramName) {
                 title: "Oops!",
                 text: "Please try again."
             }
+        },
+        'editInfo': {
+            "success": {
+                icon: "success",
+                title: "Update Successful!",
+                text: "Your personal information has been edited."
+            },
+            "failed": {
+                icon: "error",
+                title: "Oops!",
+                text: "Something went wrong. Please try again."
+            }
         }
     };
 

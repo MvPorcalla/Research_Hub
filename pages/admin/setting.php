@@ -78,15 +78,15 @@ if ($_SESSION['user_type'] != 'A') header("location: ../../index.php");
 
                                                 <!-- Editable Fields -->
                                                 <div class="text-start">
-                                                    <form action="update_profile.php" method="post">
+                                                    <form action="../../backend/update_profile.php" method="post">
                                                         <div class="row">
-                                                            <div class="col-md-5">
-                                                                <label for="firstName" class="form-label">First Name</label>
-                                                                <input type="text" class="form-control" id="firstName" name="firstName">
-                                                            </div>
                                                             <div class="col-md-5">
                                                                 <label for="lastName" class="form-label">Last Name</label>
                                                                 <input type="text" class="form-control" id="lastName" name="lastName">
+                                                            </div>
+                                                            <div class="col-md-5">
+                                                                <label for="firstName" class="form-label">First Name</label>
+                                                                <input type="text" class="form-control" id="firstName" name="firstName">
                                                             </div>
                                                             <div class="col-md-2">
                                                                 <label for="middleInitial" class="form-label">M.I.</label>
@@ -97,7 +97,7 @@ if ($_SESSION['user_type'] != 'A') header("location: ../../index.php");
                                                         <!-- Username -->
                                                         <div class="col-md-12 mt-3">
                                                             <label for="usernameField" class="form-label">Username</label>
-                                                            <input type="text" class="form-control" id="usernameField" name="username">
+                                                            <input type="text" class="form-control" id="usernameField" name="usernameField">
                                                         </div>
 
                                                         <!-- Save Changes Button -->
@@ -179,7 +179,14 @@ if ($_SESSION['user_type'] != 'A') header("location: ../../index.php");
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
+    <script src="..\..\includes\functions.js"></script>
     <script src="./scripts/fetchOneRecord.js"></script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            handleStatus('editInfo');
+        });
+    </script>
 </body>
 
 </html>
