@@ -40,7 +40,7 @@
                         <!-- Search Bar -->
                         <div class="row">
                             <div class="col-md-5 d-flex justify-content-start">
-                                <a href="addStudentLRN.php" class="btn btn-secondary px-3">Add</a>
+                                <a href="lrn.php" class="btn btn-secondary px-3">Add</a>
                                 
                                 <a href="#" class="btn btn-success ms-3 px-3" data-bs-toggle="modal" data-bs-target="#importModal">Import</a>
 
@@ -124,15 +124,11 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            handleStatus('deleteLrn');
-        });
-
-        // =====================================================================
-
-        setupConfirmationDialog('.delete-button', {
-            multiTd: false,
-            actionText: "You are about to delete the LRN of:",
-            confirmButtonText: "Delete"
+            handleStatus('addRecord');
+            handleStatus('editRecord');
+            handleStatus('deleteRecord');
+            handleStatus('importRecords');
+            handleStatus('existingRecords');
         });
     </script>
 </body>

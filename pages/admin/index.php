@@ -34,7 +34,7 @@
                         <!-- Search Bar -->
                         <div class="row">
                             <div class="col-md-5 d-flex justify-content-start">
-                                <a href="./addRecord.php" class="btn btn-secondary px-3">Add</a>
+                                <a href="./abstract.php" class="btn btn-secondary px-3">Add</a>
                             </div>
 
                             <div class="col-md-7">
@@ -58,8 +58,8 @@
                                     <thead class="table-dark">
                                         <tr>
                                             <th>Title</th>
-                                            <th>Year</th>
-                                            <th>Month</th>
+                                            <th>Month Year</th>
+                                            <th>Author</th>
                                             <th>Actions</th>
                                         </tr>
                                     </thead>
@@ -87,15 +87,9 @@
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             handleStatus('login');
-            handleStatus('deleteAbstract');
-        });
-
-        // =====================================================================
-
-        setupConfirmationDialog('.delete-button', {
-            multiTd: false,
-            actionText: "You are about to delete",
-            confirmButtonText: "Delete"
+            handleStatus('addRecord');
+            handleStatus('editRecord');
+            handleStatus('deleteRecord');
         });
     </script>
 </body>

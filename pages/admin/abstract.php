@@ -1,3 +1,5 @@
+<?php include_once "..\..\includes\db.php"; ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -25,21 +27,21 @@
         <div class="row text-center">
             <!-- sidebar -->
             <?php include './../admin/components/sidebar.php'; ?>
-            
 
             <!-- Main content area -->
             <main class="col-md-9 ms-sm-auto col-lg-9 px-md-4">
                 <div class="container">
                     <div class="row">
                         <div class="mt-5 mb-3">
-                            <h1 class='admin-subtitle'>Add Record</h1>
+                            <h1 class='admin-subtitle' id="recordSubtitle">Add Record</h1>
                         </div>
                         <div class="row justify-content-center">
                             <div class="col-md-10">
                                 <div class="card admin-card bg-transparent">
                                     
                                     <div class="card-body mx-5 text-start">
-                                        <form action="..\..\backend\add_record.php" method="POST" enctype="multipart/form-data">
+                                        <form id="recordForm" action="..\..\backend\abstract.php" method="POST" enctype="multipart/form-data">
+
                                             <!-- Title -->
                                             <div class="row mb-3">
                                                 <div class="col-md-12">
@@ -56,10 +58,10 @@
                                                 </div>
                                             </div>
 
-                                            <!-- year -->
+                                            <!-- Month - Year -->
                                             <div class="row mb-3">
                                                 <div class="col-md-12">
-                                                    <label for="year" class="form-label">Year</label>
+                                                    <label for="monthYear" class="form-label">Year</label>
                                                     <input type="month" class="form-control" id="monthYear" name="monthYear" required>
                                                 </div>
                                             </div>
@@ -104,10 +106,13 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
     <script src="..\..\includes\functions.js"></script>
+    <script src="./scripts/fetchOneRecord.js"></script>
     
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             handleStatus('addRecord');
+            handleStatus('editRecord');
+            clearUrlParam('abstractId');
         });
     </script>
 </body>

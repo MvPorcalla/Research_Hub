@@ -4,57 +4,56 @@ require '../vendor/autoload.php';
 
 use PhpOffice\PhpSpreadsheet\IOFactory;
 
-// Check if the connection is successful
-if (!$conn) {
-    die("Database connection failed: " . mysqli_connect_error());
-}
-
 if (isset($_POST['save_excel_data'])) {
     if (isset($_FILES['file']) && $_FILES['file']['error'] === UPLOAD_ERR_OK) {
         $fileName = $_FILES['file']['name'];
-        $file_ext = pathinfo($fileName, PATHINFO_EXTENSION);
+        $fileExt = pathinfo($fileName, PATHINFO_EXTENSION);
+        $allowedExt = ['xls', 'xlsx'];
 
-        $allowed_ext = ['xls', 'xlsx'];
-
-        if (in_array($file_ext, $allowed_ext)) {
+        if (in_array($fileExt, $allowedExt)) {
             $inputFileNamePath = $_FILES['file']['tmp_name'];
             $spreadsheet = IOFactory::load($inputFileNamePath);
             $data = $spreadsheet->getActiveSheet()->toArray();
 
-            $count = 0;
+            $existing = 0;
+            $dataCount = 0;
 
-            // Prepare the SQL statement
-            $sql = 'INSERT INTO lrn (lrn_student, lrn_lrnid, lrn_status) VALUES (?, ?, ?)';
-            $stmt = mysqli_prepare($conn, $sql);
+            foreach ($data as $index => $row) {
+                if ($index === 0) continue; // Skip the header row
 
-            if (!$stmt) {
-                die("Failed to prepare the SQL statement: " . mysqli_error($conn));
-            }
+                $studentName = trim($row[0] ?? '');
+                $lrn = trim($row[1] ?? '');
 
-            foreach ($data as $row) {
-                if ($count > 0) { // Skip the first row (header)
-                    $studentName = isset($row[0]) ? trim($row[0]) : '';
-                    $lrn = isset($row[1]) ? trim($row[1]) : '';
-                    $status = 'A'; // Default status
+                $sql = "SELECT `lrn_lrnid` FROM `lrn` WHERE `lrn_lrnid` = ?";
+                $filter = [$lrn];
+                $result = query($conn, $sql, $filter);
 
-                    // Bind parameters and execute the statement
-                    mysqli_stmt_bind_param($stmt, 'sss', $studentName, $lrn, $status);
-                    mysqli_stmt_execute($stmt);
+                if (empty($result)) {
+                    $table = 'lrn';
+                    $fields = [
+                        'lrn_student' => $studentName,
+                        'lrn_lrnid' => $lrn
+                    ];
+                    insert($conn, $table, $fields);
                 } else {
-                    $count = 1; // Move past the header row
+                    $existing++;
                 }
+                $dataCount++;
             }
 
-            mysqli_stmt_close($stmt);
-            header('Location: ../pages/admin/listLRN.php?success=1');
-            exit();
+            if ($existing > 0) {
+                header("Location: ../pages/admin/listLRN.php?existingRecords={$existing}-{$dataCount}");
+            } else {
+                header("Location: ../pages/admin/listLRN.php?importRecords=success");
+            }
         } else {
-            echo "Invalid file format. Only xls and xlsx files are allowed.";
+            header("Location: ../pages/admin/listLRN.php?importRecords=invalid");
         }
     } else {
-        echo "Error uploading file. Please try again.";
+        header("Location: ../pages/admin/listLRN.php?importRecords=error");
     }
 } else {
-    echo "No file uploaded.";
+    header("Location: ../pages/admin/listLRN.php?importRecords=missing");
 }
+exit();
 ?>

@@ -8,7 +8,7 @@ function handleStatus(paramName) {
             },
             "failed": {
                 icon: "error",
-                title: "Incorrect credentials.",
+                title: "Incorrect Credentials",
                 text: "Please try again."
             },
             "inactive": {
@@ -23,20 +23,20 @@ function handleStatus(paramName) {
                 title: "Registration Complete!",
                 text: "Your registration is pending for approval by the admin."
             },
-            "wronglrn": {
+            "failed": {
                 icon: "error",
-                title: "Wrong LRN.",
-                text: "Your LRN does not exist in the database."
+                title: "Oops!",
+                text: "Your registration failed. Please try again."
             },
             "existing": {
                 icon: "error",
                 title: "LRN already registered.",
                 text: "Your LRN has already been registered to an account."
             },
-            "failed": {
+            "wronglrn": {
                 icon: "error",
-                title: "Oops!",
-                text: "Your registration failed. Please try again."
+                title: "Wrong LRN",
+                text: "Your LRN does not exist in the database."
             }
         },
         'reset': {
@@ -61,12 +61,30 @@ function handleStatus(paramName) {
                 icon: "error",
                 title: "Oops!",
                 text: "Failed to add new record."
+            },
+            "existing": {
+                icon: "error",
+                title: "Oops!",
+                text: "Record already exists."
             }
         },
-        'deleteAbstract': {
+        'editRecord': {
             "success": {
                 icon: "success",
-                title: "Record Deleted!"
+                title: "Record Edited",
+                text: "Successfully edited record."
+            },
+            "failed": {
+                icon: "error",
+                title: "Oops!",
+                text: "Failed to edit record."
+            }
+        },
+        'deleteRecord': {
+            "success": {
+                icon: "success",
+                title: "Record Deleted",
+                text: "Successfully deleted record."
             },
             "failed": {
                 icon: "error",
@@ -74,26 +92,48 @@ function handleStatus(paramName) {
                 text: "Failed to delete record."
             }
         },
-        'deleteUser': {
+        'importRecords': {
             "success": {
                 icon: "success",
-                title: "User Deleted!"
+                title: "Content Imported!",
+                text: "Successfully imported file contents to the list."
             },
             "failed": {
                 icon: "error",
+                title: "Import Failed",
+                text: "Error importing file. Please try again."
+            },
+            "error": {
+                icon: "error",
+                title: "Error",
+                text: "Error uploading file. Please try again."
+            },
+            "invalid": {
+                icon: "warning",
+                title: "Invalid",
+                text: "Invalid file format. Only xls and xlsx files are allowed."
+            },
+            "missing": {
+                icon: "warning",
                 title: "Oops!",
-                text: "Failed to delete user."
+                text: "No file uploaded."
             }
         },
-        'deleteLrn': {
-            "success": {
+        'action': {
+            "accepted": {
                 icon: "success",
-                title: "LRN Deleted!"
+                title: "Guest Accepted!",
+                text: "You can now view guest in the list."
+            },
+            "declined": {
+                icon: "success",
+                title: "Guest Declined",
+                text: "Guest access was declined."
             },
             "failed": {
                 icon: "error",
                 title: "Oops!",
-                text: "Failed to delete LRN."
+                text: "Please try again."
             }
         }
     };
@@ -101,18 +141,48 @@ function handleStatus(paramName) {
     const urlParams = new URLSearchParams(window.location.search);
     const status = urlParams.get(paramName);
 
+    let message; // Initialize message variable
+
     if (status) {
-        const paramMessages = messages[paramName] || {};
-        const message = paramMessages[status];
+        if (paramName === 'existingRecords') {
+            const parts = status.split("-");
+            const existingData = parts[0];
+            const totalData = parts[1];
+    
+            if (existingData == totalData) {
+                message = {
+                    icon: "info",
+                    title: "Records Already Exists",
+                    text: `The records within the file already exists in the list.`
+                };
+            } else {
+                message = {
+                    icon: "success",
+                    title: "Records Imported!",
+                    html: `Successfully imported file records to the list.<br><small>There were ${existingData} existing record(s) out of ${totalData} records.</small>`
+                };
+            }
+        } else {
+            const paramMessages = messages[paramName] || {};
+            message = paramMessages[status];
+        }
+        
         if (message) {
             Swal.fire(message);
         }
-
-        // Clean up URL
-        let url = new URL(window.location.href);
-        url.searchParams.delete(paramName);
-        window.history.replaceState({}, document.title, url.toString());
+    
+        clearUrlParam(paramName);
     }
+    
+}
+
+// =========================================================================
+
+function clearUrlParam(paramName) {
+    // Clean up URL
+    let url = new URL(window.location.href);
+    url.searchParams.delete(paramName);
+    window.history.replaceState({}, document.title, url.toString());
 }
 
 // =========================================================================

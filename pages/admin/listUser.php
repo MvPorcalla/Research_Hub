@@ -146,16 +146,7 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            handleStatus('deleteUser');
-        });
-
-        // =====================================================================
-
-        setupConfirmationDialog('.delete-button', {
-            multiTd: true,
-            tdCount: 3, // Number of <td> elements to extract text from
-            actionText: "You are about to deactivate the account of",
-            confirmButtonText: "Deactivate"
+            handleStatus('deleteRecord');
         });
     </script>
 </body>
