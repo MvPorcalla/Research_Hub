@@ -26,9 +26,6 @@ if ((isset($_POST['lrn']) || isset($_POST['email'])) && $_FILES['idImage']['erro
     //hashes value of name="reg_password" from form then transfered to variable
     $r_pwdhash = password_hash($_POST['password'], PASSWORD_ARGON2ID);
 
-    // create session variables
-    $_SESSION["username"] = $r_username;
-
     // echo "
     //     'user_lastname' => $r_lastName,<br>
     //     'user_firstname' => $r_firstName,<br>

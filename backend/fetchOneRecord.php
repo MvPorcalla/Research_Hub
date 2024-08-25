@@ -25,6 +25,8 @@ if (isset($_GET['abstractId'])) {
     echo fetchRecord($conn, 'records', 'record_id', $_GET['abstractId']);
 } elseif (isset($_GET['lrnId'])) {
     echo fetchRecord($conn, 'lrn', 'lrn_id', $_GET['lrnId']);
+} elseif (isset($_GET['userId'])) {
+    echo fetchRecord($conn, 'users', 'user_id', $_GET['userId']);
 } else {
     echo json_encode(['error' => 'No ID provided']);
 }

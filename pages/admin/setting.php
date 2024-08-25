@@ -1,3 +1,8 @@
+<?php
+include_once "..\..\includes\db.php";
+if ($_SESSION['user_type'] != 'A') header("location: ../../index.php");
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -47,27 +52,6 @@
             <main class="col-md-9 ms-sm-auto col-lg-9 px-md-4 mt-5">
                 <div class="row">
                     <div class="container">
-
-                        <?php 
-                            // Hardcoded admin user data
-                            $admin = [
-                                'user_firstname' => 'Jack', 
-                                'user_mi' => 'D', 
-                                'user_lastname' => 'Cool', 
-                                'user_email' => 'samplesheshsampe12332@gmail.com',
-                                'user_username' => 'jackcool',
-                                'user_idpicture_imgdir' => 'https://via.placeholder.com/100', // Placeholder for profile picture
-                            ];
-
-                            // Sanitize user data
-                            $fname = htmlspecialchars($admin['user_firstname']);
-                            $mi = htmlspecialchars($admin['user_mi']);
-                            $lname = htmlspecialchars($admin['user_lastname']);
-                            $email = htmlspecialchars($admin['user_email']);
-                            $username = htmlspecialchars($admin['user_username']);
-                            $profilePic = htmlspecialchars($admin['user_idpicture_imgdir']);
-                        ?>
-
                         <div class='card border-dark bg-transparent'>
                             <div class="card-body">
                                 <div class="row">
@@ -80,12 +64,12 @@
 
                                                 <div class="row align-items-center">
                                                     <div class="col-md-12 text-center">
-                                                        <img src="<?php echo $profilePic; ?>" alt="Admin Image" class="admin-profile-pic img-fluid rounded-circle mb-2">
+                                                        <img id="idImage" src="#" alt="Admin Image" class="admin-profile-pic img-fluid rounded-circle mb-2">
                                                         <div>
                                                             <!-- Display Current Name and Username -->
-                                                            <h2 class="admin-name-text mb-1"><?php echo $fname . ' ' . $mi . '. ' . $lname; ?></h2>
-                                                            <h2 class="admin-username-text">@<?php echo $username ?></h2>
-                                                            <h2 class="admin-username-text mb-3"><?php echo $email ?></h2>
+                                                            <h2 id="completeName" class="admin-name-text mb-1" data-user-id="<?php echo $_SESSION['user_id']; ?>"></h2>
+                                                            <h2 id="userName" class="admin-username-text"></h2>
+                                                            <h2 id="emailAdd" class="admin-username-text mb-3"></h2>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -94,26 +78,26 @@
 
                                                 <!-- Editable Fields -->
                                                 <div class="text-start">
-                                                    <form action="update_profile.php" method="post">
+                                                    <form action="../../backend/update_profile.php" method="post">
                                                         <div class="row">
                                                             <div class="col-md-5">
-                                                                <label for="firstName" class="form-label">First Name</label>
-                                                                <input type="text" class="form-control" id="firstName" name="firstName" value="<?php echo $fname; ?>">
+                                                                <label for="lastName" class="form-label">Last Name</label>
+                                                                <input type="text" class="form-control" id="lastName" name="lastName">
                                                             </div>
                                                             <div class="col-md-5">
-                                                                <label for="lastName" class="form-label">Last Name</label>
-                                                                <input type="text" class="form-control" id="lastName" name="lastName" value="<?php echo $lname; ?>">
+                                                                <label for="firstName" class="form-label">First Name</label>
+                                                                <input type="text" class="form-control" id="firstName" name="firstName">
                                                             </div>
                                                             <div class="col-md-2">
                                                                 <label for="middleInitial" class="form-label">M.I.</label>
-                                                                <input type="text" class="form-control" id="middleInitial" name="middleInitial" value="<?php echo $mi; ?>" maxlength="1">
+                                                                <input type="text" class="form-control" id="middleInitial" name="middleInitial" maxlength="1">
                                                             </div>
                                                         </div>
                                                         
                                                         <!-- Username -->
                                                         <div class="col-md-12 mt-3">
-                                                            <label for="username" class="form-label">Username</label>
-                                                            <input type="text" class="form-control" id="username" name="username" value="<?php echo $username; ?>">
+                                                            <label for="usernameField" class="form-label">Username</label>
+                                                            <input type="text" class="form-control" id="usernameField" name="usernameField">
                                                         </div>
 
                                                         <!-- Save Changes Button -->
@@ -171,7 +155,7 @@
                                             <!-- Logout Button -->
                                             <div class="mt-3">
                                                 <div class="col-md-12 text-center">
-                                                    <form action="logout.php" method="post">
+                                                    <form action="../../backend/logout.php" method="post">
                                                         <button type="submit" class="btn btn-danger w-100">Logout</button>
                                                     </form>
                                                 </div>
@@ -195,9 +179,13 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
-
+    <script src="..\..\includes\functions.js"></script>
+    <script src="./scripts/fetchOneRecord.js"></script>
+    
     <script>
-        
+        document.addEventListener('DOMContentLoaded', function () {
+            handleStatus('editInfo');
+        });
     </script>
 </body>
 
