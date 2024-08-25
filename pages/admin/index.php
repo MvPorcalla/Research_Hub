@@ -22,7 +22,7 @@ if ($_SESSION['user_type'] != 'A') header("location: ../../index.php");
 
     <!-- main content with sidebar -->
     <div class="container-fluid">
-        <div class="row text-center">
+        <div class="row">
             <!-- sidebar -->
             <?php include './../admin/components/sidebar.php'; ?>
 
