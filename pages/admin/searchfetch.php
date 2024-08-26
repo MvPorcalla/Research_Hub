@@ -1,33 +1,35 @@
 <?php
-    header('Content-Type: application/json');
+header('Content-Type: application/json');
 
-    // Database connection
-    include_once "../../includes/db.php";
+// Database connection
+include_once "../../includes/db.php";
 
-    // Get the search query
-    $query = isset($_GET['query']) ? trim($_GET['query']) : '';
+// Get the search query
+$query = isset($_GET['query']) ? trim($_GET['query']) : '';
 
-    // Only include the WHERE clause if there's a query
-    $sql = "SELECT * FROM records";
-    if ($query !== '') {
-        $search_query = "%" . $conn->real_escape_string($query) . "%";
-        $sql .= " WHERE record_title LIKE ? OR record_authors LIKE ? OR record_year LIKE ? OR record_month LIKE ?";
-    }
+// Initialize SQL statement
+$sql = "SELECT * FROM records";
 
-    $stmt = $conn->prepare($sql);
-    if ($query !== '') {
-        $stmt->bind_param("ssss", $search_query, $search_query, $search_query, $search_query);
-    }
-    $stmt->execute();
-    $result = $stmt->get_result();
-    $data = [];
+// Add WHERE clause if there's a query
+if ($query !== '') {
+    $search_query = "%" . $conn->real_escape_string($query) . "%";
+    $sql .= " WHERE record_title LIKE ? OR record_authors LIKE ? OR record_year LIKE ? OR record_month LIKE ?";
+}
 
-    while ($row = $result->fetch_assoc()) {
-        $data[] = $row;
-    }
+$stmt = $conn->prepare($sql);
+if ($query !== '') {
+    $stmt->bind_param("ssss", $search_query, $search_query, $search_query, $search_query);
+}
+$stmt->execute();
+$result = $stmt->get_result();
+$data = [];
 
-    $stmt->close();
-    $conn->close();
+while ($row = $result->fetch_assoc()) {
+    $data[] = $row;
+}
 
-    echo json_encode($data);
+$stmt->close();
+$conn->close();
+
+echo json_encode($data);
 ?>
