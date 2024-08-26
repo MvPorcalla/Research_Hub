@@ -59,11 +59,11 @@ if ($_SESSION['user_type'] != 'A') header("location: ../../index.php");
                             <div class="table-responsive">
                                 <table class="table table-bordered table-striped abstracts">
                                     <thead class="table-dark">
-                                        <tr>
-                                            <th>Title</th>
-                                            <th>Month Year</th>
-                                            <th>Author</th>
-                                            <th>Actions</th>
+                                        <tr class="col-md-12">
+                                            <th class="col-md-4">Title</th>
+                                            <th class="col-md-2">Month Year</th>
+                                            <th class="col-md-4">Author</th>
+                                            <th class="col-md-2">Actions</th>
                                         </tr>
                                     </thead>
 
