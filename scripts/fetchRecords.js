@@ -168,7 +168,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                             <button class="btn btn-outline-primary btn-sm mx-1">
                                                 <i class="fas fa-comment"></i>
                                             </button>
-                                            <button class="btn btn-outline-danger btn-sm mx-1 toggle-heart">
+                                            <button class="btn btn-outline-danger btn-sm mx-1 like-button" data-record-id="${escapeHTML(dataRow.id)}">
                                                 <i class="fas fa-heart"></i>
                                             </button>
                                             <button class="btn btn-outline-success btn-sm mx-1">
@@ -188,5 +188,41 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    fetchRecords();
+    fetchRecords().then(() => {
+        var url = window.location.href;
+
+        if (url.includes('pages/user')) {
+            const updateButtonStatuses = () => {
+                const buttons = document.querySelectorAll('.like-button');
+        
+                const requests = Array.from(buttons).map(button => {
+                    const recordId = button.getAttribute('data-record-id');
+                    const userId = document.getElementById('abstractTiles').getAttribute('data-user-id');
+                    
+                    return fetch(`../../backend/get_like_status.php?recordId=${recordId}&userId=${userId}`)
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.like_status === 'A') {
+                                button.classList.add('btn-danger');
+                                button.classList.remove('btn-outline-danger');
+                            } else {
+                                button.classList.add('btn-outline-danger');
+                                button.classList.remove('btn-danger');
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Error fetching like status:', error);
+                        });
+                });
+        
+                // Ensure all requests are completed
+                Promise.all(requests).then(() => {
+                    console.log('All like statuses updated');
+                });
+            };
+        
+            // Call the function to update button statuses
+            updateButtonStatuses();
+        }
+    });
 });

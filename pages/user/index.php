@@ -41,7 +41,7 @@ if (!isset($_SESSION['user_type']) || $_SESSION['user_type'] == 'A') header("loc
 
                         <!-- Content Cards -->
                         <div class="container mt-3 side-container">
-                            <div id="abstractTiles" class="row">
+                            <div id="abstractTiles" class="row" data-user-id="<?php echo $_SESSION['user_id']; ?>">
                                 
                             </div>
                         </div>
@@ -58,6 +58,7 @@ if (!isset($_SESSION['user_type']) || $_SESSION['user_type'] == 'A') header("loc
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
     <script src="..\..\includes\functions.js"></script>
     <script src="../../scripts/fetchRecords.js"></script>
+    <script src="../../scripts/toggleLike.js"></script>
 </body>
 
 </html>
