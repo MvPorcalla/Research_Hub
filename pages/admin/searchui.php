@@ -56,13 +56,14 @@
                                     <form id="search-form" class="d-flex w-100">
                                         <div class="input-group">
                                             <input class="form-control rounded-pill" type="search" id="query" placeholder="Search" aria-label="Search">
-                                            <button class="btn btn-primary btn-search" type="button">
+                                            <span class="btn rounded-pill" type="submit" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%);">
                                                 <i class="fas fa-search"></i>
-                                            </button>
+                                            </span>
                                         </div>
                                     </form>
                                 </div>
                             </div>
+
                         </div>
 
                         <!-- Content Table -->
