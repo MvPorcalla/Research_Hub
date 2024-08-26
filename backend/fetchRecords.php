@@ -30,7 +30,8 @@ if ($results) {
                 'title' => htmlspecialchars($result['record_title'], ENT_QUOTES, 'UTF-8'),
                 'yearmonth' => DateTime::createFromFormat('!m', htmlspecialchars($result['record_month'], ENT_QUOTES, 'UTF-8'))->format('F') . ' ' . htmlspecialchars($result['record_year'], ENT_QUOTES, 'UTF-8'),
                 'authors' => htmlspecialchars($result['record_authors'], ENT_QUOTES, 'UTF-8'),
-                'trackstrand' => htmlspecialchars($result['record_trackstrand'], ENT_QUOTES, 'UTF-8')
+                'trackstrand' => htmlspecialchars($result['record_trackstrand'], ENT_QUOTES, 'UTF-8'),
+                'filedir' => htmlspecialchars($result['record_filedir'], ENT_QUOTES, 'UTF-8')
             ],
             'students' => [
                 'id' => htmlspecialchars($result['user_id'], ENT_QUOTES, 'UTF-8'),

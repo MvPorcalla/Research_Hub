@@ -140,9 +140,48 @@ document.addEventListener('DOMContentLoaded', () => {
                             </div>
                         </div>
                     `;
-                    pendingTiles.innerHTML += `<tr>${tileHTML}</tr>`;
+                    pendingTiles.innerHTML += tileHTML;
                 });
+            }
 
+            if (document.getElementById('abstractTiles')) {
+
+                const abstractTiles = document.getElementById('abstractTiles');
+
+                const response = await fetch(`../../backend/fetchRecords.php?fetch=abstracts`);
+                if (!response.ok) throw new Error('Network response was not ok');
+
+                const data = await response.json();
+                abstractTiles.innerHTML = '';
+
+                data.forEach(dataRow => {
+                    let tileHTML = `
+                        <div class="col-12 mb-2">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="row text-center">
+                                        <div class="col-md-2 d-flex align-items-center justify-content-center border-end">
+                                            <img src="https://via.placeholder.com/75x100" class="img-fluid rounded-1" alt="${escapeHTML(dataRow.title)}">
+                                        </div>
+                                        <div class="col-md-8 d-flex align-items-center justify-content-start border-end">${escapeHTML(dataRow.title)}</div>
+                                        <div class="col-md-2 d-flex align-items-center justify-content-center">
+                                            <button class="btn btn-outline-primary btn-sm mx-1">
+                                                <i class="fas fa-comment"></i>
+                                            </button>
+                                            <button class="btn btn-outline-danger btn-sm mx-1 toggle-heart">
+                                                <i class="fas fa-heart"></i>
+                                            </button>
+                                            <button class="btn btn-outline-success btn-sm mx-1">
+                                                <i class="fas fa-download"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    abstractTiles.innerHTML += tileHTML;
+                });
             }
         } catch (error) {
             console.error('Error fetching records:', error);
