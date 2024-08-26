@@ -74,8 +74,10 @@ document.addEventListener('DOMContentLoaded', async function() {
             document.getElementById('lrn').value = data.lrn_lrnid;
         } 
         else if (idType === 'userId') {
+            const mi = (data.user_mi == '') ? ' ' : data.user_mi + '. ';
+
             document.getElementById('idImage').src = `../${data.user_idpicture_imgdir}`;
-            document.getElementById('completeName').textContent = `${data.user_firstname} ${data.user_mi}. ${data.user_lastname}`;
+            document.getElementById('completeName').textContent = `${data.user_firstname} ${mi}${data.user_lastname}`;
             document.getElementById('userName').textContent = `@${data.user_username}`;
             document.getElementById('emailAdd').textContent = data.user_emailadd;
             document.getElementById('lastName').value = data.user_lastname;
