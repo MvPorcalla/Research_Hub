@@ -1,18 +1,21 @@
-document.addEventListener('DOMContentLoaded', function() {
-    const $queryInput = document.querySelector('#query');
-    const $tableBody = document.querySelector('#records-table tbody');
+$(document).ready(function() {
+    const $queryInput = $('#query');
+    const $tableBody = $('#records-table tbody');
 
     function fetchRecords(query = '') {
         console.log('Fetching records with query:', query); // Debugging line
 
-        fetch(`searchfetch.php?query=${encodeURIComponent(query)}`)
-            .then(response => response.json())
-            .then(data => {
+        $.ajax({
+            url: 'searchfetch.php',
+            type: 'GET',
+            data: { query: query },
+            dataType: 'json',
+            success: function(data) {
                 console.log('Data received:', data); // Debugging line
-                $tableBody.innerHTML = ''; // Clear the table body
+                $tableBody.empty(); // Clear the table body
 
                 if (data.length === 0) {
-                    $tableBody.innerHTML = '<tr><td colspan="4">No records found.</td></tr>';
+                    $tableBody.append('<tr><td colspan="4">No records found.</td></tr>');
                 } else {
                     data.forEach(record => {
                         const row = `
@@ -26,30 +29,31 @@ document.addEventListener('DOMContentLoaded', function() {
                                 </td>
                             </tr>
                         `;
-                        $tableBody.innerHTML += row;
+                        $tableBody.append(row);
                     });
                 }
-            })
-            .catch(error => {
+            },
+            error: function(xhr, status, error) {
                 console.error('Error fetching records:', error);
-            });
+            }
+        });
     }
 
     // Fetch records when the page loads
     fetchRecords('');
 
     // Handle real-time search input
-    $queryInput.addEventListener('input', function() {
-        const query = $queryInput.value.trim();
+    $queryInput.on('input', function() {
+        const query = $queryInput.val().trim();
         fetchRecords(query);
     });
 
     // Handle form submission
-    document.querySelector('#search-form').addEventListener('submit', function(event) {
+    $('#search-form').on('submit', function(event) {
         event.preventDefault(); // Prevent the default form submission
 
         // Get the search query
-        const query = $queryInput.value.trim();
+        const query = $queryInput.val().trim();
 
         // Fetch records based on the search query
         fetchRecords(query);
