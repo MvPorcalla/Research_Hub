@@ -1,8 +1,5 @@
 <?php
 
-// Simulate fetching the record from the database
-$record_filedir = '../../uploads/records/MeowMadness.pdf';
-
 // Simulated comments array
 $comments = [
     [
@@ -143,7 +140,7 @@ $comments = [
                     <div class="row">
                         <div class="col-md-8">
                             <div class="pdf-container">
-                                <iframe src="<?php echo htmlspecialchars($record_filedir); ?>" frameborder="0" allowfullscreen></iframe>
+                                <iframe id="fileDisplay" src="" frameborder="0" allowfullscreen></iframe>
                             </div>
                         </div>
                         <div class="col-md-4">
@@ -191,11 +188,17 @@ $comments = [
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
-    <script src="../includes/functions.js"></script>
+    <script src="../../includes/functions.js"></script>
     <script src="./scripts/fetchRecords.js"></script>
+    <script src="./scripts/fetchOneRecord.js"></script>
 
     <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            handleStatus('abstractId');
+        });
+
         document.querySelectorAll('.like-btn').forEach(button => {
+
             button.addEventListener('click', function() {
                 const commentId = this.getAttribute('data-comment-id');
                 const likeCountElement = document.getElementById(`like-count-${commentId}`);

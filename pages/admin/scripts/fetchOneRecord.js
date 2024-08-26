@@ -46,8 +46,10 @@ document.addEventListener('DOMContentLoaded', async function() {
             return;
         }
 
-        if (idType != 'userId') {
-            // Populate form fields
+        var url = window.location.href;
+
+        if (idType != 'userId' && !url.includes('abstractView.php')) {
+            
             const form = document.getElementById(formId);
             form.setAttribute('action', `${form.getAttribute('action')}?${idType}=${idValue}`);
         }
@@ -55,12 +57,16 @@ document.addEventListener('DOMContentLoaded', async function() {
         if (idType === 'abstractId') {
             const month = data.record_month.toString().padStart(2, '0');
 
-            document.getElementById('recordSubtitle').textContent = 'Edit Record';
-            document.getElementById('title').value = data.record_title;
-            document.getElementById('authors').value = data.record_authors;
-            document.getElementById('monthYear').value = `${data.record_year}-${month}`;
-            document.getElementById('trackStrand').value = data.record_trackstrand;
-            document.getElementById('file').required = false;
+            if (document.getElementById('title')) {
+                document.getElementById('recordSubtitle').textContent = 'Edit Record';
+                document.getElementById('title').value = data.record_title;
+                document.getElementById('authors').value = data.record_authors;
+                document.getElementById('monthYear').value = `${data.record_year}-${month}`;
+                document.getElementById('trackStrand').value = data.record_trackstrand;
+                document.getElementById('file').required = false;
+            } else if (document.getElementById('fileDisplay')) {
+                document.getElementById('fileDisplay').src = `../${data.record_filedir}`;
+            }
         } 
         else if (idType === 'lrnId') {
             document.getElementById('lrnSubtitle').textContent = 'Edit Student LRN';

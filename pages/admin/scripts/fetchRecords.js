@@ -27,48 +27,57 @@ document.addEventListener('DOMContentLoaded', () => {
                     switch (foundClass) {
                         case 'abstracts':
                             rowHTML = `
-                                <td>${escapeHTML(dataRow.title)}</td>
-                                <td>${escapeHTML(dataRow.yearmonth)}</td>
-                                <td>${escapeHTML(dataRow.authors)}</td>
-                                <td>
-                                    <a href="abstract.php?abstractId=${encodeURIComponent(dataRow.id)}" class="btn btn-primary btn-sm"><i class='fas fa-edit'></i></a>
-                                    <a href="../../backend/delete.php?abstractId=${encodeURIComponent(dataRow.id)}" class="btn btn-danger btn-sm delete-button"><i class='fas fa-trash-alt'></i></a>
-                                </td>`;
+                                <tr onclick="window.location.href='abstractView.php?abstractId=${escapeHTML(dataRow.id)}';" style="cursor: pointer;">
+                                    <td>${escapeHTML(dataRow.title)}</td>
+                                    <td>${escapeHTML(dataRow.yearmonth)}</td>
+                                    <td>${escapeHTML(dataRow.authors)}</td>
+                                    <td>${escapeHTML(dataRow.trackstrand)}</td>
+                                    <td>
+                                        <a href="abstract.php?abstractId=${encodeURIComponent(dataRow.id)}" class="btn btn-primary btn-sm"><i class='fas fa-edit'></i></a>
+                                        <a href="../../backend/delete.php?abstractId=${encodeURIComponent(dataRow.id)}" class="btn btn-danger btn-sm delete-button"><i class='fas fa-trash-alt'></i></a>
+                                    </td>
+                                </tr>`;
                             break;
                         case 'students':
                             rowHTML = `
-                                <td>${escapeHTML(dataRow.fname)}</td>
-                                <td>${escapeHTML(dataRow.mi)}</td>
-                                <td>${escapeHTML(dataRow.lname)}</td>
-                                <td>${escapeHTML(dataRow.lrn)}</td>
-                                <td>${escapeHTML(dataRow.track)}</td>
-                                <td>
-                                    <a href="#" class="btn btn-primary btn-sm"><i class='fas fa-edit'></i></a>
-                                    <a href="../../backend/delete.php?userId=${encodeURIComponent(dataRow.id)}" class="btn btn-danger btn-sm delete-button"><i class='fas fa-trash-alt'></i></a>
-                                </td>`;
+                                <tr>
+                                    <td>${escapeHTML(dataRow.fname)}</td>
+                                    <td>${escapeHTML(dataRow.mi)}</td>
+                                    <td>${escapeHTML(dataRow.lname)}</td>
+                                    <td>${escapeHTML(dataRow.lrn)}</td>
+                                    <td>${escapeHTML(dataRow.track)}</td>
+                                    <td>
+                                        <a href="#" class="btn btn-primary btn-sm"><i class='fas fa-edit'></i></a>
+                                        <a href="../../backend/delete.php?userId=${encodeURIComponent(dataRow.id)}" class="btn btn-danger btn-sm delete-button"><i class='fas fa-trash-alt'></i></a>
+                                    </td>
+                                </tr>`;
                             break;
                         case 'guests':
                             rowHTML = `
-                                <td>${escapeHTML(dataRow.fname)}</td>
-                                <td>${escapeHTML(dataRow.mi)}</td>
-                                <td>${escapeHTML(dataRow.lname)}</td>
-                                <td>${escapeHTML(dataRow.school)}</td>
-                                <td>
-                                    <a href="#" class="btn btn-primary btn-sm"><i class='fas fa-edit'></i></a>
-                                    <a href="../../backend/delete.php?userId=${encodeURIComponent(dataRow.id)}" class="btn btn-danger btn-sm delete-button"><i class='fas fa-trash-alt'></i></a>
-                                </td>`;
+                                <tr>
+                                    <td>${escapeHTML(dataRow.fname)}</td>
+                                    <td>${escapeHTML(dataRow.mi)}</td>
+                                    <td>${escapeHTML(dataRow.lname)}</td>
+                                    <td>${escapeHTML(dataRow.school)}</td>
+                                    <td>
+                                        <a href="#" class="btn btn-primary btn-sm"><i class='fas fa-edit'></i></a>
+                                        <a href="../../backend/delete.php?userId=${encodeURIComponent(dataRow.id)}" class="btn btn-danger btn-sm delete-button"><i class='fas fa-trash-alt'></i></a>
+                                    </td>
+                                </tr>`;
                             break;
                         case 'LRNs':
                             rowHTML = `
-                                <td>${escapeHTML(dataRow.fullname)}</td>
-                                <td>${escapeHTML(dataRow.lrn)}</td>
-                                <td>
-                                    <a href="lrn.php?lrnId=${encodeURIComponent(dataRow.id)}" class="btn btn-primary btn-sm"><i class='fas fa-edit'></i></a>
-                                    <a href="../../backend/delete.php?lrnId=${encodeURIComponent(dataRow.id)}" class="btn btn-danger btn-sm delete-button"><i class='fas fa-trash-alt'></i></a>
-                                </td>`;
+                                <tr>
+                                    <td>${escapeHTML(dataRow.fullname)}</td>
+                                    <td>${escapeHTML(dataRow.lrn)}</td>
+                                    <td>
+                                        <a href="lrn.php?lrnId=${encodeURIComponent(dataRow.id)}" class="btn btn-primary btn-sm"><i class='fas fa-edit'></i></a>
+                                        <a href="../../backend/delete.php?lrnId=${encodeURIComponent(dataRow.id)}" class="btn btn-danger btn-sm delete-button"><i class='fas fa-trash-alt'></i></a>
+                                    </td>
+                                </tr>`;
                             break;
                     }
-                    tableBody.innerHTML += `<tr>${rowHTML}</tr>`;
+                    tableBody.innerHTML += rowHTML;
                 });
 
                 let options = '';
