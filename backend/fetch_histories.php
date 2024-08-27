@@ -21,6 +21,7 @@ foreach ($histories as $history) {
     }
     $dataByDate[$date][] = [
         'history_id' => $history['history_id'],
+        'record_id' => $history['record_id'],
         'record' => $history['record_title'],
     ];
 }

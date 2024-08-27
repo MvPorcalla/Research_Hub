@@ -25,6 +25,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 recordsOnDate.forEach(record => {
                     const tr = document.createElement('tr');
 
+                    // Set the onclick event
+                    tr.onclick = () => {
+                        window.location.href = `../../pages/user/abstractView.php?abstractId=${record.record_id}`;
+                    };
+
                     // Record cell
                     const recordCell = document.createElement('td');
                     recordCell.classList.add('col-md-11', 'text-start');
