@@ -26,6 +26,34 @@
             transform: translateY(-50%);
             border-radius: 50%;
         }
+
+        #search {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+        #suggestions {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            max-height: 200px;
+            border: 1px solid #ddd;
+            border-top: none;
+            background-color: var(--bg-base-lt);
+            border-radius: 10px;
+            border:1px solid #000;
+            z-index: 1000;
+            overflow-y: auto;
+            display: none;
+        }
+        #suggestions div {
+            padding: 8px;
+            cursor: pointer;
+        }
+        #suggestions div:hover {
+            background-color: #f0f0f0;
+        }
     </style>
 </head>
 <body>
@@ -55,15 +83,15 @@
                                 <div class="d-flex justify-content-end">
                                     <form id="search-form" class="d-flex w-100">
                                         <div class="input-group">
-                                            <input class="form-control rounded-pill" type="search" id="query" placeholder="Search" aria-label="Search">
+                                            <input class="form-control rounded-pill" type="search" id="query" placeholder="Search" aria-label="Search" autocomplete='off'>
                                             <span class="btn rounded-pill" type="submit" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%);">
                                                 <i class="fas fa-search"></i>
                                             </span>
+                                            <div class="mt-1" id="suggestions"></div>
                                         </div>
                                     </form>
                                 </div>
                             </div>
-
                         </div>
 
                         <!-- Content Table -->
@@ -97,6 +125,7 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
 
+    <!-- Include the search script -->
     <script src="searchfetch.js"></script>
 </body>
 </html>
