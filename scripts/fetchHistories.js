@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     // Record cell
                     const recordCell = document.createElement('td');
                     recordCell.classList.add('col-md-11', 'text-start');
-                    recordCell.textContent = record;
+                    recordCell.textContent = record.record;
                     tr.appendChild(recordCell);
 
                     // Delete button cell
@@ -37,6 +37,12 @@ document.addEventListener('DOMContentLoaded', () => {
                     const button = document.createElement('button');
                     button.classList.add('btn', 'btn-danger', 'btn-sm', 'mx-1', 'delete-button');
                     button.innerHTML = '<i class="fas fa-trash-alt"></i>';  // Trash can icon
+
+                    // Set the onclick event
+                    button.onclick = () => {
+                        window.location.href = `../../backend/delete.php?historyId=${record.history_id}`;
+                    };
+
                     buttonCell.appendChild(button);
                     tr.appendChild(buttonCell);
 

@@ -3,7 +3,7 @@ include_once "../includes/db.php";
 
 $userId = $_SESSION['user_id'];
 
-$sql = "SELECT h.record_id, h.history_timestamp, r.record_title 
+$sql = "SELECT h.history_id, h.record_id, h.history_timestamp, r.record_title 
         FROM `histories` h
         JOIN `records` r ON h.record_id = r.record_id
         WHERE h.user_id = ? AND h.history_status = 'A'
@@ -19,7 +19,10 @@ foreach ($histories as $history) {
     if (!isset($dataByDate[$date])) {
         $dataByDate[$date] = [];
     }
-    $dataByDate[$date][] = $history['record_title'];
+    $dataByDate[$date][] = [
+        'history_id' => $history['history_id'],
+        'record' => $history['record_title'],
+    ];
 }
 
 header('Content-Type: application/json');

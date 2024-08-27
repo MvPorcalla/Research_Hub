@@ -51,6 +51,12 @@ if (!isset($_SESSION['user_type']) || $_SESSION['user_type'] == 'A') header("loc
     <script src="..\..\includes\functions.js"></script>
     <script src="..\..\scripts\fetchHistories.js"></script>
 
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            handleStatus('deleteRecord');
+        });
+    </script>
+
 </body>
 
 </html>
