@@ -185,7 +185,7 @@ $forum_entries = [
                                                     <?php endif; ?>
 
                                                     <!-- Comment Form for Main Entry -->
-                                                    <div class="card-body mt-3">
+                                                    <div class="card-body mt-1">
                                                         <form method="post" action="">
                                                             <div class="form-row align-items-center">
                                                                 <div class="col">
