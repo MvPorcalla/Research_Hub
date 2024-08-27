@@ -6,14 +6,13 @@ document.addEventListener('DOMContentLoaded', function() {
     // Function to fetch and display records based on the search query
     function fetchRecords(query = '') {
         console.log('Fetching records with query:', query); // Debugging line
-         // Show loading indicator
-        tableBody.innerHTML = '<tr><td colspan="4">Loading...</td></tr>';
+        
 
         // Send a request to the server to fetch records
         fetch(`searchfetch.php?query=${encodeURIComponent(query)}`)
             .then(response => response.json()) // Parse the JSON response
             .then(data => {
-                console.log('Data received:', data); // Debugging line
+                console.log('Data received:', data); // Debugging line                
 
                 // Initialize an empty string to hold the table rows
                 let rows = '';
