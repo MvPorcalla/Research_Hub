@@ -115,13 +115,13 @@ $forum_entries = [
                     <div class="row">
                         <div class="col-md-12 mt-4">
                             <!-- filter Content -->
-                            <div class="row text-left mb-3">
+                            <div class="row text-left mb-2">
                                 <div class="col-lg-10 text-lg-right">
                                     <h1 class=''>Research Hub Forum</h1>
                                 </div>
 
                                 <div class='col-lg-2 text-center'>
-                                    <a class="btn btn-sm btn-block btn-success rounded-0 py-2 mb-2 bg-op-6" href="#">Ask a Question</a>
+                                    <a class="btn btn-sm btn-block btn-success rounded-2 py-2 mb-2 bg-op-6" href="#">Ask a Question</a>
                                 </div>
                             </div>
 
