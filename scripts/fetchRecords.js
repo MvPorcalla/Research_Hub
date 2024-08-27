@@ -41,13 +41,12 @@ document.addEventListener('DOMContentLoaded', () => {
                         case 'students':
                             rowHTML = `
                                 <tr>
+                                    <td>${escapeHTML(dataRow.lname)}</td>
                                     <td>${escapeHTML(dataRow.fname)}</td>
                                     <td>${escapeHTML(dataRow.mi)}</td>
-                                    <td>${escapeHTML(dataRow.lname)}</td>
                                     <td>${escapeHTML(dataRow.lrn)}</td>
                                     <td>${escapeHTML(dataRow.track)}</td>
                                     <td>
-                                        <a href="#" class="btn btn-primary btn-sm"><i class='fas fa-edit'></i></a>
                                         <a href="../../backend/delete.php?userId=${encodeURIComponent(dataRow.id)}" class="btn btn-danger btn-sm delete-button"><i class='fas fa-trash-alt'></i></a>
                                     </td>
                                 </tr>`;
@@ -55,12 +54,11 @@ document.addEventListener('DOMContentLoaded', () => {
                         case 'guests':
                             rowHTML = `
                                 <tr>
+                                    <td>${escapeHTML(dataRow.lname)}</td>
                                     <td>${escapeHTML(dataRow.fname)}</td>
                                     <td>${escapeHTML(dataRow.mi)}</td>
-                                    <td>${escapeHTML(dataRow.lname)}</td>
                                     <td>${escapeHTML(dataRow.school)}</td>
                                     <td>
-                                        <a href="#" class="btn btn-primary btn-sm"><i class='fas fa-edit'></i></a>
                                         <a href="../../backend/delete.php?userId=${encodeURIComponent(dataRow.id)}" class="btn btn-danger btn-sm delete-button"><i class='fas fa-trash-alt'></i></a>
                                     </td>
                                 </tr>`;

@@ -61,10 +61,10 @@ if ($_SESSION['user_type'] != 'A') header("location: ../../index.php");
                                     <thead class="table-dark">
                                         <tr class="col-md-12">
                                             <th class="col-md-4">Title</th>
-                                            <th class="col-md-2">Month Year</th>
-                                            <th class="col-md-3">Author</th>
-                                            <th class="col-md-2">Track/Strand</th>
-                                            <th class="col-md-1">Actions</th>
+                                            <th class="col-md">Month Year</th>
+                                            <th class="col-md-4">Author</th>
+                                            <th class="col-md">Track/Strand</th>
+                                            <th class="col-md">Actions</th>
                                         </tr>
                                     </thead>
 

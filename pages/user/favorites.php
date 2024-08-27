@@ -33,7 +33,7 @@ if (!isset($_SESSION['user_type']) || $_SESSION['user_type'] == 'A') header("loc
                         <div class="mt-5 mb-3">
                             <h1 class='admin-subtitle'>Favorites</h1>
                         </div>
-                        
+                        <!-- Data will be dynamically inserted here -->
                     </div>
                 </div>
             </main>

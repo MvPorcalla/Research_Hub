@@ -42,7 +42,7 @@ if (!isset($_SESSION['user_type']) || $_SESSION['user_type'] == 'A') header("loc
                         <!-- Content Cards -->
                         <div class="container mt-3 side-container">
                             <div id="abstractTiles" class="row" data-user-id="<?php echo $_SESSION['user_id']; ?>">
-                                
+                                <!-- Data will be dynamically inserted here -->
                             </div>
                         </div>
                     </div>
