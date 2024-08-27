@@ -11,7 +11,8 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!button) return;
 
             const recordId = button.getAttribute('data-record-id');
-            const userId = document.getElementById('abstractTiles').getAttribute('data-user-id');
+            let userIdElement = document.getElementById('abstractTiles') || document.getElementById('favoriteTiles');
+            const userId = userIdElement ? userIdElement.getAttribute('data-user-id') : null;
 
             fetch('../../backend/toggle_like.php', {
                 method: 'POST',
