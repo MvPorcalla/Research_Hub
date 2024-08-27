@@ -6,6 +6,8 @@ ini_set('error_log', '/path/to/error.log'); // Log file path
 
 include_once "../includes/db.php";
 
+$user_id = $_SESSION['user_id'];
+
 header('Content-Type: application/json');
 
 // Initialize $response array
@@ -17,6 +19,7 @@ $queries = [
     'guests' => "SELECT * FROM `users` u WHERE `user_type` = 'G' AND `user_status` = 'A'",
     'LRNs' => "SELECT * FROM `lrn` WHERE lrn_status = 'A'",
     'pending' => "SELECT * FROM `users` u WHERE `user_type` = 'G' AND `user_status` = 'P'",
+    'favorites' => "SELECT * FROM `likes` l JOIN `records` r ON r.record_id = l.record_id WHERE l.user_id = {$user_id} and l.like_status = 'A' ORDER BY l.like_timestamp DESC",
 ];
 
 $fetchType = $_GET['fetch'] ?? '';
@@ -29,7 +32,9 @@ if ($results) {
                 'id' => htmlspecialchars($result['record_id'], ENT_QUOTES, 'UTF-8'),
                 'title' => htmlspecialchars($result['record_title'], ENT_QUOTES, 'UTF-8'),
                 'yearmonth' => DateTime::createFromFormat('!m', htmlspecialchars($result['record_month'], ENT_QUOTES, 'UTF-8'))->format('F') . ' ' . htmlspecialchars($result['record_year'], ENT_QUOTES, 'UTF-8'),
-                'authors' => htmlspecialchars($result['record_authors'], ENT_QUOTES, 'UTF-8')
+                'authors' => htmlspecialchars($result['record_authors'], ENT_QUOTES, 'UTF-8'),
+                'trackstrand' => htmlspecialchars($result['record_trackstrand'], ENT_QUOTES, 'UTF-8'),
+                'filedir' => htmlspecialchars($result['record_filedir'], ENT_QUOTES, 'UTF-8')
             ],
             'students' => [
                 'id' => htmlspecialchars($result['user_id'], ENT_QUOTES, 'UTF-8'),
@@ -59,6 +64,11 @@ if ($results) {
                 'email' => htmlspecialchars($result['user_emailadd'], ENT_QUOTES, 'UTF-8'),
                 'school' => htmlspecialchars($result['user_school'], ENT_QUOTES, 'UTF-8'),
                 'reason' => htmlspecialchars($result['user_reason'], ENT_QUOTES, 'UTF-8')
+            ],
+            'favorites' => [
+                'id' => htmlspecialchars($result['like_id'], ENT_QUOTES, 'UTF-8'),
+                'record_id' => htmlspecialchars($result['record_id'], ENT_QUOTES, 'UTF-8'),
+                'title' => htmlspecialchars($result['record_title'], ENT_QUOTES, 'UTF-8')
             ],
             default => []
         };

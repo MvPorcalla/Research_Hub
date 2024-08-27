@@ -62,8 +62,9 @@ if ($_SESSION['user_type'] != 'A') header("location: ../../index.php");
                                         <tr class="col-md-12">
                                             <th class="col-md-4">Title</th>
                                             <th class="col-md-2">Month Year</th>
-                                            <th class="col-md-4">Author</th>
-                                            <th class="col-md-2">Actions</th>
+                                            <th class="col-md-3">Author</th>
+                                            <th class="col-md-2">Track/Strand</th>
+                                            <th class="col-md-1">Actions</th>
                                         </tr>
                                     </thead>
 
@@ -85,7 +86,7 @@ if ($_SESSION['user_type'] != 'A') header("location: ../../index.php");
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
     <script src="..\..\includes\functions.js"></script>
-    <script src="./scripts/fetchRecords.js"></script>
+    <script src="../../scripts/fetchRecords.js"></script>
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {

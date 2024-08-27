@@ -28,43 +28,12 @@ if (!isset($_SESSION['user_type']) || $_SESSION['user_type'] == 'A') header("loc
             <!-- Main content area -->
             <main class="col-md-9 ms-sm-auto col-lg-9 px-md-4">
                 <div class="container">
-                    <div class="row">
+                    <div id="favoriteTiles" class="row" data-user-id="<?php echo $_SESSION['user_id']; ?>">
 
                         <div class="mt-5 mb-3">
                             <h1 class='admin-subtitle'>Favorites</h1>
                         </div>
-                    
-                        <!-- Content -->
-                        <?php
-                        // Example data, replace with actual database results
-                        $users = [
-                            ['record_id' => 'Advancements in Artificial Intelligence', ],
-                            ['record_id' => 'Impact of Climate Change on Agriculture',],
-                            ['record_id' => 'Statistical Data on Renewable Energy',],
-                            
-                            // Add more users as needed
-                        ];
-
-                        foreach ($users as $user) {
-                            $record = htmlspecialchars($user['record_id']);
- 
-                            echo '<div class="col-12 mb-2">';
-                                echo '<div class="card border-dark rounded-4">';
-                                    echo '<div class="card-body">';
-                                        echo '<div class="row text-center">';
-                                            echo '<div class="col-md-11 d-flex align-items-center justify-content-start border-end">' . $record . '</div>';
-                                            echo '<div class="col-md-1 d-flex align-items-center justify-content-center">';
-                                            echo '<button class="btn btn-danger btn-sm mx-1 toggle-heart">';
-                                            echo '<i class="fas fa-heart"></i>';
-                                            echo '</button>';
-                                            echo '</div>';
-                                        echo '</div>';
-                                    echo '</div>';
-                                echo '</div>'; 
-                            echo '</div>';   
-                        }
-                        ?>
-
+                        
                     </div>
                 </div>
             </main>
@@ -77,21 +46,8 @@ if (!isset($_SESSION['user_type']) || $_SESSION['user_type'] == 'A') header("loc
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
     <script src="..\..\includes\functions.js"></script>
-
-    <!-- Custom JS for heart toggle -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            document.querySelectorAll('.toggle-heart').forEach(button => {
-                button.addEventListener('click', function() {
-                    this.classList.toggle('btn-danger');
-                    this.classList.toggle('btn-outline-danger');
-                    const icon = this.querySelector('i');
-                    icon.classList.toggle('fa-heart');
-                    icon.classList.toggle('fa-heart-broken');
-                });
-            });
-        });
-    </script>
+    <script src="../../scripts/fetchRecords.js"></script>
+    <script src="../../scripts/toggleLike.js"></script>
       
 </body>
 

@@ -52,4 +52,18 @@ if (isset($_GET['abstractId'])) {
         exit();
     }
 
+} else if (isset($_GET['historyId'])) {
+
+    $table = "histories";
+    $fields = ['history_status' => 'I'];
+    $filter = ['history_id' => $_GET['historyId']];
+
+    if (update($conn, $table, $fields, $filter)) {
+        header("location: ..\pages\user\history.php?deleteRecord=success");
+        exit();
+    } else {
+        header("location: ..\pages\user\history.php?deleteRecord=failed");
+        exit();
+    }
+
 }

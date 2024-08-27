@@ -180,7 +180,7 @@ if ($_SESSION['user_type'] != 'A') header("location: ../../index.php");
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
     <script src="..\..\includes\functions.js"></script>
-    <script src="./scripts/fetchOneRecord.js"></script>
+    <script src="../../scripts/fetchOneRecord.js"></script>
     
     <script>
         document.addEventListener('DOMContentLoaded', function () {

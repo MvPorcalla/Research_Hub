@@ -41,50 +41,8 @@ if (!isset($_SESSION['user_type']) || $_SESSION['user_type'] == 'A') header("loc
 
                         <!-- Content Cards -->
                         <div class="container mt-3 side-container">
-                            <div class="row">
-                                <?php
-                                // Sample data array
-                                $users = [
-                                    ['title' => 'Advancements in Artificial Intelligence'],
-                                    ['title' => 'Impact of Climate Change on Agriculture'],
-                                    ['title' => 'Statistical Data on Renewable Energy'],
-                                    ['title' => 'Still missing you everyday'],
-                                    ['title' => 'How are you baby girl'],
-                                    ['title' => 'kung ang pusa ay cat, bakit ka tanga?'],
-                                    ['title' => 'Statistical Data on Karupokan'],
-                                    ['title' => 'Impact of Pagiging Delulu'],
-                                    ['title' => 'Advancement in Assuming'],
-                                ];
-
-                                // Generate cards from the data
-                                foreach ($users as $user) {
-                                    $file = 'https://via.placeholder.com/55x70';
-                                    $title = htmlspecialchars($user['title']);
-                                    echo '<div class="col-12 mb-2">';
-                                        echo '<div class="card">';
-                                            echo '<div class="card-body">';
-                                                echo '<div class="row text-center">';
-                                                    echo '<div class="col-md-2 d-flex align-items-center justify-content-center border-end">';
-                                                        echo '<img src="' . $file . '" class="img-fluid rounded-1" alt="' . $title . '">';
-                                                    echo '</div>';
-                                                    echo '<div class="col-md-8 d-flex align-items-center justify-content-start border-end">' . $title . '</div>';
-                                                    echo '<div class="col-md-2 d-flex align-items-center justify-content-center">';
-                                                        echo '<button class="btn btn-outline-primary btn-sm mx-1">';
-                                                            echo '<i class="fas fa-comment"></i>';
-                                                        echo '</button>';
-                                                        echo '<button class="btn btn-outline-danger btn-sm mx-1 toggle-heart">';
-                                                            echo '<i class="fas fa-heart"></i>';
-                                                        echo '</button>';
-                                                        echo '<button class="btn btn-outline-success btn-sm mx-1">';
-                                                            echo '<i class="fas fa-download"></i>';
-                                                        echo '</button>';
-                                                    echo '</div>';
-                                                echo '</div>';
-                                            echo '</div>';
-                                        echo '</div>'; 
-                                    echo '</div>';
-                                }
-                                ?>
+                            <div id="abstractTiles" class="row" data-user-id="<?php echo $_SESSION['user_id']; ?>">
+                                
                             </div>
                         </div>
                     </div>
@@ -99,6 +57,8 @@ if (!isset($_SESSION['user_type']) || $_SESSION['user_type'] == 'A') header("loc
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
     <script src="..\..\includes\functions.js"></script>
+    <script src="../../scripts/fetchRecords.js"></script>
+    <script src="../../scripts/toggleLike.js"></script>
 </body>
 
 </html>

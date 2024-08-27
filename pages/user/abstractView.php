@@ -1,4 +1,5 @@
 <?php
+include "..\..\backend\history.php";
 
 // Simulated comments array
 $comments = [
