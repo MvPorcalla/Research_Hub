@@ -211,6 +211,48 @@ document.addEventListener('DOMContentLoaded', () => {
                     favoriteTiles.innerHTML += tileHTML;
                 });
             }
+
+            if (document.getElementById('commentsContainer')) {
+
+                const commentsContainer = document.getElementById('commentsContainer');
+                const abstractId = commentsContainer.getAttribute('data-abstract-id');
+
+                const response = await fetch(`../../backend/fetchRecords.php?fetch=comments&abstract_id=${abstractId}`);
+                if (!response.ok) throw new Error('Network response was not ok');
+
+                const data = await response.json();
+
+                data.forEach(dataRow => {
+
+                    // Format timestamp
+                    const timestamp = dataRow.commentTimestamp;
+                    const date = new Date(timestamp);
+                    const options = { year: 'numeric', month: 'long', day: 'numeric' };
+                    const formattedDate = date.toLocaleDateString('en-US', options);
+
+                    let tileHTML = `
+                        <div class="card comment-card">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between mb-2">
+                                    <div class="d-flex flex-row align-items-center">
+                                        <img src="../${escapeHTML(dataRow.userIdImage)}" alt="avatar" width="25" height="25" />
+                                        <p class="small mb-0 ms-2">${escapeHTML(dataRow.userName)}</p>
+                                    </div>
+                                    <div class="d-flex flex-row align-items-center">
+                                        <button class="btn btn-link like-btn px-0" data-comment-id="${escapeHTML(dataRow.commentId)}">
+                                            <i class="far fa-thumbs-up mx-2 fa-xs text-body" style="margin-top: -0.16rem;"></i>
+                                        </button>
+                                        <p class="small text-muted mb-0 me-2">${escapeHTML(dataRow.commentLikes)}</p>
+                                    </div>
+                                </div>
+                                <p>${escapeHTML(dataRow.commentContent)}</p>
+                                <p><small>${escapeHTML(formattedDate)}</small></p>
+                            </div>
+                        </div>
+                    `;
+                    commentsContainer.innerHTML += tileHTML;
+                });
+            }
         } catch (error) {
             console.error('Error fetching records:', error);
         }
@@ -219,7 +261,7 @@ document.addEventListener('DOMContentLoaded', () => {
     fetchRecords().then(() => {
         var url = window.location.href;
 
-        if (url.includes('pages/user')) {
+        if (url.includes('pages/user/index.php') || url.includes('pages/user/favorites.php')) {
             const updateButtonStatuses = () => {
 
                 let userIdElement = document.getElementById('abstractTiles') || document.getElementById('favoriteTiles');

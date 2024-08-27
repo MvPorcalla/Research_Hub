@@ -122,9 +122,15 @@ $comments = [
             padding: 10px;
         }
 
-        .like-btn {
+        .like-button {
             cursor: pointer;
         }
+        
+        .liked {
+            color: red; /* Change the icon color to red */
+            font-weight: bold; /* Optional: make it bold */
+        }
+
     </style>
 </head>
 <body>
@@ -145,52 +151,22 @@ $comments = [
                             </div>
                         </div>
                         <div class="col-md-4">
-                            <!-- <div data-mdb-input-init class="form-outline mb-2">
-                                <input type="text" id="addANote" class="form-control border-dark" placeholder="+Add comment..." />
-                            </div> -->
 
                             <!-- Comment Form -->
-                            <form id="commentForm" method="POST" action="commentForm.php" class="d-flex align-items-center">
+                            <form id="commentForm" method="POST" action="../../backend/comment.php" class="d-flex align-items-center">
                                 <div class="form-outline flex-grow-1 mb-2">
-                                    <input type="text" id="addANote" name="comment_content" class="form-control border-dark" placeholder="+Add comment..." required />
+                                    <input type="hidden" name="record_id" value="<?php echo $_GET['abstractId']; ?>"> 
+                                    <input type="hidden" name="user_id" value="<?php echo $_SESSION['user_id']; ?>">
+                                    <input type="text" id="addANote" name="comment_content" class="form-control border-dark" placeholder="+ Add comment..." required />
                                 </div>
-                                <input type="hidden" name="record_id" value="1"> 
-                                <input type="hidden" name="entry_id" value="1"> 
-                                <input type="hidden" name="user_id" value="1"> 
-                                <input type="hidden" name="repliedto_user_id" value="">
                                 <button type="submit" class="btn btn-primary ms-2 mb-2">
                                     <i class="fas fa-paper-plane"></i>
                                 </button>
                             </form>
 
-
-
                             <!-- Comment List -->
-                            <div class="comment-container">
-                                <?php foreach ($comments as $comment): ?>
-                                    <div class="card comment-card">
-                                        <div class="card-body">
-                                            <div class="d-flex justify-content-between mb-2">
-                                                <div class="d-flex flex-row align-items-center">
-                                                    <!-- avatar iamage -->
-                                                    <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(<?php echo htmlspecialchars($comment['user_id']); ?>).webp" alt="avatar" width="25" height="25" />
-                                                    <p class="small mb-0 ms-2"><?php echo htmlspecialchars($comment['user_id']); ?></p>
-                                                </div>
-                                                <div class="d-flex flex-row align-items-center">
-                                                    <!-- Likes -->
-                                                    <button class="btn btn-link like-btn" data-comment-id="<?php echo htmlspecialchars($comment['comment_id']); ?>">
-                                                        <i class="far fa-thumbs-up mx-2 fa-xs text-body" style="margin-top: -0.16rem;"></i>
-                                                    </button>
-                                                    <p class="small text-muted mb-0" id="like-count-<?php echo htmlspecialchars($comment['comment_id']); ?>">
-                                                        <?php echo htmlspecialchars($comment['comment_likes']); ?>
-                                                    </p>
-                                                </div>
-                                            </div>
-                                            <p><?php echo htmlspecialchars($comment['comment_content']); ?></p>
-                                            <p><small>Date: <?php echo htmlspecialchars($comment['date']); ?></small></p>
-                                        </div>
-                                    </div>
-                                <?php endforeach; ?>
+                            <div id="commentsContainer" class="comment-container" data-abstract-id="<?php echo $_GET['abstractId']; ?>" data-user-id="<?php echo $_SESSION['user_id']; ?>">
+
                             </div>
                         </div>
                     </div>
@@ -210,6 +186,10 @@ $comments = [
     <script src="../../scripts/fetchOneRecord.js"></script>
 
     <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            handleStatus('comment');
+        });
+
         document.querySelectorAll('.like-btn').forEach(button => {
 
             button.addEventListener('click', function() {
