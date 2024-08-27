@@ -238,8 +238,8 @@ document.addEventListener('DOMContentLoaded', () => {
                                         <img src="../${escapeHTML(dataRow.userIdImage)}" alt="avatar" width="25" height="25" />
                                         <p class="small mb-0 ms-2">${escapeHTML(dataRow.userName)}</p>
                                     </div>
-                                    <div class="d-flex flex-row align-items-center">
-                                        <button class="btn btn-link like-btn px-0" data-comment-id="${escapeHTML(dataRow.commentId)}">
+                                    <div class="likes-section d-flex flex-row align-items-center">
+                                        <button class="btn like-button px-0" data-comment-id="${escapeHTML(dataRow.commentId)}">
                                             <i class="far fa-thumbs-up mx-2 fa-xs text-body" style="margin-top: -0.16rem;"></i>
                                         </button>
                                         <p class="small text-muted mb-0 me-2">${escapeHTML(dataRow.commentLikes)}</p>
@@ -261,17 +261,20 @@ document.addEventListener('DOMContentLoaded', () => {
     fetchRecords().then(() => {
         var url = window.location.href;
 
-        if (url.includes('pages/user/index.php') || url.includes('pages/user/favorites.php')) {
+        if (url.includes('pages/user/index.php') || url.includes('pages/user/favorites.php') || url.includes('pages/user/abstractView.php')) {
             const updateButtonStatuses = () => {
 
-                let userIdElement = document.getElementById('abstractTiles') || document.getElementById('favoriteTiles');
+                let userIdElement = document.getElementById('abstractTiles') || document.getElementById('favoriteTiles') || document.getElementById('commentsContainer');
                 const userId = userIdElement ? userIdElement.getAttribute('data-user-id') : null;
                 const buttons = document.querySelectorAll('.like-button');
                 
                 const requests = Array.from(buttons).map(button => {
-                    const recordId = button.getAttribute('data-record-id');
+                    const abstractId = button.getAttribute('data-record-id');
+                    const commentId = button.getAttribute('data-comment-id');
+
+                    if (abstractId) {
                     
-                    return fetch(`../../backend/get_like_status.php?recordId=${recordId}&userId=${userId}`)
+                    return fetch(`../../backend/get_like_status.php?record_type=abstract&recordId=${abstractId}&userId=${userId}`)
                         .then(response => response.json())
                         .then(data => {
 
@@ -286,6 +289,25 @@ document.addEventListener('DOMContentLoaded', () => {
                         .catch(error => {
                             console.error('Error fetching like status:', error);
                         });
+
+                    } else if (commentId) {
+                    
+                        return fetch(`../../backend/get_like_status.php?record_type=comment&recordId=${commentId}&userId=${userId}`)
+                            .then(response => response.json())
+                            .then(data => {
+
+                                const icon = button.querySelector('svg');
+    
+                                if (data.like_status == 'A') {
+                                    icon.classList.add('liked');
+                                } else {
+                                    icon.classList.remove('liked');
+                                }
+                            })
+                            .catch(error => {
+                                console.error('Error fetching like status:', error);
+                            });
+                    }
                 });
         
                 // Ensure all requests are completed

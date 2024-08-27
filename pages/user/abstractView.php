@@ -1,4 +1,6 @@
 <?php
+include_once "..\..\includes\db.php";
+if (!isset($_SESSION['user_type']) || $_SESSION['user_type'] == 'A') header("location: ../../index.php");
 include "..\..\backend\history.php";
 
 // Simulated comments array
@@ -127,8 +129,8 @@ $comments = [
         }
         
         .liked {
-            color: red; /* Change the icon color to red */
-            font-weight: bold; /* Optional: make it bold */
+            color: blue !important; /* Change the icon color to blue */
+            font-weight: bold !important; /* Optional: make it bold */
         }
 
     </style>
@@ -166,7 +168,7 @@ $comments = [
 
                             <!-- Comment List -->
                             <div id="commentsContainer" class="comment-container" data-abstract-id="<?php echo $_GET['abstractId']; ?>" data-user-id="<?php echo $_SESSION['user_id']; ?>">
-
+                                <!-- Data will be dynamically inserted here -->
                             </div>
                         </div>
                     </div>
@@ -184,28 +186,11 @@ $comments = [
     <script src="../../includes/functions.js"></script>
     <script src="../../scripts/fetchRecords.js"></script>
     <script src="../../scripts/fetchOneRecord.js"></script>
+    <script src="../../scripts/toggleLike.js"></script>
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             handleStatus('comment');
-        });
-
-        document.querySelectorAll('.like-btn').forEach(button => {
-
-            button.addEventListener('click', function() {
-                const commentId = this.getAttribute('data-comment-id');
-                const likeCountElement = document.getElementById(`like-count-${commentId}`);
-                let currentLikes = parseInt(likeCountElement.textContent);
-
-                // Simulate a server request here
-                // Example: send an AJAX request to update likes in the database
-
-                // Update the like count
-                likeCountElement.textContent = currentLikes + 1;
-
-                // Optional: Provide feedback to the user (e.g., a success message)
-                // Swal.fire('Liked!', 'You have liked this comment.', 'success');
-            });
         });
     </script>
 </body>
