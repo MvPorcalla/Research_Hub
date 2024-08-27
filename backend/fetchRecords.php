@@ -67,6 +67,7 @@ if ($results) {
             ],
             'favorites' => [
                 'id' => htmlspecialchars($result['like_id'], ENT_QUOTES, 'UTF-8'),
+                'record_id' => htmlspecialchars($result['record_id'], ENT_QUOTES, 'UTF-8'),
                 'title' => htmlspecialchars($result['record_title'], ENT_QUOTES, 'UTF-8')
             ],
             default => []

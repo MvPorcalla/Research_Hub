@@ -28,7 +28,7 @@ if (!isset($_SESSION['user_type']) || $_SESSION['user_type'] == 'A') header("loc
             <!-- Main content area -->
             <main class="col-md-9 ms-sm-auto col-lg-9 px-md-4">
                 <div class="container">
-                    <div id="favoriteTiles" class="row">
+                    <div id="favoriteTiles" class="row" data-user-id="<?php echo $_SESSION['user_id']; ?>">
 
                         <div class="mt-5 mb-3">
                             <h1 class='admin-subtitle'>Favorites</h1>

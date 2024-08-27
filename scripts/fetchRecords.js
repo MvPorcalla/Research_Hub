@@ -201,7 +201,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                     <div class="row text-center">
                                         <div class="col-md-11 d-flex align-items-center justify-content-start border-end">${escapeHTML(dataRow.title)}</div>
                                         <div class="col-md-1 d-flex align-items-center justify-content-center">
-                                            <button class="btn btn-danger btn-sm mx-1 like-button" data-record-id="${escapeHTML(dataRow.id)}">
+                                            <button class="btn btn-outline-danger btn-sm mx-1 like-button" data-record-id="${escapeHTML(dataRow.record_id)}">
                                                 <i class="fas fa-heart"></i>
                                             </button>
                                         </div>
@@ -223,16 +223,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (url.includes('pages/user')) {
             const updateButtonStatuses = () => {
+
+                let userIdElement = document.getElementById('abstractTiles') || document.getElementById('favoriteTiles');
+                const userId = userIdElement ? userIdElement.getAttribute('data-user-id') : null;
                 const buttons = document.querySelectorAll('.like-button');
-        
+                
                 const requests = Array.from(buttons).map(button => {
                     const recordId = button.getAttribute('data-record-id');
-                    let userIdElement = document.getElementById('abstractTiles') || document.getElementById('favoriteTiles');
-                    const userId = userIdElement ? userIdElement.getAttribute('data-user-id') : null;
                     
                     return fetch(`../../backend/get_like_status.php?recordId=${recordId}&userId=${userId}`)
                         .then(response => response.json())
                         .then(data => {
+
                             if (data.like_status === 'A') {
                                 button.classList.add('btn-danger');
                                 button.classList.remove('btn-outline-danger');
