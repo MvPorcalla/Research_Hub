@@ -12,7 +12,7 @@ $fields = [
 ];
 
 // Check if the user has already liked this record
-$sql = "SELECT * FROM likes WHERE user_id = ? AND record_id = ?";
+$sql = "SELECT * FROM `likes` WHERE `user_id` = ? AND `record_id` = ?";
 $filter = [$userId, $recordId];
 $result = query($conn, $sql, $filter);
 

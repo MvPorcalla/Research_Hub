@@ -158,7 +158,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     let tileHTML = `
                         <div class="col-12 mb-2">
                             <div class="card">
-                                <div class="card-body">
+                                <div class="card-body" onclick="window.location.href='abstractView.php?abstractId=${escapeHTML(dataRow.id)}';" style="cursor: pointer;">
                                     <div class="row text-center">
                                         <div class="col-md-2 d-flex align-items-center justify-content-center border-end">
                                             <img src="https://via.placeholder.com/75x100" class="img-fluid rounded-1" alt="${escapeHTML(dataRow.title)}">
@@ -197,7 +197,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     let tileHTML = `
                         <div class="col-12 mb-2">
                             <div class="card border-dark rounded-4">
-                                <div class="card-body">
+                                <div class="card-body" onclick="window.location.href='abstractView.php?abstractId=${escapeHTML(dataRow.record_id)}';" style="cursor: pointer;">
                                     <div class="row text-center">
                                         <div class="col-md-11 d-flex align-items-center justify-content-start border-end">${escapeHTML(dataRow.title)}</div>
                                         <div class="col-md-1 d-flex align-items-center justify-content-center">

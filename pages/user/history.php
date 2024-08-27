@@ -33,50 +33,8 @@ if (!isset($_SESSION['user_type']) || $_SESSION['user_type'] == 'A') header("loc
                             <h1 class="admin-subtitle">History</h1>
                         </div>
 
-                        <div class="side-container">
-                            <?php
-                                $records = [
-                                    ['record_id' => 'Advancements in Artificial Intelligence', 'date' => '2024-08-21'],
-                                    ['record_id' => 'Impact of Climate Change on Agriculture', 'date' => '2024-08-21'],
-                                    ['record_id' => 'Statistical Data on Renewable Energy', 'date' => '2024-08-20'],
-                                    ['record_id' => 'Quantum Computing and Cryptography', 'date' => '2024-08-20'],
-                                    ['record_id' => 'New Findings in Genetic Engineering', 'date' => '2024-08-19'],
-                                    ['record_id' => 'How are you baby girl', 'date' => '2024-08-29'],
-                                    // Add more records as needed
-                                ];
+                        <div id="historyContainer" class="side-container">
 
-                                // Sort records by date in descending order
-                                usort($records, function($a, $b) {
-                                    return strtotime($b['date']) - strtotime($a['date']);
-                                });
-
-                                // Group records by date
-                                $groupedRecords = [];
-                                foreach ($records as $record) {
-                                    $groupedRecords[$record['date']][] = $record['record_id'];
-                                }
-
-                                foreach ($groupedRecords as $date => $recordsOnDate) {
-                                    echo '<div class="mb-4">';
-                                    // Display the date at the top left
-                                    echo '<div class="text-start text-muted mb-2"><strong>Date: ' . $date . '</strong></div>';
-                                    echo '<table class="table table-bordered">';
-                                    echo '<tbody>';
-                                    foreach ($recordsOnDate as $record) {
-                                        echo '<tr>';
-                                        echo '<td class="col-md-11 text-start">' . htmlspecialchars($record) . '</td>';
-                                        echo '<td class="col-md-1 text-center">';
-                                        echo '<button class="btn btn-danger btn-sm mx-1 delete-button">';
-                                        echo '<i class="fas fa-trash-alt"></i>';  // Trash can icon for delete
-                                        echo '</button>';
-                                        echo '</td>';
-                                        echo '</tr>';
-                                    }
-                                    echo '</tbody>';
-                                    echo '</table>';
-                                    echo '</div>';
-                                }
-                            ?>
                         </div>
                     </div>
                 </div>
@@ -91,6 +49,7 @@ if (!isset($_SESSION['user_type']) || $_SESSION['user_type'] == 'A') header("loc
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
     <script src="..\..\includes\functions.js"></script>
+    <script src="..\..\scripts\fetchHistories.js"></script>
 
 </body>
 

@@ -115,7 +115,6 @@ if ($_SESSION['user_type'] != 'A') header("location: ../../index.php");
         document.addEventListener('DOMContentLoaded', function () {
             handleStatus('addRecord');
             handleStatus('editRecord');
-            clearUrlParam('abstractId');
         });
     </script>
 </body>
