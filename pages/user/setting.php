@@ -64,7 +64,7 @@ if (!isset($_SESSION['user_type']) || $_SESSION['user_type'] == 'A') header("loc
 
                                                 <div class="row align-items-center">
                                                     <div class="col-md-12 text-center">
-                                                        <img id="idImage" src="#" alt="Admin Image" class="admin-profile-pic img-fluid rounded-circle mb-2">
+                                                        <img id="idImage" src="#" alt="User Image" class="admin-profile-pic img-fluid rounded-circle mb-2">
                                                         <div>
                                                             <!-- Display Current Name and Username -->
                                                             <h2 id="completeName" class="admin-name-text mb-1" data-user-id="<?php echo $_SESSION['user_id']; ?>"></h2>
