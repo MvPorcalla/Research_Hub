@@ -1,6 +1,33 @@
 <?php
 include_once "..\..\includes\db.php";
 if (!isset($_SESSION['user_type']) || $_SESSION['user_type'] == 'A') header("location: ../../index.php");
+
+// Mock data for forum entries
+$forum_entries = [
+    [
+        'entry_id' => 1,
+        'user_id' => 1,
+        'entry_content' => 'Challenges in Conducting Qualitative Research',
+        'entry_likes' => 87,
+        'entry_status' => 'A',
+        'posted_time' => '10 minutes ago',
+        'user_name' => 'JaneDoe',
+        'replies' => 45,
+        'views' => 150,
+    ],
+    [
+        'entry_id' => 2,
+        'user_id' => 2,
+        'entry_content' => 'Best Practices for Data Analysis in Research',
+        'entry_likes' => 112,
+        'entry_status' => 'A',
+        'posted_time' => '1 hour ago',
+        'user_name' => 'JohnSmith',
+        'replies' => 78,
+        'views' => 200,
+    ],
+    // Add more mock entries as needed
+];
 ?>
 
 <!DOCTYPE html>
@@ -35,15 +62,15 @@ if (!isset($_SESSION['user_type']) || $_SESSION['user_type'] == 'A') header("loc
                         </div>
 
                         <div class="col-md-12">
-                             <!-- filter Content -->
+                            <!-- filter Content -->
                             <div class="row text-left mb-3">
                                 <div class="col-lg-4 mb-2 mb-sm-0">
                                     <div class="dropdown bootstrap-select form-control form-control-sm bg-white bg-op-9 text-sm" style="width: 100%;">
                                         <select class="form-control form-control-sm bg-white bg-op-9 text-sm" data-toggle="select">
                                             <option> Categories </option>
-                                            <option> Research Methods </option>
-                                            <option> Data Analysis </option>
-                                            <option> Literature Review </option>
+                                            <option> STEM </option>
+                                            <option> ABM </option>
+                                            <option> HUMSS </option>
                                         </select>
                                     </div>
                                 </div>
@@ -63,70 +90,40 @@ if (!isset($_SESSION['user_type']) || $_SESSION['user_type'] == 'A') header("loc
                                 </div>
                             </div>
 
-                           
-
                             <!-- Forum Posts -->
-                            <div class="card row-hover pos-relative py-3 px-3 mb-3 border-warning border-top-0 border-right-0 border-bottom-0 rounded-0">
-                                <div class="row align-items-center">
-                                    <div class="col-md-8 mb-3 mb-sm-0">
-                                        <h5>
-                                            <a href="#" class="text-primary">Challenges in Conducting Qualitative Research</a>
-                                        </h5>
-                                        <p class="text-sm"><span class="op-6">Posted</span> <a class="text-black" href="#">10 minutes</a> <span class="op-6">ago by</span> <a class="text-black" href="#">JaneDoe</a></p>
-                                        <div class="text-sm op-5">
-                                            <a class="text-black mr-2" href="#">#Qualitative</a>
-                                            <a class="text-black mr-2" href="#">#Challenges</a>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4 op-7">
-                                        <div class="row text-center op-7">
-                                            <div class="col px-1">
-                                                <i class="ion-connection-bars icon-1x"></i> <span class="d-block text-sm">87 Votes</span>
-                                            </div>
-                                            <div class="col px-1">
-                                                <i class="ion-ios-chatboxes-outline icon-1x"></i> <span class="d-block text-sm">45 Replies</span>
-                                            </div>
-                                            <div class="col px-1">
-                                                <i class="ion-ios-eye-outline icon-1x"></i> <span class="d-block text-sm">150 Views</span>
+                            <?php foreach ($forum_entries as $entry): ?>
+                                <div class="card row-hover pos-relative py-3 px-3 mb-3 border-warning border-top-0 border-right-0 border-bottom-0 rounded-0">
+                                    <div class="row align-items-center">
+                                        <div class="col-md-8 mb-3 mb-sm-0">
+                                            <h5>
+                                                <a href="#" class="text-primary"><?= $entry['entry_content']; ?></a>
+                                            </h5>
+                                            <p class="text-sm"><span class="op-6">Posted</span> <a class="text-black" href="#"><?= $entry['posted_time']; ?></a> <span class="op-6">ago by</span> <a class="text-black" href="#"><?= $entry['user_name']; ?></a></p>
+                                            <div class="text-sm op-5">
+                                                
                                             </div>
                                         </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="card row-hover pos-relative py-3 px-3 mb-3 border-primary border-top-0 border-right-0 border-bottom-0 rounded-0">
-                                <div class="row align-items-center">
-                                    <div class="col-md-8 mb-3 mb-sm-0">
-                                        <h5>
-                                            <a href="#" class="text-primary">Best Practices for Data Analysis in Research</a>
-                                        </h5>
-                                        <p class="text-sm"><span class="op-6">Posted</span> <a class="text-black" href="#">1 hour</a> <span class="op-6">ago by</span> <a class="text-black" href="#">JohnSmith</a></p>
-                                        <div class="text-sm op-5">
-                                            <a class="text-black mr-2" href="#">#DataAnalysis</a>
-                                            <a class="text-black mr-2" href="#">#BestPractices</a>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4 op-7">
-                                        <div class="row text-center op-7">
-                                            <div class="col px-1">
-                                                <i class="ion-connection-bars icon-1x"></i> <span class="d-block text-sm">112 Votes</span>
-                                            </div>
-                                            <div class="col px-1">
-                                                <i class="ion-ios-chatboxes-outline icon-1x"></i> <span class="d-block text-sm">78 Replies</span>
-                                            </div>
-                                            <div class="col px-1">
-                                                <i class="ion-ios-eye-outline icon-1x"></i> <span class="d-block text-sm">200 Views</span>
+                                        <div class="col-md-4 op-7">
+                                            <div class="row text-center op-7">
+                                                <div class="col px-1">
+                                                    <i class="ion-connection-bars icon-1x"></i> <span class="d-block text-sm"><?= $entry['entry_likes']; ?> Votes</span>
+                                                </div>
+                                                <div class="col px-1">
+                                                    <i class="ion-ios-chatboxes-outline icon-1x"></i> <span class="d-block text-sm"><?= $entry['replies']; ?> Replies</span>
+                                                </div>
+                                                <div class="col px-1">
+                                                    <i class="ion-ios-eye-outline icon-1x"></i> <span class="d-block text-sm"><?= $entry['views']; ?> Views</span>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            <?php endforeach; ?>
                             <!-- /End of forum posts -->
                         </div>
 
-                    
                     </div>
-                    
+
                 </div>
             </main>
         </div>
@@ -139,7 +136,6 @@ if (!isset($_SESSION['user_type']) || $_SESSION['user_type'] == 'A') header("loc
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
     <script src="..\..\includes\functions.js"></script>
 
-      
 </body>
 
 </html>

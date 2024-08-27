@@ -145,9 +145,25 @@ $comments = [
                             </div>
                         </div>
                         <div class="col-md-4">
-                            <div data-mdb-input-init class="form-outline mb-2">
+                            <!-- <div data-mdb-input-init class="form-outline mb-2">
                                 <input type="text" id="addANote" class="form-control border-dark" placeholder="+Add comment..." />
-                            </div>
+                            </div> -->
+
+                            <!-- Comment Form -->
+                            <form id="commentForm" method="POST" action="commentForm.php" class="d-flex align-items-center">
+                                <div class="form-outline flex-grow-1 mb-2">
+                                    <input type="text" id="addANote" name="comment_content" class="form-control border-dark" placeholder="+Add comment..." required />
+                                </div>
+                                <input type="hidden" name="record_id" value="1"> 
+                                <input type="hidden" name="entry_id" value="1"> 
+                                <input type="hidden" name="user_id" value="1"> 
+                                <input type="hidden" name="repliedto_user_id" value="">
+                                <button type="submit" class="btn btn-primary ms-2 mb-2">
+                                    <i class="fas fa-paper-plane"></i>
+                                </button>
+                            </form>
+
+
 
                             <!-- Comment List -->
                             <div class="comment-container">
