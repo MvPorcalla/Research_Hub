@@ -267,6 +267,8 @@ function setupConfirmationDialog(buttonSelector, options) {
     });
 }
 
+// =========================================================================
+
 // Define the timeAgo function
 function timeAgo(timestamp) {
     const now = new Date();
@@ -290,6 +292,8 @@ function timeAgo(timestamp) {
     return 'Just now';
 }
 
+// =========================================================================
+
 function formatDateTime(timestamp) {
     const date = new Date(timestamp);
     const options = {
@@ -301,4 +305,24 @@ function formatDateTime(timestamp) {
         hour12: true // Use 12-hour clock (AM/PM)
     };
     return date.toLocaleDateString('en-US', options);
+}
+
+// =========================================================================
+
+function confirmPassword() {
+    
+    const form = document.querySelector('form');
+    form.addEventListener('submit', function (e) {
+        const password = form.getElementById('password').value;
+        const confirmPassword = form.getElementById('confirmPassword').value;
+
+        if (password !== confirmPassword) {
+            e.preventDefault(); // Prevent form submission
+            Swal.fire({
+                icon: "error",
+                title: "Passwords do not match.",
+                text: "Please try again."
+            });
+        }
+    });
 }

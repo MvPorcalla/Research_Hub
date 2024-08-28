@@ -107,11 +107,11 @@ if ($_SESSION['user_type'] != 'A') header("location: ../../index.php");
                                                             </div>
                                                             <div class="col-md-4">
                                                                 <label for="password" class="form-label fw-bold">Password</label>
-                                                                <input type="password" class="form-control" id="passwordField" name="passwordField">
+                                                                <input type="password" class="form-control" id="password" name="password">
                                                             </div>
                                                             <div class="col-md-4">
                                                                 <label for="conpassword" class="form-label fw-bold">Confirm Password</label>
-                                                                <input type="password" class="form-control" id="conpasswordField" name="conpasswordField">
+                                                                <input type="password" class="form-control" id="confirmpassword" name="confirmpassword">
                                                             </div>
                                                         </div>
 
@@ -199,6 +199,7 @@ if ($_SESSION['user_type'] != 'A') header("location: ../../index.php");
     
     <script>
         document.addEventListener('DOMContentLoaded', function () {
+            confirmPassword();
             handleStatus('editInfo');
         });
     </script>
