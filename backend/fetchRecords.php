@@ -25,7 +25,7 @@ $queries = [
     'LRNs' => "SELECT * FROM `lrn` WHERE lrn_status = 'A'",
     'pending' => "SELECT * FROM `users` WHERE `user_type` = 'G' AND `user_status` = 'P'",
     'favorites' => "SELECT * FROM `likes` l JOIN `records` r ON r.record_id = l.record_id WHERE l.user_id = {$user_id} and l.like_status = 'A' ORDER BY l.like_timestamp DESC",
-    'comments' => "SELECT * FROM `comments` c JOIN `users` u ON u.user_id = c.user_id WHERE {$comment_type} = {$record_id} ORDER BY `comment_timestamp` DESC",
+    'comments' => "SELECT * FROM `comments` c JOIN `users` u ON u.user_id = c.user_id WHERE {$comment_type} = {$record_id} AND `comment_status` = 'A' ORDER BY `comment_timestamp` DESC",
     'entries' => "SELECT * FROM `forum_entry` e JOIN `users` u ON u.user_id = e.user_id WHERE `entry_status` = 'A' ORDER BY `entry_timestamp` DESC",
 ];
 
@@ -88,6 +88,10 @@ if ($results) {
                 'entryId' => htmlspecialchars($result['entry_id'], ENT_QUOTES, 'UTF-8'),
                 'userId' => htmlspecialchars($result['user_user'], ENT_QUOTES, 'UTF-8'),
                 'userName' => htmlspecialchars($result['user_username'], ENT_QUOTES, 'UTF-8'),
+                'imgDir' => htmlspecialchars($result['user_idpicture_imgdir'], ENT_QUOTES, 'UTF-8'),
+                'lastName' => htmlspecialchars($result['user_lastname'], ENT_QUOTES, 'UTF-8'),
+                'firstName' => htmlspecialchars($result['user_firstname'], ENT_QUOTES, 'UTF-8'),
+                'mi' => htmlspecialchars($result['user_mi'], ENT_QUOTES, 'UTF-8'),
                 'entryContent' => htmlspecialchars($result['entry_content'], ENT_QUOTES, 'UTF-8'),
                 'entryTimestamp' => htmlspecialchars($result['entry_timestamp'], ENT_QUOTES, 'UTF-8'),
                 'entryLikes' => htmlspecialchars($result['entry_likes'], ENT_QUOTES, 'UTF-8'),

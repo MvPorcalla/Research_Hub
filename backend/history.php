@@ -4,15 +4,17 @@ include_once "..\..\includes\db.php";
 $userId = $_SESSION['user_id'];
 $abstractId = $_GET['abstractId'];
 
+$currentTimestamp = date('Y-m-d H:i:s');
+
 $table = 'histories';
 $fields = [
-    'history_timestamp' => date('Y-m-d H:i:s'),
+    'history_timestamp' => $currentTimestamp,
     'history_status' => 'A'
 ];
 
 // Check if the user has already liked this record
-$sql = "SELECT * FROM `histories` WHERE `user_id` = ? AND `record_id` = ?";
-$filter = [$userId, $abstractId];
+$sql = "SELECT * FROM `histories` WHERE `user_id` = ? AND `record_id` = ? AND DATE(`history_timestamp`) = DATE(?)";
+$filter = [$userId, $abstractId, $currentTimestamp];
 $result = query($conn, $sql, $filter);
 
 

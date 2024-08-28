@@ -1,7 +1,6 @@
 <?php
 include_once "..\..\includes\db.php";
 if (!isset($_SESSION['user_type']) || $_SESSION['user_type'] != 'A') header("location: ../../index.php");
-include "..\..\backend\history.php";
 ?>
 
 <!DOCTYPE html>
@@ -110,6 +109,7 @@ include "..\..\backend\history.php";
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             handleStatus('comment');
+            handleStatus('deleteRecord');
         });
     </script>
 </body>
