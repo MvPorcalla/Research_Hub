@@ -17,8 +17,14 @@ if (isset($_POST['comment_content'])) {
         $key = isset($_POST['record_id']) ? 'record_id' : 'entry_id';
         $fields[$key] = $_POST[$key];
         
+        if (isset($_SERVER['HTTP_REFERER']) && strpos($_SERVER['HTTP_REFERER'], 'abstractView') !== false) {
+            $file = "abstractView.php?abstractId={$fields[$key]}&";
+        } else {
+            $file = 'index.php?';
+        }
+
         $status = insert($conn, $table, $fields) ? "success" : "failed";
-        $redirectUrl = $key === 'record_id' ? "../pages/user/abstractView.php?abstractId={$fields[$key]}&comment={$status}" : "../pages/user/forum.php?comment={$status}";
+        $redirectUrl = $key === 'record_id' ? "../pages/user/{$file}comment={$status}" : "../pages/user/forum.php?comment={$status}";
         
         header("Location: $redirectUrl");
         exit;
