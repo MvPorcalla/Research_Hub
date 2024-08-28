@@ -222,6 +222,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 const data = await response.json();
 
+                var url = window.location.href;
+                const disabled = url.includes('admin') ? ' disabled' : ''
+
                 data.forEach(dataRow => {
 
                     // Format timestamp
@@ -239,7 +242,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                         <p class="small mb-0 ms-2">${escapeHTML(dataRow.userName)}</p>
                                     </div>
                                     <div class="likes-section d-flex flex-row align-items-center">
-                                        <button class="btn like-button px-0" data-comment-id="${escapeHTML(dataRow.commentId)}">
+                                        <button class="btn like-button px-0" data-comment-id="${escapeHTML(dataRow.commentId)}"${disabled}>
                                             <i class="far fa-thumbs-up mx-2 fa-xs text-body" style="margin-top: -0.16rem;"></i>
                                         </button>
                                         <p class="small text-muted mb-0 me-2">${escapeHTML(dataRow.commentLikes)}</p>
