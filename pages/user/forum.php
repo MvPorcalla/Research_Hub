@@ -73,7 +73,7 @@ if (!isset($_SESSION['user_type']) || $_SESSION['user_type'] == 'A') header("loc
                                 </div>
 
                                 <div class='col-lg-2 text-center'>
-                                    <button class="btn btn-sm btn-block btn-success rounded-2 py-2 mb-2 bg-op-6" data-bs-toggle="modal" data-bs-target="#askQuestionModal">
+                                    <button class="btn btn-sm btn-block btn-primary rounded-2 py-2 mb-2 bg-op-6" data-bs-toggle="modal" data-bs-target="#askQuestionModal">
                                         Ask a Question
                                     </button>
                                 </div>
@@ -83,7 +83,7 @@ if (!isset($_SESSION['user_type']) || $_SESSION['user_type'] == 'A') header("loc
                             <div class="modal fade" id="askQuestionModal" tabindex="-1" aria-labelledby="askQuestionModalLabel" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered">
                                     <div class="modal-content">
-                                        <div class="modal-header bg-success text-white">
+                                        <div class="modal-header bg-primary text-white">
                                             <h5 class="modal-title" id="askQuestionModalLabel">Ask a Question</h5>
                                         </div>
                                         <div class="modal-body">
@@ -92,7 +92,7 @@ if (!isset($_SESSION['user_type']) || $_SESSION['user_type'] == 'A') header("loc
                                                     <label for="question" class="form-label">Your Question</label>
                                                     <textarea class="form-control" id="question" name="question" rows="4" placeholder="Type your question here..." maxlength="2000" required></textarea>
                                                 </div>
-                                                <button type="submit" class="btn btn-success btn-block w-100">Submit Question</button>
+                                                <button type="submit" class="btn btn-primary btn-block w-100">Submit</button>
                                             </form>
                                         </div>
                                     </div>
