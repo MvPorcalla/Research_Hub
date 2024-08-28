@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 16, 2024 at 05:42 PM
+-- Generation Time: Aug 28, 2024 at 09:48 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -34,8 +34,9 @@ CREATE TABLE `comments` (
   `user_id` int(11) NOT NULL,
   `repliedto_user_id` int(11) DEFAULT NULL,
   `comment_content` varchar(512) NOT NULL,
-  `comment_likes` int(11) NOT NULL,
-  `comment_status` char(1) NOT NULL COMMENT 'A = Active / I = Inactive'
+  `comment_timestamp` datetime NOT NULL DEFAULT current_timestamp(),
+  `comment_likes` int(11) NOT NULL DEFAULT 0,
+  `comment_status` char(1) NOT NULL DEFAULT 'A' COMMENT 'A = Active / I = Inactive'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -75,7 +76,8 @@ CREATE TABLE `histories` (
 CREATE TABLE `likes` (
   `like_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
-  `record_id` int(11) NOT NULL,
+  `record_id` int(11) DEFAULT NULL,
+  `comment_id` int(11) DEFAULT NULL,
   `like_timestamp` datetime NOT NULL,
   `like_status` char(1) NOT NULL COMMENT 'A = Active / I = Inactive'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -90,7 +92,7 @@ CREATE TABLE `lrn` (
   `lrn_id` int(11) NOT NULL,
   `lrn_student` varchar(256) NOT NULL,
   `lrn_lrnid` varchar(12) NOT NULL,
-  `lrn_status` char(1) NOT NULL COMMENT 'A = Active / I = Inactive'
+  `lrn_status` char(1) NOT NULL DEFAULT 'A' COMMENT 'A = Active / I = Inactive'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -104,10 +106,10 @@ CREATE TABLE `records` (
   `record_title` varchar(256) NOT NULL,
   `record_authors` varchar(256) NOT NULL,
   `record_year` smallint(6) NOT NULL,
-  `record_month` smallint(6) NOT NULL,
+  `record_month` tinyint(4) NOT NULL,
   `record_filedir` varchar(256) NOT NULL,
   `record_trackstrand` varchar(5) NOT NULL COMMENT 'ABM / HUMMS / STEM',
-  `record_timestamp` datetime NOT NULL,
+  `record_timestamp` datetime NOT NULL DEFAULT current_timestamp(),
   `record_status` char(1) NOT NULL COMMENT 'A = Active / I = Inactive'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -130,6 +132,8 @@ CREATE TABLE `users` (
   `user_school` varchar(128) DEFAULT NULL,
   `user_reason` varchar(512) DEFAULT NULL,
   `user_pwdhash` varchar(128) NOT NULL,
+  `user_reset_token` varchar(255) DEFAULT NULL,
+  `user_reset_token_expire` datetime DEFAULT NULL,
   `user_type` char(1) NOT NULL COMMENT 'A = Admin / S = Student / G = Guest',
   `user_status` char(1) NOT NULL DEFAULT 'A' COMMENT 'A = Active / P = Pending / I = Inactive'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -169,7 +173,8 @@ ALTER TABLE `histories`
 ALTER TABLE `likes`
   ADD PRIMARY KEY (`like_id`),
   ADD KEY `user_id` (`user_id`),
-  ADD KEY `record_id` (`record_id`);
+  ADD KEY `record_id` (`record_id`),
+  ADD KEY `comment_id` (`comment_id`);
 
 --
 -- Indexes for table `lrn`
@@ -267,7 +272,8 @@ ALTER TABLE `histories`
 --
 ALTER TABLE `likes`
   ADD CONSTRAINT `likes_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `likes_ibfk_2` FOREIGN KEY (`record_id`) REFERENCES `records` (`record_id`) ON UPDATE CASCADE;
+  ADD CONSTRAINT `likes_ibfk_2` FOREIGN KEY (`record_id`) REFERENCES `records` (`record_id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `likes_ibfk_3` FOREIGN KEY (`comment_id`) REFERENCES `comments` (`comment_id`) ON UPDATE CASCADE;
 
 --
 -- Constraints for table `users`

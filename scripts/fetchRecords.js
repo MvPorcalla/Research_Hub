@@ -156,7 +156,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     let tileHTML = `
                         <div class="col-12 mb-2">
                             <div class="card">
-                                <div class="card-body" onclick="window.location.href='abstractView.php?abstractId=${escapeHTML(dataRow.id)}';" style="cursor: pointer;">
+                                <div class="card-body" onclick="if (!event.target.closest('button')) { window.location.href='abstractView.php?abstractId=${escapeHTML(dataRow.id)}'; }" style="cursor: pointer;">
                                     <div class="row text-center">
                                         <div class="col-md-2 d-flex align-items-center justify-content-center border-end">
                                             <img src="https://via.placeholder.com/75x100" class="img-fluid rounded-1" alt="${escapeHTML(dataRow.title)}">
@@ -195,7 +195,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     let tileHTML = `
                         <div class="col-12 mb-2">
                             <div class="card border-dark rounded-4">
-                                <div class="card-body" onclick="window.location.href='abstractView.php?abstractId=${escapeHTML(dataRow.record_id)}';" style="cursor: pointer;">
+                                <div class="card-body" onclick="if (!event.target.closest('button')) { window.location.href='abstractView.php?abstractId=${escapeHTML(dataRow.record_id)}'; }" style="cursor: pointer;">
                                     <div class="row text-center">
                                         <div class="col-md-11 d-flex align-items-center justify-content-start border-end">${escapeHTML(dataRow.title)}</div>
                                         <div class="col-md-1 d-flex align-items-center justify-content-center">
@@ -222,36 +222,47 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 const data = await response.json();
 
-                data.forEach(dataRow => {
+                var url = window.location.href;
+                const disabled = url.includes('admin') ? ' disabled' : ''
 
-                    // Format timestamp
-                    const timestamp = dataRow.commentTimestamp;
-                    const date = new Date(timestamp);
-                    const options = { year: 'numeric', month: 'long', day: 'numeric' };
-                    const formattedDate = date.toLocaleDateString('en-US', options);
+                if (data.length == 0) {
 
-                    let tileHTML = `
-                        <div class="card comment-card">
-                            <div class="card-body">
-                                <div class="d-flex justify-content-between mb-2">
-                                    <div class="d-flex flex-row align-items-center">
-                                        <img src="../${escapeHTML(dataRow.userIdImage)}" alt="avatar" width="25" height="25" />
-                                        <p class="small mb-0 ms-2">${escapeHTML(dataRow.userName)}</p>
-                                    </div>
-                                    <div class="likes-section d-flex flex-row align-items-center">
-                                        <button class="btn like-button px-0" data-comment-id="${escapeHTML(dataRow.commentId)}">
-                                            <i class="far fa-thumbs-up mx-2 fa-xs text-body" style="margin-top: -0.16rem;"></i>
-                                        </button>
-                                        <p class="small text-muted mb-0 me-2">${escapeHTML(dataRow.commentLikes)}</p>
-                                    </div>
-                                </div>
-                                <p>${escapeHTML(dataRow.commentContent)}</p>
-                                <p><small>${escapeHTML(formattedDate)}</small></p>
-                            </div>
-                        </div>
-                    `;
+                    let tileHTML = `<small>No comments yet.</small>`;
                     commentsContainer.innerHTML += tileHTML;
-                });
+                    
+                } else {
+
+                    data.forEach(dataRow => {
+
+                        // Format timestamp
+                        const timestamp = dataRow.commentTimestamp;
+                        const date = new Date(timestamp);
+                        const options = { year: 'numeric', month: 'long', day: 'numeric' };
+                        const formattedDate = date.toLocaleDateString('en-US', options);
+
+                        let tileHTML = `
+                            <div class="card comment-card">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between mb-2">
+                                        <div class="d-flex flex-row align-items-center">
+                                            <img src="../${escapeHTML(dataRow.userIdImage)}" alt="avatar" width="25" height="25" />
+                                            <p class="small mb-0 ms-2">${escapeHTML(dataRow.userName)}</p>
+                                        </div>
+                                        <div class="likes-section d-flex flex-row align-items-center">
+                                            <button class="btn like-button px-0" data-comment-id="${escapeHTML(dataRow.commentId)}"${disabled}>
+                                                <i class="far fa-thumbs-up mx-2 fa-xs text-body" style="margin-top: -0.16rem;"></i>
+                                            </button>
+                                            <p class="small text-muted mb-0 me-2">${escapeHTML(dataRow.commentLikes)}</p>
+                                        </div>
+                                    </div>
+                                    <p>${escapeHTML(dataRow.commentContent)}</p>
+                                    <p><small>${escapeHTML(formattedDate)}</small></p>
+                                </div>
+                            </div>
+                        `;
+                        commentsContainer.innerHTML += tileHTML;
+                    });
+                }
             }
         } catch (error) {
             console.error('Error fetching records:', error);
