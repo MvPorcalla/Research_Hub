@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 28, 2024 at 09:48 AM
+-- Generation Time: Aug 28, 2024 at 04:12 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -33,7 +33,7 @@ CREATE TABLE `comments` (
   `entry_id` int(11) DEFAULT NULL,
   `user_id` int(11) NOT NULL,
   `repliedto_user_id` int(11) DEFAULT NULL,
-  `comment_content` varchar(512) NOT NULL,
+  `comment_content` varchar(256) NOT NULL,
   `comment_timestamp` datetime NOT NULL DEFAULT current_timestamp(),
   `comment_likes` int(11) NOT NULL DEFAULT 0,
   `comment_status` char(1) NOT NULL DEFAULT 'A' COMMENT 'A = Active / I = Inactive'
@@ -48,9 +48,10 @@ CREATE TABLE `comments` (
 CREATE TABLE `forum_entry` (
   `entry_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
-  `entry_content` varchar(512) NOT NULL,
-  `entry_likes` int(11) NOT NULL,
-  `entry_status` char(1) NOT NULL COMMENT 'A = Active / I = Inactive'
+  `entry_content` varchar(2048) NOT NULL,
+  `entry_timestamp` datetime NOT NULL DEFAULT current_timestamp(),
+  `entry_likes` int(11) NOT NULL DEFAULT 0,
+  `entry_status` char(1) NOT NULL DEFAULT 'A' COMMENT 'A = Active / I = Inactive'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -77,6 +78,7 @@ CREATE TABLE `likes` (
   `like_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `record_id` int(11) DEFAULT NULL,
+  `entry_id` int(11) DEFAULT NULL,
   `comment_id` int(11) DEFAULT NULL,
   `like_timestamp` datetime NOT NULL,
   `like_status` char(1) NOT NULL COMMENT 'A = Active / I = Inactive'
@@ -174,6 +176,7 @@ ALTER TABLE `likes`
   ADD PRIMARY KEY (`like_id`),
   ADD KEY `user_id` (`user_id`),
   ADD KEY `record_id` (`record_id`),
+  ADD KEY `likes_ibfk_3` (`entry_id`),
   ADD KEY `comment_id` (`comment_id`);
 
 --
@@ -273,7 +276,8 @@ ALTER TABLE `histories`
 ALTER TABLE `likes`
   ADD CONSTRAINT `likes_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON UPDATE CASCADE,
   ADD CONSTRAINT `likes_ibfk_2` FOREIGN KEY (`record_id`) REFERENCES `records` (`record_id`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `likes_ibfk_3` FOREIGN KEY (`comment_id`) REFERENCES `comments` (`comment_id`) ON UPDATE CASCADE;
+  ADD CONSTRAINT `likes_ibfk_3` FOREIGN KEY (`entry_id`) REFERENCES `forum_entry` (`entry_id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `likes_ibfk_4` FOREIGN KEY (`comment_id`) REFERENCES `comments` (`comment_id`) ON UPDATE CASCADE;
 
 --
 -- Constraints for table `users`
