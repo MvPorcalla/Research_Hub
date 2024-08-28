@@ -4,22 +4,24 @@ include_once "..\includes\db.php";
 if (isset($_POST['comment_content'])) {
 
     //transfers value of name="" from form to variable
-    $record_id = $_POST['record_id'];
-    $user_id = $_POST['user_id'];
+    $user_id = $_SESSION['user_id'];
     $comment_content = $_POST['comment_content'];
-
-    echo "Record: {$record_id}<br>";
-    echo "User: {$user_id}<br>";
-    echo "Comment: {$comment_content}<br>";
     
     $table = 'comments';
     $fields = [
-        'record_id' => $record_id,
         'user_id' => $user_id,
         'comment_content' => $comment_content,
     ];
 
-    $status = insert($conn, $table, $fields) ? "success" : "failed";
-    header("Location: ../pages/user/abstractView.php?abstractId={$record_id}&comment={$status}");
-    exit;
+    if (isset($_POST['record_id']) || isset($_POST['entry_id'])) {
+        $key = isset($_POST['record_id']) ? 'record_id' : 'entry_id';
+        $fields[$key] = $_POST[$key];
+        
+        $status = insert($conn, $table, $fields) ? "success" : "failed";
+        $redirectUrl = $key === 'record_id' ? "../pages/user/abstractView.php?abstractId={$fields[$key]}&comment={$status}" : "../pages/user/forum.php?comment={$status}";
+        
+        header("Location: $redirectUrl");
+        exit;
+    }
+    
 }

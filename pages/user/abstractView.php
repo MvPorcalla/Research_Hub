@@ -1,7 +1,6 @@
 <?php
 include_once "..\..\includes\db.php";
 if (!isset($_SESSION['user_type']) || $_SESSION['user_type'] == 'A') header("location: ../../index.php");
-include "..\..\backend\history.php";
 ?>
 
 <!DOCTYPE html>
@@ -89,7 +88,7 @@ include "..\..\backend\history.php";
                                 <div class="form-outline flex-grow-1 mb-2">
                                     <input type="hidden" name="record_id" value="<?php echo $_GET['abstractId']; ?>"> 
                                     <input type="hidden" name="user_id" value="<?php echo $_SESSION['user_id']; ?>">
-                                    <input type="text" id="addANote" name="comment_content" class="form-control border-dark" placeholder="+ Add comment..." required />
+                                    <input type="text" id="addANote" name="comment_content" class="form-control border-dark" placeholder="+ Add comment..." maxlength="200" required />
                                 </div>
                                 <button type="submit" class="btn btn-primary ms-2 mb-2">
                                     <i class="fas fa-paper-plane"></i>
