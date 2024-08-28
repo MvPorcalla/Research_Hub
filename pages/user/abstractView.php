@@ -86,15 +86,21 @@ include "..\..\backend\history.php";
 
                             <!-- Comment Form -->
                             <form id="commentForm" method="POST" action="../../backend/comment.php" class="d-flex align-items-center">
+                                <!-- Back Button -->
+                                <a href="./index.php" class="btn btn-secondary me-2 mb-2">
+                                    <i class="fas fa-arrow-left"></i> <!-- Use Font Awesome or any other icon library -->
+                                </a>
                                 <div class="form-outline flex-grow-1 mb-2">
                                     <input type="hidden" name="record_id" value="<?php echo $_GET['abstractId']; ?>"> 
                                     <input type="hidden" name="user_id" value="<?php echo $_SESSION['user_id']; ?>">
                                     <input type="text" id="addANote" name="comment_content" class="form-control border-dark" placeholder="+ Add comment..." required />
                                 </div>
+                                <!-- Submit Button -->
                                 <button type="submit" class="btn btn-primary ms-2 mb-2">
                                     <i class="fas fa-paper-plane"></i>
                                 </button>
                             </form>
+
 
                             <!-- Comment List -->
                             <div id="commentsContainer" class="comment-container" data-abstract-id="<?php echo $_GET['abstractId']; ?>" data-user-id="<?php echo $_SESSION['user_id']; ?>">
