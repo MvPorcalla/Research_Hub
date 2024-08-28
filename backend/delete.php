@@ -66,4 +66,20 @@ if (isset($_GET['abstractId'])) {
         exit();
     }
 
+} else if (isset($_GET['comment_id'])) {
+
+    $table = "comments";
+    $fields = ['comment_status' => 'I'];
+    $filter = ['comment_id' => $_GET['comment_id']];
+
+    $abstractId = $_GET['abstract_id'];
+
+    if (update($conn, $table, $fields, $filter)) {
+        header("location: ..\pages\admin\abstractView.php?abstractId={$abstractId}&deleteRecord=success");
+        exit();
+    } else {
+        header("location: ..\pages\admin\abstractView.php?abstractId={$abstractId}&deleteRecord=failed");
+        exit();
+    }
+
 }

@@ -109,6 +109,7 @@ if (!isset($_SESSION['user_type']) || $_SESSION['user_type'] != 'A') header("loc
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             handleStatus('comment');
+            handleStatus('deleteRecord');
         });
     </script>
 </body>

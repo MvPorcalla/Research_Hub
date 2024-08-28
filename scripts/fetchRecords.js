@@ -223,7 +223,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 const data = await response.json();
 
                 var url = window.location.href;
-                const disabled = url.includes('admin') ? ' disabled' : ''
 
                 if (data.length == 0) {
 
@@ -247,15 +246,21 @@ document.addEventListener('DOMContentLoaded', () => {
                                             <img src="../${escapeHTML(dataRow.userIdImage)}" alt="avatar" class="img-fluid rounded-circle" style="width: 25px; height: 25px;" />
                                             <p class="small mb-0 ms-2">${escapeHTML(dataRow.userName)}</p>
                                         </div>
-                                        <div class="likes-section d-flex flex-row align-items-center">
-                                            <button class="btn like-button px-0" data-comment-id="${escapeHTML(dataRow.commentId)}"${disabled}>
-                                                <i class="far fa-thumbs-up mx-2 fa-xs text-body" style="margin-top: -0.16rem;"></i>
+                                        <div class="d-flex flex-row align-items-center">
+                                            <button class="btn px-0" onclick="window.location.href='../../backend/delete.php?abstract_id=${abstractId}&comment_id=${escapeHTML(dataRow.commentId)}'">
+                                                <i class="fas fa-trash mx-2 fa-xs text-body" style="margin-top: -0.16rem;"></i>
                                             </button>
-                                            <p class="small text-muted mb-0 me-2">${escapeHTML(dataRow.commentLikes)}</p>
                                         </div>
                                     </div>
                                     <p>${escapeHTML(dataRow.commentContent)}</p>
-                                    <p title="${formattedDateTime}" style="cursor: pointer;"><small>${timePassed}</small></p>
+                                    <div class="d-flex justify-content-between">
+                                        <div class="d-flex flex-row align-items-center">
+                                            <p title="${formattedDateTime}" style="cursor: pointer;"><small>${timePassed}</small></p>
+                                        </div>
+                                        <div class="d-flex flex-row align-items-center">
+                                            <p><small>Likes: ${escapeHTML(dataRow.commentLikes)}</small></p>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         `;

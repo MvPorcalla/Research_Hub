@@ -25,7 +25,7 @@ $queries = [
     'LRNs' => "SELECT * FROM `lrn` WHERE lrn_status = 'A'",
     'pending' => "SELECT * FROM `users` WHERE `user_type` = 'G' AND `user_status` = 'P'",
     'favorites' => "SELECT * FROM `likes` l JOIN `records` r ON r.record_id = l.record_id WHERE l.user_id = {$user_id} and l.like_status = 'A' ORDER BY l.like_timestamp DESC",
-    'comments' => "SELECT * FROM `comments` c JOIN `users` u ON u.user_id = c.user_id WHERE {$comment_type} = {$record_id} ORDER BY `comment_timestamp` DESC",
+    'comments' => "SELECT * FROM `comments` c JOIN `users` u ON u.user_id = c.user_id WHERE {$comment_type} = {$record_id} AND `comment_status` = 'A' ORDER BY `comment_timestamp` DESC",
     'entries' => "SELECT * FROM `forum_entry` e JOIN `users` u ON u.user_id = e.user_id WHERE `entry_status` = 'A' ORDER BY `entry_timestamp` DESC",
 ];
 
