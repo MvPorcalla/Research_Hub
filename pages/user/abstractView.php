@@ -87,9 +87,10 @@ include "..\..\backend\history.php";
                             <!-- Comment Form -->
                             <form id="commentForm" method="POST" action="../../backend/comment.php" class="d-flex align-items-center">
                                 <!-- Back Button -->
-                                <a href="./index.php" class="btn btn-secondary me-2 mb-2">
+                                <a href="#" class="btn btn-secondary me-2 mb-2" onclick="history.back(); return false;">
                                     <i class="fas fa-arrow-left"></i>
                                 </a>
+
                                 <div class="form-outline flex-grow-1 mb-2">
                                     <input type="hidden" name="record_id" value="<?php echo $_GET['abstractId']; ?>"> 
                                     <input type="hidden" name="user_id" value="<?php echo $_SESSION['user_id']; ?>">

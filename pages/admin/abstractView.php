@@ -83,7 +83,7 @@ if (!isset($_SESSION['user_type']) || $_SESSION['user_type'] != 'A') header("loc
                         </div>
                         <div class="col-md-4">
                             <!-- Back Button -->
-                            <a href="./index.php" class="btn btn-secondary mb-2">
+                            <a href="#" class="btn btn-secondary me-2 mb-2" onclick="history.back(); return false;">
                                 <i class="fas fa-arrow-left"></i>
                             </a>
 
