@@ -26,8 +26,10 @@ document.addEventListener('DOMContentLoaded', () => {
                     const tr = document.createElement('tr');
 
                     // Set the onclick event
-                    tr.onclick = () => {
-                        window.location.href = `../../pages/user/abstractView.php?abstractId=${record.record_id}`;
+                    tr.onclick = (event) => {
+                        if (!event.target.closest('button')) { 
+                            window.location.href = `../../pages/user/abstractView.php?abstractId=${record.record_id}`;
+                        }
                     };
 
                     // Record cell
