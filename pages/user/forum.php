@@ -6,7 +6,7 @@ if (!isset($_SESSION['user_type']) || $_SESSION['user_type'] == 'A') header("loc
 $forum_entries = [
     [
         'entry_id' => 1,
-        'user_id' => 'Melvin',
+        'user_id' => 'Jollibee',
         'entry_content' => 'Challenges in Conducting Qualitative Research',
         'entry_likes' => 87,
         'entry_status' => 'A',
@@ -24,7 +24,7 @@ $forum_entries = [
             ],
             [
                 'comment_id' => 2,
-                'user_id' => 'Melvin',
+                'user_id' => 'Jollibee',
                 'comment_content' => '@Mcdo Tanga mo Taena ka',
                 'comment_likes' => 10,
                 'comment_status' => 'A'
@@ -32,13 +32,13 @@ $forum_entries = [
             [
                 'comment_id' => 1,
                 'user_id' => 'McDo',
-                'comment_content' => '@Melvin who you ka!',
+                'comment_content' => '@Jollibee who you ka!',
                 'comment_likes' => 10,
                 'comment_status' => 'A'
             ],
             [
                 'comment_id' => 2,
-                'user_id' => 'Melvin',
+                'user_id' => 'Jollibee',
                 'comment_content' => '@Mcdo Mama mo who you!',
                 'comment_likes' => 10,
                 'comment_status' => 'A'
@@ -96,6 +96,7 @@ $forum_entries = [
         .comments-section {
             display: none; /* Hide comments section initially */
         }
+        
     </style>
 </head>
 
@@ -114,16 +115,39 @@ $forum_entries = [
                 <div class="container">
                     <div class="row">
                         <div class="col-md-12 mt-4">
-                            <!-- filter Content -->
+                            <!--  Content -->
                             <div class="row text-left mb-2">
                                 <div class="col-lg-10 text-lg-right">
-                                    <h1 class=''>Research Hub Forum</h1>
+                                    <h1 class='fs-2'>Research Hub Forum</h1>
                                 </div>
 
                                 <div class='col-lg-2 text-center'>
-                                    <a class="btn btn-sm btn-block btn-success rounded-2 py-2 mb-2 bg-op-6" href="#">Ask a Question</a>
+                                    <button class="btn btn-sm btn-block btn-success rounded-2 py-2 mb-2 bg-op-6" data-bs-toggle="modal" data-bs-target="#askQuestionModal">
+                                        Ask a Question
+                                    </button>
                                 </div>
                             </div>
+
+                            <!-- Modal -->
+                            <div class="modal fade" id="askQuestionModal" tabindex="-1" aria-labelledby="askQuestionModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-header bg-success text-white">
+                                            <h5 class="modal-title" id="askQuestionModalLabel">Ask a Question</h5>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form id="askQuestionForm" action="#" method="post">
+                                                <div class="mb-3">
+                                                    <label for="question" class="form-label">Your Question</label>
+                                                    <textarea class="form-control" id="question" name="question" rows="4" placeholder="Type your question here..."></textarea>
+                                                </div>
+                                                <button type="submit" class="btn btn-success btn-block w-100">Submit Question</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
 
                            <!-- Forum Posts -->
                            <?php foreach ($forum_entries as $entry): ?>
