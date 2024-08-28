@@ -163,7 +163,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                         </div>
                                         <div class="col-md-8 d-flex align-items-center justify-content-start border-end">${escapeHTML(dataRow.title)}</div>
                                         <div class="col-md-2 d-flex align-items-center justify-content-center">
-                                            <button class="btn btn-outline-primary btn-sm mx-1">
+                                            <button class="btn btn-outline-primary btn-sm mx-1" data-bs-toggle="modal" data-bs-target="#commentsModal">
                                                 <i class="fas fa-comment"></i>
                                             </button>
                                             <button class="btn btn-outline-danger btn-sm mx-1 like-button" data-record-id="${escapeHTML(dataRow.id)}">

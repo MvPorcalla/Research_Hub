@@ -65,9 +65,9 @@ if (!isset($_SESSION['user_type']) || $_SESSION['user_type'] == 'A') header("loc
             <main class="col-md-9 ms-sm-auto col-lg-9 px-md-4">
                 <div class="container">
                     <div class="row">
-                        <div id="entriesContainer" data-user-id="<?php echo $_SESSION['user_id']; ?>" class="col-md-12 mt-4">
+                        <div class="col-md-12 mt-4">
                             <!--  Content -->
-                            <div class="row text-left mb-2">
+                            <div class="row text-left my-3">
                                 <div class="col-lg-10 text-lg-right">
                                     <h1 class='fs-2'>Research Hub Forum</h1>
                                 </div>
@@ -99,8 +99,9 @@ if (!isset($_SESSION['user_type']) || $_SESSION['user_type'] == 'A') header("loc
                                 </div>
                             </div>
 
-                            <!-- Data will be dynamically inserted here -->
-
+                            <div id="entriesContainer" data-user-id="<?php echo $_SESSION['user_id']; ?>" class="container ">
+                                <!-- Data will be dynamically inserted here -->
+                            </div>
                         </div>
 
                     </div>

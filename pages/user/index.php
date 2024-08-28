@@ -13,6 +13,31 @@ if (!isset($_SESSION['user_type']) || $_SESSION['user_type'] == 'A') header("loc
     <link rel="icon" href="../../assets/icons/LNHS-icon.png" type="image/png">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../../css/mainStyle.css">
+
+    <style>
+        .comment-container {
+            position: relative;
+            width: 100%;
+            height: auto;
+            border: 1px solid black;
+            border-radius: 8px;
+            padding: 10px;
+            max-height: 600px;
+            overflow-y: auto;
+        }
+
+        .comment-card {
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background-color: #fff;
+        }
+
+        .comment-card .card-body {
+            padding: 10px;
+        }
+
+    </style>
 </head>
 
 <body>
@@ -36,6 +61,25 @@ if (!isset($_SESSION['user_type']) || $_SESSION['user_type'] == 'A') header("loc
                                 <span class="input-group-text border-0" id="search-addon">
                                     <i class="fas fa-search"></i>
                                 </span>
+                            </div>
+                        </div>
+
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="commentsModal" tabindex="-1" aria-labelledby="commentsModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <div class="modal-header bg-primary text-white">
+                                        <h5 class="modal-titler" id="commentsModalLabel">Comments</h5>
+                                    </div>
+                                    <div class="modal-body">
+                                        <!-- Comment List -->
+                                        <div id="commentsContainer" class="comment-container" data-abstract-id="<?php echo $_GET['abstractId']; ?>" data-user-id="<?php echo $_SESSION['user_id']; ?>">
+                                        <!-- Data will be dynamically inserted here -->
+                                        </div>
+                                       
+                                    </div>
+                                </div>
                             </div>
                         </div>
 

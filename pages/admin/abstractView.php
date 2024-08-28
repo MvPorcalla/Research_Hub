@@ -82,6 +82,10 @@ if (!isset($_SESSION['user_type']) || $_SESSION['user_type'] != 'A') header("loc
                             </div>
                         </div>
                         <div class="col-md-4">
+                            <!-- Back Button -->
+                            <a href="./index.php" class="btn btn-secondary mb-2">
+                                <i class="fas fa-arrow-left"></i>
+                            </a>
 
                             <!-- Comment List -->
                             <div id="commentsContainer" class="comment-container" data-abstract-id="<?php echo $_GET['abstractId']; ?>" data-user-id="<?php echo $_SESSION['user_id']; ?>">

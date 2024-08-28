@@ -66,10 +66,15 @@ if ($_SESSION['user_type'] != 'A') header("location: ../../index.php");
                                                     <div class="col-md-12 text-center">
                                                         <img id="idImage" src="#" alt="Admin Image" class="admin-profile-pic img-fluid rounded-circle mb-2">
                                                         <div>
-                                                            <!-- Display Current Name and Username -->
+                                                            <!-- Display Current Name -->
                                                             <h2 id="completeName" class="admin-name-text mb-1" data-user-id="<?php echo $_SESSION['user_id']; ?>"></h2>
-                                                            <h2 id="userName" class="admin-username-text"></h2>
-                                                            <h2 id="emailAdd" class="admin-username-text mb-3"></h2>
+                                                            
+                                                            <!-- Container for Username and Email Address -->
+                                                            <div class="d-flex justify-content-center align-items-center mb-3">
+                                                                <h2 id="userName" class="admin-username-text mb-0"></h2>
+                                                                <span class='mx-2'> | </span>
+                                                                <h2 id="emailAdd" class="admin-username-text mb-0 ml-3"></h2>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -81,23 +86,33 @@ if ($_SESSION['user_type'] != 'A') header("location: ../../index.php");
                                                     <form action="../../backend/update_profile.php" method="post">
                                                         <div class="row">
                                                             <div class="col-md-5">
-                                                                <label for="lastName" class="form-label">Last Name</label>
+                                                                <label for="lastName" class="form-label fw-bold">Last Name</label>
                                                                 <input type="text" class="form-control" id="lastName" name="lastName">
                                                             </div>
                                                             <div class="col-md-5">
-                                                                <label for="firstName" class="form-label">First Name</label>
+                                                                <label for="firstName" class="form-label fw-bold">First Name</label>
                                                                 <input type="text" class="form-control" id="firstName" name="firstName">
                                                             </div>
                                                             <div class="col-md-2">
-                                                                <label for="middleInitial" class="form-label">M.I.</label>
+                                                                <label for="middleInitial" class="form-label fw-bold">M.I.</label>
                                                                 <input type="text" class="form-control" id="middleInitial" name="middleInitial" maxlength="1">
                                                             </div>
                                                         </div>
                                                         
-                                                        <!-- Username -->
-                                                        <div class="col-md-12 mt-3">
-                                                            <label for="usernameField" class="form-label">Username</label>
-                                                            <input type="text" class="form-control" id="usernameField" name="usernameField">
+                                                         <!-- Username and password-->
+                                                         <div class="row mt-3">
+                                                            <div class="col-md-4">
+                                                                <label for="usernameField" class="form-label fw-bold">Username</label>
+                                                                <input type="text" class="form-control" id="usernameField" name="usernameField">
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <label for="password" class="form-label fw-bold">Password</label>
+                                                                <input type="password" class="form-control" id="passwordField" name="passwordField">
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <label for="conpassword" class="form-label fw-bold">Confirm Password</label>
+                                                                <input type="password" class="form-control" id="conpasswordField" name="conpasswordField">
+                                                            </div>
                                                         </div>
 
                                                         <!-- Save Changes Button -->
