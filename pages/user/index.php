@@ -73,9 +73,23 @@ if (!isset($_SESSION['user_type']) || $_SESSION['user_type'] == 'A') header("loc
                                         <h5 class="modal-titler" id="commentsModalLabel">Comments</h5>
                                     </div>
                                     <div class="modal-body">
+
+                                        <!-- Comment Form -->
+                                        <form id="commentForm" method="POST" action="../../backend/comment.php" class="d-flex align-items-center">
+                                            <div class="form-outline flex-grow-1 mb-2">
+                                                <input type="hidden" id="record_id" name="record_id"> 
+                                                <input type="hidden" name="user_id" value="<?php echo $_SESSION['user_id']; ?>">
+                                                <input type="text" id="addANote" name="comment_content" class="form-control border-dark" placeholder="+ Add comment..." maxlength="200" required />
+                                            </div>
+                                            <!-- Submit Button -->
+                                            <button type="submit" class="btn btn-primary ms-2 mb-2">
+                                                <i class="fas fa-paper-plane"></i>
+                                            </button>
+                                        </form>
+
                                         <!-- Comment List -->
-                                        <div id="commentsContainer" class="comment-container" data-abstract-id="<?php echo $_GET['abstractId']; ?>" data-user-id="<?php echo $_SESSION['user_id']; ?>">
-                                        <!-- Data will be dynamically inserted here -->
+                                        <div id="commentsContainer" class="comment-container" data-user-id="<?php echo $_SESSION['user_id']; ?>">
+                                            <!-- Data will be dynamically inserted here -->
                                         </div>
                                        
                                     </div>
@@ -107,6 +121,7 @@ if (!isset($_SESSION['user_type']) || $_SESSION['user_type'] == 'A') header("loc
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             handleStatus('login');
+            handleStatus('comment');
         });
     </script>
 </body>

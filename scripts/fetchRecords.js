@@ -163,7 +163,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                         </div>
                                         <div class="col-md-8 d-flex align-items-center justify-content-start border-end">${escapeHTML(dataRow.title)}</div>
                                         <div class="col-md-2 d-flex align-items-center justify-content-center">
-                                            <button class="btn btn-outline-primary btn-sm mx-1" data-bs-toggle="modal" data-bs-target="#commentsModal">
+                                            <button class="btn btn-outline-primary btn-sm mx-1" data-bs-toggle="modal" data-bs-target="#commentsModal" data-record-id="${escapeHTML(dataRow.id)}" data-record-title="${escapeHTML(dataRow.title)}">
                                                 <i class="fas fa-comment"></i>
                                             </button>
                                             <button class="btn btn-outline-danger btn-sm mx-1 like-button" data-record-id="${escapeHTML(dataRow.id)}">
@@ -212,32 +212,20 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
             }
 
-            if (document.getElementById('commentsContainer')) {
-
-                const commentsContainer = document.getElementById('commentsContainer');
-                const abstractId = commentsContainer.getAttribute('data-abstract-id');
-
-                const response = await fetch(`../../backend/fetchRecords.php?fetch=comments&comment_on=record_id&record_id=${abstractId}`);
+            async function fetchAndDisplayComments(container, recordId) {
+                const response = await fetch(`../../backend/fetchRecords.php?fetch=comments&comment_on=record_id&record_id=${recordId}`);
                 if (!response.ok) throw new Error('Network response was not ok');
-
+            
                 const data = await response.json();
-
-                var url = window.location.href;
-
-                if (data.length == 0) {
-
-                    let tileHTML = `<small>No comments yet.</small>`;
-                    commentsContainer.innerHTML += tileHTML;
-                    
+            
+                if (data.length === 0) {
+                    container.innerHTML += `<small>No comments yet.</small>`;
                 } else {
-
                     data.forEach(dataRow => {
-
                         const timestamp = dataRow.commentTimestamp;
-
                         const timePassed = timeAgo(timestamp);
                         const formattedDateTime = formatDateTime(timestamp);
-
+            
                         let tileHTML = `
                             <div class="card comment-card">
                                 <div class="card-body">
@@ -247,12 +235,12 @@ document.addEventListener('DOMContentLoaded', () => {
                                             <p class="small mb-0 ms-2">${escapeHTML(dataRow.userName)}</p>
                                         </div>
                                         <div class="d-flex flex-row align-items-center">
-                                            <button class="btn px-0" onclick="window.location.href='../../backend/delete.php?abstract_id=${abstractId}&comment_id=${escapeHTML(dataRow.commentId)}'">
+                                            <button class="btn px-0" onclick="window.location.href='../../backend/delete.php?abstract_id=${recordId}&comment_id=${escapeHTML(dataRow.commentId)}'">
                                                 <i class="fas fa-trash mx-2 fa-xs text-body" style="margin-top: -0.16rem;"></i>
                                             </button>
                                         </div>
                                     </div>
-                                    <p>${escapeHTML(dataRow.commentContent)}</p>
+                                    <p class="text-start">${escapeHTML(dataRow.commentContent)}</p>
                                     <div class="d-flex justify-content-between">
                                         <div class="d-flex flex-row align-items-center">
                                             <p title="${formattedDateTime}" style="cursor: pointer;"><small>${timePassed}</small></p>
@@ -264,11 +252,38 @@ document.addEventListener('DOMContentLoaded', () => {
                                 </div>
                             </div>
                         `;
-                        commentsContainer.innerHTML += tileHTML;
+                        container.innerHTML += tileHTML;
                     });
                 }
             }
+            
+            const commentsModal = document.getElementById('commentsModal');
+            const commentsContainer = document.getElementById('commentsContainer');
+            
+            if (commentsContainer) {
+                const abstractId = commentsContainer.getAttribute('data-abstract-id');
+                fetchAndDisplayComments(commentsContainer, abstractId);
+            }
+            
+            if (commentsModal) {
+                commentsModal.addEventListener('show.bs.modal', async function (event) {
+                    const button = event.relatedTarget;
+                    const abstractId = button.getAttribute('data-record-id');
+                    const abstractTitle = button.getAttribute('data-record-title');
 
+                    const modalLabel = document.getElementById('commentsModalLabel');
+                    modalLabel.innerText = abstractTitle;
+
+                    const abstractIdField = document.getElementById('record_id');
+                    abstractIdField.value = abstractId;
+            
+                    if (commentsContainer) {
+                        commentsContainer.innerHTML = ''; // Clear the container before loading new content
+                        await fetchAndDisplayComments(commentsContainer, abstractId);
+                    }
+                });
+            }
+            
             if (document.getElementById('entriesContainer')) {
 
                 const entriesContainer = document.getElementById('entriesContainer');
