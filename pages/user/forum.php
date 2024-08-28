@@ -141,7 +141,7 @@ $forum_entries = [
                                                     <label for="question" class="form-label">Your Question</label>
                                                     <textarea class="form-control" id="question" name="question" rows="4" placeholder="Type your question here..."></textarea>
                                                 </div>
-                                                <button type="submit" class="btn btn-success btn-block w-100">Submit Question</button>
+                                                <button type="submit" class="btn btn-success btn-block w-100">Submit</button>
                                             </form>
                                         </div>
                                     </div>
