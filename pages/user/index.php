@@ -22,7 +22,7 @@ if (!isset($_SESSION['user_type']) || $_SESSION['user_type'] == 'A') header("loc
             border: 1px solid black;
             border-radius: 8px;
             padding: 10px;
-            max-height: 600px;
+            max-height: 550px;
             overflow-y: auto;
         }
 
