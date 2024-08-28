@@ -217,7 +217,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const commentsContainer = document.getElementById('commentsContainer');
                 const abstractId = commentsContainer.getAttribute('data-abstract-id');
 
-                const response = await fetch(`../../backend/fetchRecords.php?fetch=comments&abstract_id=${abstractId}`);
+                const response = await fetch(`../../backend/fetchRecords.php?fetch=comments&comment_on=record_id&record_id=${abstractId}`);
                 if (!response.ok) throw new Error('Network response was not ok');
 
                 const data = await response.json();
@@ -234,11 +234,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
                     data.forEach(dataRow => {
 
-                        // Format timestamp
                         const timestamp = dataRow.commentTimestamp;
-                        const date = new Date(timestamp);
-                        const options = { year: 'numeric', month: 'long', day: 'numeric' };
-                        const formattedDate = date.toLocaleDateString('en-US', options);
+
+                        const timePassed = timeAgo(timestamp);
+                        const formattedDateTime = formatDateTime(timestamp);
 
                         let tileHTML = `
                             <div class="card comment-card">
@@ -256,13 +255,136 @@ document.addEventListener('DOMContentLoaded', () => {
                                         </div>
                                     </div>
                                     <p>${escapeHTML(dataRow.commentContent)}</p>
-                                    <p><small>${escapeHTML(formattedDate)}</small></p>
+                                    <p title="${formattedDateTime}" style="cursor: pointer;"><small>${timePassed}</small></p>
                                 </div>
                             </div>
                         `;
                         commentsContainer.innerHTML += tileHTML;
                     });
                 }
+            }
+
+            if (document.getElementById('entriesContainer')) {
+
+                const entriesContainer = document.getElementById('entriesContainer');
+
+                const response = await fetch(`../../backend/fetchRecords.php?fetch=entries`);
+                if (!response.ok) throw new Error('Network response was not ok');
+
+                const data = await response.json();
+
+                for (const dataRow of data) {
+
+                    const timestamp = dataRow.entryTimestamp;
+
+                    const timePassed = timeAgo(timestamp);
+                    const formattedDateTime = formatDateTime(timestamp);
+
+                    let tileHTML = `
+                                <div class="card row-hover pos-relative py-3 px-3 mb-3 border-warning border-top-0 border-right-0 border-bottom-0 rounded-0">
+                                    <div class="row mt-3 mx-3">
+                                        <div class="col-md-12 mb-sm-0">
+                                            <div class="entry-container">
+
+                                                <div class=" mb-3">
+                                                    
+                                                    <div class="d-flex align-items-center">
+                                                        <img id="idImage" src="../../assets/icons/Vector.png" alt="User Image" class="img-fluid rounded-circle me-3" style="width: 45px; height: 45px;">
+                                                        <div>
+                                                            <h4 class="mb-0">@${escapeHTML(dataRow.userName)}</h4>
+                                                            <p title="${formattedDateTime}" class="ms-1 mb-0">${timePassed}</p>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+
+                                                <!-- Entry content displayed -->
+                                                <div class="border p-3 rounded">
+                                                    <h5>${escapeHTML(dataRow.entryContent)}</h5>
+                                                </div>
+
+                                                <!-- Stats and Buttons Row -->
+                                                <div class="row mt-3">
+                                                    <div class="col-12 text-end">
+                                                        <!-- Likes with Like Button -->
+                                                        <div class="d-inline-block text-center me-3 likes-section">
+                                                            <button class="btn btn-link p-0 ms-1 text-decoration-none like-button" data-entry-id="${escapeHTML(dataRow.entryId)}">
+                                                                <i class="fa-solid fa-thumbs-up"></i> Like
+                                                            </button>
+                                                            <span class="ms-2">${escapeHTML(dataRow.entryLikes)}</span>
+                                                        </div>
+                                                        <!-- Replies with Comment Button -->
+                                                        <div class="d-inline-block text-center me-3">
+                                                            <button class="btn btn-link p-0 ms-1 text-decoration-none" onclick="toggleComments(${escapeHTML(dataRow.entryId)})">
+                                                                <i class="fa-solid fa-comment-dots"></i> Reply
+                                                            </button>
+                                                            <span id="entryComments-${escapeHTML(dataRow.entryId)}" class="ms-2"></span>
+                                                        </div>
+                                                      
+                                                    </div>
+                                                </div>
+
+                                                <hr>
+
+                                                <!-- Comments Section -->
+                                                <div id="comment-section-${escapeHTML(dataRow.entryId)}" data-entry-id="${escapeHTML(dataRow.entryId)}" class="comments-section ms-3 mt-3">
+                                                    <div id="comments-${escapeHTML(dataRow.entryId)}" class="card-body">
+
+                                                    </div>
+                                                </div>
+                                                <!-- /End of Comments Section -->
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                    `;
+                    entriesContainer.innerHTML += tileHTML;
+
+                    if (document.getElementById(`comment-section-${escapeHTML(dataRow.entryId)}`)) {
+
+                        const commentSection = document.getElementById(`comment-section-${escapeHTML(dataRow.entryId)}`);
+                        const comments = document.getElementById(`comments-${escapeHTML(dataRow.entryId)}`);
+            
+                        const response = await fetch(`../../backend/fetchRecords.php?fetch=comments&comment_on=entry_id&record_id=${escapeHTML(dataRow.entryId)}`);
+                        if (!response.ok) throw new Error('Network response was not ok');
+            
+                        const data = await response.json();
+
+                        const entryComments = document.getElementById(`entryComments-${escapeHTML(dataRow.entryId)}`);
+                        entryComments.innerHTML = data.length;
+            
+                        data.forEach(dataRow => {
+                            let tileHTML = `
+                                <div class="comment">
+                                    <p><strong>${escapeHTML(dataRow.userName)}:</strong> ${escapeHTML(dataRow.commentContent)}</p>
+                                </div>
+                            `;
+                            comments.innerHTML += tileHTML;
+                        });
+            
+                        const addCommentForm = `
+                            <!-- Comment Form for Main Entry -->
+                            <div class="card-body mt-1">
+                                <form method="post" action="../../backend/comment.php">
+                                    <div class="form-row align-items-center">
+                                        <div class="col">
+                                            <div class="input-group">
+                                                <textarea class="form-control" name="comment_content" rows="1" placeholder="Add a comment..."></textarea>
+                                                <button type="submit" class="btn btn-primary ms-2" title="Post Comment">
+                                                    <i class="fa-solid fa-paper-plane"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <input type="hidden" name="entry_id" value="${escapeHTML(dataRow.entryId)}">
+                                </form>
+                            </div>
+                        `;
+                        commentSection.innerHTML += addCommentForm;
+                    }
+                };
             }
         } catch (error) {
             console.error('Error fetching records:', error);
@@ -272,20 +394,21 @@ document.addEventListener('DOMContentLoaded', () => {
     fetchRecords().then(() => {
         var url = window.location.href;
 
-        if (url.includes('pages/user/index.php') || url.includes('pages/user/favorites.php') || url.includes('pages/user/abstractView.php')) {
+        if (url.includes('pages/user/index.php') || url.includes('pages/user/favorites.php') || url.includes('pages/user/abstractView.php') || url.includes('pages/user/forum.php')) {
             const updateButtonStatuses = () => {
 
-                let userIdElement = document.getElementById('abstractTiles') || document.getElementById('favoriteTiles') || document.getElementById('commentsContainer');
+                let userIdElement = document.getElementById('abstractTiles') || document.getElementById('favoriteTiles') || document.getElementById('commentsContainer') || document.getElementById('entriesContainer');
                 const userId = userIdElement ? userIdElement.getAttribute('data-user-id') : null;
                 const buttons = document.querySelectorAll('.like-button');
                 
                 const requests = Array.from(buttons).map(button => {
                     const abstractId = button.getAttribute('data-record-id');
+                    const entryId = button.getAttribute('data-entry-id');
                     const commentId = button.getAttribute('data-comment-id');
 
                     if (abstractId) {
                     
-                    return fetch(`../../backend/get_like_status.php?record_type=abstract&recordId=${abstractId}&userId=${userId}`)
+                    return fetch(`../../backend/get_like_status.php?record_type=record&recordId=${abstractId}&userId=${userId}`)
                         .then(response => response.json())
                         .then(data => {
 
@@ -301,6 +424,23 @@ document.addEventListener('DOMContentLoaded', () => {
                             console.error('Error fetching like status:', error);
                         });
 
+                    } else if (entryId) {
+                    
+                        return fetch(`../../backend/get_like_status.php?record_type=entry&recordId=${entryId}&userId=${userId}`)
+                            .then(response => response.json())
+                            .then(data => {
+
+                                const icon = button.querySelector('svg');
+    
+                                if (data.like_status == 'A') {
+                                    icon.classList.add('liked');
+                                } else {
+                                    icon.classList.remove('liked');
+                                }
+                            })
+                            .catch(error => {
+                                console.error('Error fetching like status:', error);
+                            });
                     } else if (commentId) {
                     
                         return fetch(`../../backend/get_like_status.php?record_type=comment&recordId=${commentId}&userId=${userId}`)

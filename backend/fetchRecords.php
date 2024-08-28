@@ -15,7 +15,8 @@ $response = [];
 
 $fetchType = $_GET['fetch'] ?? '';
 
-$abstract_id = isset($_GET['abstract_id']) ? $_GET['abstract_id'] : null;
+$comment_type = ($fetchType == 'comments') ? $_GET['comment_on'] : '';
+$record_id = $_GET['record_id'] ?? null;
 
 $queries = [
     'abstracts' => "SELECT * FROM `records` WHERE `record_status` = 'A' ORDER BY `record_year` DESC, `record_month` DESC",
@@ -24,7 +25,8 @@ $queries = [
     'LRNs' => "SELECT * FROM `lrn` WHERE lrn_status = 'A'",
     'pending' => "SELECT * FROM `users` WHERE `user_type` = 'G' AND `user_status` = 'P'",
     'favorites' => "SELECT * FROM `likes` l JOIN `records` r ON r.record_id = l.record_id WHERE l.user_id = {$user_id} and l.like_status = 'A' ORDER BY l.like_timestamp DESC",
-    'comments' => "SELECT * FROM `comments` c JOIN `users` u ON u.user_id = c.user_id WHERE `record_id` = {$abstract_id} ORDER BY `comment_timestamp` DESC",
+    'comments' => "SELECT * FROM `comments` c JOIN `users` u ON u.user_id = c.user_id WHERE {$comment_type} = {$record_id} ORDER BY `comment_timestamp` DESC",
+    'entries' => "SELECT * FROM `forum_entry` e JOIN `users` u ON u.user_id = e.user_id WHERE `entry_status` = 'A' ORDER BY `entry_timestamp` DESC",
 ];
 
 $results = $queries[$fetchType] ? query($conn, $queries[$fetchType]) : null;
@@ -81,6 +83,15 @@ if ($results) {
                 'commentContent' => htmlspecialchars($result['comment_content'], ENT_QUOTES, 'UTF-8'),
                 'commentTimestamp' => htmlspecialchars($result['comment_timestamp'], ENT_QUOTES, 'UTF-8'),
                 'commentLikes' => htmlspecialchars($result['comment_likes'], ENT_QUOTES, 'UTF-8')
+            ],
+            'entries' => [
+                'entryId' => htmlspecialchars($result['entry_id'], ENT_QUOTES, 'UTF-8'),
+                'userId' => htmlspecialchars($result['user_user'], ENT_QUOTES, 'UTF-8'),
+                'userName' => htmlspecialchars($result['user_username'], ENT_QUOTES, 'UTF-8'),
+                'entryContent' => htmlspecialchars($result['entry_content'], ENT_QUOTES, 'UTF-8'),
+                'entryTimestamp' => htmlspecialchars($result['entry_timestamp'], ENT_QUOTES, 'UTF-8'),
+                'entryLikes' => htmlspecialchars($result['entry_likes'], ENT_QUOTES, 'UTF-8'),
+                'entryComments' => htmlspecialchars($result['entry_comments'], ENT_QUOTES, 'UTF-8'),
             ],
             default => []
         };

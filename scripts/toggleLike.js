@@ -13,8 +13,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const recordId = button.getAttribute('data-record-id');
             const commentId = button.getAttribute('data-comment-id');
+            const entryId = button.getAttribute('data-entry-id');
             
-            let container = document.getElementById('abstractTiles') || document.getElementById('favoriteTiles') || document.getElementById('commentsContainer');
+            let container = document.getElementById('abstractTiles') || document.getElementById('favoriteTiles') || document.getElementById('commentsContainer') || document.getElementById('entriesContainer');
             const userId = container ? container.getAttribute('data-user-id') : null;
 
             fetch('../../backend/toggle_like.php', {
@@ -22,20 +23,31 @@ document.addEventListener('DOMContentLoaded', () => {
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ recordId, commentId, userId })
+                body: JSON.stringify({ recordId, entryId, commentId, userId })
             })
             .then(response => response.json())
             .then(result => {
                 if (result.liked !== undefined) {
                     if (recordId) {
+
                         button.classList.toggle('btn-outline-danger');
                         button.classList.toggle('btn-danger');
+
                     } else if (commentId && icon) {
 
                         icon.classList.toggle('liked');
 
                         const likesSection = button.closest('.likes-section');
                         const likesText = likesSection.querySelector('p');
+                        let number = parseInt(likesText.innerText, 10);
+                        likesText.innerText = (result.liked) ? (number + 1) : (number - 1);
+
+                    } else if (entryId && icon) {
+
+                        icon.classList.toggle('liked');
+
+                        const likesSection = button.closest('.likes-section');
+                        const likesText = likesSection.querySelector('span');
                         let number = parseInt(likesText.innerText, 10);
                         likesText.innerText = (result.liked) ? (number + 1) : (number - 1);
                     }

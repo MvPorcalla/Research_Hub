@@ -8,9 +8,7 @@ $record_type = $_GET['record_type'];
 $recordId = $_GET['recordId'];
 $userId = $_GET['userId'];
 
-$sql = ($record_type == 'abstract')
-        ? "SELECT * FROM `likes` WHERE `user_id` = ? AND `record_id` = ?"
-        : "SELECT * FROM `likes` WHERE `user_id` = ? AND `comment_id` = ?";
+$sql = "SELECT * FROM `likes` WHERE `user_id` = ? AND `{$record_type}_id` = ?";
 $filter = [$userId, $recordId];
 $result = query($conn, $sql, $filter);
 

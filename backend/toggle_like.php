@@ -1,101 +1,99 @@
 <?php
-include_once "..\includes\db.php";
+include_once "../includes/db.php";
 
 // Get the JSON payload
 $data = json_decode(file_get_contents('php://input'), true);
-$recordId = $data['recordId'];
-$commentId = $data['commentId'];
-$userId = $data['userId'];
+$recordId = $data['recordId'] ?? null;
+$entryId = $data['entryId'] ?? null;
+$commentId = $data['commentId'] ?? null;
+$userId = $data['userId'] ?? null;
 
-if ($recordId != null) {
+function updateLikes($conn, $record_type, $recordId) {
+    $sql = "SELECT COUNT(*) AS likes FROM `likes` WHERE `{$record_type}_id` = ? AND like_status = 'A'";
+    $result = query($conn, $sql, [$recordId]);
+    $row = $result[0];
 
-    $table = 'likes';
-    $fields = [
-        'like_timestamp' => date('Y-m-d H:i:s')
-    ];
+    switch ($record_type) {
+        case 'entry':
+            $table = 'forum_entry';
+            $fields = ['entry_likes' => $row['likes']];
+            $filter = ['entry_id' => $recordId];
+            break;
+        case 'comment':
+            $table = 'comments';
+            $fields = ['comment_likes' => $row['likes']];
+            $filter = ['comment_id' => $recordId];
+            break;
+    }
 
-    // Check if the user has already liked this record
+    update($conn, $table, $fields, $filter);
+}
+
+$liked = false;
+
+if ($recordId !== null) {
     $sql = "SELECT * FROM `likes` WHERE `user_id` = ? AND `record_id` = ?";
-    $filter = [$userId, $recordId];
-    $result = query($conn, $sql, $filter);
+    $result = query($conn, $sql, [$userId, $recordId]);
 
-
+    $fields = ['like_timestamp' => date('Y-m-d H:i:s')];
     if (!empty($result)) {
-        // If the record exists, toggle the status
-
         $like = $result[0];
-
         $fields['like_status'] = $like['like_status'] === 'A' ? 'I' : 'A';
-        $filter = [
-            'like_id' => $like['like_id']
-        ];
-
-        update($conn, $table, $fields, $filter);
-
+        update($conn, 'likes', $fields, ['like_id' => $like['like_id']]);
+        $liked = $fields['like_status'] === 'A';
     } else {
-        // If the record does not exist, add a new like
-
         $fields = array_merge($fields, [
             'user_id' => $userId,
             'record_id' => $recordId,
             'like_status' => 'A'
         ]);
-
-        insert($conn, $table, $fields);
+        insert($conn, 'likes', $fields);
+        $liked = true;
     }
-
-    $liked = true;
-
-} else if ($commentId != null) {
-
-    $table = 'likes';
-    $fields = [
-        'like_timestamp' => date('Y-m-d H:i:s')
-    ];
-
-    // Check if the user has already liked this comment
+} elseif ($commentId !== null) {
     $sql = "SELECT * FROM `likes` WHERE `user_id` = ? AND `comment_id` = ?";
-    $filter = [$userId, $commentId];
-    $result = query($conn, $sql, $filter);
+    $result = query($conn, $sql, [$userId, $commentId]);
 
-    function updateCommentLikes($conn, $commentId) {
-
-        $sql = "SELECT COUNT(*) AS `likes` FROM `likes` WHERE `comment_id` = ? AND like_status = 'A'";
-        $result = query($conn, $sql, [$commentId]);
-        $row = $result[0];
-
-        $table = 'comments';
-        $fields = [ 'comment_likes' => $row['likes'] ];
-        $filter = [ 'comment_id' => $commentId ];
-
-        update($conn, $table, $fields, $filter);
-    }
-
+    $fields = ['like_timestamp' => date('Y-m-d H:i:s')];
     if (!empty($result)) {
-        // If the record exists, toggle the status
-
         $like = $result[0];
-
         $fields['like_status'] = $like['like_status'] === 'A' ? 'I' : 'A';
-        $filter = [
-            'like_id' => $like['like_id']
-        ];
-
-        if (update($conn, $table, $fields, $filter)) updateCommentLikes($conn, $commentId);
-
-        $liked = $like['like_status'] !== 'A';
-
+        if (update($conn, 'likes', $fields, ['like_id' => $like['like_id']])) {
+            updateLikes($conn, 'comment', $commentId);
+        }
+        $liked = $fields['like_status'] === 'A';
     } else {
-        // If the record does not exist, add a new like
-
         $fields = array_merge($fields, [
             'user_id' => $userId,
             'comment_id' => $commentId,
             'like_status' => 'A'
         ]);
+        if (insert($conn, 'likes', $fields)) {
+            updateLikes($conn, 'comment', $commentId);
+        }
+        $liked = true;
+    }
+} elseif ($entryId !== null) {
+    $sql = "SELECT * FROM `likes` WHERE `user_id` = ? AND `entry_id` = ?";
+    $result = query($conn, $sql, [$userId, $entryId]);
 
-        if (insert($conn, $table, $fields)) updateCommentLikes($conn, $commentId);
-
+    $fields = ['like_timestamp' => date('Y-m-d H:i:s')];
+    if (!empty($result)) {
+        $like = $result[0];
+        $fields['like_status'] = $like['like_status'] === 'A' ? 'I' : 'A';
+        if (update($conn, 'likes', $fields, ['like_id' => $like['like_id']])) {
+            updateLikes($conn, 'entry', $entryId);
+        }
+        $liked = $fields['like_status'] === 'A';
+    } else {
+        $fields = array_merge($fields, [
+            'user_id' => $userId,
+            'entry_id' => $entryId,
+            'like_status' => 'A'
+        ]);
+        if (insert($conn, 'likes', $fields)) {
+            updateLikes($conn, 'entry', $entryId);
+        }
         $liked = true;
     }
 }
