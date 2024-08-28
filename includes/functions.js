@@ -147,6 +147,17 @@ function handleStatus(paramName) {
                 title: "Oops!",
                 text: "Something went wrong. Please try again."
             }
+        },
+        'comment': {
+            "success": {
+                icon: "success",
+                title: "Comment posted!",
+            },
+            "failed": {
+                icon: "error",
+                title: "Oops!",
+                text: "Something went wrong. Please try again."
+            }
         }
     };
 

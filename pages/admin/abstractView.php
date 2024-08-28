@@ -121,7 +121,7 @@ $comments = [
             padding: 10px;
         }
 
-        .like-btn {
+        .like-button {
             cursor: pointer;
         }
     </style>

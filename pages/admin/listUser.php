@@ -80,8 +80,8 @@ if ($_SESSION['user_type'] != 'A') header("location: ../../index.php");
                                                     <table class="table table-bordered table-striped students">
                                                         <thead class="table-dark">
                                                             <tr>
-                                                                <th>First Name</th>
                                                                 <th>Last Name</th>
+                                                                <th>First Name</th>
                                                                 <th>Middle Initial</th>
                                                                 <th>LRN</th>
                                                                 <th>Track/Strand</th>
@@ -110,8 +110,8 @@ if ($_SESSION['user_type'] != 'A') header("location: ../../index.php");
                                                     <table class="table table-bordered table-striped guests">
                                                         <thead class="table-dark">
                                                             <tr>
-                                                                <th>First Name</th>
                                                                 <th>Last Name</th>
+                                                                <th>First Name</th>
                                                                 <th>Middle Initial</th>
                                                                 <th>School</th>
                                                                 <th>Actions</th>

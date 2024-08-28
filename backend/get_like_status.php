@@ -4,10 +4,13 @@ include_once "..\includes\db.php";
 header('Content-Type: application/json');
 
 // Get parameters
+$record_type = $_GET['record_type'];
 $recordId = $_GET['recordId'];
 $userId = $_GET['userId'];
 
-$sql = "SELECT * FROM `likes` WHERE `user_id` = ? AND `record_id` = ?";
+$sql = ($record_type == 'abstract')
+        ? "SELECT * FROM `likes` WHERE `user_id` = ? AND `record_id` = ?"
+        : "SELECT * FROM `likes` WHERE `user_id` = ? AND `comment_id` = ?";
 $filter = [$userId, $recordId];
 $result = query($conn, $sql, $filter);
 

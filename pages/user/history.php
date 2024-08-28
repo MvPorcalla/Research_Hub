@@ -34,7 +34,7 @@ if (!isset($_SESSION['user_type']) || $_SESSION['user_type'] == 'A') header("loc
                         </div>
 
                         <div id="historyContainer" class="side-container">
-
+                            <!-- Data will be dynamically inserted here -->
                         </div>
                     </div>
                 </div>

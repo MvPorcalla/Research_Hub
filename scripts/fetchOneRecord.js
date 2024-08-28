@@ -58,6 +58,7 @@ document.addEventListener('DOMContentLoaded', async function() {
             const month = data.record_month.toString().padStart(2, '0');
 
             if (document.getElementById('title')) {
+                document.getElementById('abstractTitle').textContent = 'Edit Record - LNHS Research Hub';
                 document.getElementById('recordSubtitle').textContent = 'Edit Record';
                 document.getElementById('title').value = data.record_title;
                 document.getElementById('authors').value = data.record_authors;
@@ -69,6 +70,7 @@ document.addEventListener('DOMContentLoaded', async function() {
             }
         } 
         else if (idType === 'lrnId') {
+            document.getElementById('lrnTitle').textContent = 'Edit LRN - LNHS Research Hub';
             document.getElementById('lrnSubtitle').textContent = 'Edit Student LRN';
             document.getElementById('fullName').value = data.lrn_student;
             document.getElementById('lrn').value = data.lrn_lrnid;

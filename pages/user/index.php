@@ -42,7 +42,7 @@ if (!isset($_SESSION['user_type']) || $_SESSION['user_type'] == 'A') header("loc
                         <!-- Content Cards -->
                         <div class="container mt-3 side-container">
                             <div id="abstractTiles" class="row" data-user-id="<?php echo $_SESSION['user_id']; ?>">
-                                
+                                <!-- Data will be dynamically inserted here -->
                             </div>
                         </div>
                     </div>
@@ -59,6 +59,12 @@ if (!isset($_SESSION['user_type']) || $_SESSION['user_type'] == 'A') header("loc
     <script src="..\..\includes\functions.js"></script>
     <script src="../../scripts/fetchRecords.js"></script>
     <script src="../../scripts/toggleLike.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            handleStatus('login');
+        });
+    </script>
 </body>
 
 </html>
