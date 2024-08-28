@@ -88,7 +88,7 @@ include "..\..\backend\history.php";
                             <form id="commentForm" method="POST" action="../../backend/comment.php" class="d-flex align-items-center">
                                 <!-- Back Button -->
                                 <a href="./index.php" class="btn btn-secondary me-2 mb-2">
-                                    <i class="fas fa-arrow-left"></i> <!-- Use Font Awesome or any other icon library -->
+                                    <i class="fas fa-arrow-left"></i>
                                 </a>
                                 <div class="form-outline flex-grow-1 mb-2">
                                     <input type="hidden" name="record_id" value="<?php echo $_GET['abstractId']; ?>"> 
