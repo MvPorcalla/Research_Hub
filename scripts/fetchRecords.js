@@ -307,8 +307,8 @@ document.addEventListener('DOMContentLoaded', () => {
                                                 <div class="row mt-3">
                                                     <div class="col-12 text-end">
                                                         <!-- Likes with Like Button -->
-                                                        <div class="d-inline-block text-center me-3">
-                                                            <button class="btn btn-link p-0 ms-1 text-decoration-none" onclick="likeEntry(${escapeHTML(dataRow.entryId)})">
+                                                        <div class="d-inline-block text-center me-3 likes-section">
+                                                            <button class="btn btn-link p-0 ms-1 text-decoration-none like-button" data-entry-id="${escapeHTML(dataRow.entryId)}">
                                                                 <i class="fa-solid fa-thumbs-up"></i> Like
                                                             </button>
                                                             <span class="ms-2">${escapeHTML(dataRow.entryLikes)}</span>
@@ -394,20 +394,21 @@ document.addEventListener('DOMContentLoaded', () => {
     fetchRecords().then(() => {
         var url = window.location.href;
 
-        if (url.includes('pages/user/index.php') || url.includes('pages/user/favorites.php') || url.includes('pages/user/abstractView.php')) {
+        if (url.includes('pages/user/index.php') || url.includes('pages/user/favorites.php') || url.includes('pages/user/abstractView.php') || url.includes('pages/user/forum.php')) {
             const updateButtonStatuses = () => {
 
-                let userIdElement = document.getElementById('abstractTiles') || document.getElementById('favoriteTiles') || document.getElementById('commentsContainer');
+                let userIdElement = document.getElementById('abstractTiles') || document.getElementById('favoriteTiles') || document.getElementById('commentsContainer') || document.getElementById('entriesContainer');
                 const userId = userIdElement ? userIdElement.getAttribute('data-user-id') : null;
                 const buttons = document.querySelectorAll('.like-button');
                 
                 const requests = Array.from(buttons).map(button => {
                     const abstractId = button.getAttribute('data-record-id');
+                    const entryId = button.getAttribute('data-entry-id');
                     const commentId = button.getAttribute('data-comment-id');
 
                     if (abstractId) {
                     
-                    return fetch(`../../backend/get_like_status.php?record_type=abstract&recordId=${abstractId}&userId=${userId}`)
+                    return fetch(`../../backend/get_like_status.php?record_type=record&recordId=${abstractId}&userId=${userId}`)
                         .then(response => response.json())
                         .then(data => {
 
@@ -423,6 +424,23 @@ document.addEventListener('DOMContentLoaded', () => {
                             console.error('Error fetching like status:', error);
                         });
 
+                    } else if (entryId) {
+                    
+                        return fetch(`../../backend/get_like_status.php?record_type=entry&recordId=${entryId}&userId=${userId}`)
+                            .then(response => response.json())
+                            .then(data => {
+
+                                const icon = button.querySelector('svg');
+    
+                                if (data.like_status == 'A') {
+                                    icon.classList.add('liked');
+                                } else {
+                                    icon.classList.remove('liked');
+                                }
+                            })
+                            .catch(error => {
+                                console.error('Error fetching like status:', error);
+                            });
                     } else if (commentId) {
                     
                         return fetch(`../../backend/get_like_status.php?record_type=comment&recordId=${commentId}&userId=${userId}`)

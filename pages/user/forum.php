@@ -1,64 +1,6 @@
 <?php
 include_once "../../includes/db.php";
 if (!isset($_SESSION['user_type']) || $_SESSION['user_type'] == 'A') header("location: ../../index.php");
-
-// Mock data for forum entries and comments
-$forum_entries = [
-    [
-        'entry_id' => 1,
-        'user_id' => 'Jollibee',
-        'entry_content' => 'Challenges in Conducting Qualitative Research',
-        'entry_likes' => 87,
-        'entry_status' => 'A',
-        'posted_time' => '10 minutes ago',
-        'user_name' => 'JaneDoe',
-        'replies' => 4,
-        'views' => 150,
-        'comments' => [
-            [
-                'comment_id' => 1,
-                'user_id' => 'McDo',
-                'comment_content' => 'This is a very insightful discussion!',
-                'comment_likes' => 10,
-                'comment_status' => 'A'
-            ],
-            [
-                'comment_id' => 2,
-                'user_id' => 'Jollibee',
-                'comment_content' => '@Mcdo Tanga mo Taena ka',
-                'comment_likes' => 10,
-                'comment_status' => 'A'
-            ],
-            [
-                'comment_id' => 1,
-                'user_id' => 'McDo',
-                'comment_content' => '@Jollibee who you ka!',
-                'comment_likes' => 10,
-                'comment_status' => 'A'
-            ],
-            [
-                'comment_id' => 2,
-                'user_id' => 'Jollibee',
-                'comment_content' => '@Mcdo Mama mo who you!',
-                'comment_likes' => 10,
-                'comment_status' => 'A'
-            ],
-        ]
-    ],
-    [
-        'entry_id' => 2,
-        'user_id' => 'McDo',
-        'entry_content' => 'Best Practices for Data Analysis in Research',
-        'entry_likes' => 112,
-        'entry_status' => 'A',
-        'posted_time' => '1 hour ago',
-        'user_name' => 'JohnSmith',
-        'replies' => 0,
-        'views' => 200,
-        'comments' => []
-    ],
-    // Add more mock entries as needed
-];
 ?>
 
 <!DOCTYPE html>
@@ -96,6 +38,15 @@ $forum_entries = [
         .comments-section {
             display: none; /* Hide comments section initially */
         }
+
+        .like-button {
+            cursor: pointer;
+        }
+
+        .liked {
+            color: blue !important; /* Change the icon color to blue */
+            font-weight: bold !important; /* Optional: make it bold */
+        }
         
     </style>
 </head>
@@ -114,7 +65,7 @@ $forum_entries = [
             <main class="col-md-9 ms-sm-auto col-lg-9 px-md-4">
                 <div class="container">
                     <div class="row">
-                        <div id="entriesContainer" class="col-md-12 mt-4">
+                        <div id="entriesContainer" data-user-id="<?php echo $_SESSION['user_id']; ?>" class="col-md-12 mt-4">
                             <!--  Content -->
                             <div class="row text-left mb-2">
                                 <div class="col-lg-10 text-lg-right">
@@ -148,6 +99,8 @@ $forum_entries = [
                                 </div>
                             </div>
 
+                            <!-- Data will be dynamically inserted here -->
+
                         </div>
 
                     </div>
@@ -165,6 +118,7 @@ $forum_entries = [
 
     <script src="../../includes/functions.js"></script>
     <script src="../../scripts/fetchRecords.js"></script>
+    <script src="../../scripts/toggleLike.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             handleStatus('entry');
