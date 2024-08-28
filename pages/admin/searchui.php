@@ -87,7 +87,6 @@
                                             <span class="btn rounded-pill" type="submit" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%);">
                                                 <i class="fas fa-search"></i>
                                             </span>
-                                            <div class="mt-1" id="suggestions"></div>
                                         </div>
                                     </form>
                                 </div>
