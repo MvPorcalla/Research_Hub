@@ -32,68 +32,94 @@ function updateLikes($conn, $record_type, $recordId) {
 $liked = false;
 
 if ($recordId !== null) {
+
     $sql = "SELECT * FROM `likes` WHERE `user_id` = ? AND `record_id` = ?";
     $result = query($conn, $sql, [$userId, $recordId]);
 
     $fields = ['like_timestamp' => date('Y-m-d H:i:s')];
+
     if (!empty($result)) {
+
         $like = $result[0];
         $fields['like_status'] = $like['like_status'] === 'A' ? 'I' : 'A';
         update($conn, 'likes', $fields, ['like_id' => $like['like_id']]);
         $liked = $fields['like_status'] === 'A';
+
     } else {
+
         $fields = array_merge($fields, [
+
             'user_id' => $userId,
             'record_id' => $recordId,
             'like_status' => 'A'
         ]);
+
         insert($conn, 'likes', $fields);
         $liked = true;
     }
+
 } elseif ($commentId !== null) {
+
     $sql = "SELECT * FROM `likes` WHERE `user_id` = ? AND `comment_id` = ?";
     $result = query($conn, $sql, [$userId, $commentId]);
 
     $fields = ['like_timestamp' => date('Y-m-d H:i:s')];
+
     if (!empty($result)) {
+
         $like = $result[0];
         $fields['like_status'] = $like['like_status'] === 'A' ? 'I' : 'A';
+
         if (update($conn, 'likes', $fields, ['like_id' => $like['like_id']])) {
             updateLikes($conn, 'comment', $commentId);
         }
+
         $liked = $fields['like_status'] === 'A';
+
     } else {
+
         $fields = array_merge($fields, [
             'user_id' => $userId,
             'comment_id' => $commentId,
             'like_status' => 'A'
         ]);
+
         if (insert($conn, 'likes', $fields)) {
             updateLikes($conn, 'comment', $commentId);
         }
+
         $liked = true;
     }
+
 } elseif ($entryId !== null) {
+
     $sql = "SELECT * FROM `likes` WHERE `user_id` = ? AND `entry_id` = ?";
     $result = query($conn, $sql, [$userId, $entryId]);
 
     $fields = ['like_timestamp' => date('Y-m-d H:i:s')];
+
     if (!empty($result)) {
         $like = $result[0];
         $fields['like_status'] = $like['like_status'] === 'A' ? 'I' : 'A';
+
         if (update($conn, 'likes', $fields, ['like_id' => $like['like_id']])) {
             updateLikes($conn, 'entry', $entryId);
         }
+
         $liked = $fields['like_status'] === 'A';
+
     } else {
+        
         $fields = array_merge($fields, [
             'user_id' => $userId,
             'entry_id' => $entryId,
             'like_status' => 'A'
         ]);
+
         if (insert($conn, 'likes', $fields)) {
             updateLikes($conn, 'entry', $entryId);
         }
+        
         $liked = true;
     }
 }

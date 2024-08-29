@@ -33,21 +33,12 @@ document.addEventListener('DOMContentLoaded', () => {
                         button.classList.toggle('btn-outline-danger');
                         button.classList.toggle('btn-danger');
 
-                    } else if (commentId && icon) {
+                    } else if ((commentId || entryId) && icon) {
 
                         icon.classList.toggle('liked');
 
                         const likesSection = button.closest('.likes-section');
-                        const likesText = likesSection.querySelector('p');
-                        let number = parseInt(likesText.innerText, 10);
-                        likesText.innerText = (result.liked) ? (number + 1) : (number - 1);
-
-                    } else if (entryId && icon) {
-
-                        icon.classList.toggle('liked');
-
-                        const likesSection = button.closest('.likes-section');
-                        const likesText = likesSection.querySelector('span');
+                        const likesText = commentId ? likesSection.querySelector('p') : likesSection.querySelector('span');
                         let number = parseInt(likesText.innerText, 10);
                         likesText.innerText = (result.liked) ? (number + 1) : (number - 1);
                     }

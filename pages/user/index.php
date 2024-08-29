@@ -37,6 +37,15 @@ if (!isset($_SESSION['user_type']) || $_SESSION['user_type'] == 'A') header("loc
             padding: 10px;
         }
 
+        .like-button {
+            cursor: pointer;
+        }
+
+        .liked {
+            color: blue !important; /* Change the icon color to blue */
+            font-weight: bold !important; /* Optional: make it bold */
+        }
+
     </style>
 </head>
 
