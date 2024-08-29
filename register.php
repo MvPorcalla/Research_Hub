@@ -43,7 +43,7 @@
 
                 <!-- Admin Card -->
                 <div class="col-md-4">
-                    <a href="#" class="text-decoration-none">
+                    <a href="./registerTeacher.php" class="text-decoration-none">
                         <div class="register_card">
                             <h1 class="register_card-text mb-0">Teacher</h1>
                         </div>
