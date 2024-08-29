@@ -335,7 +335,7 @@ function confirmPassword() {
 
 // =========================================================================
 
-function displayCommentTiles(data, commentsContainer) {
+function displayCommentTiles(data, commentsContainer, abstractId) {
 
     data.forEach(dataRow => {
 

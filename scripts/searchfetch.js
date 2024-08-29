@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', function() {
     function fetchRecords(query = '') {
         console.log('Fetching records with query:', query); // Debugging line
         
-        fetch(`searchfetch.php?query=${encodeURIComponent(query)}`)
+        fetch(`../../backend/searchfetch.php?query=${encodeURIComponent(query)}`)
             .then(response => response.json())
             .then(data => {
                 console.log('Data received:', data); // Debugging line                
@@ -16,14 +16,16 @@ document.addEventListener('DOMContentLoaded', function() {
                     rows = '<tr><td colspan="4">No records found.</td></tr>';
                 } else {
                     data.forEach(record => {
+                        const month = Intl.DateTimeFormat('en', { month: 'long' }).format(new Date(record.record_month));
                         rows += `
-                            <tr>
+                            <tr onclick="window.location.href='abstractView.php?abstractId=${record.record_id}';" style="cursor: pointer;">
                                 <td>${highlightText(record.record_title, query)}</td>
-                                <td>${highlightText(record.record_month + ' ' + record.record_year, query)}</td>
+                                <td>${highlightText(month + ' ' + record.record_year, query)}</td>
                                 <td>${highlightText(record.record_authors, query)}</td>
+                                <td>${highlightText(record.record_trackstrand, query)}</td>
                                 <td>
-                                    <a href="edit.php?id=${record.record_id}" class="btn btn-warning btn-sm">Edit</a>
-                                    <a href="copy.php?id=${record.record_id}" class="btn btn-info btn-sm">Copy</a>
+                                    <a href="abstract.php?abstractId=${record.record_id}" class="btn btn-primary btn-sm"><i class='fas fa-edit'></i></a>
+                                    <a href="../../backend/delete.php?abstractId=${record.record_id}" class="btn btn-danger btn-sm delete-button"><i class='fas fa-trash-alt'></i></a>
                                 </td>
                             </tr>
                         `;

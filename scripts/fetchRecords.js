@@ -229,7 +229,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     
                 } else {
 
-                    displayCommentTiles(data, commentsContainer);
+                    displayCommentTiles(data, commentsContainer, abstractId);
                 }
             }
             
@@ -491,7 +491,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             const noCommentElement = document.getElementById('no_comment');
                             if (noCommentElement) noCommentElement.remove();
             
-                            displayCommentTiles(data, commentsContainer);
+                            displayCommentTiles(data, commentsContainer, abstractId);
                         }
                     }
         
