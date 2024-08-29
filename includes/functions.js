@@ -311,10 +311,11 @@ function formatDateTime(timestamp) {
 
 function confirmPassword() {
     
-    const form = document.querySelector('form');
+    const form = document.getElementById('editForm');
     form.addEventListener('submit', function (e) {
-        const password = form.getElementById('password').value;
-        const confirmPassword = form.getElementById('confirmPassword').value;
+
+        const password = document.getElementById('password').value;
+        const confirmPassword = document.getElementById('confirmPassword').value;
 
         if (password !== confirmPassword) {
             e.preventDefault(); // Prevent form submission
