@@ -22,22 +22,22 @@ if (!isset($_SESSION['user_type'])) {
     <link rel="stylesheet" href="../../css/mainStyle.css">
 
     <style>
-        .admin-info-title {
-            font-size: var(--fs-xl);
+        .setting-info-title {
+            font-size: var(--fs-lg);
             font-weight: var(--fw-semibold);
             color: var(--text-base-lt);
         }
-        .admin-profile-pic {
+        .setting-profile-pic {
             width: 80px;
             height: 80px;
             object-fit: cover;
         }
-        .admin-name-text {
+        .setting-name-text {
             font-size: var(--fs-2xl);
             font-weight: var(--fw-semibold);
             color: var(--text-base);
         }
-        .admin-username-text {
+        .setting-username-text {
             font-size: var(--fs-lg);
             font-weight: var(--fw-medium);
             color: var(--text-base-lt);
@@ -61,113 +61,80 @@ if (!isset($_SESSION['user_type'])) {
                     <div class="container">
                         <div class='card border-dark bg-transparent'>
                             <div class="card-body">
+
                                 <div class="row">
                                     <!-- Personal Information -->
-                                    <div class="col-md-8">
+                                    <div class="col-md-12">
                                         <div class="card">
                                             <div class="card-body p-4">
-                                                <h1 class="admin-info-title text-center">Personal Information</h1>
-                                                <hr class="border-2 border-secondary mb-4">
+                                                <h1 class="setting-info-title text-start">Personal Information</h1>
+                                                <hr class="border-2 border-secondary mb-2">
 
                                                 <div class="row align-items-center">
-                                                    <div class="col-md-12 text-center">
-                                                        <img id="idImage" src="#" alt="User Image" class="admin-profile-pic img-fluid rounded-circle mb-2">
-                                                        <div>
-                                                            <!-- Display Current Name -->
-                                                            <h2 id="completeName" class="admin-name-text mb-1" data-user-id="<?php echo $_SESSION['user_id']; ?>"></h2>
-                                                            
-                                                            <!-- Container for Username and Email Address -->
-                                                            <div class="d-flex justify-content-center align-items-center mb-3">
-                                                                <h2 id="userName" class="admin-username-text mb-0"></h2>
-                                                                <span class='mx-2'> | </span>
-                                                                <h2 id="emailAdd" class="admin-username-text mb-0 ml-3"></h2>
-                                                            </div>
-                                                        </div>
-
+                                                    <!-- Image Column -->
+                                                    <div class="col-md-2 text-center">
+                                                        <img id="idImage" src="#" alt="User Image" class="setting-profile-pic img-fluid rounded-circle mb-2">
                                                     </div>
-                                                </div>
 
-                                                <hr class="border-2 border-secondary mb-4">
+                                                    <!-- Info Column -->
+                                                    <div class="col-md-8 text-start">
+                                                        <!-- Display Current Name -->
+                                                        <h2 id="completeName" class="setting-name-text mb-1" data-user-id="<?php echo $_SESSION['user_id']; ?>"></h2>
 
-                                                <!-- Editable Fields -->
-                                                <div class="text-start">
-                                                    <form action="../../backend/update_profile.php" method="post">
-                                                        <div class="row">
-                                                            <div class="col-md-5">
-                                                                <label for="lastName" class="form-label fw-bold">Last Name</label>
-                                                                <input type="text" class="form-control" id="lastName" name="lastName">
-                                                            </div>
-                                                            <div class="col-md-5">
-                                                                <label for="firstName" class="form-label fw-bold">First Name</label>
-                                                                <input type="text" class="form-control" id="firstName" name="firstName">
-                                                            </div>
-                                                            <div class="col-md-2">
-                                                                <label for="middleInitial" class="form-label fw-bold">M.I.</label>
-                                                                <input type="text" class="form-control" id="middleInitial" name="middleInitial" maxlength="1">
-                                                            </div>
+                                                        <!-- Container for Username and Email Address -->
+                                                        <div class="d-flex flex-column flex-md-row align-items-center">
+                                                            <h2 id="userName" class="setting-username-text mb-0"></h2>
+                                                            <span class='mx-2'> | </span>
+                                                            <h2 id="emailAdd" class="setting-username-text mb-0"></h2>
                                                         </div>
-                                                        
-                                                        <!-- Username and password-->
-                                                        <div class="row mt-3">
-                                                            <div class="col-md-4">
-                                                                <label for="usernameField" class="form-label fw-bold">Username</label>
-                                                                <input type="text" class="form-control" id="usernameField" name="usernameField">
-                                                            </div>
-                                                            <div class="col-md-4">
-                                                                <label for="password" class="form-label fw-bold">Password</label>
-                                                                <input type="password" class="form-control" id="password" name="password">
-                                                            </div>
-                                                            <div class="col-md-4">
-                                                                <label for="conpassword" class="form-label fw-bold">Confirm Password</label>
-                                                                <input type="password" class="form-control" id="confirmpassword" name="confirmpassword">
-                                                            </div>
-                                                        </div>
+                                                    </div>
 
-                                                        <!-- Save Changes Button -->
-                                                        <div class="col-md-12 mt-3 text-center">
-                                                            <button type="submit" class="btn btn-primary">Save Changes</button>
-                                                        </div>
-                                                    </form>
+                                                    <div class="col-md-2 text-center">
+                                                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editProfileModal">
+                                                            Edit
+                                                        </button>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
 
-                                    <!-- Notification -->
-                                    <div class="col-md-4 text-start">
-                                        <div class="row">
-                                            <div class="card">
-                                                <div class="card-body p-4">
-                                                    <h1 class="admin-info-title text-center">Notification</h1>
-                                                    <hr class="border-2 border-secondary mb-4">
+                                </div>
+
+                                <!-- Notification -->
+                                <div class="row mt-2">
+                                    <div class="col-md-12">
+                                        <div class="card  text-start">
+                                            <div class="card-body p-4">
+                                                <h1 class="setting-info-title">Personal Information</h1>
+                                                <hr class="border-2 border-secondary mb-2">
 
                                                     <form>
                                                         <div class="form-check">
                                                             <input class="form-check-input" type="checkbox" id="emailNotifications" checked>
-                                                            <label class="form-check-label" for="emailNotifications">
+                                                            <label class="form-check-label fw-bold" for="emailNotifications">
                                                                 Send notifications by email
                                                             </label>
                                                             <p class='ms-3'>
-                                                                You’ll still get other <br>
-                                                                emails from Research Hub
+                                                                You’ll still get other emails from Research Hub
                                                             </p>
                                                         </div>
                                                         
                                                         <div class="form-check mt-2">
                                                             <input class="form-check-input" type="checkbox" id="comments">
-                                                            <label class="form-check-label" for="comments">
+                                                            <label class="form-check-label fw-bold" for="comments">
                                                                 Comments
                                                             </label>
                                                         </div>
                                                         <div class="form-check mt-2">
                                                             <input class="form-check-input" type="checkbox" id="reactions">
-                                                            <label class="form-check-label" for="reactions">
+                                                            <label class="form-check-label fw-bold" for="reactions">
                                                                 Reactions
                                                             </label>
                                                         </div>
                                                         <div class="form-check mt-2">
                                                             <input class="form-check-input" type="checkbox" id="newUploads">
-                                                            <label class="form-check-label" for="newUploads">
+                                                            <label class="form-check-label fw-bold" for="newUploads">
                                                                 New upload research
                                                             </label>
                                                         </div>
@@ -185,6 +152,58 @@ if (!isset($_SESSION['user_type'])) {
                                             </div>
                                         </div>
 
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Modal for edit profile -->
+                        <div class="modal fade" id="editProfileModal" tabindex="-1" aria-labelledby="editProfileModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <div class="modal-header bg-primary text-white">
+                                        <h5 class="modal-title" id="editProfileModalLabel">Edit Profile</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form action="../../backend/update_profile.php" method="post">
+                                            <div class='text-start'>
+                                                <div class="row">
+                                                    <div class="col-md-5 mb-3">
+                                                        <label for="lastName" class="form-label fw-bold">Last Name</label>
+                                                        <input type="text" class="form-control" id="lastName" name="lastName">
+                                                    </div>
+                                                    <div class="col-md-5 mb-3">
+                                                        <label for="firstName" class="form-label fw-bold">First Name</label>
+                                                        <input type="text" class="form-control" id="firstName" name="firstName">
+                                                    </div>
+                                                    <div class="col-md-2 mb-3">
+                                                        <label for="middleInitial" class="form-label fw-bold">M.I.</label>
+                                                        <input type="text" class="form-control" id="middleInitial" name="middleInitial" maxlength="1">
+                                                    </div>
+                                                </div>
+                                                
+                                                <div class="row">
+                                                    <div class="col-md-12 mb-3">
+                                                        <label for="usernameField" class="form-label fw-bold">Username</label>
+                                                        <input type="text" class="form-control" id="usernameField" name="usernameField">
+                                                    </div>
+                                                </div>
+
+                                                <div class="row">
+                                                    <div class="col-md-6 mb-3">
+                                                        <label for="passwordField" class="form-label fw-bold">Password</label>
+                                                        <input type="password" class="form-control" id="passwordField" name="passwordField">
+                                                    </div>
+                                                    <div class="col-md-6 mb-3">
+                                                        <label for="conpasswordField" class="form-label fw-bold">Confirm Password</label>
+                                                        <input type="password" class="form-control" id="conpasswordField" name="conpasswordField">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <button type="submit" class="btn btn-primary btn-block w-100">Save Changes</button>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
