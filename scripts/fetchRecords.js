@@ -2,12 +2,6 @@
 
 document.addEventListener('DOMContentLoaded', () => {
     const classes = ['abstracts', 'students', 'guests', 'LRNs'];
-
-    const escapeHTML = str => str.replace(/&/g, "&amp;")
-                                 .replace(/</g, "&lt;")
-                                 .replace(/>/g, "&gt;")
-                                 .replace(/"/g, "&quot;")
-                                 .replace(/'/g, "&#039;");
     
     const fetchRecords = async () => {
         try {
@@ -27,11 +21,11 @@ document.addEventListener('DOMContentLoaded', () => {
                     switch (foundClass) {
                         case 'abstracts':
                             rowHTML = `
-                                <tr onclick="window.location.href='abstractView.php?abstractId=${escapeHTML(dataRow.id)}';" style="cursor: pointer;">
-                                    <td>${escapeHTML(dataRow.title)}</td>
-                                    <td>${escapeHTML(dataRow.yearmonth)}</td>
-                                    <td>${escapeHTML(dataRow.authors)}</td>
-                                    <td>${escapeHTML(dataRow.trackstrand)}</td>
+                                <tr onclick="window.location.href='abstractView.php?abstractId=${dataRow.id}';" style="cursor: pointer;">
+                                    <td>${dataRow.title}</td>
+                                    <td>${dataRow.yearmonth}</td>
+                                    <td>${dataRow.authors}</td>
+                                    <td>${dataRow.trackstrand}</td>
                                     <td>
                                         <a href="abstract.php?abstractId=${encodeURIComponent(dataRow.id)}" class="btn btn-primary btn-sm"><i class='fas fa-edit'></i></a>
                                         <a href="../../backend/delete.php?abstractId=${encodeURIComponent(dataRow.id)}" class="btn btn-danger btn-sm delete-button"><i class='fas fa-trash-alt'></i></a>
@@ -41,11 +35,11 @@ document.addEventListener('DOMContentLoaded', () => {
                         case 'students':
                             rowHTML = `
                                 <tr>
-                                    <td>${escapeHTML(dataRow.lname)}</td>
-                                    <td>${escapeHTML(dataRow.fname)}</td>
-                                    <td>${escapeHTML(dataRow.mi)}</td>
-                                    <td>${escapeHTML(dataRow.lrn)}</td>
-                                    <td>${escapeHTML(dataRow.track)}</td>
+                                    <td>${dataRow.lname}</td>
+                                    <td>${dataRow.fname}</td>
+                                    <td>${dataRow.mi}</td>
+                                    <td>${dataRow.lrn}</td>
+                                    <td>${dataRow.track}</td>
                                     <td>
                                         <a href="../../backend/delete.php?userId=${encodeURIComponent(dataRow.id)}" class="btn btn-danger btn-sm delete-button"><i class='fas fa-trash-alt'></i></a>
                                     </td>
@@ -54,10 +48,10 @@ document.addEventListener('DOMContentLoaded', () => {
                         case 'guests':
                             rowHTML = `
                                 <tr>
-                                    <td>${escapeHTML(dataRow.lname)}</td>
-                                    <td>${escapeHTML(dataRow.fname)}</td>
-                                    <td>${escapeHTML(dataRow.mi)}</td>
-                                    <td>${escapeHTML(dataRow.school)}</td>
+                                    <td>${dataRow.lname}</td>
+                                    <td>${dataRow.fname}</td>
+                                    <td>${dataRow.mi}</td>
+                                    <td>${dataRow.school}</td>
                                     <td>
                                         <a href="../../backend/delete.php?userId=${encodeURIComponent(dataRow.id)}" class="btn btn-danger btn-sm delete-button"><i class='fas fa-trash-alt'></i></a>
                                     </td>
@@ -66,8 +60,8 @@ document.addEventListener('DOMContentLoaded', () => {
                         case 'LRNs':
                             rowHTML = `
                                 <tr>
-                                    <td>${escapeHTML(dataRow.fullname)}</td>
-                                    <td>${escapeHTML(dataRow.lrn)}</td>
+                                    <td>${dataRow.fullname}</td>
+                                    <td>${dataRow.lrn}</td>
                                     <td>
                                         <a href="lrn.php?lrnId=${encodeURIComponent(dataRow.id)}" class="btn btn-primary btn-sm"><i class='fas fa-edit'></i></a>
                                         <a href="../../backend/delete.php?lrnId=${encodeURIComponent(dataRow.id)}" class="btn btn-danger btn-sm delete-button"><i class='fas fa-trash-alt'></i></a>
@@ -122,17 +116,17 @@ document.addEventListener('DOMContentLoaded', () => {
                         <div class="col-md-6 mb-4">
                             <div class="card border-dark rounded-4 h-100">
                                 <div class="card-body d-flex flex-column">
-                                    <h5 class="card-title text-center flex-grow-1">${escapeHTML(dataRow.fname)} ${escapeHTML(dataRow.mi)}. ${escapeHTML(dataRow.lname)}</h5>
-                                    <p class="card-text text-center">${escapeHTML(dataRow.email)}</p>
-                                    <p class="card-text text-center">${escapeHTML(dataRow.school)}</p>
+                                    <h5 class="card-title text-center flex-grow-1">${dataRow.fname} ${dataRow.mi}. ${dataRow.lname}</h5>
+                                    <p class="card-text text-center">${dataRow.email}</p>
+                                    <p class="card-text text-center">${dataRow.school}</p>
                                     
                                     <div class="border border-secondary rounded p-2 mb-3">
                                         <p class="card-text text-center fw-bold mb-1">Reason</p>
-                                        <p class="card-text text-center">${escapeHTML(dataRow.reason)}</p>
+                                        <p class="card-text text-center">${dataRow.reason}</p>
                                     </div>
                                     <div class="d-flex justify-content-center mt-auto">
-                                        <a href="../../backend/pending_actions.php?accept=${escapeHTML(dataRow.id)}" class="btn btn-primary btn-sm me-2">Accept</a>
-                                        <a href="../../backend/pending_actions.php?decline=${escapeHTML(dataRow.id)}" class="btn btn-danger btn-sm">Decline</a>
+                                        <a href="../../backend/pending_actions.php?accept=${dataRow.id}" class="btn btn-primary btn-sm me-2">Accept</a>
+                                        <a href="../../backend/pending_actions.php?decline=${dataRow.id}" class="btn btn-danger btn-sm">Decline</a>
                                     </div>
                                 </div>
                             </div>
@@ -156,17 +150,17 @@ document.addEventListener('DOMContentLoaded', () => {
                     let tileHTML = `
                         <div class="col-12 mb-2">
                             <div class="card">
-                                <div class="card-body" onclick="if (!event.target.closest('button')) { window.location.href='abstractView.php?abstractId=${escapeHTML(dataRow.id)}'; }" style="cursor: pointer;">
+                                <div class="card-body" onclick="if (!event.target.closest('button')) { window.location.href='abstractView.php?abstractId=${dataRow.id}'; }" style="cursor: pointer;">
                                     <div class="row text-center">
                                         <div class="col-md-2 d-flex align-items-center justify-content-center border-end">
-                                            <img src="https://via.placeholder.com/75x100" class="img-fluid rounded-1" alt="${escapeHTML(dataRow.title)}">
+                                            <img src="https://via.placeholder.com/75x100" class="img-fluid rounded-1" alt="${dataRow.title}">
                                         </div>
-                                        <div class="col-md-8 d-flex align-items-center justify-content-start border-end">${escapeHTML(dataRow.title)}</div>
+                                        <div class="col-md-8 d-flex align-items-center justify-content-start border-end">${dataRow.title}</div>
                                         <div class="col-md-2 d-flex align-items-center justify-content-center">
-                                            <button class="btn btn-outline-primary btn-sm mx-1" data-bs-toggle="modal" data-bs-target="#commentsModal" data-record-id="${escapeHTML(dataRow.id)}" data-record-title="${escapeHTML(dataRow.title)}">
+                                            <button class="btn btn-outline-primary btn-sm mx-1" data-bs-toggle="modal" data-bs-target="#commentsModal" data-record-id="${dataRow.id}" data-record-title="${dataRow.title}">
                                                 <i class="fas fa-comment"></i>
                                             </button>
-                                            <button class="btn btn-outline-danger btn-sm mx-1 like-button" data-record-id="${escapeHTML(dataRow.id)}">
+                                            <button class="btn btn-outline-danger btn-sm mx-1 like-button" data-record-id="${dataRow.id}">
                                                 <i class="fas fa-heart"></i>
                                             </button>
                                             <button class="btn btn-outline-success btn-sm mx-1">
@@ -195,11 +189,11 @@ document.addEventListener('DOMContentLoaded', () => {
                     let tileHTML = `
                         <div class="col-12 mb-2">
                             <div class="card border-dark rounded-4">
-                                <div class="card-body" onclick="if (!event.target.closest('button')) { window.location.href='abstractView.php?abstractId=${escapeHTML(dataRow.record_id)}'; }" style="cursor: pointer;">
+                                <div class="card-body" onclick="if (!event.target.closest('button')) { window.location.href='abstractView.php?abstractId=${dataRow.record_id}'; }" style="cursor: pointer;">
                                     <div class="row text-center">
-                                        <div class="col-md-11 d-flex align-items-center justify-content-start border-end">${escapeHTML(dataRow.title)}</div>
+                                        <div class="col-md-11 d-flex align-items-center justify-content-start border-end">${dataRow.title}</div>
                                         <div class="col-md-1 d-flex align-items-center justify-content-center">
-                                            <button class="btn btn-outline-danger btn-sm mx-1 like-button" data-record-id="${escapeHTML(dataRow.record_id)}">
+                                            <button class="btn btn-outline-danger btn-sm mx-1 like-button" data-record-id="${dataRow.record_id}">
                                                 <i class="fas fa-heart"></i>
                                             </button>
                                         </div>
@@ -261,9 +255,9 @@ document.addEventListener('DOMContentLoaded', () => {
                                                 <div class=" mb-3">
                                                     
                                                     <div class="d-flex align-items-center">
-                                                        <img src="../${escapeHTML(dataRow.imgDir)}" alt="${escapeHTML(dataRow.userName)}" title="${escapeHTML(fullName)}" class="img-fluid rounded-circle me-3" style="width: 50px; height: 50px;">
+                                                        <img src="../${dataRow.imgDir}" alt="${dataRow.userName}" title="${fullName}" class="img-fluid rounded-circle me-3" style="width: 50px; height: 50px;">
                                                         <div>
-                                                            <h4 title="${escapeHTML(fullName)}" class="mb-0">@${escapeHTML(dataRow.userName)}</h4>
+                                                            <h4 title="${fullName}" class="mb-0">@${dataRow.userName}</h4>
                                                             <p title="${formattedDateTime}" class="ms-1 mb-0">${timePassed}</p>
                                                         </div>
                                                     </div>
@@ -272,7 +266,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                                                 <!-- Entry content displayed -->
                                                 <div class="border p-3 rounded">
-                                                    <h5>${escapeHTML(dataRow.entryContent)}</h5>
+                                                    <h5>${dataRow.entryContent}</h5>
                                                 </div>
 
                                                 <!-- Stats and Buttons Row -->
@@ -280,17 +274,17 @@ document.addEventListener('DOMContentLoaded', () => {
                                                     <div class="col-12 text-end">
                                                         <!-- Likes with Like Button -->
                                                         <div class="d-inline-block text-center me-3 likes-section">
-                                                            <button class="btn btn-link p-0 ms-1 text-decoration-none like-button" data-entry-id="${escapeHTML(dataRow.entryId)}">
+                                                            <button class="btn btn-link p-0 ms-1 text-decoration-none like-button" data-entry-id="${dataRow.entryId}">
                                                                 <i class="fa-solid fa-thumbs-up"></i> Like
                                                             </button>
-                                                            <span class="ms-2">${escapeHTML(dataRow.entryLikes)}</span>
+                                                            <span class="ms-2">${dataRow.entryLikes}</span>
                                                         </div>
                                                         <!-- Replies with Comment Button -->
                                                         <div class="d-inline-block text-center me-3">
-                                                            <button class="btn btn-link p-0 ms-1 text-decoration-none" onclick="toggleComments(${escapeHTML(dataRow.entryId)})">
+                                                            <button class="btn btn-link p-0 ms-1 text-decoration-none" onclick="toggleComments(${dataRow.entryId})">
                                                                 <i class="fa-solid fa-comment-dots"></i> Reply
                                                             </button>
-                                                            <span id="entryComments-${escapeHTML(dataRow.entryId)}" class="ms-2"></span>
+                                                            <span id="entryComments-${dataRow.entryId}" class="ms-2"></span>
                                                         </div>
                                                       
                                                     </div>
@@ -299,8 +293,8 @@ document.addEventListener('DOMContentLoaded', () => {
                                                 <hr>
 
                                                 <!-- Comments Section -->
-                                                <div id="comment-section-${escapeHTML(dataRow.entryId)}" data-entry-id="${escapeHTML(dataRow.entryId)}" class="comments-section ms-3 mt-3">
-                                                    <div id="comments-${escapeHTML(dataRow.entryId)}" class="card-body">
+                                                <div id="comment-section-${dataRow.entryId}" data-entry-id="${dataRow.entryId}" class="comments-section ms-3 mt-3">
+                                                    <div id="comments-${dataRow.entryId}" class="card-body">
 
                                                     </div>
                                                 </div>
@@ -314,17 +308,17 @@ document.addEventListener('DOMContentLoaded', () => {
                     `;
                     entriesContainer.innerHTML += tileHTML;
 
-                    if (document.getElementById(`comment-section-${escapeHTML(dataRow.entryId)}`)) {
+                    if (document.getElementById(`comment-section-${dataRow.entryId}`)) {
 
-                        const commentSection = document.getElementById(`comment-section-${escapeHTML(dataRow.entryId)}`);
-                        const comments = document.getElementById(`comments-${escapeHTML(dataRow.entryId)}`);
+                        const commentSection = document.getElementById(`comment-section-${dataRow.entryId}`);
+                        const comments = document.getElementById(`comments-${dataRow.entryId}`);
             
-                        const response = await fetch(`../../backend/fetchRecords.php?fetch=comments&comment_on=entry_id&record_id=${escapeHTML(dataRow.entryId)}`);
+                        const response = await fetch(`../../backend/fetchRecords.php?fetch=comments&comment_on=entry_id&record_id=${dataRow.entryId}`);
                         if (!response.ok) throw new Error('Network response was not ok');
             
                         const data = await response.json();
 
-                        const entryComments = document.getElementById(`entryComments-${escapeHTML(dataRow.entryId)}`);
+                        const entryComments = document.getElementById(`entryComments-${dataRow.entryId}`);
                         entryComments.innerHTML = data.length;
 
                         const commentTimestamp = dataRow.entryTimestamp;
@@ -336,12 +330,12 @@ document.addEventListener('DOMContentLoaded', () => {
                             let tileHTML = `
                             <div class="row">
                                 <div class="comment d-flex col-md-10">
-                                    <img src="../${escapeHTML(dataRow.userIdImage)}" alt="${escapeHTML(dataRow.userName)}" class="img-fluid rounded-circle me-3" style="width: 30px; height: 30px;">
-                                    <p><strong>${escapeHTML(dataRow.userName)}:</strong> ${escapeHTML(dataRow.commentContent)}</p>
+                                    <img src="../${dataRow.userIdImage}" alt="${dataRow.userName}" class="img-fluid rounded-circle me-3" style="width: 30px; height: 30px;">
+                                    <p><strong>${dataRow.userName}:</strong> ${dataRow.commentContent}</p>
                                     <hr>
                                 </div>
                                 <div class="col-md-2">
-                                    <p title="${escapeHTML(commentFormattedDateTime)}" style="cursor: pointer;">${escapeHTML(commentTimePassed)}</p>
+                                    <p title="${commentFormattedDateTime}" style="cursor: pointer;">${commentTimePassed}</p>
                                 </div>
                             </div>
                             `;
@@ -362,7 +356,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                             </div>
                                         </div>
                                     </div>
-                                    <input type="hidden" name="entry_id" value="${escapeHTML(dataRow.entryId)}">
+                                    <input type="hidden" name="entry_id" value="${dataRow.entryId}">
                                 </form>
                             </div>
                         `;
