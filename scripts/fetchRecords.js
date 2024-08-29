@@ -463,7 +463,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 commentsModal.addEventListener('show.bs.modal', async function (event) {                    
                     // You can add any other logic here
                     const button = event.relatedTarget;
-                    abstractId = button.getAttribute('data-record-id');
+                    const abstractId = button.getAttribute('data-record-id');
+                    const abstractTitle = button.getAttribute('data-record-title');
+
+                    const modalLabel = document.getElementById('commentsModalLabel');
+                    modalLabel.innerText = abstractTitle;
+
+                    const abstractIdField = document.getElementById('record_id');
+                    abstractIdField.value = abstractId;
             
                     if (document.getElementById('commentsContainer')) {
             

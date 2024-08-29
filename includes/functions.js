@@ -385,7 +385,7 @@ function displayCommentTiles(data, commentsContainer) {
                         </div>
                         ${buttonHTML}
                     </div>
-                    <p>${escapeHTML(dataRow.commentContent)}</p>
+                    <p class="text-start">${escapeHTML(dataRow.commentContent)}</p>
                     <div class="d-flex justify-content-between">
                         <div class="d-flex flex-row align-items-center">
                             <p title="${formattedDateTime}" style="cursor: pointer;"><small>${timePassed}</small></p>
