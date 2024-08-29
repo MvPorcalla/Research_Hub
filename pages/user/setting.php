@@ -1,6 +1,13 @@
 <?php
 include_once "..\..\includes\db.php";
-if (!isset($_SESSION['user_type']) || $_SESSION['user_type'] == 'A') header("location: ../../index.php");
+
+if (!isset($_SESSION['user_type'])) {
+    header("location: ../../index.php");
+    exit;
+} elseif ($_SESSION['user_type'] == 'A') {
+    header("location: ../../backend/logout.php");
+    exit;
+}
 ?>
 
 <!DOCTYPE html>
@@ -219,6 +226,7 @@ if (!isset($_SESSION['user_type']) || $_SESSION['user_type'] == 'A') header("loc
     
     <script>
         document.addEventListener('DOMContentLoaded', function () {
+            confirmPassword();
             handleStatus('editInfo');
         });
     </script>

@@ -129,21 +129,7 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            const form = document.querySelector('form');
-            form.addEventListener('submit', function (e) {
-                const password = document.getElementById('password').value;
-                const confirmPassword = document.getElementById('confirmPassword').value;
-
-                if (password !== confirmPassword) {
-                    e.preventDefault(); // Prevent form submission
-                    Swal.fire({
-                        icon: "error",
-                        title: "Passwords do not match.",
-                        text: "Please try again."
-                    });
-                }
-            });
-
+            confirmPassword();
             handleStatus('registration');
         });
     </script>

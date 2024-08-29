@@ -2,16 +2,24 @@
     header('Content-Type: application/json');
 
     // Database connection
-    include_once "../../includes/db.php";
+    include_once "../includes/db.php";
 
     // Get the search query
     $query = isset($_GET['query']) ? trim($_GET['query']) : '';
 
     // Only include the WHERE clause if there's a query
-    $sql = "SELECT * FROM records";
+    $sql = "SELECT * 
+            FROM `records` 
+            WHERE `record_status` = 'A'";
     if ($query !== '') {
         $search_query = "%" . $conn->real_escape_string($query) . "%";
-        $sql .= " WHERE record_title LIKE ? OR record_authors LIKE ? OR record_year LIKE ? OR record_month LIKE ?";
+        $sql .= "  AND (
+                        `record_title` LIKE ?
+                        OR `record_authors` LIKE ?
+                        OR `record_year` LIKE ?
+                        OR `record_month` LIKE ?
+                    )";
+    $sql .= "ORDER BY `record_year` DESC, `record_month` DESC";
     }
 
     $stmt = $conn->prepare($sql);

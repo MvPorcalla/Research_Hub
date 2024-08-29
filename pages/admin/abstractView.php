@@ -1,6 +1,13 @@
 <?php
 include_once "..\..\includes\db.php";
-if (!isset($_SESSION['user_type']) || $_SESSION['user_type'] != 'A') header("location: ../../index.php");
+
+if (!isset($_SESSION['user_type'])) {
+    header("location: ../../index.php");
+    exit;
+} elseif ($_SESSION['user_type'] != 'A') {
+    header("location: ../../backend/logout.php");
+    exit;
+}
 ?>
 
 <!DOCTYPE html>
@@ -51,15 +58,6 @@ if (!isset($_SESSION['user_type']) || $_SESSION['user_type'] != 'A') header("loc
 
         .comment-card .card-body {
             padding: 10px;
-        }
-
-        .like-button {
-            cursor: pointer;
-        }
-        
-        .liked {
-            color: blue !important; /* Change the icon color to blue */
-            font-weight: bold !important; /* Optional: make it bold */
         }
 
     </style>

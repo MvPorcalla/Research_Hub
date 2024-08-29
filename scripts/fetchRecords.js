@@ -212,76 +212,25 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
             }
 
-            async function fetchAndDisplayComments(container, recordId) {
-                const response = await fetch(`../../backend/fetchRecords.php?fetch=comments&comment_on=record_id&record_id=${recordId}`);
-                if (!response.ok) throw new Error('Network response was not ok');
-            
-                const data = await response.json();
-            
-                if (data.length === 0) {
-                    container.innerHTML += `<small>No comments yet.</small>`;
-                } else {
-                    data.forEach(dataRow => {
-                        const timestamp = dataRow.commentTimestamp;
-                        const timePassed = timeAgo(timestamp);
-                        const formattedDateTime = formatDateTime(timestamp);
-            
-                        let tileHTML = `
-                            <div class="card comment-card">
-                                <div class="card-body">
-                                    <div class="d-flex justify-content-between mb-2">
-                                        <div class="d-flex flex-row align-items-center">
-                                            <img src="../${escapeHTML(dataRow.userIdImage)}" alt="avatar" class="img-fluid rounded-circle" style="width: 25px; height: 25px;" />
-                                            <p class="small mb-0 ms-2">${escapeHTML(dataRow.userName)}</p>
-                                        </div>
-                                        <div class="d-flex flex-row align-items-center">
-                                            <button class="btn px-0" onclick="window.location.href='../../backend/delete.php?abstract_id=${recordId}&comment_id=${escapeHTML(dataRow.commentId)}'">
-                                                <i class="fas fa-trash mx-2 fa-xs text-body" style="margin-top: -0.16rem;"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                    <p class="text-start">${escapeHTML(dataRow.commentContent)}</p>
-                                    <div class="d-flex justify-content-between">
-                                        <div class="d-flex flex-row align-items-center">
-                                            <p title="${formattedDateTime}" style="cursor: pointer;"><small>${timePassed}</small></p>
-                                        </div>
-                                        <div class="d-flex flex-row align-items-center">
-                                            <p><small>Likes: ${escapeHTML(dataRow.commentLikes)}</small></p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        `;
-                        container.innerHTML += tileHTML;
-                    });
-                }
-            }
-            
-            const commentsModal = document.getElementById('commentsModal');
-            const commentsContainer = document.getElementById('commentsContainer');
-            
-            if (commentsContainer) {
+            if (document.getElementById('commentsContainer')) {
+
+                const commentsContainer = document.getElementById('commentsContainer');
                 const abstractId = commentsContainer.getAttribute('data-abstract-id');
-                fetchAndDisplayComments(commentsContainer, abstractId);
-            }
-            
-            if (commentsModal) {
-                commentsModal.addEventListener('show.bs.modal', async function (event) {
-                    const button = event.relatedTarget;
-                    const abstractId = button.getAttribute('data-record-id');
-                    const abstractTitle = button.getAttribute('data-record-title');
 
-                    const modalLabel = document.getElementById('commentsModalLabel');
-                    modalLabel.innerText = abstractTitle;
+                const response = await fetch(`../../backend/fetchRecords.php?fetch=comments&comment_on=record_id&record_id=${abstractId}`);
+                if (!response.ok) throw new Error('Network response was not ok');
 
-                    const abstractIdField = document.getElementById('record_id');
-                    abstractIdField.value = abstractId;
-            
-                    if (commentsContainer) {
-                        commentsContainer.innerHTML = ''; // Clear the container before loading new content
-                        await fetchAndDisplayComments(commentsContainer, abstractId);
-                    }
-                });
+                const data = await response.json();
+
+                if (data.length == 0) {
+
+                    let tileHTML = `<small id="no_comment">No comments yet.</small>`;
+                    commentsContainer.innerHTML += tileHTML;
+                    
+                } else {
+
+                    displayCommentTiles(data, commentsContainer, abstractId);
+                }
             }
             
             if (document.getElementById('entriesContainer')) {
@@ -443,21 +392,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
                     if (abstractId) {
                     
-                    return fetch(`../../backend/get_like_status.php?record_type=record&recordId=${abstractId}&userId=${userId}`)
-                        .then(response => response.json())
-                        .then(data => {
+                        return fetch(`../../backend/get_like_status.php?record_type=record&recordId=${abstractId}&userId=${userId}`)
+                            .then(response => response.json())
+                            .then(data => {
 
-                            if (data.like_status === 'A') {
-                                button.classList.add('btn-danger');
-                                button.classList.remove('btn-outline-danger');
-                            } else {
-                                button.classList.add('btn-outline-danger');
-                                button.classList.remove('btn-danger');
-                            }
-                        })
-                        .catch(error => {
-                            console.error('Error fetching like status:', error);
-                        });
+                                if (data.like_status === 'A') {
+                                    button.classList.add('btn-danger');
+                                    button.classList.remove('btn-outline-danger');
+                                } else {
+                                    button.classList.add('btn-outline-danger');
+                                    button.classList.remove('btn-danger');
+                                }
+                            })
+                            .catch(error => {
+                                console.error('Error fetching like status:', error);
+                            });
 
                     } else if (entryId) {
                     
@@ -476,6 +425,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             .catch(error => {
                                 console.error('Error fetching like status:', error);
                             });
+
                     } else if (commentId) {
                     
                         return fetch(`../../backend/get_like_status.php?record_type=comment&recordId=${commentId}&userId=${userId}`)
@@ -485,6 +435,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                 const icon = button.querySelector('svg');
     
                                 if (data.like_status == 'A') {
+                                    console.log('yep here');
                                     icon.classList.add('liked');
                                 } else {
                                     icon.classList.remove('liked');
@@ -504,6 +455,50 @@ document.addEventListener('DOMContentLoaded', () => {
         
             // Call the function to update button statuses
             updateButtonStatuses();
+
+            const commentsModal = document.getElementById('commentsModal');
+            
+            if (commentsModal) {
+                // Event listener for when the modal is shown
+                commentsModal.addEventListener('show.bs.modal', async function (event) {                    
+                    // You can add any other logic here
+                    const button = event.relatedTarget;
+                    const abstractId = button.getAttribute('data-record-id');
+                    const abstractTitle = button.getAttribute('data-record-title');
+
+                    const modalLabel = document.getElementById('commentsModalLabel');
+                    modalLabel.innerText = abstractTitle;
+
+                    const abstractIdField = document.getElementById('record_id');
+                    abstractIdField.value = abstractId;
+            
+                    if (document.getElementById('commentsContainer')) {
+            
+                        const commentsContainer = document.getElementById('commentsContainer');
+            
+                        const response = await fetch(`../../backend/fetchRecords.php?fetch=comments&comment_on=record_id&record_id=${abstractId}`);
+                        if (!response.ok) throw new Error('Network response was not ok');
+            
+                        const data = await response.json();
+            
+                        if (data.length == 0) {
+            
+                            let tileHTML = `<small>No comments yet.</small>`;
+                            commentsContainer.innerHTML += tileHTML;
+                            
+                        } else {
+
+                            const noCommentElement = document.getElementById('no_comment');
+                            if (noCommentElement) noCommentElement.remove();
+            
+                            displayCommentTiles(data, commentsContainer, abstractId);
+                        }
+                    }
+        
+                    // Call the function to update button statuses
+                    updateButtonStatuses();
+                });
+            }      
         }
     });
 });
