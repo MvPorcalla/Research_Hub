@@ -36,7 +36,7 @@
                                         <!-- Role -->
                                         <div class="row mb-3" hidden>
                                             <label for="role" class="form-label">Role</label>
-                                            <input type="text" class="form-control" id="role" name="role" requiredvalue="G">
+                                            <input type="text" class="form-control" id="role" name="role" required value="G">
                                         </div>
 
                                         <!-- Name, Last Name, M.I. -->

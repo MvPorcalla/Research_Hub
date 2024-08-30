@@ -40,7 +40,7 @@ document.addEventListener('DOMContentLoaded', function() {
                             data.forEach(record => {
                                 var url = window.location.href;
                                 if (url.includes('admin')) {
-                                    const month = Intl.DateTimeFormat('en', { month: 'long' }).format(new Date(record.record_month));
+                                    const month = Intl.DateTimeFormat('en', { month: 'long' }).format(new Date(2024, record.record_month - 1));
                                     rows += `
                                         <tr onclick="window.location.href='abstractView.php?abstractId=${record.record_id}';" style="cursor: pointer;">
                                             <td>${highlightText(record.record_title, query)}</td>

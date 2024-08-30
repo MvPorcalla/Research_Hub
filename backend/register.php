@@ -26,6 +26,8 @@ if ((isset($_POST['lrn']) || isset($_POST['email'])) && $_FILES['idImage']['erro
     //hashes value of name="reg_password" from form then transfered to variable
     $r_pwdhash = password_hash($_POST['password'], PASSWORD_ARGON2ID);
 
+    $r_status = ($r_role == 'G') ? 'P' : 'A';
+
     // echo "
     //     'user_lastname' => $r_lastName,<br>
     //     'user_firstname' => $r_firstName,<br>
@@ -60,7 +62,7 @@ if ((isset($_POST['lrn']) || isset($_POST['email'])) && $_FILES['idImage']['erro
         'user_reason' => $r_reason,
         'user_pwdhash' => $r_pwdhash,
         'user_type' => $r_role,
-        'user_status' => 'A'
+        'user_status' => $r_status
     ];
 
     $role = ($r_role == 'S') ? "Student" : "Guest";
