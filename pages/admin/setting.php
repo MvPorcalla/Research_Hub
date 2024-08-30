@@ -103,7 +103,7 @@ if (!isset($_SESSION['user_type'])) {
                                     <div class="col-md-12">
                                         <div class="card  text-start">
                                             <div class="card-body p-4">
-                                                <h1 class="setting-info-title">Personal Information</h1>
+                                                <h1 class="setting-info-title">Notification</h1>
                                                 <hr class="border-2 border-secondary mb-2">
 
                                                     <form>

@@ -99,18 +99,7 @@ if (!isset($_SESSION['user_type'])) {
                             </div>
                             
 
-                            <div class="col-md-7">
-                                <div class="d-flex justify-content-end">
-                                    <form id="search-form" class="d-flex w-100">
-                                        <div class="input-group">
-                                            <input class="form-control rounded-pill" type="search" id="query" placeholder="Search" aria-label="Search" autocomplete='off'>
-                                            <span class="btn rounded-pill" type="submit" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%);">
-                                                <i class="fas fa-search"></i>
-                                            </span>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
+                            <?php include './../admin/components/searchbar.php' ?>
 
                             <!-- Modal -->
                             <div class="modal fade" id="importModal" tabindex="-1" aria-labelledby="importModalLabel" aria-hidden="true">

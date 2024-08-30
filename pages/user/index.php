@@ -122,7 +122,7 @@ if (!isset($_SESSION['user_type'])) {
                         <!-- Search Bar -->
                         <div class="row my-4 justify-content-end">
                             <div class="col-md-7">
-                                <div class="d-flex justify-content-end">
+                                <div class="d-flex">
                                     <form id="search-form" class="d-flex w-100">
                                         <div class="input-group">
                                             <input class="form-control rounded-pill" type="search" id="query" placeholder="Search" aria-label="Search" autocomplete='off'>

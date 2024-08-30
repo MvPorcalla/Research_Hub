@@ -42,33 +42,6 @@ if (!isset($_SESSION['user_type'])) {
             border-radius: 50%;
         }
 
-        #search {
-            width: 100%;
-            padding: 8px;
-            box-sizing: border-box;
-        }
-        #suggestions {
-            position: absolute;
-            top: 100%;
-            left: 0;
-            width: 100%;
-            max-height: 200px;
-            border: 1px solid #ddd;
-            border-top: none;
-            background-color: var(--bg-base-lt);
-            border-radius: 10px;
-            border:1px solid #000;
-            z-index: 1000;
-            overflow-y: auto;
-            display: none;
-        }
-        #suggestions div {
-            padding: 8px;
-            cursor: pointer;
-        }
-        #suggestions div:hover {
-            background-color: #f0f0f0;
-        }
     </style>
 
 </head>
@@ -93,22 +66,25 @@ if (!isset($_SESSION['user_type'])) {
 
                         <!-- Search Bar -->
                         <div class="row">
-                            <div class="col-md-5 d-flex justify-content-start">
+                            <div class="col-md-3 d-flex justify-content-start">
                                 <a href="./abstract.php" class="btn btn-secondary px-3">Add</a>
                             </div>
 
-                            <div class="col-md-7">
-                                <div class="d-flex justify-content-end">
-                                    <form id="search-form" class="d-flex w-100">
-                                        <div class="input-group">
-                                            <input class="form-control rounded-pill" type="search" id="query" placeholder="Search" aria-label="Search" autocomplete='off'>
-                                            <span class="btn rounded-pill" type="submit" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%);">
-                                                <i class="fas fa-search"></i>
-                                            </span>
-                                        </div>
-                                    </form>
-                                </div>
+                            <!-- Filter Dropdown -->
+                            <div class="col-md-2">
+                                <select class="form-select rounded-pill" id="filter" aria-label="Filter">
+                                    <option value="all">All</option>
+                                    <option value="title">Title</option>
+                                    <option value="year">Year</option>
+                                    <option value="month">Month</option>
+                                    <option value="author">Author</option>
+                                    <option value="strand">Strand</option>
+                                </select>
                             </div>
+
+                            <?php include './../admin/components/searchbar.php' ?>
+                          
+
                         </div>
 
                         <!-- Content Table -->
