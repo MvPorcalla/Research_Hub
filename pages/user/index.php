@@ -20,8 +20,56 @@ if (!isset($_SESSION['user_type'])) {
     <link rel="icon" href="../../assets/icons/LNHS-icon.png" type="image/png">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../../css/mainStyle.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <style>
+        .btn {
+            position: relative;
+        }
+        .input-group {
+            position: relative;
+        }
+        .form-control {
+            padding-right: 50px; /* Adjusted to accommodate the button */
+        }
+        .btn-search {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            border-radius: 50%;
+        }
+
+        #search {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+        #suggestions {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            max-height: 200px;
+            border: 1px solid #ddd;
+            border-top: none;
+            background-color: var(--bg-base-lt);
+            border-radius: 10px;
+            border:1px solid #000;
+            z-index: 1000;
+            overflow-y: auto;
+            display: none;
+        }
+        #suggestions div {
+            padding: 8px;
+            cursor: pointer;
+        }
+        #suggestions div:hover {
+            background-color: #f0f0f0;
+        }
+
         .comment-container {
             position: relative;
             width: 100%;
@@ -70,16 +118,22 @@ if (!isset($_SESSION['user_type'])) {
             <main class="col-md-9 ms-sm-auto col-lg-9 px-md-4">
                 <div class="container">
                     <div class="row">
-                        <div class="my-4 d-flex justify-content-end">
-                            <!-- Search Bar -->
-                            <div class="input-group rounded" style="max-width: 800px;">
-                                <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" id="search-bar">
-                                <span class="input-group-text border-0" id="search-addon">
-                                    <i class="fas fa-search"></i>
-                                </span>
+
+                        <!-- Search Bar -->
+                        <div class="row my-4 justify-content-end">
+                            <div class="col-md-7">
+                                <div class="d-flex justify-content-end">
+                                    <form id="search-form" class="d-flex w-100">
+                                        <div class="input-group">
+                                            <input class="form-control rounded-pill" type="search" id="query" placeholder="Search" aria-label="Search" autocomplete='off'>
+                                            <span class="btn rounded-pill" type="submit" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%);">
+                                                <i class="fas fa-search"></i>
+                                            </span>
+                                        </div>
+                                    </form>
+                                </div>
                             </div>
                         </div>
-
 
                         <!-- Modal -->
                         <div class="modal fade" id="commentsModal" tabindex="-1" aria-labelledby="commentsModalLabel" aria-hidden="true">
@@ -131,7 +185,8 @@ if (!isset($_SESSION['user_type'])) {
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
     <script src="..\..\includes\functions.js"></script>
-    <script src="../../scripts/fetchRecords.js"></script>
+    <!-- <script src="../../scripts/fetchRecords.js"></script> -->
+    <script src="../../scripts/searchfetch.js"></script>
     <script src="../../scripts/toggleLike.js"></script>
 
     <script>

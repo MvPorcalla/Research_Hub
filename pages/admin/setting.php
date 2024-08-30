@@ -161,7 +161,7 @@ if (!isset($_SESSION['user_type'])) {
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body">
-                                                <form action="../../backend/update_profile.php" method="post">
+                                                <form id="editForm" action="../../backend/update_profile.php" method="post">
                                                     <div class='text-start'>
                                                         <div class="row">
                                                             <div class="col-md-5 mb-3">
@@ -187,12 +187,12 @@ if (!isset($_SESSION['user_type'])) {
 
                                                         <div class="row">
                                                             <div class="col-md-6 mb-3">
-                                                                <label for="passwordField" class="form-label fw-bold">Password</label>
-                                                                <input type="password" class="form-control" id="passwordField" name="passwordField">
+                                                                <label for="password" class="form-label fw-bold">Password</label>
+                                                                <input type="password" class="form-control" id="password" name="password">
                                                             </div>
                                                             <div class="col-md-6 mb-3">
-                                                                <label for="conpasswordField" class="form-label fw-bold">Confirm Password</label>
-                                                                <input type="password" class="form-control" id="conpasswordField" name="conpasswordField">
+                                                                <label for="confirmPassword" class="form-label fw-bold">Confirm Password</label>
+                                                                <input type="password" class="form-control" id="confirmPassword" name="confirmPassword">
                                                             </div>
                                                         </div>
                                                     </div>

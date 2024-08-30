@@ -1,9 +1,3 @@
-const escapeHTML = str => str.replace(/&/g, "&amp;")
-.replace(/</g, "&lt;")
-.replace(/>/g, "&gt;")
-.replace(/"/g, "&quot;")
-.replace(/'/g, "&#039;");
-
 // shows sweet alert depending on paramName and its value
 function handleStatus(paramName) {
     const messages = {
@@ -317,10 +311,11 @@ function formatDateTime(timestamp) {
 
 function confirmPassword() {
     
-    const form = document.querySelector('form');
+    const form = document.getElementById('editForm');
     form.addEventListener('submit', function (e) {
-        const password = form.getElementById('password').value;
-        const confirmPassword = form.getElementById('confirmPassword').value;
+
+        const password = document.getElementById('password').value;
+        const confirmPassword = document.getElementById('confirmPassword').value;
 
         if (password !== confirmPassword) {
             e.preventDefault(); // Prevent form submission
@@ -354,23 +349,23 @@ function displayCommentTiles(data, commentsContainer, abstractId) {
         if (type === 'admin') {
             buttonHTML = `
                 <div class="d-flex flex-row align-items-center">
-                    <button class="btn px-0" onclick="window.location.href='../../backend/delete.php?abstract_id=${abstractId}&comment_id=${escapeHTML(dataRow.commentId)}'">
+                    <button class="btn px-0" onclick="window.location.href='../../backend/delete.php?abstract_id=${abstractId}&comment_id=${dataRow.commentId}'">
                         <i class="fas fa-trash mx-2 fa-xs text-body" style="margin-top: -0.16rem;"></i>
                     </button>
                 </div>
             `;
             likesHTML = `
                 <div class="d-flex flex-row align-items-center">
-                    <p><small>Likes: ${escapeHTML(dataRow.commentLikes)}</small></p>
+                    <p><small>Likes: ${dataRow.commentLikes}</small></p>
                 </div>
             `;
         } else {
             buttonHTML = `
                 <div class="likes-section d-flex flex-row align-items-center">
-                    <button class="btn like-button px-0" data-comment-id="${escapeHTML(dataRow.commentId)}">
+                    <button class="btn like-button px-0" data-comment-id="${dataRow.commentId}">
                         <i class="far fa-thumbs-up mx-2 fa-xs text-body" style="margin-top: -0.16rem;"></i>
                     </button>
-                    <p class="small text-muted mb-0 me-2">${escapeHTML(dataRow.commentLikes)}</p>
+                    <p class="small text-muted mb-0 me-2">${dataRow.commentLikes}</p>
                 </div>
             `;
         }
@@ -380,12 +375,12 @@ function displayCommentTiles(data, commentsContainer, abstractId) {
                 <div class="card-body">
                     <div class="d-flex justify-content-between mb-2">
                         <div class="d-flex flex-row align-items-center">
-                            <img src="../${escapeHTML(dataRow.userIdImage)}" alt="avatar" class="img-fluid rounded-circle" style="width: 25px; height: 25px;" />
-                            <p class="small mb-0 ms-2">${escapeHTML(dataRow.userName)}</p>
+                            <img src="../${dataRow.userIdImage}" alt="avatar" class="img-fluid rounded-circle" style="width: 25px; height: 25px;" />
+                            <p class="small mb-0 ms-2">${dataRow.userName}</p>
                         </div>
                         ${buttonHTML}
                     </div>
-                    <p class="text-start">${escapeHTML(dataRow.commentContent)}</p>
+                    <p class="text-start">${dataRow.commentContent}</p>
                     <div class="d-flex justify-content-between">
                         <div class="d-flex flex-row align-items-center">
                             <p title="${formattedDateTime}" style="cursor: pointer;"><small>${timePassed}</small></p>

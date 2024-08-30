@@ -8,6 +8,7 @@ if (!isset($_SESSION['user_type'])) {
     header("location: ../../backend/logout.php");
     exit;
 }
+include "..\..\backend\history.php";
 ?>
 
 <!DOCTYPE html>
