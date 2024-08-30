@@ -24,14 +24,14 @@ document.addEventListener('DOMContentLoaded', function() {
     };
 
     function fetchRecords(recordType, query = '') {
+        console.log('Fetching records with query:', query); // Debugging line
         
         return new Promise((resolve, reject) => {
-            console.log(`../../backend/searchfetch.php?record_type=${encodeURIComponent(recordType)}&query=${encodeURIComponent(query)}`);
             fetch(`../../backend/searchfetch.php?record_type=${encodeURIComponent(recordType)}&query=${encodeURIComponent(query)}`)
                 .then(response => response.json())
                 .then(data => {
                     console.log('Data received:', data); // Debugging line
-    
+
                     let rows = '';
     
                     if (data.length === 0) {
@@ -56,6 +56,8 @@ document.addEventListener('DOMContentLoaded', function() {
                                             </tr>
                                         `;
                                     } else {
+                                        console.log(`${highlightText(record.record_title, query)}`);
+                                        console.log(`${record.record_title}`);
                                         rows += `
                                             <div class="col-12 mb-2">
                                                 <div class="card">
@@ -64,7 +66,10 @@ document.addEventListener('DOMContentLoaded', function() {
                                                             <div class="col-md-2 d-flex align-items-center justify-content-center border-end">
                                                                 <img src="https://via.placeholder.com/75x100" class="img-fluid rounded-1" alt="${record.record_title}">
                                                             </div>
-                                                            <div class="col-md-8 d-flex align-items-center justify-content-start border-end">${highlightText(record.record_title, query)}</div>
+                                                            <div class="col-md-8 d-flex flex-column align-items-start justify-content-center border-end">
+                                                                <p class="mb-1">${highlightText(record.record_title, query)}</p>
+                                                                <small>${highlightText(record.record_authors, query)}</small>
+                                                            </div>
                                                             <div class="col-md-2 d-flex align-items-center justify-content-center">
                                                                 <button class="btn btn-outline-primary btn-sm mx-1" data-bs-toggle="modal" data-bs-target="#commentsModal" data-record-id="${record.record_id}" data-record-title="${record.record_title}">
                                                                     <i class="fas fa-comment"></i>
