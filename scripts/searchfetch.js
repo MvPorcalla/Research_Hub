@@ -1,11 +1,29 @@
 document.addEventListener('DOMContentLoaded', function() {
     const queryInput = document.querySelector('#query');
-    const tableBody = document.querySelector('#records-table tbody');
+    
+    let recordTableBody, lrnTableBody, studentTableBody, guestTableBody, recordType;
+    if (document.getElementById(`records-table`)) {
+        recordTableBody = document.querySelector(`#records-table tbody`);
+        recordType = 'record';
+    } else if (document.getElementById(`users-table`)) {
+        studentTableBody = document.querySelector(`#students-table tbody`);
+        guestTableBody = document.querySelector(`#guests-table tbody`);
+    } else if (document.getElementById(`lrns-table`)) {
+        lrnTableBody = document.querySelector(`#lrns-table tbody`);
+        recordType = 'lrn';
+    }
 
-    function fetchRecords(query = '') {
-        console.log('Fetching records with query:', query); // Debugging line
+    const tableBodies = {
+        record: recordTableBody,
+        student: studentTableBody,
+        guest: guestTableBody,
+        lrn: lrnTableBody
+    };
+
+    function fetchRecords(recordType, query = '') {
+        console.log(`../../backend/searchfetch.php?record_type=${encodeURIComponent(recordType)}&query=${encodeURIComponent(query)}`); // Debugging line
         
-        fetch(`../../backend/searchfetch.php?query=${encodeURIComponent(query)}`)
+        fetch(`../../backend/searchfetch.php?record_type=${encodeURIComponent(recordType)}&query=${encodeURIComponent(query)}`)
             .then(response => response.json())
             .then(data => {
                 console.log('Data received:', data); // Debugging line                
@@ -13,51 +31,78 @@ document.addEventListener('DOMContentLoaded', function() {
                 let rows = '';
 
                 if (data.length === 0) {
-                    rows = '<tr><td colspan="4">No records found.</td></tr>';
+                    rows = '<tr><td colspan="6">No records found.</td></tr>';
                 } else {
-                    data.forEach(record => {
-                        const month = Intl.DateTimeFormat('en', { month: 'long' }).format(new Date(record.record_month));
-                        rows += `
-                            <tr onclick="window.location.href='abstractView.php?abstractId=${record.record_id}';" style="cursor: pointer;">
-                                <td>${highlightText(record.record_title, query)}</td>
-                                <td>${highlightText(month + ' ' + record.record_year, query)}</td>
-                                <td>${highlightText(record.record_authors, query)}</td>
-                                <td>${highlightText(record.record_trackstrand, query)}</td>
-                                <td>
-                                    <a href="abstract.php?abstractId=${record.record_id}" class="btn btn-primary btn-sm"><i class='fas fa-edit'></i></a>
-                                    <a href="../../backend/delete.php?abstractId=${record.record_id}" class="btn btn-danger btn-sm delete-button"><i class='fas fa-trash-alt'></i></a>
-                                </td>
-                            </tr>
-                        `;
-                    });
+                    switch (recordType) {
+                        case 'record':
+                            data.forEach(record => {
+                                const month = Intl.DateTimeFormat('en', { month: 'long' }).format(new Date(record.record_month));
+                                rows += `
+                                    <tr onclick="window.location.href='abstractView.php?abstractId=${record.record_id}';" style="cursor: pointer;">
+                                        <td>${highlightText(record.record_title, query)}</td>
+                                        <td>${highlightText(month + ' ' + record.record_year, query)}</td>
+                                        <td>${highlightText(record.record_authors, query)}</td>
+                                        <td>${highlightText(record.record_trackstrand, query)}</td>
+                                        <td>
+                                            <a href="abstract.php?abstractId=${record.record_id}" class="btn btn-primary btn-sm"><i class='fas fa-edit'></i></a>
+                                            <a href="../../backend/delete.php?abstractId=${record.record_id}" class="btn btn-danger btn-sm delete-button"><i class='fas fa-trash-alt'></i></a>
+                                        </td>
+                                    </tr>
+                                `;
+                            });
+                            break;
+                        case 'student':
+                            data.forEach(record => {
+                                rows += `
+                                    <tr>
+                                        <td>${highlightText(record.user_lastname, query)}</td>
+                                        <td>${highlightText(record.user_firstname, query)}</td>
+                                        <td>${highlightText(record.user_mi, query)}</td>
+                                        <td>${highlightText(record.lrn_lrnid, query)}</td>
+                                        <td>${highlightText(record.user_trackstrand, query)}</td>
+                                        <td>
+                                            <a href="../../backend/delete.php?userId=${record.user_id}" class="btn btn-danger btn-sm delete-button"><i class='fas fa-trash-alt'></i></a>
+                                        </td>
+                                    </tr>
+                                `;
+                            });
+                            break;
+                        case 'guest':
+                            data.forEach(record => {
+                                rows += `
+                                    <tr>
+                                        <td>${highlightText(record.user_lastname, query)}</td>
+                                        <td>${highlightText(record.user_firstname, query)}</td>
+                                        <td>${highlightText(record.user_mi, query)}</td>
+                                        <td>${highlightText(record.user_school, query)}</td>
+                                        <td>
+                                            <a href="../../backend/delete.php?userId=${record.user_id}" class="btn btn-danger btn-sm delete-button"><i class='fas fa-trash-alt'></i></a>
+                                        </td>
+                                    </tr>
+                                `;
+                            });
+                            break;
+                        case 'lrn':
+                            data.forEach(record => {
+                                rows += `
+                                    <tr>
+                                        <td>${highlightText(record.lrn_student, query)}</td>
+                                        <td>${highlightText(record.lrn_lrnid, query)}</td>
+                                        <td>
+                                            <a href="lrn.php?lrnId=${record.lrn_id}" class="btn btn-primary btn-sm"><i class='fas fa-edit'></i></a>
+                                            <a href="../../backend/delete.php?lrnId=${record.lrn_id}" class="btn btn-danger btn-sm delete-button"><i class='fas fa-trash-alt'></i></a>
+                                        </td>
+                                    </tr>
+                                `;
+                            });
+                            break;
+                    }
                 }
 
-                tableBody.innerHTML = rows;
+                tableBodies[recordType].innerHTML = rows;
             })
             .catch(error => {
                 console.error('Error fetching records:', error);
-            });
-    }
-
-    function fetchSuggestions(query) {
-        if (query.length < 2) {
-            queryInput.placeholder = 'Search...'; // Default placeholder
-            return;
-        }
-
-        fetch(`searchSuggestion.php?query=${encodeURIComponent(query)}`)
-            .then(response => response.json())
-            .then(data => {
-                if (data.length > 0) {
-                    // Combine suggestions into a single string
-                    const suggestions = data.map(item => item).join(', ');
-                    queryInput.placeholder = `Suggestions: ${suggestions}`; // Update placeholder with suggestions
-                } else {
-                    queryInput.placeholder = 'No suggestions available'; // Placeholder when no suggestions
-                }
-            })
-            .catch(error => {
-                console.error('Error fetching suggestions:', error);
             });
     }
 
@@ -68,17 +113,31 @@ document.addEventListener('DOMContentLoaded', function() {
         return text.replace(regex, '<strong>$1</strong>');
     }
 
-    fetchRecords('');
+    if (document.getElementById(`users-table`)) {
+        fetchRecords('student');
+        fetchRecords('guest');
+    } else {
+        fetchRecords(recordType);
+    }
 
     queryInput.addEventListener('input', function() {
         const query = queryInput.value.trim();
-        fetchSuggestions(query); // Fetch suggestions based on the current query
-        fetchRecords(query); // Fetch records based on the current query
+        if (document.getElementById(`users-table`)) {
+            fetchRecords('student', query);
+            fetchRecords('guest', query);
+        } else {
+            fetchRecords(recordType, query);
+        }
     });
 
     document.querySelector('#search-form').addEventListener('submit', function(event) {
         event.preventDefault();
         const query = queryInput.value.trim();
-        fetchRecords(query); // Fetch records based on the search query when the form is submitted
+        if (document.getElementById(`users-table`)) {
+            fetchRecords('student', query);
+            fetchRecords('guest', query);
+        } else {
+            fetchRecords(recordType, query);
+        }
     });
 });

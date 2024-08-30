@@ -102,6 +102,7 @@
                                             <th>Title</th>
                                             <th>Month Year</th>
                                             <th>Author</th>
+                                            <th>Track/Strand</th>
                                             <th>Actions</th>
                                         </tr>
                                     </thead>
@@ -125,6 +126,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
 
     <!-- Include the search script -->
-    <script src="searchfetch.js"></script>
+    <script src="../../scripts/searchfetch.js"></script>
 </body>
 </html>
