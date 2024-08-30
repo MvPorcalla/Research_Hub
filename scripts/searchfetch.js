@@ -44,11 +44,11 @@ document.addEventListener('DOMContentLoaded', function() {
                                     if (url.includes('admin')) {
                                         const month = Intl.DateTimeFormat('en', { month: 'long' }).format(new Date(2024, record.record_month - 1));
                                         rows += `
-                                            <tr onclick="window.location.href='abstractView.php?abstractId=${record.record_id}';" style="cursor: pointer;">
+                                            <tr onclick="if (!event.target.closest('a')) { window.location.href='abstractView.php?abstractId=${record.record_id}'; }" style="cursor: pointer;">
                                                 <td>${highlightText(record.record_title, query)}</td>
-                                                <td>${highlightText(month + ' ' + record.record_year, query)}</td>
+                                                <td>${month + ' ' + record.record_year}</td>
                                                 <td>${highlightText(record.record_authors, query)}</td>
-                                                <td>${highlightText(record.record_trackstrand, query)}</td>
+                                                <td>${record.record_trackstrand}</td>
                                                 <td>
                                                     <a href="abstract.php?abstractId=${record.record_id}" class="btn btn-primary btn-sm"><i class='fas fa-edit'></i></a>
                                                     <a href="../../backend/delete.php?abstractId=${record.record_id}" class="btn btn-danger btn-sm delete-button"><i class='fas fa-trash-alt'></i></a>
@@ -56,8 +56,6 @@ document.addEventListener('DOMContentLoaded', function() {
                                             </tr>
                                         `;
                                     } else {
-                                        console.log(`${highlightText(record.record_title, query)}`);
-                                        console.log(`${record.record_title}`);
                                         rows += `
                                             <div class="col-12 mb-2">
                                                 <div class="card">
@@ -138,6 +136,34 @@ document.addEventListener('DOMContentLoaded', function() {
                     }
     
                     tableBodies[recordType].innerHTML = rows;
+
+                    let options = '';
+                    switch (recordType) {
+                        case 'record':
+                            options = {
+                                multiTd: false,
+                                actionText: "You are about to delete",
+                                confirmButtonText: "Delete"
+                            };
+                            break;
+                        case 'lrn':
+                            options = {
+                                multiTd: false,
+                                actionText: "You are about to delete the LRN of:",
+                                confirmButtonText: "Delete"
+                            };
+                            break;
+                        default:
+                            options = {
+                                multiTd: true,
+                                tdCount: 3, // Number of <td> elements to extract text from
+                                actionText: "You are about to deactivate the account of",
+                                confirmButtonText: "Deactivate"
+                            };
+                            break;
+        
+                    }
+                    setupConfirmationDialog('.delete-button', options);
     
                     // Resolve the promise after data has been processed
                     resolve();

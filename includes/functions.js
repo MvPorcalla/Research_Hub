@@ -254,8 +254,8 @@ function setupConfirmationDialog(buttonSelector, options) {
                 html: alertText,
                 icon: 'warning',
                 showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
                 confirmButtonText: options.confirmButtonText
             }).then((result) => {
                 if (result.isConfirmed) {
