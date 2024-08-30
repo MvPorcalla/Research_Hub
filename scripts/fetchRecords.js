@@ -429,7 +429,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                 const icon = button.querySelector('svg');
     
                                 if (data.like_status == 'A') {
-                                    console.log('yep here');
+
                                     icon.classList.add('liked');
                                 } else {
                                     icon.classList.remove('liked');

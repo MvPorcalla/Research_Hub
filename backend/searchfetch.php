@@ -19,16 +19,13 @@
                 $sql .= "  AND (
                                 `record_title` LIKE ?
                                 OR `record_authors` LIKE ?
-                                OR `record_year` LIKE ?
-                                OR `record_month` LIKE ?
-                                OR `record_trackstrand` LIKE ?
                             )";
-            $sql .= "ORDER BY `record_year` DESC, `record_month` DESC";
             }
+            $sql .= "   ORDER BY `record_year` DESC, `record_month` DESC";
 
             $stmt = $conn->prepare($sql);
             if ($query !== '') {
-                $stmt->bind_param("sssss", $search_query, $search_query, $search_query, $search_query, $search_query);
+                $stmt->bind_param("ss", $search_query, $search_query);
             }
             $stmt->execute();
             $result = $stmt->get_result();
@@ -58,6 +55,7 @@
                                 OR u.`user_trackstrand` LIKE ?
                             )";
             }
+            $sql .= "   ORDER BY `user_id` DESC";
 
             $stmt = $conn->prepare($sql);
             if ($query !== '') {
@@ -89,6 +87,7 @@
                                 OR `user_school` LIKE ?
                             )";
             }
+            $sql .= "   ORDER BY `user_id` DESC";
 
             $stmt = $conn->prepare($sql);
             if ($query !== '') {
@@ -118,6 +117,7 @@
                                 OR `lrn_lrnid` LIKE ?
                             )";
             }
+            $sql .= "   ORDER BY `lrn_id` DESC";
 
             $stmt = $conn->prepare($sql);
             if ($query !== '') {
