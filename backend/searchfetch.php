@@ -4,39 +4,74 @@
     // Database connection
     include_once "../includes/db.php";
 
-    // Get the search query
-    $query = isset($_GET['query']) ? trim($_GET['query']) : '';
+// Get the search query and filters
+$query = isset($_GET['query']) ? trim($_GET['query']) : '';
+$month = isset($_GET['month']) ? trim($_GET['month']) : '';
+$year = isset($_GET['year']) ? trim($_GET['year']) : '';
+$track = isset($_GET['track']) ? trim($_GET['track']) : '';
 
-    if (isset($_GET['record_type'])) {
-        if ($_GET['record_type'] == 'record') {
+$data = [];
 
-            // Only include the WHERE clause if there's a query
-            $sql = "SELECT * 
-                    FROM `records` 
-                    WHERE `record_status` = 'A'";
-            if ($query !== '') {
-                $search_query = "%" . $conn->real_escape_string($query) . "%";
-                $sql .= "  AND (
-                                `record_title` LIKE ?
-                                OR `record_authors` LIKE ?
-                            )";
-            }
-            $sql .= "   ORDER BY `record_year` DESC, `record_month` DESC";
+if (isset($_GET['record_type'])) {
+    if ($_GET['record_type'] == 'record') {
+        $sql = "SELECT * FROM `records` WHERE `record_status` = 'A'";
 
-            $stmt = $conn->prepare($sql);
-            if ($query !== '') {
-                $stmt->bind_param("ss", $search_query, $search_query);
-            }
-            $stmt->execute();
-            $result = $stmt->get_result();
-            $data = [];
+        // Add conditions to the SQL query
+        if ($query !== '') {
+            $search_query = "%" . $conn->real_escape_string($query) . "%";
+            $sql .= " AND (
+                            `record_title` LIKE ?
+                            OR `record_authors` LIKE ?
+                        )";
+        }
+        if ($month !== '') {
+            $sql .= " AND `record_month` = ?";
+        }
+        if ($year !== '') {
+            $sql .= " AND `record_year` = ?";
+        }
+        if ($track !== '') {
+            $sql .= " AND `record_trackstrand` = ?";
+        }
 
-            while ($row = $result->fetch_assoc()) {
-                $data[] = $row;
-            }
+        $sql .= " ORDER BY `record_year` DESC, FIELD(`record_month`, 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December') DESC";
 
-            $stmt->close();
-            $conn->close();
+        // Prepare and bind parameters
+        $stmt = $conn->prepare($sql);
+        $params = [];
+        $types = '';
+
+        if ($query !== '') {
+            $params[] = $search_query;
+            $params[] = $search_query;
+            $types .= "ss";
+        }
+        if ($month !== '') {
+            $params[] = $month;
+            $types .= "s";
+        }
+        if ($year !== '') {
+            $params[] = $year;
+            $types .= "s";
+        }
+        if ($track !== '') {
+            $params[] = $track;
+            $types .= "s";
+        }
+
+        if ($types) {
+            $stmt->bind_param($types, ...$params);
+        }
+
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        while ($row = $result->fetch_assoc()) {
+            $data[] = $row;
+        }
+
+        $stmt->close();
+        $conn->close();
 
         } else if ($_GET['record_type'] == 'student') {
 
