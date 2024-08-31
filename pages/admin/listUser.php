@@ -107,7 +107,10 @@ if (!isset($_SESSION['user_type'])) {
                                 </ul>
                             </div>
 
-                            <?php include './../admin/components/searchbar.php' ?>
+                            <div class="col-md-7">
+                                <?php include './../admin/components/searchbar.php' ?>
+                            </div>
+                            
                         </div>
 
 

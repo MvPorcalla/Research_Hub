@@ -61,31 +61,46 @@ if (!isset($_SESSION['user_type'])) {
                 <div class="container">
                     <div class="row">
                         <div class="my-3">
-                            <h1 class="admin_title">Research Records</h1>
+                            <h1 class="admin_title text-center">Research Records</h1>
                         </div>
 
-                        <!-- Search Bar -->
-                        <div class="row">
-                            <div class="col-md-3 d-flex justify-content-start">
+                        <!-- Search Bar and Filters -->
+                        <div class="row align-items-center">
+                            <!-- Add Button -->
+                            <div class="col-md-1">
                                 <a href="./abstract.php" class="btn btn-secondary px-3">Add</a>
                             </div>
 
-                            <!-- Filter Dropdown -->
-                            <div class="col-md-2">
-                                <select class="form-select rounded-pill" id="filter" aria-label="Filter">
-                                    <option value="all">All</option>
-                                    <option value="title">Title</option>
-                                    <option value="year">Year</option>
-                                    <option value="month">Month</option>
-                                    <option value="author">Author</option>
-                                    <option value="strand">Strand</option>
-                                </select>
+                            <!-- Filter Dropdowns -->
+                            <div class="col-md-6 d-flex justify-content-end">
+                                <div class="d-flex align-items-center">
+                                    <div class="">
+                                        <select id="monthFilter" class="form-select">
+                                            <option value="">All Month</option>
+                                            <!-- Options will be dynamically added here -->
+                                        </select>
+                                    </div>
+                                    <div class="mx-1">
+                                        <select id="yearFilter" class="form-select">
+                                            <option value="">All Year</option>
+                                            <!-- Options will be dynamically added here -->
+                                        </select>
+                                    </div>
+                                    <div class="">
+                                        <select id="trackFilter" class="form-select">
+                                            <option value="">All Strand</option>
+                                            <!-- Options will be dynamically added here -->
+                                        </select>
+                                    </div>
+                                </div>
                             </div>
 
-                            <?php include './../admin/components/searchbar.php' ?>
-                          
-
+                            <!-- Search Bar -->
+                            <div class="col-md-5">
+                                <?php include './../admin/components/searchbar.php'; ?>
+                            </div>
                         </div>
+
 
                         <!-- Content Table -->
                         <div class="container mt-3 side-container">

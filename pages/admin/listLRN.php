@@ -99,7 +99,9 @@ if (!isset($_SESSION['user_type'])) {
                             </div>
                             
 
-                            <?php include './../admin/components/searchbar.php' ?>
+                            <div class="col-md-7">
+                                <?php include './../admin/components/searchbar.php' ?>
+                            </div>
 
                             <!-- Modal -->
                             <div class="modal fade" id="importModal" tabindex="-1" aria-labelledby="importModalLabel" aria-hidden="true">

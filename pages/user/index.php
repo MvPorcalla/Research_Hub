@@ -120,8 +120,33 @@ if (!isset($_SESSION['user_type'])) {
                     <div class="row">
 
                         <!-- Search Bar -->
-                        <div class="row my-4 justify-content-end">
-                            <div class="col-md-7">
+                        <div class="row my-4">
+                             <!-- Filter Dropdowns -->
+                             <div class="col-md-6 d-flex justify-content-end">
+                                <div class="d-flex align-items-center">
+                                    <div class="">
+                                        <select id="monthFilter" class="form-select">
+                                            <option value="">All Month</option>
+                                            <!-- Options will be dynamically added here -->
+                                        </select>
+                                    </div>
+                                    <div class="mx-1">
+                                        <select id="yearFilter" class="form-select">
+                                            <option value="">All Year</option>
+                                            <!-- Options will be dynamically added here -->
+                                        </select>
+                                    </div>
+                                    <div class="">
+                                        <select id="trackFilter" class="form-select">
+                                            <option value="">All Strand</option>
+                                            <!-- Options will be dynamically added here -->
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                             <!-- Search Bar -->
+                            <div class="col-md-6">
                                 <div class="d-flex">
                                     <form id="search-form" class="d-flex w-100">
                                         <div class="input-group">
