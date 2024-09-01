@@ -7,6 +7,7 @@
     <title>FORGOT PASSWORD - LNHS Research Hub</title>
     <link rel="icon" href="./assets/icons/LNHS-icon.png" type="image/png">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="css/mainStyle.css">
 
     <style>
@@ -24,25 +25,34 @@
     ?>
 
     <main>
-        <!-- Login Section -->
+        <!-- Forgot Password Section -->
         <div class="container d-flex justify-content-center align-items-center">
             <div class="card login-card">
                 <div class="card-body p-4">
+
                     <h3 class="login_card-title text-center mb-4">Forgot Password</h3>
-                    <form action="backend\forgot_password.php" method="POST">
-                        <div class="">
-                            <label for="email" class="form-label">Enter your email address</label>
-                            <input type="email" class="form-control" id="email" name="email" placeholder="Enter Email"
-                                required>
+                    <form id="forgotPasswordForm" action="" method="POST">
+
+                        <input type="text" class="form-control" name="website_name" required value="Research Hub" hidden>
+                        <input type="text" class="form-control" id="user_firstname" name="user_firstname" hidden>
+
+                        <div class="my-5">
+                            <label for="email" class="form-label">Email Address</label>
+                            <input type="email" class="form-control" id="email" name="user_email" placeholder="Enter your email address" required>
                         </div>
 
-                        <div class="d-grid mt-5">
-                            <button type="submit" class="btn btn-primary">Send Reset Password Link</button>
+                        <input type="text" class="form-control" id="reset_link" name="reset_link" hidden>
+
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary" id="resetButton">Send Reset Password Link</button>
                         </div>
+
                         <div class="card-footer text-center">
                             <small> <a href="./login.php">Go back</a></small>
                         </div>
+
                     </form>
+
                 </div>
             </div>
         </div>
@@ -53,7 +63,9 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="scripts\forgotPassword.js"></script>
     <script src="includes\functions.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
