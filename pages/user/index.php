@@ -130,7 +130,7 @@ if (!isset($_SESSION['user_type'])) {
                                             <!-- Options will be dynamically added here -->
                                         </select>
                                     </div>
-                                    <div class="mx-1">
+                                    <div class="mx-2">
                                         <select id="yearFilter" class="form-select">
                                             <option value="">All Year</option>
                                             <!-- Options will be dynamically added here -->
