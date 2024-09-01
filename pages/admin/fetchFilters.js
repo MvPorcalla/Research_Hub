@@ -1,56 +1,42 @@
-// populate the Filters
+// fetchFilters.js
 
-const monthFilter = document.getElementById('monthFilter');
-const yearFilter = document.getElementById('yearFilter');
-const trackFilter = document.getElementById('trackFilter');
+document.addEventListener('DOMContentLoaded', () => {
+    const monthFilter = document.getElementById('monthFilter');
+    const yearFilter = document.getElementById('yearFilter');
+    const trackFilter = document.getElementById('trackFilter');
 
-const monthNames = [
-    "January", "February", "March", "April", "May", "June",
-    "July", "August", "September", "October", "November", "December"
-];
+    // Function to populate select elements
+    function populateSelect(selectElement, items, type = 'text') {
+        selectElement.innerHTML = '<option value="">All</option>';
 
-async function fetchFilters() {
-    try {
-        const response = await fetch('fetchFilters.php');
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-        const data = await response.json();
-        populateFilters(data);
-    } catch (error) {
-        console.error('Error fetching filters:', error);
+        items.forEach(item => {
+            const option = document.createElement('option');
+
+            if (type === 'month') {
+                const monthName = new Intl.DateTimeFormat('en', { month: 'long' }).format(new Date(2024, item - 1));
+                option.value = item;
+                option.textContent = monthName;
+            } else {
+                option.value = item;
+                option.textContent = item;
+            }
+
+            selectElement.appendChild(option);
+        });
     }
-}
 
-function populateFilters(data) {
-    // Populate month filter
-    data.months.forEach(monthNumber => {
-        const option = document.createElement('option');
-        option.value = monthNumber;
-        option.textContent = getMonthName(monthNumber);
-        monthFilter.appendChild(option);
-    });
+    // Fetch and populate filters
+    function populateFilters() {
+        fetch('fetchFilters.php')
+            .then(response => response.json())
+            .then(data => {
+                populateSelect(monthFilter, data.months, 'month');
+                populateSelect(yearFilter, data.years);
+                populateSelect(trackFilter, data.tracks);
+            })
+            .catch(error => console.error('Error fetching filters:', error));
+    }
 
-    // Populate year filter
-    data.years.forEach(year => {
-        const option = document.createElement('option');
-        option.value = year;
-        option.textContent = year;
-        yearFilter.appendChild(option);
-    });
-
-    // Populate track/strand filter
-    data.tracks.forEach(track => {
-        const option = document.createElement('option');
-        option.value = track;
-        option.textContent = track;
-        trackFilter.appendChild(option);
-    });
-}
-
-function getMonthName(monthNumber) {
-    return monthNames[monthNumber - 1] || "Unknown";
-}
-
-// Fetch filters on page load
-fetchFilters();
+    // Fetch filters on page load
+    populateFilters();
+});

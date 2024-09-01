@@ -10,7 +10,7 @@ include_once "../../includes/db.php";
 $monthSql = "SELECT DISTINCT record_month
              FROM records
              WHERE record_status = 'A'
-             ORDER BY FIELD(record_month, 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December')";
+             ORDER BY FIELD(record_month, '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12')";
 
 $monthResult = $conn->query($monthSql);
 $months = [];
