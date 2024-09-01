@@ -71,6 +71,7 @@
                 <tr>
                     <th>Title</th>
                     <th>Month Year</th>
+                    <th>Author</th>
                     <th>Track/Strand</th>
                 </tr>
             </thead>
@@ -130,15 +131,22 @@
                     const row = dataTable.insertRow();
                     row.insertCell(0).textContent = item.record_title;
                     row.insertCell(1).textContent = item.record_month + ' ' + item.record_year;
-                    row.insertCell(2).textContent = item.record_trackstrand;
+                    row.insertCell(2).textContent = item.record_authors;
+                    row.insertCell(3).textContent = item.record_trackstrand;
                 });
             } else {
                 const row = dataTable.insertRow();
                 const cell = row.insertCell(0);
-                cell.colSpan = 3;
+                cell.colSpan = 4;
                 cell.textContent = 'No records found';
                 cell.classList.add('text-center');
             }
+        }
+
+        function getMonthName(monthNumber) {
+            const date = new Date();
+            date.setMonth(monthNumber - 1);
+            return date.toLocaleString('en-US', { month: 'long' });
         }
 
         // Fetch data when the filters change
