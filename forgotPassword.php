@@ -69,7 +69,7 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            handleStatus('reset');
+            handleStatus('token');
         });
     </script>
 </body>

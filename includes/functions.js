@@ -39,17 +39,24 @@ function handleStatus(paramName) {
                 text: "Your LRN does not exist in the database."
             }
         },
+        'token': {
+            "invalid": {
+                icon: "warning",
+                title: "Password Reset Link Invalid",
+                text: "The link you have accessed is no longer valid. Please try again."
+            }
+        },
         'reset': {
             "success": {
                 icon: "success",
-                title: "Password Reset Link Sent!",
-                text: "The link will be sent you shortly. Please check your email."
+                title: "Password Reset Success!",
+                text: "Please continue with your login."
             },
             "failed": {
                 icon: "error",
                 title: "Password Reset Failed",
-                text: "No account found with that email address."
-            }
+                html: "Something went wrong. Please try again.<hr><small>If problem persists, request for another reset link.</small>"
+            },
         },
         'addRecord': {
             "success": {
@@ -336,7 +343,7 @@ function formatDateTime(timestamp) {
 
 function confirmPassword() {
     
-    const form = document.getElementById('editForm');
+    const form = document.getElementById('formWithPassword');
     form.addEventListener('submit', function (e) {
 
         const password = document.getElementById('password').value;

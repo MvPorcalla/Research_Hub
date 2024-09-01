@@ -31,7 +31,7 @@
                             <div class="card bg-transparent">
 
                                 <div class="card-body mx-5">
-                                    <form action="backend\register.php" method="POST" enctype="multipart/form-data">
+                                    <form id="formWithPassword" action="backend\register.php" method="POST" enctype="multipart/form-data">
                                         <!-- Role -->
                                         <div class="row mb-3" hidden>
                                             <label for="role" class="form-label">Role</label>
