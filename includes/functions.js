@@ -178,10 +178,11 @@ function handleStatus(paramName) {
     let message; // Initialize message variable
 
     if (status) {
-        if (paramName === 'existingRecords') {
+        if (paramName === 'exceptions') {
             const parts = status.split("-");
             const existingData = parts[0];
-            const totalData = parts[1];
+            const notTwelveData = parts[1];
+            const totalData = parts[2];
     
             if (existingData == totalData) {
                 message = {
@@ -189,11 +190,35 @@ function handleStatus(paramName) {
                     title: "Records Already Exists",
                     text: `The records within the file already exists in the list.`
                 };
+            } else if (notTwelveData == totalData) {
+                message = {
+                    icon: "warning",
+                    title: "Records Not Imported!",
+                    text: `The records within the file does not follow the 12-digit format of LRNs.`
+                };
+            } else if (Number(existingData) == 0) {
+                message = {
+                    icon: "warning",
+                    title: "Records Imported!",
+                    html: `Successfully imported file records to the list.<hr><small><em>There were <strong>${notTwelveData} non-12-digit LRN(s)</strong> out of <strong>${totalData} records</strong>. Please <strong>fix</strong> format of non-12-digit LRNs and try again.</em></small>`
+                };
+            } else if (Number(notTwelveData) == 0) {
+                message = {
+                    icon: "info",
+                    title: "Records Imported!",
+                    html: `Successfully imported file records to the list.<hr><small><em>There were <strong>${existingData} existing record(s)</strong> out of <strong>${totalData} records</strong>.</em></small>`
+                };
+            } else if (Number(existingData) + Number(notTwelveData) == Number(totalData)) {
+                message = {
+                    icon: "info",
+                    title: "Records Not Imported!",
+                    html: `There were <strong>${existingData} existing record(s)</strong> and <strong>${notTwelveData} non-12-digit LRN(s)</strong> out of <strong>${totalData} records</strong>. Please <strong>fix</strong> format of non-12-digit LRNs and try again.</small>`
+                };
             } else {
                 message = {
-                    icon: "success",
+                    icon: "info",
                     title: "Records Imported!",
-                    html: `Successfully imported file records to the list.<br><small>There were ${existingData} existing record(s) out of ${totalData} records.</small>`
+                    html: `<strong>Successfully imported file records to the list.</strong><hr><small>There were <strong>${existingData} existing record(s)</strong> and <strong>${notTwelveData} non-12-digit LRN(s)</strong> out of <strong>${totalData} records</strong>. Please <strong>fix</strong> format of non-12-digit LRNs and try again.</small>`
                 };
             }
         } else {
@@ -254,8 +279,8 @@ function setupConfirmationDialog(buttonSelector, options) {
                 html: alertText,
                 icon: 'warning',
                 showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
                 confirmButtonText: options.confirmButtonText
             }).then((result) => {
                 if (result.isConfirmed) {

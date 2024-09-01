@@ -9,11 +9,28 @@ document.addEventListener('DOMContentLoaded', () => {
             for (const [date, recordsOnDate] of Object.entries(dataByDate)) {
                 const div = document.createElement('div');
                 div.classList.add('mb-4');
+
+                const storedDate = new Date(date);
+
+                const today = new Date();
+                
+                const yesterday = new Date();
+                yesterday.setDate(yesterday.getDate() - 1);
+
+                const dateOptions = {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric',
+                };
+                const formattedDate = storedDate.toLocaleDateString('en-US', dateOptions);
+
+                const isToday = today.toDateString() === storedDate.toDateString();
+                const isYesterday = yesterday.toDateString() === storedDate.toDateString();
                 
                 // Date header
                 const dateHeader = document.createElement('div');
                 dateHeader.classList.add('text-start', 'text-muted', 'mb-2');
-                dateHeader.innerHTML = `<strong>Date: ${date}</strong>`;
+                dateHeader.innerHTML = isToday ? `<strong>Today<strong>` : isYesterday ? `<strong>Yesterday<strong>` : `<strong>${formattedDate}</strong>`;
                 div.appendChild(dateHeader);
 
                 // Table element

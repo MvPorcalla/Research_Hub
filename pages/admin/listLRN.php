@@ -171,7 +171,7 @@ if (!isset($_SESSION['user_type'])) {
             handleStatus('editRecord');
             handleStatus('deleteRecord');
             handleStatus('importRecords');
-            handleStatus('existingRecords');
+            handleStatus('exceptions');
         });
     </script>
 </body>
