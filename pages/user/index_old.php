@@ -193,9 +193,11 @@ if (!isset($_SESSION['user_type'])) {
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
     <script src="..\..\includes\functions.js"></script>
     
+    <script src="../../scripts/searchfetch.js"></script>
     <script src="../../scripts/toggleLike.js"></script>
-    <script src="../../scripts/fetchAbstract.js"></script>
+
     <script src="../../scripts/fetchFilters.js"></script>
+
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
@@ -203,6 +205,6 @@ if (!isset($_SESSION['user_type'])) {
             handleStatus('comment');
         });
     </script>
-    
 </body>
+
 </html>

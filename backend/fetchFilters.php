@@ -4,7 +4,7 @@ ini_set('display_errors', 1);
 header('Content-Type: application/json');
 
 // Database connection
-include_once "../../includes/db.php";
+include_once "../includes/db.php";
 
 // Prepare SQL query to get distinct months
 $monthSql = "SELECT DISTINCT record_month
