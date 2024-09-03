@@ -34,8 +34,25 @@ document.addEventListener('DOMContentLoaded', function() {
 
                     let rows = '';
     
+                    const isAdmin = window.location.href.includes('admin');
                     if (data.length === 0) {
-                        rows = '<tr><td colspan="6">No records found.</td></tr>';
+                        if (isAdmin) {
+                            // If no data and admin, display a table row indicating no records
+                            rows = '<tr><td colspan="5" class="text-center">No Abstract Records Found.</td></tr>';
+                            // Update the table body with the message
+                            const tableBody = document.querySelector('#tableBodyId'); // Adjust the selector as needed
+                            if (tableBody) {
+                                tableBody.innerHTML = rows;
+                            }
+                        } else {
+                            // If no data and not admin, display a message in a div
+                            rows = '<div class="col-12 text-center">No Abstract Records Found.</div>';
+                            // Update the container with the message
+                            const container = document.querySelector('#containerId'); // Adjust the selector as needed
+                            if (container) {
+                                container.innerHTML = rows;
+                            }
+                        }
                     } else {
                         switch (recordType) {
                             case 'record':

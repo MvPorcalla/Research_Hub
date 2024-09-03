@@ -15,7 +15,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
         fetch(`../../backend/searchfetch.php?query=${encodeURIComponent(query)}&month=${encodeURIComponent(month)}&year=${encodeURIComponent(year)}&track=${encodeURIComponent(track)}&record_type=record`)
             .then(response => response.json())
-            .then(populateTable)
+            .then(data => {
+                populateTable(data);
+                handleAfterFetch(); // Call handleAfterFetch after populating the table
+            })
             .catch(error => {
                 console.error('Error fetching data:', error);
                 tableBody.innerHTML = '<div class="col-12 text-center">Error fetching data. Please try again later.</div>';
@@ -30,9 +33,9 @@ document.addEventListener('DOMContentLoaded', () => {
         const isAdmin = window.location.href.includes('admin');
         if (data.length === 0) {
             if (isAdmin) {
-                tableBody.innerHTML = '<tr><td colspan="5" class="text-center">No Abstract Records Available.</td></tr>';
+                tableBody.innerHTML = '<tr><td colspan="5" class="text-center">No Abstract Records Found.</td></tr>';
             } else {
-                tableBody.innerHTML = '<div class="col-12 text-center">No Abstract Records Available.</div>';
+                tableBody.innerHTML = '<div class="col-12 text-center">No Abstract Records Found.</div>';
             }
             return;
         }
@@ -66,6 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                     <div class="col-md-8 d-flex flex-column align-items-start justify-content-center border-end">
                                         <p class="mb-1">${highlightText(record.record_title, query)}</p>
                                         <small>${highlightText(record.record_authors, query)}</small>
+                                        <small>${record.record_trackstrand}</small>
                                     </div>
                                     <div class="col-md-2 d-flex align-items-center justify-content-center">
                                         <button class="btn btn-outline-primary btn-sm mx-1" data-bs-toggle="modal" data-bs-target="#commentsModal" data-record-id="${record.record_id}" data-record-title="${record.record_title}">
@@ -87,7 +91,109 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         tableBody.innerHTML = rows;
+        
     };
+
+    function handleAfterFetch() {
+        console.log("handleAfterFetch function called");
+
+        var url = window.location.href;
+        console.log("Current URL: ", url);
+
+    
+        if (url.includes('pages/user/index.php')) {
+            const updateButtonStatuses = () => {
+                let userIdElement = document.getElementById('abstractTiles');
+                const userId = userIdElement ? userIdElement.getAttribute('data-user-id') : null;
+                const buttons = document.querySelectorAll('.like-button');
+                
+                const requests = Array.from(buttons).map(button => {
+                    const abstractId = button.getAttribute('data-record-id');
+                    const commentId = button.getAttribute('data-comment-id');
+
+                    if (abstractId) {
+                        return fetch(`../../backend/get_like_status.php?record_type=record&recordId=${abstractId}&userId=${userId}`)
+                            .then(response => response.json())
+                            .then(data => {
+                                if (data.like_status === 'A') {
+                                    button.classList.add('btn-danger');
+                                    button.classList.remove('btn-outline-danger');
+                                } else {
+                                    button.classList.add('btn-outline-danger');
+                                    button.classList.remove('btn-danger');
+                                }
+                            })
+                            .catch(error => {
+                                console.error('Error fetching like status:', error);
+                            });
+    
+                    } else if (commentId) {
+                        return fetch(`../../backend/get_like_status.php?record_type=comment&recordId=${commentId}&userId=${userId}`)
+                            .then(response => response.json())
+                            .then(data => {
+                                const icon = button.querySelector('svg');
+                                if (data.like_status == 'A') {
+                                    icon.classList.add('liked');
+                                } else {
+                                    icon.classList.remove('liked');
+                                }
+                            })
+                            .catch(error => {
+                                console.error('Error fetching like status:', error);
+                            });
+                    }
+                });
+        
+                // Ensure all requests are completed
+                Promise.all(requests).then(() => {
+                    console.log('All like statuses updated');
+                });
+            };
+    
+            // Call the function to update button statuses
+            updateButtonStatuses();
+    
+            const commentsModal = document.getElementById('commentsModal');
+            
+            if (commentsModal) {
+                // Event listener for when the modal is shown
+                commentsModal.addEventListener('show.bs.modal', async function (event) {
+                    // Your existing logic for handling modal events
+                    const button = event.relatedTarget;
+                    const abstractId = button.getAttribute('data-record-id');
+                    const abstractTitle = button.getAttribute('data-record-title');
+    
+                    const modalLabel = document.getElementById('commentsModalLabel');
+                    modalLabel.innerText = abstractTitle;
+    
+                    const abstractIdField = document.getElementById('record_id');
+                    abstractIdField.value = abstractId;
+    
+                    if (document.getElementById('commentsContainer')) {
+                        const commentsContainer = document.getElementById('commentsContainer');
+    
+                        const response = await fetch(`../../backend/fetchRecords.php?fetch=comments&comment_on=record_id&record_id=${abstractId}`);
+                        if (!response.ok) throw new Error('Network response was not ok');
+    
+                        const data = await response.json();
+    
+                        if (data.length == 0) {
+                            let tileHTML = `<small>No comments yet.</small>`;
+                            commentsContainer.innerHTML += tileHTML;
+                        } else {
+                            const noCommentElement = document.getElementById('no_comment');
+                            if (noCommentElement) noCommentElement.remove();
+    
+                            displayCommentTiles(data, commentsContainer, abstractId);
+                        }
+                    }
+    
+                    // Call the function to update button statuses
+                    updateButtonStatuses();
+                });
+            }      
+        }
+    }    
 
     // Function to highlight search query in table
     const highlightText = (text, query) => {
