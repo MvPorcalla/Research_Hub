@@ -108,19 +108,16 @@ if (!isset($_SESSION['user_type'])) {
                                 <div class="d-flex align-items-center">
                                     <div class="">
                                         <select id="monthFilter" class="form-select">
-                                            <option value="">All Month</option>
                                             <!-- Options will be dynamically added here -->
                                         </select>
                                     </div>
                                     <div class="mx-2">
                                         <select id="yearFilter" class="form-select">
-                                            <option value="">All Year</option>
                                             <!-- Options will be dynamically added here -->
                                         </select>
                                     </div>
                                     <div class="">
                                         <select id="trackFilter" class="form-select">
-                                            <option value="">All Strand</option>
                                             <!-- Options will be dynamically added here -->
                                         </select>
                                     </div>
