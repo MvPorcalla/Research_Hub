@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
             .then(response => response.json())
             .then(data => {
                 populateTable(data);
-                handleAfterFetch(); // Call handleAfterFetch after populating the table
+                handleAfterFetch();
             })
             .catch(error => {
                 console.error('Error fetching data:', error);

@@ -193,7 +193,6 @@ if (!isset($_SESSION['user_type'])) {
     <script src="../../scripts/toggleLike.js"></script>
     <script src="../../scripts/fetchAbstract.js"></script>
     <script src="../../scripts/fetchFilters.js"></script>
-    <script src="../../scripts/handleAfterFetch.js"></script>
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
