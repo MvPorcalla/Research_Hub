@@ -191,6 +191,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     // Call the function to update button statuses
                     updateButtonStatuses();
                 });
+                
             }      
         }
     }    

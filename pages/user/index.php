@@ -200,6 +200,19 @@ if (!isset($_SESSION['user_type'])) {
             handleStatus('comment');
         });
     </script>
+
+    <!-- Temporary fix for modal comment duplicating -->
+    <!-- Refresh the page when the modal is closed -->
+
+    <!-- <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var commentsModal = new bootstrap.Modal(document.getElementById('commentsModal'));
+
+            document.getElementById('commentsModal').addEventListener('hidden.bs.modal', function (event) {
+                window.location.reload();
+            });
+        });
+    </script> -->
     
 </body>
 </html>
