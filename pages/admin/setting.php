@@ -203,6 +203,14 @@ if (!isset($_SESSION['user_type'])) {
                                                             </div>
                                                         </div>
 
+                                                        <!-- email -->
+                                                        <div class="row">
+                                                            <div class="col-md-12 mb-3">
+                                                                <label for="emailField" class="form-label fw-bold">Email</label>
+                                                                <input type="email" class="form-control" id="emailField" name="emailField">
+                                                            </div>
+                                                        </div>
+
                                                     </div>
 
                                                     <button type="submit" class="btn btn-primary btn-block w-100">Save Changes</button>
