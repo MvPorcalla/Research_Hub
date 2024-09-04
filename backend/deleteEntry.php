@@ -19,8 +19,14 @@ if (isset($data['entryId'])) {
     // Execute the statement
     if ($stmt->execute()) {
         echo json_encode(['success' => true]);
+
+        header("location: ../pages/admin/forum.php?deleteRecord=success");
+        exit();
     } else {
         echo json_encode(['success' => false, 'message' => 'Failed to update entry status.']);
+
+        header("location: ../pages/admin/forum.php?deleteRecord=failed");
+        exit();
     }
 
     // Close the statement
