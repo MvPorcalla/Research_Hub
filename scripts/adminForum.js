@@ -128,31 +128,56 @@ function toggleComments(entryId) {
 }
 
 async function deleteEntry(entryId) {
-    try {
-        const response = await fetch('../../backend/deleteEntry.php', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ entryId })
-        });
-        if (!response.ok) throw new Error('Network response was not ok');
+    // SweetAlert confirmation dialog
+    Swal.fire({
+        title: 'Are you sure?',
+        text: "Do you want to delete this entry?",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#3085d6',
+        confirmButtonText: 'Yes, delete it!'
+    }).then(async (result) => {
+        if (result.isConfirmed) {
+            try {
+                const response = await fetch('../../backend/deleteEntry.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ entryId })
+                });
 
-        const result = await response.json();
-        if (result.success) {
-            // Log entryId and check if the element is found
-            const entryElement = document.querySelector(`div[data-entry-id="${entryId}"]`);
-            console.log('Entry element:', entryElement);
+                if (!response.ok) throw new Error('Network response was not ok');
 
-            if (entryElement) {
-                entryElement.remove();
-            } else {
-                console.warn('No element found with data-entry-id:', entryId);
+                const result = await response.json();
+                if (result.success) {
+                    Swal.fire({
+                        title: 'Deleted!',
+                        text: 'The entry has been deleted.',
+                        icon: 'success',
+                        confirmButtonText: 'OK'
+                    }).then(() => {
+                        // Refresh the page
+                        location.reload();
+                    });
+                } else {
+                    Swal.fire({
+                        title: 'Error!',
+                        text: result.message || 'Failed to delete entry.',
+                        icon: 'error',
+                        confirmButtonText: 'OK'
+                    });
+                }
+            } catch (error) {
+                Swal.fire({
+                    title: 'Error!',
+                    text: 'An error occurred while deleting the entry.',
+                    icon: 'error',
+                    confirmButtonText: 'OK'
+                });
+                console.error('Error deleting entry:', error);
             }
-        } else {
-            alert(result.message || 'Failed to delete entry.');
         }
-    } catch (error) {
-        console.error('Error deleting entry:', error);
-    }
+    });
 }

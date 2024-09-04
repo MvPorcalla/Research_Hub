@@ -8,7 +8,6 @@ include_once "../includes/db.php";
 $data = json_decode(file_get_contents('php://input'), true);
 
 // Check if entryId is provided
-// Check if entryId is provided
 if (isset($data['entryId'])) {
     $entryId = $data['entryId'];
 
@@ -18,20 +17,17 @@ if (isset($data['entryId'])) {
 
     // Execute the statement
     if ($stmt->execute()) {
+        // Send JSON response
         echo json_encode(['success' => true]);
-
-        header("location: ../pages/admin/forum.php?deleteRecord=success");
-        exit();
     } else {
+        // Send JSON response
         echo json_encode(['success' => false, 'message' => 'Failed to update entry status.']);
-
-        header("location: ../pages/admin/forum.php?deleteRecord=failed");
-        exit();
     }
 
     // Close the statement
     $stmt->close();
 } else {
+    // Send JSON response if no entryId is provided
     echo json_encode(['success' => false, 'message' => 'No entry ID provided.']);
 }
 
