@@ -122,7 +122,7 @@ if (!isset($_SESSION['user_type'])) {
     <?php include './../user/components/links-footer-script.php'; ?>
 
     <script src="../../includes/functions.js"></script>
-    <script src="../../scripts/fetchRecords.js"></script>
+    <script src="../../scripts/fetchEntriesComments.js"></script>
     <script src="../../scripts/toggleLike.js"></script>
     
     <script>
