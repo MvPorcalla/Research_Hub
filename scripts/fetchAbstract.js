@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
             .then(response => response.json())
             .then(data => {
                 populateTable(data);
-                handleAfterFetch();
+                getLikes();
             })
             .catch(error => {
                 console.error('Error fetching data:', error);
@@ -102,56 +102,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     
         if (url.includes('pages/user/index.php')) {
-            const updateButtonStatuses = () => {
-                let userIdElement = document.getElementById('abstractTiles');
-                const userId = userIdElement ? userIdElement.getAttribute('data-user-id') : null;
-                const buttons = document.querySelectorAll('.like-button');
-                
-                const requests = Array.from(buttons).map(button => {
-                    const abstractId = button.getAttribute('data-record-id');
-                    const commentId = button.getAttribute('data-comment-id');
-
-                    if (abstractId) {
-                        return fetch(`../../backend/get_like_status.php?record_type=record&recordId=${abstractId}&userId=${userId}`)
-                            .then(response => response.json())
-                            .then(data => {
-                                if (data.like_status === 'A') {
-                                    button.classList.add('btn-danger');
-                                    button.classList.remove('btn-outline-danger');
-                                } else {
-                                    button.classList.add('btn-outline-danger');
-                                    button.classList.remove('btn-danger');
-                                }
-                            })
-                            .catch(error => {
-                                console.error('Error fetching like status:', error);
-                            });
-    
-                    } else if (commentId) {
-                        return fetch(`../../backend/get_like_status.php?record_type=comment&recordId=${commentId}&userId=${userId}`)
-                            .then(response => response.json())
-                            .then(data => {
-                                const icon = button.querySelector('svg');
-                                if (data.like_status == 'A') {
-                                    icon.classList.add('liked');
-                                } else {
-                                    icon.classList.remove('liked');
-                                }
-                            })
-                            .catch(error => {
-                                console.error('Error fetching like status:', error);
-                            });
-                    }
-                });
-        
-                // Ensure all requests are completed
-                Promise.all(requests).then(() => {
-                    console.log('All like statuses updated');
-                });
-            };
-    
-            // Call the function to update button statuses
-            updateButtonStatuses();
+            getLikes();
     
             const commentsModal = document.getElementById('commentsModal');
             
@@ -189,7 +140,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
     
                     // Call the function to update button statuses
-                    updateButtonStatuses();
+                    getLikes();
                 });
                 
                 // Event listener for when the modal is hidden
@@ -227,4 +178,5 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Fetch data on page load
     fetchData();
+    handleAfterFetch();
 });
