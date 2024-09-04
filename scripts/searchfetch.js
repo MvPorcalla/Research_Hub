@@ -293,15 +293,6 @@ document.addEventListener('DOMContentLoaded', function() {
                     // Call the function to update button statuses
                     updateButtonStatuses();
                 });
-                
-                // Event listener for when the modal is hidden
-                commentsModal.addEventListener('hide.bs.modal', function () {
-                    console.log('modal hidden');
-                    const commentsContainer = document.getElementById('commentsContainer');
-                    if (commentsContainer) {
-                        commentsContainer.innerHTML = '';
-                    }
-                });  
             }      
         }
     }    
