@@ -56,11 +56,38 @@ if (!isset($_SESSION['user_type'])) {
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
         <script src="..\..\includes\functions.js"></script>
         <script src="../../scripts/fetchRecords.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 
         <script>
             document.addEventListener('DOMContentLoaded', function () {
                 handleStatus('action');
             });
+
+            window.onload = function() {
+            // Check if the flag is set
+            if (sessionStorage.getItem('showAcceptedAlert') === 'true') {
+                // Show the alert
+                Swal.fire({
+                    title: `Request Accepted!`,
+                    text: "Random username and password sent accordingly via email.",
+                    icon: "success"
+                });
+
+                // Clear the flag
+                sessionStorage.removeItem('showAcceptedAlert');
+            }
+            if (sessionStorage.getItem('showDeclinedAlert') === 'true') {
+                // Show the alert
+                Swal.fire({
+                    title: "Access Request Declined",
+                    icon: "success"
+                });
+
+                // Clear the flag
+                sessionStorage.removeItem('showDeclinedAlert');
+            }
+        };
+
         </script>
     </body>
 

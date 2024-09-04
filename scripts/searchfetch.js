@@ -2,16 +2,24 @@ document.addEventListener('DOMContentLoaded', function() {
     const queryInput = document.querySelector('#query');
     
     let recordTableBody, lrnTableBody, studentTableBody, guestTableBody, recordType;
+
     if (document.getElementById(`records-table`)) {
+
         recordTableBody = document.querySelector(`#records-table tbody`);
         recordType = 'record';
+
     } else if (document.getElementById(`users-table`)) {
+
         studentTableBody = document.querySelector(`#students-table tbody`);
         guestTableBody = document.querySelector(`#guests-table tbody`);
+
     } else if (document.getElementById(`lrns-table`)) {
+
         lrnTableBody = document.querySelector(`#lrns-table tbody`);
         recordType = 'lrn';
+
     } else if (document.getElementById(`abstractTiles`)) {
+        
         recordTableBody = document.getElementById(`abstractTiles`);
         recordType = 'record';
     }
@@ -285,6 +293,15 @@ document.addEventListener('DOMContentLoaded', function() {
                     // Call the function to update button statuses
                     updateButtonStatuses();
                 });
+                
+                // Event listener for when the modal is hidden
+                commentsModal.addEventListener('hide.bs.modal', function () {
+                    console.log('modal hidden');
+                    const commentsContainer = document.getElementById('commentsContainer');
+                    if (commentsContainer) {
+                        commentsContainer.innerHTML = '';
+                    }
+                });  
             }      
         }
     }    

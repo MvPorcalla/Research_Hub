@@ -1,3 +1,21 @@
+<?php
+include_once "includes/db.php";
+
+if (!isset($_GET['token'])) {
+    header("Location: backend/logout.php");
+    exit;
+}
+
+$token = $_GET['token'];
+$sql = "SELECT * FROM `users` WHERE `user_reset_token` = ?";
+$result = query($conn, $sql, [$token]);
+
+if (empty($result) || date('Y-m-d H:i:s') >= $result[0]['user_reset_token_expire']) {
+    header("Location: forgotPassword.php?token=invalid");
+    exit;
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -28,8 +46,13 @@
         <div class="container d-flex justify-content-center align-items-center">
             <div class="card login-card">
                 <div class="card-body p-4">
+
                     <h3 class="login_card-title text-center mb-4">Reset Password</h3>
-                    <form>
+
+                    <form id="formWithPassword" action="backend/reset_password.php" method="POST">
+
+                    <input type="text" class="form-control" name="token" required hidden value="<?php echo $_GET['token']; ?>">
+
                         <!-- Password and Confirm Password -->
                         <div class="row mb-3">
                             <div class="col-md-12">
@@ -47,11 +70,8 @@
                         <div class="d-grid mt-5">
                             <button type="submit" class="btn btn-primary">Reset Password</button>
                         </div>
-
-                        <div class="card-footer text-center">
-                            <small> <a href="./login.php"> Go back </a></small>
-                        </div>
                     </form>
+
                 </div>
             </div>
         </div>
@@ -61,6 +81,14 @@
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+    <script src="includes\functions.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            confirmPassword();
+            handleStatus('reset');
+        });
+    </script>
 </body>
 
 </html>

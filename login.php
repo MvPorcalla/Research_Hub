@@ -66,6 +66,7 @@
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             handleStatus('login');
+            handleStatus('reset');
         });
     </script>
 </body>
