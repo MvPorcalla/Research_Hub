@@ -120,27 +120,7 @@ if (url.includes('index.php')) {
                         const abstractIdField = document.getElementById('record_id');
                         abstractIdField.value = abstractId;
         
-                        if (document.getElementById('commentsContainer')) {
-                            const commentsContainer = document.getElementById('commentsContainer');
-        
-                            const response = await fetch(`../../backend/fetchRecords.php?fetch=comments&comment_on=record_id&record_id=${abstractId}`);
-                            if (!response.ok) throw new Error('Network response was not ok');
-        
-                            const data = await response.json();
-        
-                            if (data.length == 0) {
-                                let tileHTML = `<small>No comments yet.</small>`;
-                                commentsContainer.innerHTML += tileHTML;
-                            } else {
-                                const noCommentElement = document.getElementById('no_comment');
-                                if (noCommentElement) noCommentElement.remove();
-        
-                                displayCommentTiles(data, commentsContainer, abstractId);
-                            }
-                        }
-        
-                        // Call the function to update button statuses
-                        getLikes();
+                        displayComments(abstractId).then(() => { getLikes(); });
                     });
                     
                     // Event listener for when the modal is hidden

@@ -4,27 +4,6 @@ document.addEventListener('DOMContentLoaded', () => {
     
     const fetchRecords = async () => {
         try {
-
-            if (document.getElementById('commentsContainer')) {
-
-                const commentsContainer = document.getElementById('commentsContainer');
-                const abstractId = commentsContainer.getAttribute('data-abstract-id');
-
-                const response = await fetch(`../../backend/fetchRecords.php?fetch=comments&comment_on=record_id&record_id=${abstractId}`);
-                if (!response.ok) throw new Error('Network response was not ok');
-
-                const data = await response.json();
-
-                if (data.length == 0) {
-
-                    let tileHTML = `<small id="no_comment">No comments yet.</small>`;
-                    commentsContainer.innerHTML += tileHTML;
-                    
-                } else {
-
-                    displayCommentTiles(data, commentsContainer, abstractId);
-                }
-            }
             
             if (document.getElementById('entriesContainer')) {
 

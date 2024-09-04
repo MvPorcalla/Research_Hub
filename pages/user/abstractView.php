@@ -126,13 +126,14 @@ include "..\..\backend\history.php";
     <?php include './../user/components/links-footer-script.php'; ?>
 
     <script src="../../includes/functions.js"></script>
-    <script src="../../scripts/fetchRecords.js"></script>
+    <script src="../../scripts/fetchAbstractComments.js"></script>
     <script src="../../scripts/fetchOneRecord.js"></script>
     <script src="../../scripts/toggleLike.js"></script>
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             handleStatus('comment');
+            displayComments().then(() => { getLikes(); });
         });
     </script>
 </body>
