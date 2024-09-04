@@ -119,10 +119,10 @@ if (!isset($_SESSION['user_type'])) {
     <script src="../../scripts/fetchOneRecord.js"></script>
     
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            handleStatus('addRecord');
-            handleStatus('editRecord');
-        });
+        // document.addEventListener('DOMContentLoaded', function () {
+        //     handleStatus('addRecord');
+        //     handleStatus('editRecord');
+        // });
     </script>
 </body>
 

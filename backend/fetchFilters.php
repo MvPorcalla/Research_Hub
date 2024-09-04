@@ -4,13 +4,13 @@ ini_set('display_errors', 1);
 header('Content-Type: application/json');
 
 // Database connection
-include_once "../../includes/db.php";
+include_once "../includes/db.php";
 
 // Prepare SQL query to get distinct months
 $monthSql = "SELECT DISTINCT record_month
              FROM records
              WHERE record_status = 'A'
-             ORDER BY FIELD(record_month, 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December')";
+             ORDER BY FIELD(record_month, '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12')";
 
 $monthResult = $conn->query($monthSql);
 $months = [];

@@ -1,13 +1,13 @@
 <?php
-include_once "..\..\includes\db.php";
+    include_once "..\..\includes\db.php";
 
-// if (!isset($_SESSION['user_type'])) {
-//     header("location: ../../index.php");
-//     exit;
-// } elseif ($_SESSION['user_type'] == 'A') {
-//     header("location: ../../backend/logout.php");
-//     exit;
-// }
+    if (!isset($_SESSION['user_type'])) {
+        header("location: ../../index.php");
+        exit;
+    } elseif ($_SESSION['user_type'] != 'A') {
+        header("location: ../../backend/logout.php");
+        exit;
+    }
 ?>
 
 <!DOCTYPE html>
@@ -74,39 +74,12 @@ include_once "..\..\includes\db.php";
                     <div class="row">
                         <div class="col-md-12 mt-4">
                             <!--  Content -->
-                            <div class="row text-left my-3">
-                                <div class="col-lg-10 text-lg-right">
-                                    <h1 class='fs-2'>Research Hub Forum</h1>
-                                </div>
-
-                                <div class='col-lg-2 text-center'>
-                                    <button class="btn btn-sm btn-block btn-primary rounded-2 py-2 mb-2 bg-op-6" data-bs-toggle="modal" data-bs-target="#askQuestionModal">
-                                        Ask a Question
-                                    </button>
-                                </div>
+                            <div class="my-3 text-center">
+                                <h1 class='admin-subtitle'>Research Hub Forum</h1>
                             </div>
 
-                            <!-- Modal -->
-                            <div class="modal fade" id="askQuestionModal" tabindex="-1" aria-labelledby="askQuestionModalLabel" aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-centered">
-                                    <div class="modal-content">
-                                        <div class="modal-header bg-primary text-white">
-                                            <h5 class="modal-title" id="askQuestionModalLabel">Ask a Question</h5>
-                                        </div>
-                                        <div class="modal-body">
-                                            <form id="askQuestionForm" action="../../backend/entry.php" method="post">
-                                                <div class="mb-3">
-                                                    <label for="question" class="form-label">Your Question</label>
-                                                    <textarea class="form-control" id="question" name="question" rows="4" placeholder="Type your question here..." maxlength="2000" required></textarea>
-                                                </div>
-                                                <button type="submit" class="btn btn-primary btn-block w-100">Submit</button>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
 
-                            <div id="entriesContainer" data-user-id="<?php echo $_SESSION['user_id']; ?>" class="container ">
+                            <div id="entriesContainer" data-user-id="<?php echo $_SESSION['user_id']; ?>" class="container" data-entry-id="${entryId}">
                                 <!-- Data will be dynamically inserted here -->
                             </div>
                         </div>
@@ -125,8 +98,10 @@ include_once "..\..\includes\db.php";
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
 
     <script src="../../includes/functions.js"></script>
-    <script src="../../scripts/fetchRecords.js"></script>
     <script src="../../scripts/toggleLike.js"></script>
+    <script src="../../scripts/adminForum.js"></script>
+
+
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             handleStatus('entry');
@@ -142,6 +117,7 @@ include_once "..\..\includes\db.php";
             }
         }
     </script>
+
 </body>
 
 </html>
