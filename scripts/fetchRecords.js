@@ -5,76 +5,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const fetchRecords = async () => {
         try {
 
-            if (document.getElementById('abstractTiles')) {
-
-                const abstractTiles = document.getElementById('abstractTiles');
-
-                const response = await fetch(`../../backend/fetchRecords.php?fetch=abstracts`);
-                if (!response.ok) throw new Error('Network response was not ok');
-
-                const data = await response.json();
-                abstractTiles.innerHTML = '';
-
-                data.forEach(dataRow => {
-                    let tileHTML = `
-                        <div class="col-12 mb-2">
-                            <div class="card">
-                                <div class="card-body" onclick="if (!event.target.closest('button')) { window.location.href='abstractView.php?abstractId=${dataRow.id}'; }" style="cursor: pointer;">
-                                    <div class="row text-center">
-                                        <div class="col-md-2 d-flex align-items-center justify-content-center border-end">
-                                            <img src="https://via.placeholder.com/75x100" class="img-fluid rounded-1" alt="${dataRow.title}">
-                                        </div>
-                                        <div class="col-md-8 d-flex align-items-center justify-content-start border-end">${dataRow.title}</div>
-                                        <div class="col-md-2 d-flex align-items-center justify-content-center">
-                                            <button class="btn btn-outline-primary btn-sm mx-1" data-bs-toggle="modal" data-bs-target="#commentsModal" data-record-id="${dataRow.id}" data-record-title="${dataRow.title}">
-                                                <i class="fas fa-comment"></i>
-                                            </button>
-                                            <button class="btn btn-outline-danger btn-sm mx-1 like-button" data-record-id="${dataRow.id}">
-                                                <i class="fas fa-heart"></i>
-                                            </button>
-                                            <button class="btn btn-outline-success btn-sm mx-1">
-                                                <i class="fas fa-download"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    `;
-                    abstractTiles.innerHTML += tileHTML;
-                });
-            }
-
-            if (document.getElementById('favoriteTiles')) {
-
-                const favoriteTiles = document.getElementById('favoriteTiles');
-
-                const response = await fetch(`../../backend/fetchRecords.php?fetch=favorites`);
-                if (!response.ok) throw new Error('Network response was not ok');
-
-                const data = await response.json();
-
-                data.forEach(dataRow => {
-                    let tileHTML = `
-                        <div class="col-12 mb-2">
-                            <div class="card border-dark rounded-4">
-                                <div class="card-body" onclick="if (!event.target.closest('button')) { window.location.href='abstractView.php?abstractId=${dataRow.record_id}'; }" style="cursor: pointer;">
-                                    <div class="row text-center">
-                                        <div class="col-md-11 d-flex align-items-center justify-content-start border-end">${dataRow.title}</div>
-                                        <div class="col-md-1 d-flex align-items-center justify-content-center">
-                                            <button class="btn btn-outline-danger btn-sm mx-1 like-button" data-record-id="${dataRow.record_id}">
-                                                <i class="fas fa-heart"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    `;
-                    favoriteTiles.innerHTML += tileHTML;
-                });
-            }
-
             if (document.getElementById('commentsContainer')) {
 
                 const commentsContainer = document.getElementById('commentsContainer');
@@ -241,9 +171,7 @@ document.addEventListener('DOMContentLoaded', () => {
     fetchRecords().then(() => {
         var url = window.location.href;
 
-        if (url.includes('pages/user/favorites.php') 
-            || url.includes('pages/user/abstractView.php') 
-            || url.includes('pages/user/forum.php'))
+        if (url.includes('pages/user/forum.php'))
             getLikes();
     });
 });
