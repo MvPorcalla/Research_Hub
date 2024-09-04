@@ -98,7 +98,7 @@ if (!isset($_SESSION['user_type'])) {
     </div>
 
     <!-- Bootstrap JS -->
-    <?php include './../admin/components/links-heafooterd-script.php'; ?>
+    <?php include './../admin/components/links-footer-script.php'; ?>
 
 
     <script src="../../includes/functions.js"></script>

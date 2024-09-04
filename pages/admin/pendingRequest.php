@@ -50,7 +50,7 @@ if (!isset($_SESSION['user_type'])) {
         <?php include './../admin/components/links-footer-script.php'; ?>
 
         <script src="../../includes/functions.js"></script>
-        <script src="../../scripts/fetchRecords.js"></script>
+        <script src="../../scripts/fetchPendingGuests.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 
         <script>
