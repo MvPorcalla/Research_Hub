@@ -8,9 +8,9 @@ include_once "../includes/db.php";
 
 // Prepare SQL query to get distinct months
 $monthSql = "SELECT DISTINCT record_month
-             FROM records
-             WHERE record_status = 'A'
-             ORDER BY FIELD(record_month, '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12')";
+            FROM records
+            WHERE record_status = 'A'
+            ORDER BY record_month DESC";
 
 $monthResult = $conn->query($monthSql);
 $months = [];
