@@ -33,15 +33,14 @@
                     <h3 class="login_card-title text-center mb-4">Forgot Password</h3>
                     <form id="forgotPasswordForm" action="" method="POST">
 
-                        <input type="text" class="form-control" name="website_name" required value="Research Hub" hidden>
-                        <input type="text" class="form-control" id="user_firstname" name="user_firstname" hidden>
+                        <input type="text" name="website_name" id="website_name" hidden value="Research Hub">
+                        <input type="text" name="user_firstname" id="user_firstname" hidden>
+                        <input type="text" name="reset_link" id="reset_link" hidden>
 
                         <div class="my-5">
                             <label for="email" class="form-label">Email Address</label>
                             <input type="email" class="form-control" id="email" name="user_email" placeholder="Enter your email address" required>
                         </div>
-
-                        <input type="text" class="form-control" id="reset_link" name="reset_link" hidden>
 
                         <div class="d-grid">
                             <button type="submit" class="btn btn-primary" id="resetButton">Send Reset Password Link</button>

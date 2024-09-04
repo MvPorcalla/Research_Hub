@@ -13,6 +13,7 @@ if (!empty($result)) {
 
     if ($row['user_status'] == 'I') {
         echo json_encode(['user_status' => 'I']);
+        exit;
     }
 
     // Generate a reset token

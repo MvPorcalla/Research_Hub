@@ -1,8 +1,7 @@
 const forgotPasswordForm = document.getElementById('forgotPasswordForm');
 const forgotPasswordMessage = document.getElementById('forgotPasswordMessage');
 
-const sendEmail = (e) => {
-    e.preventDefault();
+const sendEmail = () => {
 
     const resetButton = document.getElementById('resetButton');
 
@@ -16,7 +15,7 @@ const sendEmail = (e) => {
         resetButton.innerHTML = 'Send Reset Password Link';
 
         Swal.fire({
-            title: "Password Reset Link Snt!",
+            title: "Password Reset Link Sent!",
             text: "Please check your email.",
             icon: "success"
         });
@@ -56,7 +55,7 @@ forgotPasswordForm.addEventListener('submit', (e) => {
                 const resetLinkField = forgotPasswordForm.querySelector('#reset_link');
                 resetLinkField.value = `http://localhost/research_Hub/resetPassword.php?token=${data.user_reset_token}`;
 
-                sendEmail(e);
+                sendEmail();
                 
                 break;
             case 'I':
