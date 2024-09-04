@@ -80,10 +80,10 @@
                                 <table id="records-table" class="table table-bordered table-striped">
                                     <thead class="table-dark">
                                         <tr class="col-md-12">
-                                            <th class="col-md-5">Title</th>
-                                            <th class="col-md-1">Month/Year</th>
+                                            <th class="col-md-4">Title</th>
+                                            <th class="col-md-2">Month/Year</th>
                                             <th class="col-md-3">Author</th>
-                                            <th class="col-md-1">Track/Strand</th>
+                                            <th class="col-md-2">Track/Strand</th>
                                             <th class="col-md-1">Actions</th>
                                         </tr>
                                     </thead>

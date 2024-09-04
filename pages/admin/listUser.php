@@ -129,13 +129,13 @@ if (!isset($_SESSION['user_type'])) {
                                                 <div class="table-responsive">
                                                     <table class="table table-bordered table-striped students" id="students-table">
                                                         <thead class="table-dark">
-                                                            <tr>
-                                                                <th>Last Name</th>
-                                                                <th>First Name</th>
-                                                                <th>Middle Initial</th>
-                                                                <th>LRN</th>
-                                                                <th>Track/Strand</th>
-                                                                <th>Actions</th>
+                                                            <tr class="col-md-12">
+                                                                <th class="col-md-2">Last Name</th>
+                                                                <th class="col-md-2">First Name</th>
+                                                                <th class="col-md-2">Middle Initial</th>
+                                                                <th class="col-md-3">LRN</th>
+                                                                <th class="col-md-2">Track/Strand</th>
+                                                                <th class="col-md-1">Actions</th>
                                                             </tr>
                                                         </thead>
 

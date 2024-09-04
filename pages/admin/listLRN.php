@@ -42,33 +42,6 @@ if (!isset($_SESSION['user_type'])) {
             border-radius: 50%;
         }
 
-        #search {
-            width: 100%;
-            padding: 8px;
-            box-sizing: border-box;
-        }
-        #suggestions {
-            position: absolute;
-            top: 100%;
-            left: 0;
-            width: 100%;
-            max-height: 200px;
-            border: 1px solid #ddd;
-            border-top: none;
-            background-color: var(--bg-base-lt);
-            border-radius: 10px;
-            border:1px solid #000;
-            z-index: 1000;
-            overflow-y: auto;
-            display: none;
-        }
-        #suggestions div {
-            padding: 8px;
-            cursor: pointer;
-        }
-        #suggestions div:hover {
-            background-color: #f0f0f0;
-        }
     </style>
 
 </head>
@@ -136,10 +109,10 @@ if (!isset($_SESSION['user_type'])) {
                             <div class="table-responsive">
                                 <table class="table table-bordered table-striped LRNs" id="lrns-table">
                                     <thead class="table-dark">
-                                        <tr>
-                                            <th>Name</th>
-                                            <th>LRN</th>
-                                            <th>Actions</th>
+                                        <tr class="col-md-12">
+                                            <th class="col-md-5">Name</th>
+                                            <th class="col-md-5">LRN</th>
+                                            <th class="col-md-2">Actions</th>
                                         </tr>
                                     </thead>
 
