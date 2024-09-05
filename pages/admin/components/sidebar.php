@@ -19,7 +19,7 @@
             <a class="nav-link" href="./pendingRequest.php">Pending Request</a>
         </li>
         <li class="nav-item mb-1">
-            <a class="nav-link" href="./setting.php">Settings</a>
+            <a class="nav-link" href="./setting.php">Account Settings</a>
         </li>
     </ul>
 </nav>

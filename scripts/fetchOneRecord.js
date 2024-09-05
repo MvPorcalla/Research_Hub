@@ -82,6 +82,7 @@ document.addEventListener('DOMContentLoaded', async function() {
             document.getElementById('completeName').textContent = `${data.user_firstname} ${mi}${data.user_lastname}`;
             document.getElementById('userName').textContent = `@${data.user_username}`;
             document.getElementById('emailAdd').textContent = data.user_emailadd;
+            document.getElementById('emailField').value = data.user_emailadd;
             document.getElementById('lastName').value = data.user_lastname;
             document.getElementById('firstName').value = data.user_firstname;
             document.getElementById('middleInitial').value = data.user_mi;

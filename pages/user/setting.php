@@ -61,8 +61,10 @@ if (!isset($_SESSION['user_type'])) {
                     <div class="container">
                         <div class='card border-dark bg-transparent'>
                             <div class="card-body">
-
                                 <div class="row">
+                                    <div class="my-1 text-center">
+                                        <h1 class='admin-subtitle'>Account Setting</h1>
+                                    </div>
                                     <!-- Personal Information -->
                                     <div class="col-md-12">
                                         <div class="card">
@@ -89,126 +91,165 @@ if (!isset($_SESSION['user_type'])) {
                                                         </div>
                                                     </div>
 
-                                                    <div class="col-md-2 text-center">
-                                                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editProfileModal">
-                                                            Edit
-                                                        </button>
+                                                    <div class="col-md-2 text-end">
+                                                        <div class="dropdown dropstart">
+                                                            <button class="btn btn-outline-dark " type="button" id="kebabMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                                                                <i class="fas fa-ellipsis-v"></i>
+                                                            </button>
+                                                            <ul class="dropdown-menu me-1 border border-dark" aria-labelledby="kebabMenuButton">
+                                                                <li><button class="dropdown-item fw-semibold my-1" data-bs-toggle="modal" data-bs-target="#editProfileModal">Edit Profile</button></li>
+                                                                <li><button class="dropdown-item fw-semibold my-1" data-bs-toggle="modal" data-bs-target="#editPassModal">Edit Password</button></li>
+                                                            </ul>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
+                                </div>
+                                 <!-- Notification -->
+                                 <div class="row mt-2">
+                                    <div class="col-md-12">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="card text-start">
+                                                    <div class="card-body p-4">
+                                                        <h1 class="setting-info-title">Notification</h1>
+                                                        <hr class="border-2 border-secondary mb-2">
+                                                        <form>
+                                                            <div class="form-check">
+                                                                <input class="form-check-input" type="checkbox" id="emailNotifications" checked>
+                                                                <label class="form-check-label fw-bold" for="emailNotifications">
+                                                                    Send notifications by email
+                                                                </label>
+                                                                <p class='ms-3'>
+                                                                    You’ll still get other emails from Research Hub
+                                                                </p>
+                                                            </div>
+                                                            
+                                                            <div class="form-check mt-2">
+                                                                <input class="form-check-input" type="checkbox" id="comments">
+                                                                <label class="form-check-label fw-bold" for="comments">
+                                                                    Comments
+                                                                </label>
+                                                            </div>
+                                                            <div class="form-check mt-2">
+                                                                <input class="form-check-input" type="checkbox" id="reactions">
+                                                                <label class="form-check-label fw-bold" for="reactions">
+                                                                    Reactions
+                                                                </label>
+                                                            </div>
+                                                            <div class="form-check mt-2">
+                                                                <input class="form-check-input" type="checkbox" id="newUploads">
+                                                                <label class="form-check-label fw-bold" for="newUploads">
+                                                                    New upload research
+                                                                </label>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div> 
+                                    </div>
 
+                                    <!-- Logout Button -->
+                                    <div class="mt-3">
+                                        <div class="col-md-12 text-center">
+                                            <form action="../../backend/logout.php" method="post">
+                                                <button type="submit" class="btn btn-danger w-100">Logout</button>
+                                            </form>
+                                        </div>
+                                    </div>
                                 </div>
 
-                                <!-- Notification -->
-                                <div class="row mt-2">
-                                    <div class="col-md-12">
-                                        <div class="card  text-start">
-                                            <div class="card-body p-4">
-                                                <h1 class="setting-info-title">Notification</h1>
-                                                <hr class="border-2 border-secondary mb-2">
-
-                                                    <form>
-                                                        <div class="form-check">
-                                                            <input class="form-check-input" type="checkbox" id="emailNotifications" checked>
-                                                            <label class="form-check-label fw-bold" for="emailNotifications">
-                                                                Send notifications by email
-                                                            </label>
-                                                            <p class='ms-3'>
-                                                                You’ll still get other emails from Research Hub
-                                                            </p>
+                                <!-- Modal for edit profile -->
+                                <div class="modal fade" id="editProfileModal" tabindex="-1" aria-labelledby="editProfileModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered">
+                                        <div class="modal-content">
+                                            <div class="modal-header bg-primary text-white">
+                                                <h5 class="modal-title" id="editProfileModalLabel">Edit Profile</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form id="formWithPassword" action="../../backend/update_profile.php" method="post">
+                                                    <div class='text-start'>
+                                                        <div class="row">
+                                                            <div class="col-md-5 mb-3">
+                                                                <label for="lastName" class="form-label fw-bold">Last Name</label>
+                                                                <input type="text" class="form-control" id="lastName" name="lastName">
+                                                            </div>
+                                                            <div class="col-md-5 mb-3">
+                                                                <label for="firstName" class="form-label fw-bold">First Name</label>
+                                                                <input type="text" class="form-control" id="firstName" name="firstName">
+                                                            </div>
+                                                            <div class="col-md-2 mb-3">
+                                                                <label for="middleInitial" class="form-label fw-bold">M.I.</label>
+                                                                <input type="text" class="form-control" id="middleInitial" name="middleInitial" maxlength="1">
+                                                            </div>
                                                         </div>
                                                         
-                                                        <div class="form-check mt-2">
-                                                            <input class="form-check-input" type="checkbox" id="comments">
-                                                            <label class="form-check-label fw-bold" for="comments">
-                                                                Comments
-                                                            </label>
+                                                        <div class="row">
+                                                             <!-- username -->
+                                                            <div class="col-md-5 mb-3">
+                                                                <label for="usernameField" class="form-label fw-bold">Username</label>
+                                                                <input type="text" class="form-control" id="usernameField" name="usernameField">
+                                                            </div>
+                                                            <!-- email -->
+                                                            <div class="col-md-7 mb-3">
+                                                                <label for="emailField" class="form-label fw-bold">Email</label>
+                                                                <input type="email" class="form-control" id="emailField" name="emailField">
+                                                            </div>
                                                         </div>
-                                                        <div class="form-check mt-2">
-                                                            <input class="form-check-input" type="checkbox" id="reactions">
-                                                            <label class="form-check-label fw-bold" for="reactions">
-                                                                Reactions
-                                                            </label>
-                                                        </div>
-                                                        <div class="form-check mt-2">
-                                                            <input class="form-check-input" type="checkbox" id="newUploads">
-                                                            <label class="form-check-label fw-bold" for="newUploads">
-                                                                New upload research
-                                                            </label>
-                                                        </div>
-                                                    </form>
-                                                </div>
-                                            </div>
-                                            
-                                            <!-- Logout Button -->
-                                            <div class="mt-3">
-                                                <div class="col-md-12 text-center">
-                                                    <form action="../../backend/logout.php" method="post">
-                                                        <button type="submit" class="btn btn-danger w-100">Logout</button>
-                                                    </form>
-                                                </div>
+                                                    </div>
+                                                    <button type="submit" class="btn btn-primary btn-block w-100">Save Changes</button>
+                                                </form>
                                             </div>
                                         </div>
-
                                     </div>
                                 </div>
-                            </div>
-                        </div>
 
-                        <!-- Modal for edit profile -->
-                        <div class="modal fade" id="editProfileModal" tabindex="-1" aria-labelledby="editProfileModalLabel" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered">
-                                <div class="modal-content">
-                                    <div class="modal-header bg-primary text-white">
-                                        <h5 class="modal-title" id="editProfileModalLabel">Edit Profile</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <form id="formWithPassword" action="../../backend/update_profile.php" method="post">
-                                            <div class='text-start'>
-                                                <div class="row">
-                                                    <div class="col-md-5 mb-3">
-                                                        <label for="lastName" class="form-label fw-bold">Last Name</label>
-                                                        <input type="text" class="form-control" id="lastName" name="lastName">
-                                                    </div>
-                                                    <div class="col-md-5 mb-3">
-                                                        <label for="firstName" class="form-label fw-bold">First Name</label>
-                                                        <input type="text" class="form-control" id="firstName" name="firstName">
-                                                    </div>
-                                                    <div class="col-md-2 mb-3">
-                                                        <label for="middleInitial" class="form-label fw-bold">M.I.</label>
-                                                        <input type="text" class="form-control" id="middleInitial" name="middleInitial" maxlength="1">
-                                                    </div>
-                                                </div>
-                                                
-                                                <div class="row">
-                                                    <div class="col-md-12 mb-3">
-                                                        <label for="usernameField" class="form-label fw-bold">Username</label>
-                                                        <input type="text" class="form-control" id="usernameField" name="usernameField">
-                                                    </div>
-                                                </div>
-
-                                                <div class="row">
-                                                    <div class="col-md-6 mb-3">
-                                                        <label for="password" class="form-label fw-bold">Password</label>
-                                                        <input type="password" class="form-control" id="password" name="password">
-                                                    </div>
-                                                    <div class="col-md-6 mb-3">
-                                                        <label for="confirmPassword" class="form-label fw-bold">Confirm Password</label>
-                                                        <input type="password" class="form-control" id="confirmPassword" name="confirmPassword">
-                                                    </div>
-                                                </div>
+                                <!-- Modal for editing password -->
+                                <div class="modal fade" id="editPassModal" tabindex="-1" aria-labelledby="editPassModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered">
+                                        <div class="modal-content">
+                                            <div class="modal-header bg-primary text-white">
+                                                <h5 class="modal-title" id="editPassModalLabel">Edit Password</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
-
-                                            <button type="submit" class="btn btn-primary btn-block w-100">Save Changes</button>
-                                        </form>
+                                            <div class="modal-body">
+                                                <form action="../../backend/update_password.php" method="post">
+                                                    <div class='text-start'>
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <div class="mb-3">
+                                                                    <label for="currentPassword" class="form-label fw-bold">Current Password</label>
+                                                                    <input type="password" class="form-control" id="currentPassword" name="currentPassword" required>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-md-6">
+                                                                <div class="mb-3">
+                                                                    <label for="newPassword" class="form-label fw-bold">New Password</label>
+                                                                    <input type="password" class="form-control" id="newPassword" name="newPassword" required>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <div class="mb-3">
+                                                                    <label for="confirmNewPassword" class="form-label fw-bold">Confirm New Password</label>
+                                                                    <input type="password" class="form-control" id="confirmNewPassword" name="confirmNewPassword" required>
+                                                                </div>                                                        
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <button type="submit" class="btn btn-primary btn-block w-100">Save Changes</button>
+                                                </form>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-
                     </div>
                 </div>
             </main>
