@@ -2,16 +2,16 @@
     include_once "../includes/db.php"; // Include your database connection
 
     // Check if the current password is provided
-    if (isset($_POST['current_password']) && isset($_POST['new_password']) && isset($_POST['confirm_new_password'])) {
+    if (isset($_POST['currentPassword']) && isset($_POST['newPassword']) && isset($_POST['confirmNewPassword'])) {
 
         // Get the user ID from the session
         $user_id = $_SESSION['user_id'];
-        $current_password = $_POST['current_password'];
-        $new_password = $_POST['new_password'];
-        $confirm_new_password = $_POST['confirm_new_password'];
+        $currentPassword = $_POST['currentPassword'];
+        $newPassword = $_POST['newPassword'];
+        $confirmNewPassword = $_POST['confirmNewPassword'];
 
         // Check if new password and confirm password match
-        if ($new_password !== $confirm_new_password) {
+        if ($newPassword !== $confirmNewPassword) {
             echo "New password and confirm password do not match!";
             exit;
         }
@@ -25,10 +25,10 @@
             $row = $result[0];
             
             // Verify if the entered current password matches the stored hash
-            if (password_verify($current_password, $row['user_pwdhash'])) {
+            if (password_verify($currentPassword, $row['user_pwdhash'])) {
 
                 // Hash the new password
-                $new_password_hashed = password_hash($new_password, PASSWORD_ARGON2ID);
+                $new_password_hashed = password_hash($newPassword, PASSWORD_ARGON2ID);
 
                 // Update the password in the database
                 $table = "users";
