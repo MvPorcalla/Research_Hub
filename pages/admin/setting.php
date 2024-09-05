@@ -60,6 +60,9 @@ if (!isset($_SESSION['user_type'])) {
                         <div class='card border-dark bg-transparent'>
                             <div class="card-body">
                                 <div class="row">
+                                    <div class="my-1 text-center">
+                                        <h1 class='admin-subtitle'>Account Setting</h1>
+                                    </div>
                                     <!-- Personal Information -->
                                     <div class="col-md-12">
                                         <div class="card">
@@ -74,7 +77,7 @@ if (!isset($_SESSION['user_type'])) {
                                                     </div>
 
                                                     <!-- Info Column -->
-                                                    <div class="col-md-6 text-start">
+                                                    <div class="col-md-8 text-start">
                                                         <!-- Display Current Name -->
                                                         <h2 id="completeName" class="setting-name-text mb-1" data-user-id="<?php echo $_SESSION['user_id']; ?>"></h2>
 
@@ -83,6 +86,18 @@ if (!isset($_SESSION['user_type'])) {
                                                             <h2 id="userName" class="setting-username-text mb-0"></h2>
                                                             <span class='mx-2'> | </span>
                                                             <h2 id="emailAdd" class="setting-username-text mb-0"></h2>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-2 text-end">
+                                                        <div class="dropdown dropstart">
+                                                            <button class="btn btn-outline-dark " type="button" id="kebabMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                                                                <i class="fas fa-ellipsis-v"></i>
+                                                            </button>
+                                                            <ul class="dropdown-menu me-1 border border-dark" aria-labelledby="kebabMenuButton">
+                                                                <li><button class="dropdown-item fw-semibold my-1" data-bs-toggle="modal" data-bs-target="#editProfileModal">Edit Profile</button></li>
+                                                                <li><button class="dropdown-item fw-semibold my-1" data-bs-toggle="modal" data-bs-target="#editPassModal">Edit Password</button></li>
+                                                            </ul>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -94,12 +109,11 @@ if (!isset($_SESSION['user_type'])) {
                                  <div class="row mt-2">
                                     <div class="col-md-12">
                                         <div class="row">
-                                            <div class="col-md-6">
+                                            <div class="col-md-12">
                                                 <div class="card text-start">
                                                     <div class="card-body p-4">
                                                         <h1 class="setting-info-title">Notification</h1>
                                                         <hr class="border-2 border-secondary mb-2">
-
                                                         <form>
                                                             <div class="form-check">
                                                                 <input class="form-check-input" type="checkbox" id="emailNotifications" checked>
@@ -133,31 +147,7 @@ if (!isset($_SESSION['user_type'])) {
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-md-6">
-                                                <div class="card text-start">
-                                                    <div class="card-body p-4">
-                                                        <h1 class="setting-info-title">Activity</h1>
-                                                        <hr class="border-2 border-secondary mb-2">
-
-                                                        <div class="row my-3">
-                                                            <div class="col-md-12">
-                                                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editProfileModal">
-                                                                    Edit Profile
-                                                                </button>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="col-md-12">
-                                                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editPassModal">
-                                                                    Edit password
-                                                                </button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
                                         </div> 
-
                                     </div>
 
                                     <!-- Logout Button -->
@@ -197,22 +187,18 @@ if (!isset($_SESSION['user_type'])) {
                                                         </div>
                                                         
                                                         <div class="row">
-                                                            <div class="col-md-12 mb-3">
+                                                             <!-- username -->
+                                                            <div class="col-md-5 mb-3">
                                                                 <label for="usernameField" class="form-label fw-bold">Username</label>
                                                                 <input type="text" class="form-control" id="usernameField" name="usernameField">
                                                             </div>
-                                                        </div>
-
-                                                        <!-- email -->
-                                                        <div class="row">
-                                                            <div class="col-md-12 mb-3">
+                                                            <!-- email -->
+                                                            <div class="col-md-7 mb-3">
                                                                 <label for="emailField" class="form-label fw-bold">Email</label>
                                                                 <input type="email" class="form-control" id="emailField" name="emailField">
                                                             </div>
                                                         </div>
-
                                                     </div>
-
                                                     <button type="submit" class="btn btn-primary btn-block w-100">Save Changes</button>
                                                 </form>
                                             </div>
@@ -229,39 +215,42 @@ if (!isset($_SESSION['user_type'])) {
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body">
-                                                <form action="../../backend/update_password.php" method="post">
+                                                <form id="editPasswordForm">
                                                     <div class='text-start'>
-                                                        <div class="mb-3">
-                                                            <label for="currentPassword" class="form-label fw-bold">Current Password</label>
-                                                            <input type="password" class="form-control" id="currentPassword" name="currentPassword" required>
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <div class="mb-3">
+                                                                    <label for="currentPassword" class="form-label fw-bold">Current Password</label>
+                                                                    <input type="password" class="form-control" id="currentPassword" name="currentPassword" required>
+                                                                </div>
+                                                            </div>
                                                         </div>
-                                                        
-                                                        <div class="mb-3">
-                                                            <label for="newPassword" class="form-label fw-bold">New Password</label>
-                                                            <input type="password" class="form-control" id="newPassword" name="newPassword" required>
-                                                        </div>
-
-                                                        <div class="mb-3">
-                                                            <label for="confirmNewPassword" class="form-label fw-bold">Confirm New Password</label>
-                                                            <input type="password" class="form-control" id="confirmNewPassword" name="confirmNewPassword" required>
+                                                        <div class="row">
+                                                            <div class="col-md-6">
+                                                                <div class="mb-3">
+                                                                    <label for="newPassword" class="form-label fw-bold">New Password</label>
+                                                                    <input type="password" class="form-control" id="newPassword" name="newPassword" required>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <div class="mb-3">
+                                                                    <label for="confirmNewPassword" class="form-label fw-bold">Confirm New Password</label>
+                                                                    <input type="password" class="form-control" id="confirmNewPassword" name="confirmNewPassword" required>
+                                                                </div>                                                        
+                                                            </div>
                                                         </div>
                                                     </div>
-
                                                     <button type="submit" class="btn btn-primary btn-block w-100">Save Changes</button>
                                                 </form>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-
-                                    
                             </div>
                         </div>
-
                     </div>
                 </div>
             </main>
-
         </div>
     </div>
 
@@ -269,6 +258,7 @@ if (!isset($_SESSION['user_type'])) {
 
     <script src="../../includes/functions.js"></script>
     <script src="../../scripts/fetchOneRecord.js"></script>
+    <script src="../../scripts/fetchUpdateInfo.js"></script>
     
     <script>
         document.addEventListener('DOMContentLoaded', function () {

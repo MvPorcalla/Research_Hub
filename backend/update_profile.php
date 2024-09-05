@@ -8,7 +8,7 @@ if (isset($_POST['lastName'])) {
     $firstname = $_POST['firstName'];
     $mi = $_POST['middleInitial'];
     $username = $_POST['usernameField'];
-    $password = password_hash($_POST['password'], PASSWORD_ARGON2ID);
+    $email = $_POST['emailField'];
 
     // Fetch the image directory from the database
     $sql = "SELECT `user_idpicture_imgdir` FROM `users` WHERE `user_id` = ?";
@@ -37,7 +37,7 @@ if (isset($_POST['lastName'])) {
         'user_firstname' => $firstname,
         'user_mi' => $mi,
         'user_username' => $username,
-        'user_pwdhash' => $password,
+        'user_emailadd' => $email,
         'user_idpicture_imgdir' => $new_imgdir
     ];
     $filter = ['user_id' => $_SESSION['user_id']];
