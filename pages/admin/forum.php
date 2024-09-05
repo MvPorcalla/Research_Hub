@@ -95,7 +95,7 @@
 
     <script src="../../includes/functions.js"></script>
     <script src="../../scripts/toggleLike.js"></script>
-    <script src="../../scripts/adminForum.js"></script>
+    <script src="../../scripts/fetchEntriesComments.js"></script>
 
 
     <script>
@@ -103,15 +103,6 @@
             handleStatus('entry');
             handleStatus('comment');
         });
-
-        function toggleComments(entryId) {
-            const commentsSection = document.getElementById(`comment-section-${entryId}`);
-            if (commentsSection.style.display === 'none' || commentsSection.style.display === '') {
-                commentsSection.style.display = 'block';
-            } else {
-                commentsSection.style.display = 'none';
-            }
-        }
     </script>
 
 </body>
