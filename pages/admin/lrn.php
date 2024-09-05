@@ -47,7 +47,7 @@ if (!isset($_SESSION['user_type'])) {
                             <h1 id="lrnSubtitle" class='admin-subtitle'>Add Student LRN</h1>
                         </div>
                         <div class="row justify-content-center">
-                            <div class="col-md-10">
+                            <div class="col-md-7">
                                 <div class="card admin-card bg-transparent">
 
                                     <div class="card-body mx-5 text-start">
