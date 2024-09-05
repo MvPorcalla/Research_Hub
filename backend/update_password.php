@@ -1,54 +1,54 @@
 <?php
-    include_once "../includes/db.php";
+include_once "../includes/db.php";
 
-    // Check if the current password is provided
-    if (isset($_POST['currentPassword'])) {
+header('Content-Type: application/json'); // Set content type to JSON
 
-        // Get the user ID from the session
-        $user_id = $_SESSION['user_id'];
-        $current_password = $_POST['currentPassword'];
-        $new_password = $_POST['newPassword'];
-        $confirm_new_password = $_POST['confirmNewPassword'];
+$response = array('status' => 'error', 'message' => '');
 
-        // Check if new password matches confirm new password
-        if ($new_password !== $confirm_new_password) {
-            echo "New password and confirm password do not match!";
-            exit;
-        }
+if (isset($_POST['currentPassword']) && isset($_POST['newPassword']) && isset($_POST['confirmNewPassword'])) {
+    $user_id = $_SESSION['user_id'];
+    $currentPassword = $_POST['currentPassword'];
+    $newPassword = $_POST['newPassword'];
+    $confirmNewPassword = $_POST['confirmNewPassword'];
 
-        // Hash the new password after confirming it matches
-        $hashed_new_password = password_hash($new_password, PASSWORD_ARGON2ID);
+    if ($newPassword !== $confirmNewPassword) {
+        $response['message'] = "New password and confirm password do not match!";
+        echo json_encode($response);
+        exit;
+    }
 
-        // Fetch the user's current password from the database
-        $sql = "SELECT * FROM users WHERE user_id = ?";
-        $filter = [$user_id];
-        $result = query($conn, $sql, $filter);
+    $sql = "SELECT * FROM users WHERE user_id = ?";
+    $filter = [$user_id];
+    $result = query($conn, $sql, $filter);
 
-        // Check if a user was found
-        if ($result) {
-            $row = $result[0];
-
-            // Verify the current password entered matches the stored password
-            if (password_verify($current_password, $row['user_pwdhash'])) {
-                // Update the password in the database
+    if (!empty($result)) {
+        $row = $result[0];
+        
+        if (password_verify($currentPassword, $row['user_pwdhash'])) {
+            if ($currentPassword === $newPassword) {
+                $response['message'] = "New password cannot be the same as the current password!";
+            } else {
+                $new_password_hashed = password_hash($newPassword, PASSWORD_ARGON2ID);
                 $table = "users";
-                $fields = [
-                    'user_pwdhash' => $hashed_new_password,
-                ];
-                $filter = [
-                    'user_id' => $user_id
-                ];
+                $fields = ['user_pwdhash' => $new_password_hashed];
+                $filter = ['user_id' => $user_id];
 
                 if (update($conn, $table, $fields, $filter)) {
-                    echo "Password updated successfully!";
+                    $response['status'] = 'success';
+                    $response['message'] = "Password updated successfully!";
                 } else {
-                    echo "Failed to update password!";
+                    $response['message'] = "Password update failed!";
                 }
-            } else {
-                echo "Incorrect current password!";
             }
         } else {
-            echo "User not found!";
+            $response['message'] = "Current password is incorrect!";
         }
+    } else {
+        $response['message'] = "User not found!";
     }
+} else {
+    $response['message'] = "Please fill in all required fields!";
+}
+
+echo json_encode($response);
 ?>

@@ -56,5 +56,4 @@
     } else {
         echo "Please fill in all required fields!";
     }
-
 ?>

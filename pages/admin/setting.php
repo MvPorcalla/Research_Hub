@@ -215,7 +215,7 @@ if (!isset($_SESSION['user_type'])) {
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body">
-                                                <form action="../../backend/update_password.php" method="post">
+                                                <form id="editPasswordForm">
                                                     <div class='text-start'>
                                                         <div class="row">
                                                             <div class="col-md-12">
@@ -258,6 +258,7 @@ if (!isset($_SESSION['user_type'])) {
 
     <script src="../../includes/functions.js"></script>
     <script src="../../scripts/fetchOneRecord.js"></script>
+    <script src="../../scripts/fetchUpdateInfo.js"></script>
     
     <script>
         document.addEventListener('DOMContentLoaded', function () {
