@@ -7,7 +7,7 @@ async function updateProfile() {
     Swal.fire({
         title: 'Are you sure?',
         text: "Do you want to update your profile?",
-        icon: 'warning',
+        icon: 'question',
         showCancelButton: true,
         confirmButtonColor: '#d33',
         cancelButtonColor: '#3085d6',
@@ -35,17 +35,17 @@ async function updateProfile() {
                     });
                 } else {
                     Swal.fire({
-                        title: 'Error!',
+                        title: 'Warning!',
                         text: result.message || 'Failed to update profile.',
-                        icon: 'error',
+                        icon: 'warning',
                         confirmButtonText: 'OK'
                     });
                 }
             } catch (error) {
                 Swal.fire({
-                    title: 'Error!',
+                    title: 'Warning!',
                     text: 'An error occurred while updating your profile.',
-                    icon: 'error',
+                    icon: 'warning',
                     confirmButtonText: 'OK'
                 });
                 console.error('Error updating profile:', error);
@@ -63,7 +63,7 @@ async function updatePassword() {
     Swal.fire({
         title: 'Are you sure?',
         text: "Do you want to update your password?",
-        icon: 'warning',
+        icon: 'question',
         showCancelButton: true,
         confirmButtonColor: '#d33',
         cancelButtonColor: '#3085d6',
@@ -93,17 +93,17 @@ async function updatePassword() {
                     });
                 } else {
                     Swal.fire({
-                        title: 'Error!',
+                        title: 'Warning!',
                         text: result.message || 'Failed to update password.',
-                        icon: 'error',
+                        icon: 'warning',
                         confirmButtonText: 'OK'
                     });
                 }
             } catch (error) {
                 Swal.fire({
-                    title: 'Error!',
+                    title: 'Warning!',
                     text: 'An error occurred while updating your password.',
-                    icon: 'error',
+                    icon: 'warning',
                     confirmButtonText: 'OK'
                 });
                 console.error('Error updating password:', error);
