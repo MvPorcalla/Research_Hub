@@ -22,21 +22,6 @@ function handleStatus(paramName) {
                 icon: "success",
                 title: "Registration Complete!",
                 text: "Your registration is pending for approval by the admin."
-            },
-            "failed": {
-                icon: "error",
-                title: "Oops!",
-                text: "Your registration failed. Please try again."
-            },
-            "existing": {
-                icon: "error",
-                title: "LRN already registered.",
-                text: "Your LRN has already been registered to an account."
-            },
-            "wronglrn": {
-                icon: "error",
-                title: "Wrong LRN",
-                text: "Your LRN does not exist in the database."
             }
         },
         'token': {
