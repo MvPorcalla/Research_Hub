@@ -1,6 +1,10 @@
 <?php
 include_once "../includes/db.php";
 
+header('Content-Type: application/json'); // Set content type to JSON
+
+$response = array('status' => 'error', 'message' => '');
+
 if (isset($_POST['lastName'])) {
     
     // Assign form values to variables
@@ -10,27 +14,50 @@ if (isset($_POST['lastName'])) {
     $username = $_POST['usernameField'];
     $email = $_POST['emailField'];
 
-    // Fetch the image directory from the database
-    $sql = "SELECT `user_idpicture_imgdir` FROM `users` WHERE `user_id` = ?";
+    // Fetch the current profile data from the database
+    $sql = "SELECT * FROM users WHERE user_id = ?";
     $filter = [$_SESSION['user_id']];
     $result = query($conn, $sql, $filter);
 
-    $old_imgdir = $result[0]['user_idpicture_imgdir'];
+    if (empty($result)) {
+        $response['message'] = "User not found!";
+        echo json_encode($response);
+        exit;
+    }
+
+    $current = $result[0];
+
+    // Check if there are any changes
+    $changes = false;
+    if ($lastname !== $current['user_lastname'] || 
+        $firstname !== $current['user_firstname'] || 
+        $mi !== $current['user_mi'] || 
+        $username !== $current['user_username'] || 
+        $email !== $current['user_emailadd']) {
+        $changes = true;
+    }
+
+    if (!$changes) {
+        $response['message'] = "No changes detected!";
+        echo json_encode($response);
+        exit;
+    }
+
+    // Prepare fields for database update
+    $old_imgdir = $current['user_idpicture_imgdir'];
     $fileext = pathinfo($old_imgdir, PATHINFO_EXTENSION); //[ext]
 
     $new_filename = "{$lastname}, {$firstname} {$mi}";
     $new_imgdir = "../uploads/idImages/{$new_filename}.{$fileext}";
 
-    $page_type = ($_SESSION['user_type'] == 'A') ? "admin" : "user";
-
     // Attempt to rename the file
     if (!rename($old_imgdir, $new_imgdir)) {
-        // Redirect if the renaming fails
-        header("Location: ../pages/{$page_type}/setting.php?editInfo=failed");
+        $response['message'] = "Failed to rename the image file!";
+        echo json_encode($response);
         exit;
     }
 
-    // Prepare fields for database insertion
+    // Prepare fields for database update
     $table = "users";
     $fields = [
         'user_lastname' => $lastname,
@@ -42,7 +69,18 @@ if (isset($_POST['lastName'])) {
     ];
     $filter = ['user_id' => $_SESSION['user_id']];
 
-    $status = update($conn, $table, $fields, $filter) ? 'success' : 'failed';
-    header("Location: ../pages/{$page_type}/setting.php?editInfo={$status}");
+    if (update($conn, $table, $fields, $filter)) {
+        $response['status'] = 'success';
+        $response['message'] = "Profile updated successfully!";
+    } else {
+        $response['message'] = "Failed to update profile!";
+    }
+
+    echo json_encode($response);
+    exit;
+} else {
+    $response['message'] = "Invalid request!";
+    echo json_encode($response);
     exit;
 }
+?>

@@ -169,7 +169,7 @@ if (!isset($_SESSION['user_type'])) {
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body">
-                                                <form id="formWithPassword" action="../../backend/update_profile.php" method="post">
+                                                <form id="editProfileForm">
                                                     <div class='text-start'>
                                                         <div class="row">
                                                             <div class="col-md-5 mb-3">
@@ -185,14 +185,11 @@ if (!isset($_SESSION['user_type'])) {
                                                                 <input type="text" class="form-control" id="middleInitial" name="middleInitial" maxlength="1">
                                                             </div>
                                                         </div>
-                                                        
                                                         <div class="row">
-                                                             <!-- username -->
                                                             <div class="col-md-5 mb-3">
                                                                 <label for="usernameField" class="form-label fw-bold">Username</label>
                                                                 <input type="text" class="form-control" id="usernameField" name="usernameField">
                                                             </div>
-                                                            <!-- email -->
                                                             <div class="col-md-7 mb-3">
                                                                 <label for="emailField" class="form-label fw-bold">Email</label>
                                                                 <input type="email" class="form-control" id="emailField" name="emailField">
