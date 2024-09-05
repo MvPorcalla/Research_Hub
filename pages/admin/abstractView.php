@@ -102,7 +102,7 @@ if (!isset($_SESSION['user_type'])) {
 
 
     <script src="../../includes/functions.js"></script>
-    <script src="../../scripts/fetchRecords.js"></script>
+    <script src="../../scripts/fetchAbstractComments.js"></script>
     <script src="../../scripts/fetchOneRecord.js"></script>
     <script src="../../scripts/toggleLike.js"></script>
 
@@ -110,6 +110,7 @@ if (!isset($_SESSION['user_type'])) {
         document.addEventListener('DOMContentLoaded', function () {
             handleStatus('comment');
             handleStatus('deleteRecord');
+            displayComments();
         });
     </script>
 </body>

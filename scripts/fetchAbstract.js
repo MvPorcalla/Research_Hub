@@ -95,6 +95,11 @@ if (url.includes('index.php')) {
     
             tableBody.innerHTML = rows;
             
+            setupConfirmationDialog('.delete-button', {
+                multiTd: false,
+                actionText: "You are about to delete",
+                confirmButtonText: "Delete"
+            });
         };
     
         function handleAfterFetch() {
