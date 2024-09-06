@@ -3,10 +3,7 @@ include_once "../includes/db.php";
 
 header('Content-Type: application/json'); // Set content type to JSON
 
-$response = [
-    'status' => 'error',
-    'notifications' => []
-];
+$response = [ 'notifications' => [] ];
 
 $user_id = $_SESSION['user_id'];
 $user_lastlogin = $_SESSION['user_lastlogin']; // previous log in
@@ -33,7 +30,6 @@ $row = $result[0];
 
 $pending_count = $row['pending_count'];
 
-$response['status'] = 'success';
 $response['notifications'][] = [
     'type' => 'pending',
     'count' => $pending_count
@@ -41,7 +37,24 @@ $response['notifications'][] = [
 
 // ============================ ABSTRACTS ============================
 
+$sql = "SELECT
+            COUNT(*) AS abstract_count,
+            MAX(`record_timestamp`) AS latest_added 
+        FROM `records` 
+        WHERE `record_status` = 'A' 
+        AND `record_timestamp` > ?";
+$filter = [$user_lastlogin];
+$result = query($conn, $sql, $filter);
 
+$row = $result[0];
+
+$abstract_count = $row['abstract_count'];
+$latest_added = $row['latest_added'];
+$response['notifications'][] = [
+    'type' => 'abstract',
+    'count' => $abstract_count,
+    'latest' => $latest_added
+];
 
 // ============================ COMMENTS =============================
 

@@ -24,5 +24,3 @@
         </li>
     </ul>
 </nav>
-
-<script src="../../scripts/fetchNotifications.js"></script>
