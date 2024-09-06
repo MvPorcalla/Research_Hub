@@ -1,29 +1,38 @@
+// Async function to display comments for a given abstract ID
 async function displayComments(abstractId = '') {
     if (document.getElementById('commentsContainer')) {
 
         const commentsContainer = document.getElementById('commentsContainer');
+
+        // If no abstractId is provided, get it from the 'data-abstract-id' attribute of the container
         if (!abstractId) {
             abstractId = commentsContainer.getAttribute('data-abstract-id');
         }
 
+        // Fetch comments from the backend for the given abstract ID
         const response = await fetch(`../../backend/fetchRecords.php?fetch=comments&comment_on=record_id&record_id=${abstractId}`);
+        
+        // Throw an error if the response is not ok
         if (!response.ok) throw new Error('Network response was not ok');
 
+        // Parse the response data as JSON
         const data = await response.json();
 
         if (data.length == 0) {
 
+            // Display a message indicating no comments are available
             let tileHTML = `<small>No comments yet.</small>`;
             commentsContainer.innerHTML += tileHTML;
             
         } else {
 
+            // Iterate through each comment and create HTML for displaying
             data.forEach(dataRow => {
 
                 const timestamp = dataRow.commentTimestamp;
         
-                const timePassed = timeAgo(timestamp);
-                const formattedDateTime = formatDateTime(timestamp);
+                const timePassed = timeAgo(timestamp); // Calculate the time passed since the entry was posted
+                const formattedDateTime = formatDateTime(timestamp); // Format the timestamp for display
         
                 var url = window.location.href;
                 var type = url.includes('admin') ? 'admin' : 'user';
@@ -31,7 +40,7 @@ async function displayComments(abstractId = '') {
                 let buttonHTML;
                 let likesHTML = '';
                 
-                // Change the button HTML based on the context
+                // Change the button HTML based on the user type
                 if (type === 'admin') {
                     buttonHTML = `
                         <div class="d-flex flex-row align-items-center">
@@ -56,6 +65,7 @@ async function displayComments(abstractId = '') {
                     `;
                 }
         
+                // Construct the HTML for each comment card
                 let tileHTML = `
                     <div class="card comment-card">
                         <div class="card-body">
@@ -76,6 +86,7 @@ async function displayComments(abstractId = '') {
                         </div>
                     </div>
                 `;
+                // Append the constructed HTML to the comments container
                 commentsContainer.innerHTML += tileHTML;
             });
         }

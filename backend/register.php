@@ -1,115 +1,136 @@
 <?php
+// ==================================== data connection ====================================
 include_once "..\includes\db.php";
+
+// ================================ Set content type to JSON ================================
+header('Content-Type: application/json');
+
+// ================================= initialize $response =================================
+$response =['status' => 'error', 'message' => '', 'redirect' => ''];
 
 // checks if value of name="lrn" is set
 if ((isset($_POST['lrn']) || isset($_POST['email'])) && $_FILES['idImage']['error'] == '0') {
 
-    //transfers value of name="" from form to variable
-    $r_role = $_POST['role'];
-    $r_lastName = trim($_POST['lastName']);
-    $r_firstName = trim($_POST['firstName']);
-    $r_middleInitial = trim($_POST['middleInitial'] ?? NULL);
-    $r_username = trim($_POST['username']);
-    $r_email = trim($_POST['email']);
-    $r_lrn = trim($_POST['lrn'] ?? NULL);
-    $r_trackStrand = trim($_POST['trackStrand'] ?? NULL);
-    $r_school = trim($_POST['school'] ?? NULL);
-    $r_reason = trim($_POST['reason'] ?? NULL);
+    // ======================== transfer value from form to variable ========================
+    $role_symbol = $_POST['role'];
 
-    //for id image file
-    $fileName = "{$r_lastName}, {$r_firstName} {$r_middleInitial}";
+    $lastName = trim($_POST['lastName']);
+    $firstName = trim($_POST['firstName']);
+    $middleInitial = trim($_POST['middleInitial'] ?? NULL);
+
+    $username = trim($_POST['username']);
+    $email = trim($_POST['email']);
+
+    $lrn = trim($_POST['lrn'] ?? NULL);
+    $trackStrand = trim($_POST['trackStrand'] ?? NULL);
+    $school = trim($_POST['school'] ?? NULL);
+    $reason = trim($_POST['reason'] ?? NULL);
+
+    $password = $_POST['password'];
+    $confirm_password = $_POST['confirmPassword'];
+
+    // ================================= for ID image file =================================
+    $fileName = "{$lastName}, {$firstName} {$middleInitial}";
     $file = $_FILES['idImage']['name']; //[basename.ext]
     $fileext = pathinfo($file, PATHINFO_EXTENSION); //[ext]
+
     $temp = $_FILES['idImage']['tmp_name']; //temporary location
-    $r_idImage = "../uploads/idImages/{$fileName}.{$fileext}"; //target location
+    $idImage = "../uploads/idImages/{$fileName}.{$fileext}"; //target location
 
-    //hashes value of name="reg_password" from form then transfered to variable
-    $r_pwdhash = password_hash($_POST['password'], PASSWORD_ARGON2ID);
+    // ================================== compare password ==================================
+    if ($password !== $confirm_password) {
+        $response['message'] = "Passwords do not match.";
+        echo json_encode($response);
+        exit();
+    }
 
-    $r_status = ($r_role == 'G') ? 'P' : 'A';
+    // =================================== hash password ===================================
+    $pwdhash = password_hash($_POST['password'], PASSWORD_ARGON2ID);
 
-    // echo "
-    //     'user_lastname' => $r_lastName,<br>
-    //     'user_firstname' => $r_firstName,<br>
-    //     'user_mi' => $r_middleInitial,<br>
-    //     'user_username' => $r_username,<br>
-    //     'user_emailadd' => $r_email,<br>
-    //     'user_lrn' => $r_lrn,<br>
-    //     'user_trackstrand' => $r_trackStrand,<br>
-    //     'user_idpicture_imgdir' => $r_idImage,<br>
-    //     'user_school' => $r_school,<br>
-    //     'user_reason' => $r_reason,<br>
-    //     'user_pwdhash' => $r_pwdhash,<br>
-    //     'user_type' => '{$r_role}',<br>
-    //     'user_status' => 'A'
-    // ";
+    // ============================== declare status and role  ==============================
+    $status = ($role_symbol == 'G') ? 'P' : 'A';
+    $role = ($role_symbol == 'S') ? "Student" : "Guest";
 
-    // exit;
-
-    $filter = [$r_lrn];
-
-    //preparing arguments for insert()
+    // ====================== prepare arguments for insert() function ======================
     $table = "users";
     $fields = [
-        'user_lastname' => $r_lastName,
-        'user_firstname' => $r_firstName,
-        'user_mi' => $r_middleInitial,
-        'user_username' => $r_username,
-        'user_emailadd' => $r_email,
-        'user_trackstrand' => $r_trackStrand,
-        'user_idpicture_imgdir' => $r_idImage,
-        'user_school' => $r_school,
-        'user_reason' => $r_reason,
-        'user_pwdhash' => $r_pwdhash,
-        'user_type' => $r_role,
-        'user_status' => $r_status
+        'user_lastname' => $lastName,
+        'user_firstname' => $firstName,
+        'user_mi' => $middleInitial,
+
+        'user_username' => $username,
+        'user_emailadd' => $email,
+
+        'user_trackstrand' => $trackStrand,
+        'user_idpicture_imgdir' => $idImage,
+        'user_school' => $school,
+        'user_reason' => $reason,
+
+        'user_pwdhash' => $pwdhash,
+        'user_type' => $role,
+        'user_status' => $status
     ];
 
-    $role = ($r_role == 'S') ? "Student" : "Guest";
-
-    //checks if $r_lrn exists in table `lrn`
+    // =============== select row from `LRN` table with LRN ID matching $lrn ===============
+    // ======================= to check if LRN is valid to the school =======================
     $sql = "SELECT `lrn_id`, `lrn_lrnid` FROM `lrn` WHERE `lrn_lrnid` = ?";
+    $filter = [$lrn];
     $result = query($conn, $sql, $filter);
 
-    //if $r_lrn does not exist in table `lrn`, then go back to registration page, else proceed
-    if (empty($result) && $r_role == 'S') {
-        header("location: ../register{$role}.php?registration=wronglrn");
+    // =================== if registering as student and result is empty ===================
+    // ================================== warn: wrong LRN ==================================
+    if (empty($result) && $role_symbol == 'S') {
+ 
+        $response['message'] = "Your LRN does not exist in the database.";
+        echo json_encode($response);
         exit();
+
     } else {
-
+        // ========== add keys and values to fields argument for insert() function ==========
         $fields['lrn_id'] = $result[0]['lrn_id'];
-        $fields['user_status'] = ($r_role == 'G') ? 'P' : 'A';
+        $fields['user_status'] = ($role_symbol == 'G') ? 'P' : 'A';
 
-        //checks if $r_lrn exists in table `users`
-        $sql = "SELECT u.lrn_id, lrn.lrn_id, lrn.lrn_lrnid
+        // ============ select row from `users` table with LRN ID matching $lrn =============
+        // ======================= to check if LRN is already in use =======================
+        $sql = "SELECT u.lrn_id, lrn.lrn_id, lrn.lrn_lrnid, u.user_username, u.user_emailadd
                 FROM `users` u
                 JOIN `lrn` ON u.lrn_id = lrn.lrn_id
-                WHERE lrn.lrn_lrnid = ?";
+                WHERE lrn.lrn_lrnid = ?
+                OR u.user_username = ?
+                OR u.user_emailadd = ?";
+        $filter = [$lrn, $username, $email];
         $result = query($conn, $sql, $filter);
 
-        //if $r_lrn does not exist in table `users`, then proceed, else go back to registration page
         if (empty($result)) {
-            // if uploaded file is successfully moved, then proceed, else go back to registration page
-            move_uploaded_file($temp, $r_idImage)
-                ? (
-                    // if data is successfully inserted to database, then proceed, else go back to registration page
-                    insert($conn, $table, $fields)
-                    ? (
-                        // if user is a guest, then go back to landing page, else proceed to log in page
-                        ($r_role == 'G') 
-                        ? header("location: ../index.php?registration=success")
-                        : header("location: ../login.php?login=success")
-                    )
-                    : header("location: ../register{$role}.php?registration=failed")
-                )
-                : header("location: ../register{$role}.php?registration=failed");
-            
-            exit;
-        }
-        //if $result is not empty
-        else {
-            header("location: ../register{$role}.php?registration=existing");
-            exit();
+            // ================== move uploaded file to $idImage directory ==================
+            if (move_uploaded_file($temp, $idImage)) {
+                    // ==================== insert arguments to database ====================
+                    if (insert($conn, $table, $fields)) {
+                        
+                        $response['status'] = 'success';
+                        // =================== redirect according to role ===================
+                        ($role_symbol == 'G')
+                        ? $response['redirect'] = "index.php?registration=success"
+                        : $response['redirect'] = "login.php?login=success";
+                    } else {
+                        $response['message'] = "Your registration failed. Please try again.";
+                    }
+            } else {
+                // ========================= if moving file failed =========================
+                // ===================== warn: failed ID picture upload =====================
+                $response['message'] = "Your registration failed. Please try again.";
+            }
+        } else {
+            // =========== identify which field(s) matched to an existing account ===========
+            $matchedFields = [];
+            foreach ($result as $key => $row) {
+                if ($row['lrn_lrnid'] === $lrn) $matchedFields[] = 'LRN';
+                if ($row['user_username'] === $username) $matchedFields[] = 'username';
+                if ($row['user_emailadd'] === $email) $matchedFields[] = 'email address';
+            }
+            $response['message'] = "Your entered " . implode(', ', $matchedFields) . " already exists in the database";
         }
     }
 }
+// ================================ pass info to register.js ================================
+echo json_encode($response);

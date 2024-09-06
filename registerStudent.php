@@ -31,7 +31,7 @@
                             <div class="card bg-transparent">
 
                                 <div class="card-body mx-5">
-                                    <form id="formWithPassword" action="backend\register.php" method="POST" enctype="multipart/form-data">
+                                    <form id="formWithPassword">
                                         <!-- Role -->
                                         <div class="row mb-3" hidden>
                                             <label for="role" class="form-label">Role</label>
@@ -126,10 +126,10 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="includes\functions.js"></script>
+    <script src="scripts\register.js"></script>
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            confirmPassword();
             handleStatus('registration');
         });
     </script>

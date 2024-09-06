@@ -1,5 +1,6 @@
-// shows sweet alert depending on paramName and its value
+// Function to show SweetAlert based on the paramName and its status
 function handleStatus(paramName) {
+    // Define different messages based on action and status
     const messages = {
         'login': {
             "success": {
@@ -22,21 +23,6 @@ function handleStatus(paramName) {
                 icon: "success",
                 title: "Registration Complete!",
                 text: "Your registration is pending for approval by the admin."
-            },
-            "failed": {
-                icon: "error",
-                title: "Oops!",
-                text: "Your registration failed. Please try again."
-            },
-            "existing": {
-                icon: "error",
-                title: "LRN already registered.",
-                text: "Your LRN has already been registered to an account."
-            },
-            "wronglrn": {
-                icon: "error",
-                title: "Wrong LRN",
-                text: "Your LRN does not exist in the database."
             }
         },
         'token': {
@@ -105,11 +91,6 @@ function handleStatus(paramName) {
                 title: "Content Imported!",
                 text: "Successfully imported file contents to the list."
             },
-            "failed": {
-                icon: "error",
-                title: "Import Failed",
-                text: "Error importing file. Please try again."
-            },
             "error": {
                 icon: "error",
                 title: "Error",
@@ -124,23 +105,6 @@ function handleStatus(paramName) {
                 icon: "warning",
                 title: "Oops!",
                 text: "No file uploaded."
-            }
-        },
-        'action': {
-            "accepted": {
-                icon: "success",
-                title: "Guest Accepted!",
-                text: "You can now view guest in the list."
-            },
-            "declined": {
-                icon: "success",
-                title: "Guest Declined",
-                text: "Guest access was declined."
-            },
-            "failed": {
-                icon: "error",
-                title: "Oops!",
-                text: "Please try again."
             }
         },
         'editInfo': {
@@ -179,29 +143,33 @@ function handleStatus(paramName) {
         }
     };
 
+    // Get URL parameters
     const urlParams = new URLSearchParams(window.location.search);
     const status = urlParams.get(paramName);
 
-    let message; // Initialize message variable
+    let message;
 
     if (status) {
+        // Handle 'exceptions' status separately for specific import scenarios
         if (paramName === 'exceptions') {
+            // Split status into parts for detailed error handling
             const parts = status.split("-");
             const existingData = parts[0];
             const notTwelveData = parts[1];
             const totalData = parts[2];
-    
+
+            // Determine appropriate message based on the parts
             if (existingData == totalData) {
                 message = {
                     icon: "info",
                     title: "Records Already Exists",
-                    text: `The records within the file already exists in the list.`
+                    text: `The records within the file already exist in the list.`
                 };
             } else if (notTwelveData == totalData) {
                 message = {
                     icon: "warning",
                     title: "Records Not Imported!",
-                    text: `The records within the file does not follow the 12-digit format of LRNs.`
+                    text: `The records within the file do not follow the 12-digit format of LRNs.`
                 };
             } else if (Number(existingData) == 0) {
                 message = {
@@ -229,18 +197,21 @@ function handleStatus(paramName) {
                 };
             }
         } else {
+            // Retrieve the message for the specified status and paramName
             const paramMessages = messages[paramName] || {};
             message = paramMessages[status];
         }
-        
+
+        // Display the message if it exists
         if (message) {
             Swal.fire(message);
         }
-    
+
+        // Clear the URL parameter to prevent repeated messages
         clearUrlParam(paramName);
     }
-    
 }
+
 
 // =========================================================================
 
@@ -253,34 +224,40 @@ function clearUrlParam(paramName) {
 
 // =========================================================================
 
+// Function to setup a confirmation dialog
 function setupConfirmationDialog(buttonSelector, options) {
     // Get all elements matching the provided selector
     const buttons = document.querySelectorAll(buttonSelector);
 
-    // Add event listener to each button element
     buttons.forEach(button => {
         button.addEventListener('click', function (event) {
-            // Prevent the default action
+
             event.preventDefault();
 
-            // Extract relevant information based on options
             let textContent;
+
             if (options.multiTd) {
-                // Traverse the DOM to get the corresponding <tr> element
+                // If options.multiTd is true, get text from multiple <td> elements
+
                 let row = this.closest('tr');
-                // Get the text content from specified <td> elements
+
+                // Get the text content from the specified number of <td> elements
                 let tdElements = row.querySelectorAll('td');
                 let contents = Array.from(tdElements).slice(0, options.tdCount).map(td => td.textContent);
+                
+                // Join the text content with a space
                 textContent = contents.join(' ');
             } else {
-                // Traverse the DOM to get the corresponding single <td> element
+                // If options.multiTd is false, get text from a single <td> element
+
+                // Get the first <td> element
                 textContent = this.closest('tr').querySelector('td').textContent;
             }
 
-            // Customize SweetAlert text
+            // Customize SweetAlert text with the extracted text content
             let alertText = `${options.actionText} <strong>${textContent}</strong>`;
 
-            // Trigger the SweetAlert
+            // Trigger the SweetAlert confirmation dialog
             Swal.fire({
                 title: 'Are you sure?',
                 html: alertText,
@@ -288,10 +265,10 @@ function setupConfirmationDialog(buttonSelector, options) {
                 showCancelButton: true,
                 confirmButtonColor: '#d33',
                 cancelButtonColor: '#3085d6',
-                confirmButtonText: options.confirmButtonText
+                confirmButtonText: options.confirmButtonText // Custom confirm button text
             }).then((result) => {
                 if (result.isConfirmed) {
-                    // If confirmed, proceed to the link
+                    // If the user confirms, redirect to the href of the clicked button
                     window.location.href = this.href;
                 }
             });
@@ -301,12 +278,18 @@ function setupConfirmationDialog(buttonSelector, options) {
 
 // =========================================================================
 
-// Define the timeAgo function
+// Function to calculate the time passed based on given timestamp
 function timeAgo(timestamp) {
+    // Get the current date and time
     const now = new Date();
-    const then = new Date(timestamp);
-    const diff = now - then; // Difference in milliseconds
 
+    // Convert the timestamp to a Date object
+    const then = new Date(timestamp);
+
+    // Calculate the difference in milliseconds
+    const diff = now - then;
+
+    // Convert the difference into various time units
     const seconds = Math.floor(diff / 1000);
     const minutes = Math.floor(seconds / 60);
     const hours = Math.floor(minutes / 60);
@@ -315,42 +298,54 @@ function timeAgo(timestamp) {
     const months = Math.floor(days / 30);
     const years = Math.floor(days / 365);
 
+    // Return a human-readable time difference
     if (years > 0) return `${years} year${years > 1 ? 's' : ''} ago`;
     if (months > 0) return `${months} month${months > 1 ? 's' : ''} ago`;
     if (weeks > 0) return `${weeks} week${weeks > 1 ? 's' : ''} ago`;
     if (days > 0) return `${days} day${days > 1 ? 's' : ''} ago`;
     if (hours > 0) return `${hours} hour${hours > 1 ? 's' : ''} ago`;
     if (minutes > 0) return `${minutes} minute${minutes > 1 ? 's' : ''} ago`;
-    return 'Just now';
+    return 'Just now'; // Default message for recent timestamps
 }
 
 // =========================================================================
 
+// Function to format the given timestamp
 function formatDateTime(timestamp) {
+    // Convert the timestamp to a Date object
     const date = new Date(timestamp);
+
+    // Define options for formatting the date and time
     const options = {
         year: 'numeric',
         month: 'long',
         day: 'numeric',
         hour: 'numeric',
         minute: 'numeric',
-        hour12: true // Use 12-hour clock (AM/PM)
+        hour12: true
     };
+
+    // Return the formatted date and time string
     return date.toLocaleDateString('en-US', options);
 }
 
 // =========================================================================
 
+// Function confirm password
 function confirmPassword() {
-    
+
     const form = document.getElementById('formWithPassword');
+
     form.addEventListener('submit', function (e) {
 
         const password = document.getElementById('password').value;
         const confirmPassword = document.getElementById('confirmPassword').value;
 
+        // Check if the password and confirm password fields match
         if (password !== confirmPassword) {
-            e.preventDefault(); // Prevent form submission
+            e.preventDefault();
+
+            // Display an error message using SweetAlert
             Swal.fire({
                 icon: "error",
                 title: "Passwords do not match.",
@@ -362,21 +357,33 @@ function confirmPassword() {
 
 // =========================================================================
 
+// Function to fetch user likes from the database
 function getLikes() {
-    let userIdElement = document.getElementById('abstractTiles') || document.getElementById('favoriteTiles') || document.getElementById('commentsContainer') || document.getElementById('entriesContainer');
+    // Get the element that contains the user ID based on different possible element IDs
+    let userIdElement = document.getElementById('abstractTiles') ||
+                        document.getElementById('favoriteTiles') ||
+                        document.getElementById('commentsContainer') ||
+                        document.getElementById('entriesContainer');
+
+    // Extract the user ID from the element's data attribute, or set to null if not found
     const userId = userIdElement ? userIdElement.getAttribute('data-user-id') : null;
+
     const buttons = document.querySelectorAll('.like-button');
-    
+
+    // Create an array of fetch requests to get the like status for each button
     const requests = Array.from(buttons).map(button => {
+
         const abstractId = button.getAttribute('data-record-id');
         const entryId = button.getAttribute('data-entry-id');
         const commentId = button.getAttribute('data-comment-id');
 
+        // Check if the button is associated with a record
         if (abstractId) {
+            // Fetch like status for the record and update button appearance accordingly
             return fetch(`../../backend/get_like_status.php?record_type=record&recordId=${abstractId}&userId=${userId}`)
                 .then(response => response.json())
                 .then(data => {
-                    
+                    // Add or remove classes based on like status
                     if (data.like_status === 'A') {
                         button.classList.add('btn-danger');
                         button.classList.remove('btn-outline-danger');
@@ -386,17 +393,19 @@ function getLikes() {
                     }
                 })
                 .catch(error => {
+                    // Log any errors encountered during the fetch request
                     console.error('Error fetching like status:', error);
                 });
 
+        // Check if the button is associated with an entry
         } else if (entryId) {
-                    
+            // Fetch like status for the entry and update the icon appearance accordingly
             return fetch(`../../backend/get_like_status.php?record_type=entry&recordId=${entryId}&userId=${userId}`)
                 .then(response => response.json())
                 .then(data => {
-
                     const icon = button.querySelector('svg');
 
+                    // Add or remove 'liked' class based on like status
                     if (data.like_status == 'A') {
                         icon.classList.add('liked');
                     } else {
@@ -404,16 +413,19 @@ function getLikes() {
                     }
                 })
                 .catch(error => {
+                    // Log any errors encountered during the fetch request
                     console.error('Error fetching like status:', error);
                 });
 
+        // Check if the button is associated with a comment
         } else if (commentId) {
+            // Fetch like status for the comment and update the icon appearance accordingly
             return fetch(`../../backend/get_like_status.php?record_type=comment&recordId=${commentId}&userId=${userId}`)
                 .then(response => response.json())
                 .then(data => {
-                    
                     const icon = button.querySelector('svg');
 
+                    // Add or remove 'liked' class based on like status
                     if (data.like_status == 'A') {
                         icon.classList.add('liked');
                     } else {
@@ -421,12 +433,13 @@ function getLikes() {
                     }
                 })
                 .catch(error => {
+                    // Log any errors encountered during the fetch request
                     console.error('Error fetching like status:', error);
                 });
         }
     });
 
-    // Ensure all requests are completed
+    // Ensure all fetch requests are completed before logging success message
     Promise.all(requests).then(() => {
         console.log('All like statuses updated');
     });
