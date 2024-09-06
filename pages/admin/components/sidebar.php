@@ -17,9 +17,12 @@
         </li>
         <li class="nav-item mb-1">
             <a class="nav-link" href="./pendingRequest.php">Pending Request</a>
+            <span id="pendingCount" class="badge rounded-pill bg-danger position-absolute translate-middle"></span>
         </li>
         <li class="nav-item mb-1">
             <a class="nav-link" href="./setting.php">Account Settings</a>
         </li>
     </ul>
 </nav>
+
+<script src="../../scripts/fetchNotifications.js"></script>
