@@ -1,18 +1,17 @@
-// Wait for the DOM content to be fully loaded before executing the script
 document.addEventListener('DOMContentLoaded', function() {
-    // Select the input field where the search query is entered
+
     const queryInput = document.querySelector('#query');
     
-    // Initialize variables for table bodies and record type
     let lrnTableBody, studentTableBody, guestTableBody, recordType;
 
     // Check if the 'users-table' element exists to determine which tables to initialize
     if (document.getElementById(`users-table`)) {
-        // Select table bodies for student and guest tables
+
         studentTableBody = document.querySelector(`#students-table tbody`);
         guestTableBody = document.querySelector(`#guests-table tbody`);
+
     } else if (document.getElementById(`lrns-table`)) {
-        // Select table body for LRN table and set record type to 'lrn'
+
         lrnTableBody = document.querySelector(`#lrns-table tbody`);
         recordType = 'lrn';
     }
@@ -26,14 +25,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Function to fetch records from the server based on record type and query
     function fetchRecords(recordType, query = '') {
-        console.log('Fetching records with query:', query); // Debugging line
         
         return new Promise((resolve, reject) => {
             // Make a fetch request to the server with the specified record type and query
             fetch(`../../backend/searchfetch.php?record_type=${encodeURIComponent(recordType)}&query=${encodeURIComponent(query)}`)
                 .then(response => response.json())
                 .then(data => {
-                    console.log('Data received:', data); // Debugging line
 
                     let rows = '';
 
@@ -127,11 +124,15 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Function to highlight matching text in the table cells
     function highlightText(text, query) {
+        // If there's no query, return the original text
         if (!query) return text;
+
         // Escape special characters in the query to use in regex
         const escapedQuery = query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        
         // Create a regex to match the query text, case-insensitively
         const regex = new RegExp('(' + escapedQuery + ')', 'gi');
+
         // Replace matched text with highlighted version
         return text.replace(regex, '<strong>$1</strong>');
     }
@@ -158,7 +159,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Add event listener to handle form submission for search
     document.querySelector('#search-form').addEventListener('submit', function(event) {
-        event.preventDefault(); // Prevent default form submission
+        event.preventDefault();
         const query = queryInput.value.trim();
         if (document.getElementById(`users-table`)) {
             fetchRecords('student', query);

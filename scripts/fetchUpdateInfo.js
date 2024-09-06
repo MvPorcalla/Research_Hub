@@ -1,9 +1,9 @@
 // Function to handle profile update
 async function updateProfile() {
-    // Get form data
+    // Get form data from the profile edit form
     const formData = new FormData(document.querySelector('#editProfileForm'));
 
-    // SweetAlert confirmation dialog
+    // Show SweetAlert confirmation dialog before proceeding
     Swal.fire({
         title: 'Are you sure?',
         text: "Do you want to update your profile?",
@@ -13,16 +13,22 @@ async function updateProfile() {
         cancelButtonColor: '#3085d6',
         confirmButtonText: 'Yes, update it!'
     }).then(async (result) => {
+        // If the user confirms the update
         if (result.isConfirmed) {
             try {
+                // Send the form data to the backend using fetch
                 const response = await fetch('../../backend/update_profile.php', {
                     method: 'POST',
                     body: formData
                 });
 
+                // Throw an error if the response is not OK
                 if (!response.ok) throw new Error('Network response was not ok');
 
+                // Parse the JSON response
                 const result = await response.json();
+
+                // If the update is successful, show a success alert and reload the page
                 if (result.status === 'success') {
                     Swal.fire({
                         title: 'Updated!',
@@ -34,6 +40,7 @@ async function updateProfile() {
                         window.location.reload();
                     });
                 } else {
+                    // Show a warning alert if the update fails
                     Swal.fire({
                         title: 'Warning!',
                         text: result.message || 'Failed to update profile.',
@@ -42,13 +49,14 @@ async function updateProfile() {
                     });
                 }
             } catch (error) {
+                // Show a warning alert if an error occurs during the update
                 Swal.fire({
                     title: 'Warning!',
                     text: 'An error occurred while updating your profile.',
                     icon: 'warning',
                     confirmButtonText: 'OK'
                 });
-                console.error('Error updating profile:', error);
+                console.error('Error updating profile:', error); // Log the error to the console
             }
         }
     });
@@ -56,10 +64,10 @@ async function updateProfile() {
 
 // Function to handle password update
 async function updatePassword() {
-    // Get form data
+    // Get form data from the password edit form
     const formData = new FormData(document.querySelector('#editPasswordForm'));
 
-    // SweetAlert confirmation dialog
+    // Show SweetAlert confirmation dialog before proceeding
     Swal.fire({
         title: 'Are you sure?',
         text: "Do you want to update your password?",
@@ -69,16 +77,22 @@ async function updatePassword() {
         cancelButtonColor: '#3085d6',
         confirmButtonText: 'Yes, update it!'
     }).then(async (result) => {
+        // If the user confirms the update
         if (result.isConfirmed) {
             try {
+                // Send the form data to the backend using fetch
                 const response = await fetch('../../backend/update_password.php', {
                     method: 'POST',
                     body: formData
                 });
 
+                // Throw an error if the response is not OK
                 if (!response.ok) throw new Error('Network response was not ok');
 
+                // Parse the JSON response
                 const result = await response.json();
+
+                // If the update is successful, show a success alert and close the modal
                 if (result.status === 'success') {
                     Swal.fire({
                         title: 'Updated!',
@@ -86,12 +100,13 @@ async function updatePassword() {
                         icon: 'success',
                         confirmButtonText: 'OK'
                     }).then(() => {
-                        // Close modal and optionally reset form
+                        // Close the password modal and reset the form
                         let modal = bootstrap.Modal.getInstance(document.getElementById('editPassModal'));
                         modal.hide();
                         document.querySelector('#editPasswordForm').reset();
                     });
                 } else {
+                    // Show a warning alert if the update fails
                     Swal.fire({
                         title: 'Warning!',
                         text: result.message || 'Failed to update password.',
@@ -100,29 +115,28 @@ async function updatePassword() {
                     });
                 }
             } catch (error) {
+                // Show a warning alert if an error occurs during the update
                 Swal.fire({
                     title: 'Warning!',
                     text: 'An error occurred while updating your password.',
                     icon: 'warning',
                     confirmButtonText: 'OK'
                 });
-                console.error('Error updating password:', error);
+                console.error('Error updating password:', error); // Log the error to the console
             }
         }
     });
 }
 
-// Add event listeners for both forms
 document.addEventListener('DOMContentLoaded', function() {
-    // Event listener for profile form submission
+
     document.querySelector('#editProfileForm').addEventListener('submit', function(event) {
-        event.preventDefault(); // Prevent default form submission
-        updateProfile(); // Call the function to handle the update
+        event.preventDefault();
+        updateProfile(); // Call the function to handle the profile update
     });
 
-    // Event listener for password form submission
     document.querySelector('#editPasswordForm').addEventListener('submit', function(event) {
-        event.preventDefault(); // Prevent default form submission
-        updatePassword(); // Call the function to handle the update
+        event.preventDefault();
+        updatePassword(); // Call the function to handle the password update
     });
 });
