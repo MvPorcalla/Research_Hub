@@ -45,6 +45,7 @@ async function updateProfile() {
                         title: 'Warning!',
                         text: result.message || 'Failed to update profile.',
                         icon: 'warning',
+                        backdrop: `rgba(255, 255, 0 ,0.1)`,
                         confirmButtonText: 'OK'
                     });
                 }
@@ -54,9 +55,9 @@ async function updateProfile() {
                     title: 'Warning!',
                     text: 'An error occurred while updating your profile.',
                     icon: 'warning',
+                    backdrop: `rgba(255, 255, 0 ,0.1)`,
                     confirmButtonText: 'OK'
                 });
-                console.error('Error updating profile:', error); // Log the error to the console
             }
         }
     });
@@ -111,6 +112,7 @@ async function updatePassword() {
                         title: 'Warning!',
                         text: result.message || 'Failed to update password.',
                         icon: 'warning',
+                        backdrop: `rgba(255, 255, 0 ,0.1)`,
                         confirmButtonText: 'OK'
                     });
                 }
@@ -120,9 +122,9 @@ async function updatePassword() {
                     title: 'Warning!',
                     text: 'An error occurred while updating your password.',
                     icon: 'warning',
+                    backdrop: `rgba(255, 255, 0 ,0.1)`,
                     confirmButtonText: 'OK'
                 });
-                console.error('Error updating password:', error); // Log the error to the console
             }
         }
     });
