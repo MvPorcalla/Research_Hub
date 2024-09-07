@@ -130,15 +130,6 @@ if (!isset($_SESSION['user_type'])) {
             handleStatus('entry');
             handleStatus('comment');
         });
-
-        function toggleComments(entryId) {
-            const commentsSection = document.getElementById(`comment-section-${entryId}`);
-            if (commentsSection.style.display === 'none' || commentsSection.style.display === '') {
-                commentsSection.style.display = 'block';
-            } else {
-                commentsSection.style.display = 'none';
-            }
-        }
     </script>
 </body>
 

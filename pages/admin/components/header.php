@@ -11,8 +11,6 @@
                 <h1 class="header-title mb-0">Ligao National High School</h1>
                 <h2 class="header-title mb-0">Research Hub</h2>
             </div>
-            <!-- Dropdown Button -->
-            <?php include 'notification.php'; ?>
         </div>
     </div>
 </header>
