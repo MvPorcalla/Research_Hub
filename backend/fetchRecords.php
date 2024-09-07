@@ -15,6 +15,35 @@ $response = [];
 
 $fetchType = $_GET['fetch'] ?? '';
 
+if ($fetchType == 'entries' && isset($_GET['entry_id'])) {
+    $entry_id = $_GET['entry_id'] ?? '';
+
+    $sql = "SELECT * 
+            FROM `forum_entry` e 
+            JOIN `users` u ON u.user_id = e.user_id 
+            WHERE e.entry_status = 'A' 
+            AND e.entry_id = $entry_id 
+            ORDER BY e.entry_timestamp DESC";
+    $entry_result = query($conn, $sql);
+
+    if (!empty($entry_result)) {
+        $row = $entry_result[0];
+        $response[] = [
+            'entryId' => htmlspecialchars($row['entry_id'], ENT_QUOTES, 'UTF-8'),
+            'userId' => htmlspecialchars($row['user_user'], ENT_QUOTES, 'UTF-8'),
+            'userName' => htmlspecialchars($row['user_username'], ENT_QUOTES, 'UTF-8'),
+            'imgDir' => htmlspecialchars($row['user_idpicture_imgdir'], ENT_QUOTES, 'UTF-8'),
+            'lastName' => htmlspecialchars($row['user_lastname'], ENT_QUOTES, 'UTF-8'),
+            'firstName' => htmlspecialchars($row['user_firstname'], ENT_QUOTES, 'UTF-8'),
+            'mi' => htmlspecialchars($row['user_mi'], ENT_QUOTES, 'UTF-8'),
+            'entryContent' => htmlspecialchars($row['entry_content'], ENT_QUOTES, 'UTF-8'),
+            'entryTimestamp' => htmlspecialchars($row['entry_timestamp'], ENT_QUOTES, 'UTF-8'),
+            'entryLikes' => htmlspecialchars($row['entry_likes'], ENT_QUOTES, 'UTF-8'),
+            'entryComments' => htmlspecialchars($row['entry_comments'], ENT_QUOTES, 'UTF-8'),
+        ];
+    }
+}
+
 $comment_type = ($fetchType == 'comments') ? $_GET['comment_on'] : '';
 $record_id = $_GET['record_id'] ?? null;
 
@@ -26,7 +55,7 @@ $queries = [
     'pending' => "SELECT * FROM `users` WHERE `user_type` = 'G' AND `user_status` = 'P'",
     'favorites' => "SELECT * FROM `likes` l JOIN `records` r ON r.record_id = l.record_id WHERE l.user_id = {$user_id} and l.like_status = 'A' ORDER BY l.like_timestamp DESC",
     'comments' => "SELECT * FROM `comments` c JOIN `users` u ON u.user_id = c.user_id WHERE {$comment_type} = {$record_id} AND `comment_status` = 'A' ORDER BY `comment_timestamp` DESC",
-    'entries' => "SELECT * FROM `forum_entry` e JOIN `users` u ON u.user_id = e.user_id WHERE `entry_status` = 'A' ORDER BY `entry_timestamp` DESC",
+    'entries' => "SELECT * FROM `forum_entry` e JOIN `users` u ON u.user_id = e.user_id WHERE e.entry_status = 'A' ORDER BY e.entry_timestamp DESC",
 ];
 
 $results = $queries[$fetchType] ? query($conn, $queries[$fetchType]) : null;

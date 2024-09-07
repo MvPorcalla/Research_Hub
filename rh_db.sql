@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 28, 2024 at 04:12 PM
+-- Generation Time: Sep 07, 2024 at 04:08 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -137,7 +137,9 @@ CREATE TABLE `users` (
   `user_reset_token` varchar(255) DEFAULT NULL,
   `user_reset_token_expire` datetime DEFAULT NULL,
   `user_type` char(1) NOT NULL COMMENT 'A = Admin / S = Student / G = Guest',
-  `user_status` char(1) NOT NULL DEFAULT 'A' COMMENT 'A = Active / P = Pending / I = Inactive'
+  `user_status` char(1) NOT NULL DEFAULT 'A' COMMENT 'A = Active / P = Pending / I = Inactive',
+  `user_registration_timestamp` datetime NOT NULL DEFAULT current_timestamp(),
+  `user_lastlogin_timestamp` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --

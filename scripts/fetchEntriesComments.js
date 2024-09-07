@@ -12,14 +12,31 @@ if (url.includes('forum.php')) {
 
                     const entriesContainer = document.getElementById('entriesContainer');
 
+                    // Get the current URL's query string
+                    let queryString = window.location.search;
+                    queryString = queryString ? queryString.replace('?', '&') : '';
+
+                    const urlParams = new URLSearchParams(queryString);
+                    const entryParam = urlParams.has('entry_id') ? urlParams.get('entry_id') : '';
+                    clearUrlParam('entry_id');
+
                     // Fetch entries data from the backend
-                    const response = await fetch(`../../backend/fetchRecords.php?fetch=entries`);
+                    const response = await fetch(`../../backend/fetchRecords.php?fetch=entries${queryString}`);
                     if (!response.ok) throw new Error('Network response was not ok'); // Handle errors
 
                     const data = await response.json(); // Parse the JSON response data
 
+                    let count = 0;
                     // Loop through each entry data row
                     for (const dataRow of data) {
+
+                        if (entryParam == dataRow.entryId) {
+                            if (count == 0) {
+                                count++;
+                            } else {
+                                continue;
+                            }
+                        }
 
                         const timestamp = dataRow.entryTimestamp;
 
@@ -125,6 +142,8 @@ if (url.includes('forum.php')) {
                             await displayCommentsForEntry(dataRow.entryId, entryComments);
                         }
                     }
+
+                    if (entryParam != '') toggleComments(entryParam);
                 }
             } catch (error) {
                 console.error('Error fetching records:', error); // Log any errors that occur during the fetch operation
@@ -137,10 +156,12 @@ if (url.includes('forum.php')) {
     
     // Function to display comment section for a specified entry and hide other comment sections
     function toggleComments(entryId) {
+        console.log('function');
 
         const commentsSection = document.getElementById(`comment-section-${entryId}`);
     
         if (commentsSection) {
+            console.log('toggle');
             // Toggle the display property of the comments section between 'block' and 'none'
             commentsSection.style.display = (commentsSection.style.display === 'none' || commentsSection.style.display === '') ? 'block' : 'none';
     
@@ -155,7 +176,7 @@ if (url.includes('forum.php')) {
                 section.style.display = 'none';
             });
         }
-    }    
+    }
     
 }
 
@@ -204,31 +225,30 @@ async function displayCommentsForEntry(entryId, entryComments) {
                     // Append the comment HTML to the comments element
                     commentsElement.innerHTML += tileHTML;
                 });
+            }
                 
-                // If on the user/forum page, add a comment form
-                if (url.includes('user/forum.php')) {
-                    const addCommentForm = `
-                        <!-- Comment Form for Main Entry -->
-                        <div class="card-body mt-1">
-                            <form method="post" action="../../backend/comment.php">
-                                <div class="form-row align-items-center">
-                                    <div class="col">
-                                        <div class="input-group">
-                                            <textarea class="form-control" name="comment_content" rows="1" placeholder="Add a comment..."></textarea>
-                                            <button type="submit" class="btn btn-primary ms-2" title="Post Comment">
-                                                <i class="fa-solid fa-paper-plane"></i>
-                                            </button>
-                                        </div>
+            // If on the user/forum page, add a comment form
+            if (url.includes('user/forum.php')) {
+                const addCommentForm = `
+                    <!-- Comment Form for Main Entry -->
+                    <div class="card-body mt-1">
+                        <form method="post" action="../../backend/comment.php">
+                            <div class="form-row align-items-center">
+                                <div class="col">
+                                    <div class="input-group">
+                                        <textarea class="form-control" name="comment_content" rows="1" placeholder="Add a comment..."></textarea>
+                                        <button type="submit" class="btn btn-primary ms-2" title="Post Comment">
+                                            <i class="fa-solid fa-paper-plane"></i>
+                                        </button>
                                     </div>
                                 </div>
-                                <input type="hidden" name="entry_id" value="${entryId}">
-                            </form>
-                        </div>
-                    `;
-                    // Append the comment form to the comments container
-                    commentsContainer.innerHTML += addCommentForm;
-                }
-
+                            </div>
+                            <input type="hidden" name="entry_id" value="${entryId}">
+                        </form>
+                    </div>
+                `;
+                // Append the comment form to the comments container
+                commentsContainer.innerHTML += addCommentForm;
             }
         } catch (error) {
             // Log any errors encountered during fetch
