@@ -151,6 +151,16 @@ if (!isset($_SESSION['user_type'])) {
         </div>
     </div>
 
+
+    
+
+    
+    
+    <!-- toast -->
+    <?php 
+        include './../user/components/toasts.php'; 
+    ?>
+
     <!-- Include the links-footer-script.php file which contains all necessary JavaScript links for the page. -->
     <?php include './../user/components/links-footer-script.php'; ?>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.min.js"></script>
@@ -167,6 +177,16 @@ if (!isset($_SESSION['user_type'])) {
         document.addEventListener('DOMContentLoaded', function () {
             handleStatus('login');
             handleStatus('comment');
+        });
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var toastEl = document.querySelector('.toast');
+            var toast = new bootstrap.Toast(toastEl);
+
+            // Show the toast
+            toast.show();
         });
     </script>
     

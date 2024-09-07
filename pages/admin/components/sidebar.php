@@ -15,10 +15,11 @@
         <li class="nav-item mb-1">
             <a class="nav-link" href="./forum.php">Reaserch Hub Forum </a>
         </li>
-        <li class="nav-item mb-1">
+        <li class="nav-item mb-1 position-relative">
             <a class="nav-link" href="./pendingRequest.php">Pending Request</a>
-            <span id="pendingCount" class="badge rounded-pill bg-danger position-absolute translate-middle"></span>
+            <span id="pendingCount" class="badge rounded-pill bg-danger position-absolute" style="top: 6px; left: 93%;"></span>
         </li>
+
         <li class="nav-item mb-1">
             <a class="nav-link" href="./setting.php">Account Settings</a>
         </li>
