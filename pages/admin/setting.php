@@ -153,7 +153,7 @@ if (!isset($_SESSION['user_type'])) {
                                     <!-- Logout Button -->
                                     <div class="mt-3">
                                         <div class="col-md-12 text-center">
-                                            <form action="../../backend/logout.php" method="post">
+                                            <form id="logout" action="../../backend/logout.php" method="post">
                                                 <button type="submit" class="btn btn-danger w-100">Logout</button>
                                             </form>
                                         </div>
@@ -261,6 +261,10 @@ if (!isset($_SESSION['user_type'])) {
         document.addEventListener('DOMContentLoaded', function () {
             confirmPassword();
             handleStatus('editInfo');
+        });
+        
+        document.getElementById('logout').addEventListener('submit', function(event) {
+            sessionStorage.clear();
         });
     </script>
 </body>
