@@ -1,133 +1,143 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Dynamic Text Suggestions</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .input-group {
+            position: relative;
+            width: 100%;
+        }
 
-    <!-- Bootstrap CSS for styling and layout -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Font Awesome for icon usage -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-    <!-- Custom CSS for the main styling of the website -->
-    <link rel="stylesheet" href="./css/mainStyle.css">
+        .form-control {
+            position: relative; /* Needed to position suggestion text absolutely */
+            padding-left: 0.75em; /* Adjust to accommodate suggestion text */
+        }
+
+        .suggestion-text {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            line-height: 2.5em; /* Align with input line height */
+            color: #999;
+            pointer-events: none; /* Prevent interaction */
+            overflow-x: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            user-select: none; /* Prevent text selection */
+            padding: 0 0.75em; /* Align with input padding */
+            width: 100%; /* Fill the input width */
+            box-sizing: border-box; /* Include padding in width calculation */
+            z-index: 1; /* Ensure it stays above the input text */
+            background-color: rgba(255, 255, 255, 0.8); /* Slight background to highlight suggestion */
+        }
+
+        .form-control:focus + .suggestion-text {
+            display: none; /* Hide suggestion text when input is focused */
+        }
+    </style>
 </head>
-<body>
-                    <!-- Dropdown sample data -->
-                    <?php
-                        // Sample data for dropdown menu items
-                        $notifications = [
-                            [
-                                'label' => 'New abstract',
-                                'count' => 2,
-                                'type' => 'abstract',
-                                'date' => 'Fri, Sep 6',
-                                'url' => '#', // URL for the new abstract notification
-                            ],
-                            [
-                                'label' => 'New comment',
-                                'count' => 5,
-                                'type' => 'comment',
-                                'date' => 'Fri, Sep 6',
-                                'url' => '#', // URL for the new comment notification
-                            ],
-                            [
-                                'label' => 'Pending Request',
-                                'count' => 3,
-                                'type' => 'pending',
-                                'date' => 'Fri, Sep 6',
-                                'url' => '#', // URL for the pending review notification
-                            ],
-                            // Add more items as needed
-                        ];
-
-                        // Function to determine badge class based on notification type
-                        function getBadgeClass($type) {
-                            switch ($type) {
-                                case 'abstract':
-                                    return 'bg-primary';
-                                case 'comment':
-                                    return 'bg-success';
-                                case 'pending':
-                                    return 'bg-info';
-                                default:
-                                    return 'bg-secondary'; // Default badge class
-                            }
-                        }
-
-                        // Total number of notifications (could be used for the main badge)
-                        $totalNotifications = array_sum(array_column($notifications, 'count'));
-                    ?>
-
-        <!-- /components/header.php -->
-        <header class="header header-bg p-2">
-            <div class="container-fluid d-flex align-items-center">
-                <div class="d-flex align-items-center w-100">
-                    <!-- Logo Section -->
-                    <div class="col-md-1 d-flex justify-content-center">
-                        <img src="./assets/icons/LNHS-icon.png" alt="icon" class="rounded-circle header-icon">
-                    </div>
-                    <!-- Title Section -->
-                    <div class="col-md-10">
-                        <h1 class="header-title mb-0">Ligao National High School</h1>
-                        <h2 class="header-title mb-0">Research Hub</h2>
-                    </div>
-
-
-                    <!-- Dropdown Button -->
-                    <div class="dropdown notification" id="notification">
-                        <a class="dropdown-toggle dropdown-start d-flex align-items-center position-relative" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="fas fa-bell "></i>
-                            <span class="badge rounded-pill bg-danger position-absolute top-0 start-100 translate-middle"><?php echo $totalNotifications; ?></span>
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <?php foreach ($notifications as $notification): ?>
-                                <li class="">
-                                    <a class="dropdown-item d-flex justify-content-between align-items-center" href="<?php echo htmlspecialchars($notification['url']); ?>">
-                                        <div class="d-flex flex-column w-100">
-                                            <div class="d-flex justify-content-between align-items-center">
-                                                <div>
-                                                    <?php echo htmlspecialchars($notification['label']); ?>
-                                                    <div class="text-muted">
-                                                        <small><?php echo htmlspecialchars($notification['date']); ?></small>
-                                                    </div>
-                                                </div>
-                                                <span class="badge ms-5 <?php echo htmlspecialchars(getBadgeClass($notification['type'])); ?> rounded-pill">
-                                                    <?php echo htmlspecialchars($notification['count']); ?>
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </li>
-
-                            <?php endforeach; ?>
-                        </ul>
-                    </div>
-
+<body class="">
+<div class="container-fluid">
+    <div class="container mt-3">
+        <div class="row">
+            <div class="col-md-6">
+                <h3>NLP SAMPLE</h3>
+            </div>
+            <div class="col-md-6 position-relative">
+                <div class="d-flex">
+                    <form id="search-form" class="d-flex w-100" onsubmit="return false;">
+                        <div class="input-group overflow-x-hidden border border-dark position-relative w-100">
+                            <input class="form-control overflow-x-hidden bg-transparent" type="text" id="query" placeholder="Search" aria-label="Search" autocomplete="off">
+                            <span id="suggestion-text" class="suggestion-text overflow-x-hidden"></span>
+                        </div>
+                    </form>
                 </div>
             </div>
-        </header>
+        </div>
+        <div class="table-responsive mt-3">
+            <table id="records-table" class="table table-bordered table-striped">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Title</th>
+                        <th>Month/Year</th>
+                        <th>Author</th>
+                        <th>Track/Strand</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="table-body">
+                    <!-- Data rows will be inserted here by JavaScript -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
 
-        <main>
-            <div class="container h-100 d-flex justify-content-center align-items-center">
-                <div class="row">
-                    <button id="githubBtn" class="btn btn-primary">Look Up GitHub User</button>
-                </div>
-            </div>
-        </main>
+<!-- Bootstrap JS and dependencies -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
+<!-- Custom JavaScript for table and search functionality -->
+<script>
+    // Sample data for table
+    const tableData = [
+        { title: "Meow Madness", monthYear: "Sep/2024", author: "John Doe", trackStrand: "Web Development" },
+        { title: "Bark Bonanza to Data Science", monthYear: "Aug/2024", author: "Jane Smith", trackStrand: "Data Science" },
+       
+    ];
 
-    <!-- Bootstrap JS and Popper.js for Bootstrap components functionality -->
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
-    <!-- SweetAlert2 for beautiful alert popups -->
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <!-- Font Awesome for icon usage -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
+    // Function to render data into the table
+    function renderTable(filteredData = tableData) {
+        const tableBody = document.getElementById('table-body');
+        tableBody.innerHTML = ''; // Clear existing rows
+        
+        filteredData.forEach(item => {
+            const row = document.createElement('tr');
+            
+            row.innerHTML = `
+                <td>${item.title}</td>
+                <td>${item.monthYear}</td>
+                <td>${item.author}</td>
+                <td>${item.trackStrand}</td>
+                <td>
+                    <button class="btn btn-primary btn-sm">Edit</button>
+                    <button class="btn btn-danger btn-sm">Delete</button>
+                </td>
+            `;
+            
+            tableBody.appendChild(row);
+        });
+    }
 
+    // Function to filter data based on search query
+    function filterData(query) {
+        const lowerCaseQuery = query.toLowerCase();
+        return tableData.filter(item =>
+            item.title.toLowerCase().includes(lowerCaseQuery) ||
+            item.author.toLowerCase().includes(lowerCaseQuery) ||
+            item.trackStrand.toLowerCase().includes(lowerCaseQuery)
+        );
+    }
 
-    <script src="./zbutton.js"></script>
+    // Event listener for search input
+    document.getElementById('query').addEventListener('input', function() {
+        const query = this.value.trim();
+        const filteredData = filterData(query);
+        renderTable(filteredData);
+        updateSuggestionText(query); // Call the function from the external file
+    });
 
+    // Call the function to render data on page load
+    renderTable();
+</script>
 
-
+<!-- Include the custom suggestions script -->
+<script src="./scripts/searchSuggestion.js"></script>
 </body>
 </html>

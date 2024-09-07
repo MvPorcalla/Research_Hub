@@ -2,7 +2,7 @@
 header('Content-Type: application/json');
 
 // Database connection
-include_once "../../includes/db.php";
+include_once "../includes/db.php";
 
     // Get the search query
     $query = isset($_GET['query']) ? trim($_GET['query']) : '';

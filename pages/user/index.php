@@ -21,34 +21,7 @@ if (!isset($_SESSION['user_type'])) {
     <?php include './../user/components/links-head-css.php'; ?>
 
     <style>
-        #search {
-            width: 100%;
-            padding: 8px;
-            box-sizing: border-box;
-        }
-        #suggestions {
-            position: absolute;
-            top: 100%;
-            left: 0;
-            width: 100%;
-            max-height: 200px;
-            border: 1px solid #ddd;
-            border-top: none;
-            background-color: var(--bg-base-lt);
-            border-radius: 10px;
-            border:1px solid #000;
-            z-index: 1000;
-            overflow-y: auto;
-            display: none;
-        }
-        #suggestions div {
-            padding: 8px;
-            cursor: pointer;
-        }
-        #suggestions div:hover {
-            background-color: #f0f0f0;
-        }
-
+        
         .comment-container {
             position: relative;
             width: 100%;
@@ -89,7 +62,7 @@ if (!isset($_SESSION['user_type'])) {
 
     <!-- main content with sidebar -->
     <div class="container-fluid">
-        <div class="row text-center">
+        <div class="row">
             <!-- sidebar -->
             <?php include './../user/components/sidebar.php'; ?>
 
@@ -121,15 +94,13 @@ if (!isset($_SESSION['user_type'])) {
                                 </div>
                             </div>
 
-                             <!-- Search Bar -->
-                            <div class="col-md-6">
+                            <!-- Search Bar -->
+                            <div class="col-md-6 overflow-hidden">
                                 <div class="d-flex">
-                                    <form id="search-form" class="d-flex w-100">
-                                        <div class="input-group">
-                                            <input class="form-control rounded-pill" type="search" id="query" placeholder="Search" aria-label="Search" autocomplete='off'>
-                                            <span class="btn rounded-pill" type="submit" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%);">
-                                                <i class="fas fa-search"></i>
-                                            </span>
+                                    <form id="search-form" class="d-flex w-100" onsubmit="return false;">
+                                        <div class="input-group rounded-pill bg-light position-relative w-100">
+                                            <input class="form-control rounded-pill border border-dark bg-transparent" type="text" id="query" placeholder="Search" aria-label="Search" autocomplete="off">
+                                            <span id="suggestion-text" class="suggestion-text bg-transparent"></span>
                                         </div>
                                     </form>
                                 </div>
@@ -182,11 +153,14 @@ if (!isset($_SESSION['user_type'])) {
 
     <!-- Include the links-footer-script.php file which contains all necessary JavaScript links for the page. -->
     <?php include './../user/components/links-footer-script.php'; ?>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.min.js"></script>
+
 
     <script src="../../includes/functions.js"></script>
     <script src="../../scripts/toggleLike.js"></script>
     <script src="../../scripts/fetchAbstract.js"></script>
     <script src="../../scripts/fetchFilters.js"></script>
+    <script src="../../scripts/searchSuggestion.js"></script>
     <script src="../../scripts/fetchAbstractComments.js"></script>
     
     <script>

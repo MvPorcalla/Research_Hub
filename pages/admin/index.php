@@ -19,7 +19,7 @@
     <?php include './../admin/components/links-head-css.php'; ?>
 
 </head>
-<body>
+<!-- <body > class=" overflow-x-hidden " -->
     <!-- header -->
     <?php include './../admin/components/header.php'; ?>
 
@@ -33,62 +33,69 @@
                 <div class="container">
                     <div class="row">
 
-                    <div class="my-3">
-                            <h1 class="admin_title text-center">Research Records</h1>
-                        </div>
-
-                        <!-- Search Bar and Filters -->
-                        <div class="row align-items-center">
-                            <!-- Add Button -->
-                            <div class="col-md-1">
-                                <a href="./abstract.php" class="btn btn-secondary px-3">Add</a>
+                        <div class="my-3">
+                                <h1 class="admin_title text-center">Research Records</h1>
                             </div>
 
-                            <!-- Filter Dropdowns -->
-                            <div class="col-md-6 d-flex justify-content-end">
-                                <div class="d-flex align-items-center">
-                                    <div class="">
-                                        <select id="monthFilter" class="form-select">
-                                            <!-- Options will be dynamically added here -->
-                                        </select>
+                            <!-- Search Bar and Filters -->
+                            <div class="row align-items-center">
+                                <!-- Add Button -->
+                                <div class="col-md-1">
+                                    <a href="./abstract.php" class="btn btn-secondary px-3">Add</a>
+                                </div>
+
+                                <!-- Filter Dropdowns -->
+                                <div class="col-md-6 d-flex justify-content-end">
+                                    <div class="d-flex align-items-center">
+                                        <div class="">
+                                            <select id="monthFilter" class="form-select">
+                                                <!-- Options will be dynamically added here -->
+                                            </select>
+                                        </div>
+                                        <div class="mx-2">
+                                            <select id="yearFilter" class="form-select">
+                                                <!-- Options will be dynamically added here -->
+                                            </select>
+                                        </div>
+                                        <div class="">
+                                            <select id="trackFilter" class="form-select">
+                                                <!-- Options will be dynamically added here -->
+                                            </select>
+                                        </div>
                                     </div>
-                                    <div class="mx-2">
-                                        <select id="yearFilter" class="form-select">
-                                            <!-- Options will be dynamically added here -->
-                                        </select>
-                                    </div>
-                                    <div class="">
-                                        <select id="trackFilter" class="form-select">
-                                            <!-- Options will be dynamically added here -->
-                                        </select>
+                                </div>
+
+                                <!-- Search Bar -->
+                                <div class="col-md-5 overflow-hidden">
+                                    <div class="d-flex">
+                                        <form id="search-form" class="d-flex w-100" onsubmit="return false;">
+                                            <div class="input-group rounded-pill bg-light position-relative w-100">
+                                                <input class="form-control rounded-pill border border-dark bg-transparent" type="text" id="query" placeholder="Search" aria-label="Search" autocomplete="off">
+                                                <span id="suggestion-text" class="suggestion-text bg-transparent"></span>
+                                            </div>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
 
-                            <!-- Search Bar -->
-                            <div class="col-md-5">
-                                <?php include './../admin/components/searchbar.php'; ?>
-                            </div>
-                        </div>
-                        
-
-                        <!-- Content Table -->
-                        <div class="container mt-3 side-container">
-                            <div class="table-responsive">
-                                <table id="records-table" class="table table-bordered table-striped">
-                                    <thead class="table-dark">
-                                        <tr class="col-md-12">
-                                            <th class="col-md-4">Title</th>
-                                            <th class="col-md-2">Month/Year</th>
-                                            <th class="col-md-3">Author</th>
-                                            <th class="col-md-2">Track/Strand</th>
-                                            <th class="col-md-1">Actions</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="abstractTiles">
-                                        <!-- Table rows will be populated by JavaScript -->
-                                    </tbody>
-                                </table>
+                            <!-- Content Table -->
+                            <div class="container mt-3 side-container">
+                                <div class="table-responsive">
+                                    <table id="records-table" class="table table-bordered table-striped">
+                                        <thead class="table-dark">
+                                            <tr class="col-md-12">
+                                                <th class="col-md-4">Title</th>
+                                                <th class="col-md-2">Month/Year</th>
+                                                <th class="col-md-3">Author</th>
+                                                <th class="col-md-2">Track/Strand</th>
+                                                <th class="col-md-1">Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="abstractTiles">
+                                            <!-- Table rows will be populated by JavaScript -->
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -104,6 +111,7 @@
     <script src="../../includes/functions.js"></script>
     <script src="../../scripts/fetchAbstract.js"></script>
     <script src="../../scripts/fetchFilters.js"></script>
+    <script src="../../scripts/searchSuggestion.js"></script>
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
