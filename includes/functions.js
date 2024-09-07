@@ -5,17 +5,19 @@ function handleStatus(paramName) {
         'login': {
             "success": {
                 icon: "info",
-                title: "Welcome to Research Hub!"
+                title: "Welcome to Research Hub!",
             },
             "failed": {
                 icon: "error",
                 title: "Incorrect Credentials",
-                text: "Please try again."
+                text: "Please try again.",
+                backdrop: `rgba(255, 0, 0 ,0.2)`,
             },
             "inactive": {
                 icon: "error",
                 title: "Oops!",
-                text: "Account deactivated."
+                text: "Account deactivated.",
+                backdrop: `rgba(255, 0, 0 ,0.2)`,
             }
         },
         'registration': {
@@ -29,7 +31,8 @@ function handleStatus(paramName) {
             "invalid": {
                 icon: "warning",
                 title: "Password Reset Link Invalid",
-                text: "The link you have accessed is no longer valid. Please try again."
+                text: "The link you have accessed is no longer valid. Please try again.",
+                backdrop: `rgba(255, 255, 0 ,0.1)`,
             }
         },
         'reset': {
@@ -41,7 +44,8 @@ function handleStatus(paramName) {
             "failed": {
                 icon: "error",
                 title: "Password Reset Failed",
-                html: "Something went wrong. Please try again.<hr><small>If problem persists, request for another reset link.</small>"
+                html: "Something went wrong. Please try again.<hr><small>If problem persists, request for another reset link.</small>",
+                backdrop: `rgba(255, 0, 0 ,0.2)`,
             },
         },
         'addRecord': {
@@ -53,12 +57,14 @@ function handleStatus(paramName) {
             "failed": {
                 icon: "error",
                 title: "Oops!",
-                text: "Failed to add new record."
+                text: "Failed to add new record.",
+                backdrop: `rgba(255, 0, 0 ,0.2)`,
             },
             "existing": {
                 icon: "error",
                 title: "Oops!",
-                text: "Record already exists."
+                text: "Record already exists.",
+                backdrop: `rgba(255, 0, 0 ,0.2)`,
             }
         },
         'editRecord': {
@@ -70,7 +76,8 @@ function handleStatus(paramName) {
             "failed": {
                 icon: "error",
                 title: "Oops!",
-                text: "Failed to edit record."
+                text: "Failed to edit record.",
+                backdrop: `rgba(255, 0, 0 ,0.2)`,
             }
         },
         'deleteRecord': {
@@ -82,7 +89,8 @@ function handleStatus(paramName) {
             "failed": {
                 icon: "error",
                 title: "Oops!",
-                text: "Failed to delete record."
+                text: "Failed to delete record.",
+                backdrop: `rgba(255, 0, 0 ,0.2)`,
             }
         },
         'importRecords': {
@@ -94,17 +102,20 @@ function handleStatus(paramName) {
             "error": {
                 icon: "error",
                 title: "Error",
-                text: "Error uploading file. Please try again."
+                text: "Error uploading file. Please try again.",
+                backdrop: `rgba(255, 0, 0 ,0.2)`,
             },
             "invalid": {
                 icon: "warning",
                 title: "Invalid",
-                text: "Invalid file format. Only xls and xlsx files are allowed."
+                text: "Invalid file format. Only xls and xlsx files are allowed.",
+                backdrop: `rgba(255, 255, 0 ,0.1)`,
             },
             "missing": {
                 icon: "warning",
                 title: "Oops!",
-                text: "No file uploaded."
+                text: "No file uploaded.",
+                backdrop: `rgba(255, 255, 0 ,0.1)`,
             }
         },
         'editInfo': {
@@ -116,7 +127,8 @@ function handleStatus(paramName) {
             "failed": {
                 icon: "error",
                 title: "Oops!",
-                text: "Something went wrong. Please try again."
+                text: "Something went wrong. Please try again.",
+                backdrop: `rgba(255, 0, 0 ,0.2)`,
             }
         },
         'comment': {
@@ -127,7 +139,8 @@ function handleStatus(paramName) {
             "failed": {
                 icon: "error",
                 title: "Oops!",
-                text: "Something went wrong. Please try again."
+                text: "Something went wrong. Please try again.",
+                backdrop: `rgba(255, 0, 0 ,0.2)`,
             }
         },
         'entry': {
@@ -138,7 +151,8 @@ function handleStatus(paramName) {
             "failed": {
                 icon: "error",
                 title: "Oops!",
-                text: "Something went wrong. Please try again."
+                text: "Something went wrong. Please try again.",
+                backdrop: `rgba(255, 0, 0 ,0.2)`,
             }
         }
     };
