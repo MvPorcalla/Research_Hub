@@ -15,55 +15,29 @@ async function fetchNotifications() {
             const notificationsContainer = document.getElementById('notificationsContainer');
                         
             const liveToast = document.getElementById('liveToast');
-            let recordCount, toastTitle, time, toastBody;
-            if (liveToast) {
-                recordCount = liveToast.querySelector('#recordCount');
-                toastTitle = liveToast.querySelector('#toastTitle');
-                time = liveToast.querySelector('#time');
-                toastBody = liveToast.querySelector('#toastBody');
-            }
+
+            let content;
 
             const formattedTimePassed = timeAgo(notification.latest);
             const formattedDateTime = formatDateTime(notification.latest);
 
                 switch (notification.type) {
                     case 'pending':
-                        
-                        if (liveToast && notification.count != 0) {
-                            recordCount.innerText = notification.count;
+                        content = (notification.count == 1)
+                            ? `There's a <span class="fw-bold text-danger">pending request</span>. Please review it at your convenience.`
+                            : `There's <span class="fw-bold text-danger">${notification.count} pending requests</span>. Please review them at your convenience.`;
 
-                            toastTitle.innerText = 'Pending Request' + ((notification.count == 1) ? '' : 's');
-
-                            time.innerText = formattedTimePassed;
-                            time.setAttribute("title", formattedDateTime);
-
-                            toastBody.innerHTML = (notification.count == 1)
-                                ? `There's a <span class="fw-bold text-danger">pending request</span>. Please review it at your convenience.`
-                                : `There's <span class="fw-bold text-danger">${notification.count} pending requests</span>. Please review them at your convenience.`;
-
-                            var toast = new bootstrap.Toast(liveToast);
-                            toast.show();
-                        }
+                        populateToastContent(liveToast, notification.count, content, formattedTimePassed, formattedDateTime)
     
                         break;
                 
                     case 'abstract':
                         
-                        if (liveToast && notification.count != 0) {
-                            recordCount.innerText = notification.count;
+                        content = (notification.count == 1)
+                            ? `A <span class="fw-bold text-danger">new abstract</span> has been uploaded. Please review it at your convenience.`
+                            : `${notification.count} <span class="fw-bold text-danger"> new abstracts has been uploaded</span>. Please review them at your convenience.`;
 
-                            toastTitle.innerText = 'New Abstract' + ((notification.count == 1) ? '' : 's');
-
-                            time.innerText = formattedTimePassed;
-                            time.setAttribute("title", formattedDateTime);
-
-                            toastBody.innerHTML = (notification.count == 1)
-                                ? `A <span class="fw-bold text-danger">new abstract</span> has been uploaded. Please review it at your convenience.`
-                                : `${notification.count} <span class="fw-bold text-danger"> new abstracts has been uploaded</span>. Please review them at your convenience.`;
-
-                            var toast = new bootstrap.Toast(liveToast);
-                            toast.show();
-                        }
+                        populateToastContent(liveToast, notification.count, content, formattedTimePassed, formattedDateTime)
                         
                         break;
                 
@@ -166,3 +140,25 @@ async function fetchNotifications() {
 document.addEventListener('DOMContentLoaded', function() {
     fetchNotifications();
 });
+
+function populateToastContent(liveToast, count, content, formattedTimePassed, formattedDateTime) {
+                        
+    if (liveToast && count != 0) {
+
+        const recordCount = liveToast.querySelector('#recordCount');
+        recordCount.innerText = count;
+
+        const toastTitle = liveToast.querySelector('#toastTitle');
+        toastTitle.innerText = 'Pending Request' + ((count == 1) ? '' : 's');
+
+        const time = liveToast.querySelector('#time');
+        time.innerText = formattedTimePassed;
+        time.setAttribute("title", formattedDateTime);
+
+        const toastBody = liveToast.querySelector('#toastBody');
+        toastBody.innerHTML = content;
+
+        var toast = new bootstrap.Toast(liveToast);
+        toast.show();
+    }
+}
