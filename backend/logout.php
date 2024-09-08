@@ -1,13 +1,17 @@
 <?php
+    session_start();
+    
+    // Destroy the session
+    session_unset();
+    session_destroy();
 
-session_start();
+    // Prepare response data
+    $response = [
+        'status' => 'success',
+        'message' => 'Session destroyed successfully.'
+    ];
 
-session_unset();
-
-session_destroy();
-
-if(!isset($_SESSION['user_id'])) {
-    header("location: ../index.php");
-}
-
+    // Send JSON response
+    header('Content-Type: application/json');
+    echo json_encode($response);
 ?>

@@ -57,13 +57,13 @@ async function fetchNotifications() {
                     case 'comment':
     
                         if (notificationsContainer) {
-    
+                            
                             const notifHTML = `
                                 <a class="dropdown-item d-flex justify-content-between align-items-center" href="forum.php?entry_id=${notification.entryId}">
                                     <div class="d-flex flex-column w-100">
                                         <div class="d-flex justify-content-between align-items-center">
-                                            <div>
-                                                New comment(s) on your entry: "${notification.entryContent}"
+                                            <div class="notif-content">
+                                                <span class="fs-lg">New reply on your entry:</span> <br>"<strong>${notification.entryContent}</strong>"
                                                 <div class="text-muted">
                                                     <small>${latest}</small>
                                                 </div>
@@ -91,7 +91,7 @@ async function fetchNotifications() {
         });
 
     } catch (error) {
-        console.error('Error fetching records:', error); // Log any errors that occur during the fetch operation
+        console.error('Error fetching records:', error);
     }
 }
 

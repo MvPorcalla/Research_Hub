@@ -86,7 +86,7 @@ body {
   height: 80vh;
 }
 
-/* ======================================== Reusable ======================================== */
+/* ======================================== Reusable shesh ======================================== */
 
 .side-container {
   max-height: 500px; 
@@ -113,6 +113,19 @@ body {
   box-sizing: border-box; /* Include padding in width calculation */
   z-index: 1; /* Ensure it stays above the input text */
 }
+
+.notif-container {
+  max-height: 420px !important; /* Set the desired height */
+  overflow-y: auto; /* Add a scrollbar if content overflows */
+}
+
+.notif-content {
+  width: 250px; /* Set your desired width */
+  overflow: hidden; /* Hide the overflowing text */
+  text-overflow: ellipsis; /* Show ellipsis (...) for overflowing text */
+}
+
+
 
 /* ======================================== ======== ======================================== */
 
@@ -235,9 +248,28 @@ body {
   display: inline-block;
 }
 
-/* ======================================== admin Setting ======================================== */
+/* ======================================== Setting ======================================== */
 
-
+.setting-info-title {
+  font-size: var(--fs-lg);
+  font-weight: var(--fw-semibold);
+  color: var(--text-base-lt);
+}
+.setting-profile-pic {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+}
+.setting-name-text {
+  font-size: var(--fs-2xl);
+  font-weight: var(--fw-semibold);
+  color: var(--text-base);
+}
+.setting-username-text {
+  font-size: var(--fs-lg);
+  font-weight: var(--fw-medium);
+  color: var(--text-base-lt);
+}
 
 /* ======================================== user Page ======================================== */
 
