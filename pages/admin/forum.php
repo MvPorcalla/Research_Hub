@@ -1,14 +1,4 @@
-<?php
-    include_once "..\..\includes\db.php";
-
-    if (!isset($_SESSION['user_type'])) {
-        header("location: ../../index.php");
-        exit;
-    } elseif ($_SESSION['user_type'] != 'A') {
-        header("location: ../../backend/logout.php");
-        exit;
-    }
-?>
+<?php include_once './../admin/includes/session_check.php'; ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -17,44 +7,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FORUM - LNHS Research Hub</title>
-    <?php include './../admin/components/links-head-css.php'; ?>
-
-    <style>
-        .comment {
-            border-left: 2px solid #ccc;
-            padding-left: 15px;
-            margin-bottom: 10px;
-        }
-        .post-stats {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .post-stats span {
-            margin-right: 15px;
-        }
-        .post-buttons {
-            display: flex;
-            gap: 10px;
-        }
-        .btn-link {
-            color: inherit; /* Maintain the text color */
-            text-decoration: none; /* Remove underline */
-        }
-        .comments-section {
-            display: none; /* Hide comments section initially */
-        }
-
-        .like-button {
-            cursor: pointer;
-        }
-
-        .liked {
-            color: blue !important; /* Change the icon color to blue */
-            font-weight: bold !important; /* Optional: make it bold */
-        }
-        
-    </style>
+    <?php include './../admin/includes/links_head-css.php'; ?>
 </head>
 
 <body>
@@ -90,13 +43,11 @@
         </div>
     </div>
 
-    <?php include './../admin/components/links-footer-script.php'; ?>
-
+    <?php include './../admin/includes/links_footer-script.php'; ?>
 
     <script src="../../includes/functions.js"></script>
     <script src="../../scripts/toggleLike.js"></script>
     <script src="../../scripts/fetchEntriesComments.js"></script>
-
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
@@ -106,6 +57,5 @@
     </script>
 
 </body>
-
 </html>
 

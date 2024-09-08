@@ -1,14 +1,4 @@
-<?php
-include_once "..\..\includes\db.php";
-
-if (!isset($_SESSION['user_type'])) {
-    header("location: ../../index.php");
-    exit;
-} elseif ($_SESSION['user_type'] != 'A') {
-    header("location: ../../backend/logout.php");
-    exit;
-}
-?>
+<?php include_once './../admin/includes/session_check.php'; ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -16,51 +6,9 @@ if (!isset($_SESSION['user_type'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ABSTRACT - LNHS Research Hub</title>
-    <?php include './../admin/components/links-head-css.php'; ?>
-
-    <style>
-        .pdf-container {
-            position: relative;
-            width: 100%;
-            height: 650px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            overflow: hidden;
-        }
-
-        .pdf-container iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
-
-        .comment-container {
-            position: relative;
-            width: 100%;
-            height: auto;
-            border: 1px solid black;
-            border-radius: 8px;
-            padding: 10px;
-            max-height: 600px;
-            overflow-y: auto;
-        }
-
-        .comment-card {
-            margin-bottom: 10px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            background-color: #fff;
-        }
-
-        .comment-card .card-body {
-            padding: 10px;
-        }
-
-    </style>
+    <?php include './../admin/includes/links_head-css.php'; ?>
 </head>
+
 <body>
     <!-- header -->
     <?php include './../admin/components/header.php'; ?>
@@ -98,7 +46,7 @@ if (!isset($_SESSION['user_type'])) {
     </div>
 
     <!-- Bootstrap JS -->
-    <?php include './../admin/components/links-footer-script.php'; ?>
+    <?php include './../admin/includes/links_footer-script.php'; ?>
 
 
     <script src="../../includes/functions.js"></script>

@@ -1,14 +1,4 @@
-<?php
-include_once "..\..\includes\db.php";
-
-if (!isset($_SESSION['user_type'])) {
-    header("location: ../../index.php");
-    exit;
-} elseif ($_SESSION['user_type'] != 'A') {
-    header("location: ../../backend/logout.php");
-    exit;
-}
-?>
+<?php include_once './../admin/includes/session_check.php'; ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -17,14 +7,7 @@ if (!isset($_SESSION['user_type'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title id="abstractTitle">Add Record - LNHS Research Hub</title>
-    <?php include './../admin/components/links-head-css.php'; ?>
-
-    <style>
-        .admin-card {
-            border-radius: 20px;
-            border:1px solid #000;
-        }
-    </style>
+    <?php include './../admin/includes/links_head-css.php'; ?>
 </head>
 
 <body>
@@ -46,9 +29,9 @@ if (!isset($_SESSION['user_type'])) {
                         </div>
                         <div class="row justify-content-center">
                             <div class="col-md-10">
-                                <div class="card admin-card bg-transparent">
-                                    
+                                <div class="card border border-dark rounded-5 bg-transparent">
                                     <div class="card-body mx-5 text-start">
+
                                         <form id="recordForm" action="..\..\backend\abstract.php" method="POST" enctype="multipart/form-data">
 
                                             <!-- Title -->
@@ -109,17 +92,11 @@ if (!isset($_SESSION['user_type'])) {
         </div>
     </div>
 
-    <?php include './../admin/components/links-footer-script.php'; ?>
+    <?php include './../admin/includes/links_footer-script.php'; ?>
 
     <script src="../../includes/functions.js"></script>
     <script src="../../scripts/fetchOneRecord.js"></script>
     
-    <script>
-        // document.addEventListener('DOMContentLoaded', function () {
-        //     handleStatus('addRecord');
-        //     handleStatus('editRecord');
-        // });
-    </script>
 </body>
 
 </html>

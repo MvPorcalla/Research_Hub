@@ -1,14 +1,4 @@
-<?php
-include_once "..\..\includes\db.php";
-
-if (!isset($_SESSION['user_type'])) {
-    header("location: ../../index.php");
-    exit;
-} elseif ($_SESSION['user_type'] != 'A') {
-    header("location: ../../backend/logout.php");
-    exit;
-}
-?>
+<?php include_once './../admin/includes/session_check.php'; ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -17,15 +7,7 @@ if (!isset($_SESSION['user_type'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title id="lrnTitle">Add LRN - LNHS Research Hub</title>
-    <link rel="icon" href="../../assets/icons/LNHS-icon.png" type="image/png">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../../css/mainStyle.css">
-    <style>
-        .admin-card {
-            border-radius: 20px;
-            border: 1px solid #000;
-        }
-    </style>
+    <?php include './../admin/includes/links_head-css.php'; ?>
 </head>
 
 <body>
@@ -48,38 +30,42 @@ if (!isset($_SESSION['user_type'])) {
                         </div>
                         <div class="row justify-content-center">
                             <div class="col-md-7">
-                                <div class="card admin-card bg-transparent">
-
+                                <div class="card border border-dark rounded-4 bg-transparent">
                                     <div class="card-body mx-5 text-start">
                                         <form id="lrnForm" action="..\..\backend\lrn.php" method="POST">
 
                                             <!-- Full name -->
-                                            <div class="row mb-3">
+                                             <div class="row mb-4">
                                                 <div class="col-md-12">
                                                     <label for="fullName" class="form-label">Full Name</label>
-                                                    <input type="text" class="form-control" id="fullName"
-                                                        name="fullName" required>
+                                                    <input type="text" class="form-control" id="fullName" name="fullName" required>
+                                                </div>
+                                             </div>
+
+                                             <div class="row mb-4">
+                                                <!-- LRN / Student Number -->
+                                                <div class="col-md-12">
+                                                    <label for="lrn" class="form-label">LRN / Student Number</label>
+                                                    <input type="text" class="form-control" id="lrn" name="lrn" maxlength="12" required>
+                                                </div>
+                                             </div>
+
+                                            <!-- Back and Submit Button -->
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <button type="button" class="btn btn-secondary w-100" onclick="history.back()">Back</button>
+                                                </div>
+
+                                                <div class="col-md-8 ">
+                                                    <button type="submit" class="btn btn-primary w-100">Submit</button>
                                                 </div>
                                             </div>
-
-                                            <!-- LRN / Student Number -->
-                                            <div class="mb-3">
-                                                <label for="lrn" class="form-label">LRN / Student Number</label>
-                                                <input type="text" class="form-control" id="lrn" name="lrn"
-                                                    maxlength="12" required>
-                                            </div>
-
-                                            <!-- Submit Button -->
-                                            <div class="d-grid my-3">
-                                                <button type="submit" class="btn btn-primary">Submit</button>
-                                            </div>
-
+                                            
                                         </form>
                                     </div>
                                 </div>
                             </div>
                         </div>
-
                     </div>
                 </div>
             </main>
@@ -87,11 +73,9 @@ if (!isset($_SESSION['user_type'])) {
     </div>
 
     <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
-    <script src="..\..\includes\functions.js"></script>
+    <?php include './../admin/includes/links_footer-script.php'; ?>
+
+    <script src="../../includes/functions.js"></script>
     <script src="../../scripts/fetchOneRecord.js"></script>
     
 </body>
