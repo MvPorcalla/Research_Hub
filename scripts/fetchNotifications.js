@@ -13,43 +13,52 @@ async function fetchNotifications() {
         result.notifications.forEach(notification => {
 
             const notificationsContainer = document.getElementById('notificationsContainer');
+                        
+            const liveToast = document.getElementById('liveToast');
+            let recordCount, toastTitle, time, toastBody;
+            if (liveToast) {
+                recordCount = liveToast.querySelector('#recordCount');
+                toastTitle = liveToast.querySelector('#toastTitle');
+                time = liveToast.querySelector('#time');
+                toastBody = liveToast.querySelector('#toastBody');
+            }
 
-            const latest = timeAgo(notification.latest);
+            const formattedTimePassed = timeAgo(notification.latest);
+            const formattedDateTime = formatDateTime(notification.latest);
 
                 switch (notification.type) {
                     case 'pending':
-    
-                        const pendingCount = document.getElementById('pendingCount');
-    
-                        if (pendingCount) {
-                
-                            if (sessionStorage.getItem('seenPendingGuests') !== 'true') {
-                                if (notification.count != 0) pendingCount.innerText = notification.count;
-                            }
-    
-                            if (window.location.href.includes('pendingRequest.php')) {
-                                pendingCount.hidden = true;
-    
-                                sessionStorage.setItem('seenPendingGuests', 'true');
-                            }
+                        
+                        if (liveToast && notification.count != 0) {
+                            recordCount.innerText = notification.count;
+
+                            toastTitle.innerText = 'Pending Request' + ((notification.count == 1) ? '' : 's');
+
+                            time.innerText = formattedTimePassed;
+                            time.setAttribute("title", formattedDateTime);
+
+                            toastBody.innerHTML = (notification.count == 1)
+                                ? `There's a <span class="fw-bold text-danger">pending request</span>. Please review it at your convenience.`
+                                : `There's <span class="fw-bold text-danger">${notification.count} pending requests</span>. Please review them at your convenience.`;
+
+                            var toast = new bootstrap.Toast(liveToast);
+                            toast.show();
                         }
     
                         break;
                 
                     case 'abstract':
                         
-                        const liveToast = document.getElementById('liveToast');
-                        
                         if (liveToast && notification.count != 0) {
-                            const abstractCount = liveToast.querySelector('#abstractCount');
-                            abstractCount.innerText = notification.count;
+                            recordCount.innerText = notification.count;
 
-                            const time = liveToast.querySelector('#time');
-                            time.innerText = latest;
+                            toastTitle.innerText = 'New Abstract' + ((notification.count == 1) ? '' : 's');
 
-                            const toastBody = liveToast.querySelector('#toastBody');
+                            time.innerText = formattedTimePassed;
+                            time.setAttribute("title", formattedDateTime);
+
                             toastBody.innerHTML = (notification.count == 1)
-                                ? `A <span class="fw-bold text-danger">new abstract has been uploaded</span>. Please review them at your convenience.`
+                                ? `A <span class="fw-bold text-danger">new abstract</span> has been uploaded. Please review it at your convenience.`
                                 : `${notification.count} <span class="fw-bold text-danger"> new abstracts has been uploaded</span>. Please review them at your convenience.`;
 
                             var toast = new bootstrap.Toast(liveToast);
@@ -66,7 +75,7 @@ async function fetchNotifications() {
                                 
                                 notifHTML = `
                                     <li>
-                                        <p class="text-center mb-0">No notifications.</p>
+                                        <p class="text-center mb-0">No new notifications.</p>
                                     </li>
                                 `;
                                 notificationsContainer.innerHTML = notifHTML;
@@ -80,7 +89,7 @@ async function fetchNotifications() {
                                                 <div>
                                                     New comment(s) on your entry: "${notification.entryContent}"
                                                     <div class="text-muted">
-                                                        <small>${latest}</small>
+                                                        <small title="formattedDateTime">${formattedTimePassed}</small>
                                                     </div>
                                                 </div>
                                                 <span class="badge ms-5 bg-success rounded-pill">

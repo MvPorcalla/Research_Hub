@@ -25,21 +25,28 @@ $user_lastlogin = $_SESSION['user_lastlogin']; // previous log in
 if ($user_type == 'A') {
     // ========================= PENDING REQUESTS =========================
 
-    $sql = "SELECT COUNT(*) AS pending_count 
+    $sql = "SELECT
+                COUNT(*) AS `pending_count`,
+                MAX(`user_registration_timestamp`) AS `latest_registered` 
             FROM `users` 
-            WHERE `user_status` = 'P' 
-            AND `user_registration_timestamp` > ?";
-    $result = query($conn, $sql, [$user_lastlogin]);
+            WHERE `user_status` = 'P'";
+    $result = query($conn, $sql);
 
     $row = $result[0];
 
     $pending_count = $row['pending_count'];
+    $latest_registered = $row['latest_registered'];
 
-    $response['notifications'][] = [
-        'type' => 'pending',
-        'count' => $pending_count
-    ];
-    $response['status'] = 'success';
+    if ($pending_count != 0) {
+
+        $response['notifications'][] = [
+            'type' => 'pending',
+            'count' => $pending_count,
+            'latest' => $latest_registered
+        ];
+        $response['status'] = 'success';
+
+    }
 } else {
     // ============================ ABSTRACTS ============================
 

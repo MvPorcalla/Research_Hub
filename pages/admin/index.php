@@ -104,6 +104,9 @@
         </div>
     </div>
 
+    <?php 
+        include './../admin/components/toasts.php'; 
+    ?>
 
     <!-- Bootstrap JS -->
     <?php include './../admin/components/links-footer-script.php'; ?>
