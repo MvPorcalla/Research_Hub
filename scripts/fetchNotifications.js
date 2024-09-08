@@ -16,7 +16,7 @@ async function fetchNotifications() {
                         
             const liveToast = document.getElementById('liveToast');
 
-            let content;
+            let content, type;
 
             const formattedTimePassed = timeAgo(notification.latest);
             const formattedDateTime = formatDateTime(notification.latest);
@@ -42,88 +42,18 @@ async function fetchNotifications() {
                         break;
                 
                     case 'comment':
-    
-                        if (notificationsContainer) {
 
-                            if (result.totalNotifCount === 0) {
-                                
-                                notifHTML = `
-                                    <li>
-                                        <p class="text-center mb-0">No new notifications.</p>
-                                    </li>
-                                `;
-                                notificationsContainer.innerHTML = notifHTML;
+                        type = `repl` + ((notification.count == 1) ? 'y' : 'ies');
 
-                            } else {
-                            
-                                const notifHTML = `
-                                    <a class="dropdown-item d-flex justify-content-between align-items-center" href="forum.php?entry_id=${notification.entryId}">
-                                        <div class="d-flex flex-column w-100">
-                                            <div class="d-flex justify-content-between align-items-center">
-                                                <div class="notif-content">
-                                                    <span class="fs-lg">New reply on your entry:</span> <br>"<strong>${notification.entryContent}</strong>"
-                                                    <div class="text-muted">
-                                                        <small title="${formattedDateTime}">${formattedTimePassed}</small>
-                                                    </div>
-                                                </div>
-                                                <span class="badge ms-5 bg-success rounded-pill">
-                                                    ${notification.count}
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </a>
-                                `;
-        
-                                const li = document.createElement('li');
-                                li.innerHTML = notifHTML;
-        
-                                notificationsContainer.appendChild(li);
-
-                            }
-                        }
+                        populateNotificationContent(notificationsContainer, result.totalNotifCount, notification.entryId, notification.entryContent, notification.count, type, formattedDateTime, formattedTimePassed)
                         
                         break;
                 
                     case 'like':
-    
-                        if (notificationsContainer) {
 
-                            if (result.totalNotifCount === 0) {
-                                
-                                notifHTML = `
-                                    <li>
-                                        <p class="text-center mb-0">No new notifications.</p>
-                                    </li>
-                                `;
-                                notificationsContainer.innerHTML = notifHTML;
+                        type = `like` + ((notification.count == 1) ? '' : 's');
 
-                            } else {
-    
-                                const notifHTML = `
-                                    <a class="dropdown-item d-flex justify-content-between align-items-center" href="forum.php?entry_id=${notification.entryId}">
-                                        <div class="d-flex flex-column w-100">
-                                            <div class="d-flex justify-content-between align-items-center">
-                                                <div>
-                                                    New like(s) on your entry: "${notification.entryContent}"
-                                                    <div class="text-muted">
-                                                        <small title="${formattedDateTime}">${formattedTimePassed}</small>
-                                                    </div>
-                                                </div>
-                                                <span class="badge ms-5 bg-success rounded-pill">
-                                                    ${notification.count}
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </a>
-                                `;
-        
-                                const li = document.createElement('li');
-                                li.innerHTML = notifHTML;
-        
-                                notificationsContainer.appendChild(li);
-
-                            }
-                        }
+                        populateNotificationContent(notificationsContainer, result.totalNotifCount, notification.entryId, notification.entryContent, notification.count, type, formattedDateTime, formattedTimePassed)
                         
                         break;
                 }
@@ -160,5 +90,47 @@ function populateToastContent(liveToast, count, content, formattedTimePassed, fo
 
         var toast = new bootstrap.Toast(liveToast);
         toast.show();
+    }
+}
+
+function populateNotificationContent(notificationsContainer, totalNotifCount, entryId, entryContent, count, type, formattedDateTime, formattedTimePassed) {
+    
+    if (notificationsContainer) {
+
+        if (totalNotifCount === 0) {
+            
+            notifHTML = `
+                <li>
+                    <p class="text-center mb-0">No new notifications.</p>
+                </li>
+            `;
+            notificationsContainer.innerHTML = notifHTML;
+
+        } else {
+        
+            const notifHTML = `
+                <a class="dropdown-item d-flex justify-content-between align-items-center" href="forum.php?entry_id=${entryId}">
+                    <div class="d-flex flex-column w-100">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="notif-content">
+                                <span class="fs-lg">New ${type} on your entry:</span><br>"<strong>${entryContent}</strong>"
+                                <div class="text-muted">
+                                    <small title="${formattedDateTime}">${formattedTimePassed}</small>
+                                </div>
+                            </div>
+                            <span class="badge ms-5 bg-success rounded-pill">
+                                ${count}
+                            </span>
+                        </div>
+                    </div>
+                </a>
+            `;
+
+            const li = document.createElement('li');
+            li.innerHTML = notifHTML;
+
+            notificationsContainer.appendChild(li);
+
+        }
     }
 }
