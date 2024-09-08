@@ -71,7 +71,7 @@ async function fetchNotifications() {
     
                         if (notificationsContainer) {
 
-                            if (result.totalCommentCount === 0) {
+                            if (result.totalNotifCount === 0) {
                                 
                                 notifHTML = `
                                     <li>
@@ -89,7 +89,50 @@ async function fetchNotifications() {
                                                 <div>
                                                     New comment(s) on your entry: "${notification.entryContent}"
                                                     <div class="text-muted">
-                                                        <small title="formattedDateTime">${formattedTimePassed}</small>
+                                                        <small title="${formattedDateTime}">${formattedTimePassed}</small>
+                                                    </div>
+                                                </div>
+                                                <span class="badge ms-5 bg-success rounded-pill">
+                                                    ${notification.count}
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </a>
+                                `;
+        
+                                const li = document.createElement('li');
+                                li.innerHTML = notifHTML;
+        
+                                notificationsContainer.appendChild(li);
+
+                            }
+                        }
+                        
+                        break;
+                
+                    case 'like':
+    
+                        if (notificationsContainer) {
+
+                            if (result.totalNotifCount === 0) {
+                                
+                                notifHTML = `
+                                    <li>
+                                        <p class="text-center mb-0">No new notifications.</p>
+                                    </li>
+                                `;
+                                notificationsContainer.innerHTML = notifHTML;
+
+                            } else {
+    
+                                const notifHTML = `
+                                    <a class="dropdown-item d-flex justify-content-between align-items-center" href="forum.php?entry_id=${notification.entryId}">
+                                        <div class="d-flex flex-column w-100">
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <div>
+                                                    New like(s) on your entry: "${notification.entryContent}"
+                                                    <div class="text-muted">
+                                                        <small title="${formattedDateTime}">${formattedTimePassed}</small>
                                                     </div>
                                                 </div>
                                                 <span class="badge ms-5 bg-success rounded-pill">
@@ -112,7 +155,7 @@ async function fetchNotifications() {
                 }
                                 
             const notificationCount = document.getElementById('notificationCount');
-            if (result.totalCommentCount != 0) notificationCount.innerText = result.totalCommentCount;
+            if (result.totalNotifCount != 0) notificationCount.innerText = result.totalNotifCount;
         });
 
     } catch (error) {
