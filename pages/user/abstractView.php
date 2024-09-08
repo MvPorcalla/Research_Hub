@@ -65,7 +65,7 @@
     </div>
 
     <!-- Include the links-footer-script.php file which contains all necessary JavaScript links for the page. -->
-    <?php include './../user/components/links-footer-script.php'; ?>
+    <?php include './../user/includes/links_footer-script.php'; ?>
 
     <script src="../../includes/functions.js"></script>
     <script src="../../scripts/fetchAbstractComments.js"></script>
