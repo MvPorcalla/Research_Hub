@@ -458,3 +458,28 @@ function getLikes() {
         console.log('All like statuses updated');
     });
 }
+
+// =========================================================================
+
+function filterBadWords(formId, inputId, errorId) {
+
+    document.getElementById(formId).addEventListener('submit', function(event) {
+
+        // Array of words to filter out (add your list of cuss words here)
+        const forbiddenWords = ['shit', 'damn', 'bitch']; // Replace with actual words
+        const inputText = document.getElementById(inputId).value.toLowerCase();
+    
+        // Check if the input contains any forbidden words
+        for (let i = 0; i < forbiddenWords.length; i++) {
+            if (inputText.includes(forbiddenWords[i])) {
+                // Prevent form submission and show an error message
+                event.preventDefault();
+                document.getElementById(errorId).textContent = "Your input contains forbidden words. Please remove them and try again.";
+                return;
+            }
+        }
+        
+        // If no forbidden words are found, allow form submission
+        document.getElementById(errorId).textContent = "";
+    });
+}
