@@ -179,16 +179,6 @@ if (!isset($_SESSION['user_type'])) {
             handleStatus('comment');
         });
     </script>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            var toastEl = document.querySelector('.toast');
-            var toast = new bootstrap.Toast(toastEl);
-
-            // Show the toast
-            toast.show();
-        });
-    </script>
     
 </body>
 </html>

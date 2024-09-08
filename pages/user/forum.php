@@ -99,6 +99,7 @@ if (!isset($_SESSION['user_type'])) {
                                                     <label for="question" class="form-label">Your Question</label>
                                                     <textarea class="form-control" id="question" name="question" rows="4" placeholder="Type your question here..." maxlength="2000" required></textarea>
                                                 </div>
+                                                <p id="error" style="color: red;"></p>
                                                 <button type="submit" class="btn btn-primary btn-block w-100">Submit</button>
                                             </form>
                                         </div>
@@ -129,6 +130,7 @@ if (!isset($_SESSION['user_type'])) {
         document.addEventListener('DOMContentLoaded', function () {
             handleStatus('entry');
             handleStatus('comment');
+            filterBadWords('askQuestionForm','question', 'error');
         });
     </script>
 </body>
