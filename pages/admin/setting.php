@@ -18,29 +18,6 @@ if (!isset($_SESSION['user_type'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Profile - LNHS Research Hub</title>
     <?php include './../admin/components/links-head-css.php'; ?>
-
-    <style>
-        .setting-info-title {
-            font-size: var(--fs-lg);
-            font-weight: var(--fw-semibold);
-            color: var(--text-base-lt);
-        }
-        .setting-profile-pic {
-            width: 80px;
-            height: 80px;
-            object-fit: cover;
-        }
-        .setting-name-text {
-            font-size: var(--fs-2xl);
-            font-weight: var(--fw-semibold);
-            color: var(--text-base);
-        }
-        .setting-username-text {
-            font-size: var(--fs-lg);
-            font-weight: var(--fw-medium);
-            color: var(--text-base-lt);
-        }
-    </style>
 </head>
 
 <body>
@@ -153,11 +130,10 @@ if (!isset($_SESSION['user_type'])) {
                                     <!-- Logout Button -->
                                     <div class="mt-3">
                                         <div class="col-md-12 text-center">
-                                            <form id="logout" action="../../backend/logout.php" method="post">
-                                                <button type="submit" class="btn btn-danger w-100">Logout</button>
-                                            </form>
+                                            <button id="logoutButton" class="btn btn-danger w-100">Logout</button>
                                         </div>
                                     </div>
+
                                 </div>
 
                                 <!-- Modal for edit profile -->
@@ -256,17 +232,15 @@ if (!isset($_SESSION['user_type'])) {
     <script src="../../includes/functions.js"></script>
     <script src="../../scripts/fetchOneRecord.js"></script>
     <script src="../../scripts/fetchUpdateInfo.js"></script>
-    
+    <script src="../../scripts/logout.js"></script>
+
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             confirmPassword();
             handleStatus('editInfo');
         });
-        
-        document.getElementById('logout').addEventListener('submit', function(event) {
-            sessionStorage.clear();
-        });
     </script>
-</body>
 
+</body>
 </html>
+

@@ -88,8 +88,9 @@ if ($user_type == 'A') {
                 WHERE c.comment_status = 'A'
                 AND c.comment_timestamp > ?
                 AND e.user_id = ?
-                AND e.entry_id = ?";
-        $filter = [$user_lastlogin, $user_id, $entry_id];
+                AND e.entry_id = ?
+                AND c.user_id != ?";
+        $filter = [$user_lastlogin, $user_id, $entry_id, $user_id];
         $result = query($conn, $sql, $filter);
     
         $row = $result[0];
