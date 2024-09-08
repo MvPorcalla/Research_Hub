@@ -12,14 +12,12 @@ $fields = [
     'history_status' => 'A'
 ];
 
-// Check if the user has already liked this record
 $sql = "SELECT * FROM `histories` WHERE `user_id` = ? AND `record_id` = ? AND DATE(`history_timestamp`) = DATE(?)";
 $filter = [$userId, $abstractId, $currentTimestamp];
 $result = query($conn, $sql, $filter);
 
 
 if (!empty($result)) {
-    // If the record exists, toggle the status
     
     $row = $result[0];
 
@@ -30,7 +28,6 @@ if (!empty($result)) {
     update($conn, $table, $fields, $filter);
 
 } else {
-    // If the record does not exist, add a new like
 
     $fields = array_merge($fields, [
         'user_id' => $userId,

@@ -2,7 +2,7 @@
 async function register() {
     try {
         // Create a FormData object with the form data from the form with the ID 'formWithPassword'
-        const formData = new FormData(document.querySelector('#formWithPassword'));
+        const formData = new FormData(document.getElementById('registrationForm'));
 
         // Send a POST request to 'backend/register.php' with the form data
         const response = await fetch('backend/register.php', {
@@ -37,7 +37,7 @@ async function register() {
 }
 
 // Add an event listener to the form submission event
-document.querySelector('#formWithPassword').addEventListener('submit', function(event) {
+document.getElementById('registrationForm').addEventListener('submit', function(event) {
     event.preventDefault(); // Prevent the default form submission behavior
     register(); // Call the register function to handle the registration process
 });

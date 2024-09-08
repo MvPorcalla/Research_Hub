@@ -31,7 +31,7 @@
                             <div class="card bg-transparent">
 
                                 <div class="card-body mx-5">
-                                    <form id="formWithPassword">
+                                    <form id="registrationForm">
                                         <!-- Role -->
                                         <div class="row mb-3" hidden>
                                             <label for="role" class="form-label">Role</label>
@@ -131,6 +131,7 @@
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             handleStatus('registration');
+            confirmPassword('registrationForm')
         });
     </script>
 </body>

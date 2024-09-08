@@ -2,7 +2,7 @@
 include_once "includes/db.php";
 
 if (!isset($_GET['token'])) {
-    header("Location: backend/logout.php");
+    header("Location: index.php");
     exit;
 }
 
@@ -49,9 +49,9 @@ if (empty($result) || date('Y-m-d H:i:s') >= $result[0]['user_reset_token_expire
 
                     <h3 class="login_card-title text-center mb-4">Reset Password</h3>
 
-                    <form id="formWithPassword" action="backend/reset_password.php" method="POST">
+                    <form id="resetPasswordForm" action="backend/reset_password.php" method="POST">
 
-                    <input type="text" class="form-control" name="token" required hidden value="<?php echo $_GET['token']; ?>">
+                        <input type="text" class="form-control" name="token" required hidden value="<?php echo $_GET['token']; ?>">
 
                         <!-- Password and Confirm Password -->
                         <div class="row mb-3">
@@ -81,11 +81,12 @@ if (empty($result) || date('Y-m-d H:i:s') >= $result[0]['user_reset_token_expire
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="includes\functions.js"></script>
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            confirmPassword();
+            confirmPassword('resetPasswordForm');
             handleStatus('reset');
         });
     </script>
