@@ -9,6 +9,15 @@ async function fetchNotifications() {
         // Parse the JSON response
         const result = await response.json();
 
+        let notifCount = 0;
+
+        result.notifications.sort((a, b) => {
+            // Handle null values by considering them as the earliest
+            const dateA = a.latest ? new Date(a.latest) : new Date(0);
+            const dateB = b.latest ? new Date(b.latest) : new Date(0);
+            return dateB - dateA;
+        });
+
         // Iterate through the notifications array and handle each notification
         result.notifications.forEach(notification => {
 
@@ -31,6 +40,8 @@ async function fetchNotifications() {
                 notificationsContainer.innerHTML = notifHTML;
     
             }
+
+            if (notifCount != 0) notificationsContainer.innerHTML += `<hr class="my-0">`
 
             switch (notification.type) {
                 case 'pending':
@@ -56,7 +67,7 @@ async function fetchNotifications() {
 
                     type = `repl` + ((notification.count == 1) ? 'y' : 'ies');
 
-                    populateNotificationContent(notificationsContainer, result.totalNotifCount, notification.entryId, notification.entryContent, notification.count, type, formattedDateTime, formattedTimePassed)
+                    populateNotificationContent(notificationsContainer, notification.entryId, notification.entryContent, notification.count, type, formattedDateTime, formattedTimePassed, notifCount);
                     
                     break;
             
@@ -64,13 +75,15 @@ async function fetchNotifications() {
 
                     type = `like` + ((notification.count == 1) ? '' : 's');
 
-                    populateNotificationContent(notificationsContainer, result.totalNotifCount, notification.entryId, notification.entryContent, notification.count, type, formattedDateTime, formattedTimePassed)
+                    populateNotificationContent(notificationsContainer,  notification.entryId, notification.entryContent, notification.count, type, formattedDateTime, formattedTimePassed, notifCount);
                     
                     break;
             }
                                 
             const notificationCount = document.getElementById('notificationCount');
             if (result.totalNotifCount != 0) notificationCount.innerText = result.totalNotifCount;
+
+            if (notification.type == 'comment' || notification.type == 'like') notifCount++;
         });
 
     } catch (error) {
@@ -79,7 +92,7 @@ async function fetchNotifications() {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-    fetchNotifications();
+    fetchNotifications().then(() => { seenNotification(); });
 });
 
 function populateToastContent(liveToast, count, content, formattedTimePassed, formattedDateTime) {
@@ -104,12 +117,12 @@ function populateToastContent(liveToast, count, content, formattedTimePassed, fo
     }
 }
 
-function populateNotificationContent(notificationsContainer, totalNotifCount, entryId, entryContent, count, type, formattedDateTime, formattedTimePassed) {
+function populateNotificationContent(notificationsContainer, entryId, entryContent, count, type, formattedDateTime, formattedTimePassed, notifCount) {
     
     if (notificationsContainer) {
         
         const notifHTML = `
-            <a class="dropdown-item d-flex justify-content-between align-items-center" href="forum.php?entry_id=${entryId}">
+            <a class="dropdown-item d-flex justify-content-between align-items-center notif-link" href="forum.php?entry_id=${entryId}" data-notif-id="notif-${notifCount}">
                 <div class="d-flex flex-column w-100">
                     <div class="d-flex justify-content-between align-items-center">
                         <div class="notif-content">
@@ -132,4 +145,36 @@ function populateNotificationContent(notificationsContainer, totalNotifCount, en
         notificationsContainer.appendChild(li);
             
     }
+}
+
+function seenNotification() {
+    const notifLinks = document.querySelectorAll('.notif-link');
+
+    notifLinks.forEach(link => {
+        const notifId = link.getAttribute('data-notif-id'); // Assuming each link has a unique data-id attribute
+
+        // Check if the notification has been marked as seen in sessionStorage
+        if (sessionStorage.getItem(`notif-${notifId}`) === 'seen') {
+            link.style.backgroundColor = '#d3d3d3';
+
+            const badge = link.querySelector('.badge');
+            badge.classList.remove('bg-success');
+            badge.classList.add('bg-secondary');
+        }
+
+        link.addEventListener("click", function(e) {
+            e.preventDefault();
+
+            // Change the background color and badge classes
+            link.style.backgroundColor = '#d3d3d3';
+            const badge = link.querySelector('.badge');
+            badge.classList.remove('bg-success');
+            badge.classList.add('bg-secondary');
+
+            // Store the seen state in sessionStorage
+            sessionStorage.setItem(`notif-${notifId}`, 'seen');
+
+            window.location.href = this.href;
+        });
+    });
 }
