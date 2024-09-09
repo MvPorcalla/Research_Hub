@@ -2,7 +2,7 @@
 include_once "includes/db.php";
 
 if (!isset($_GET['token'])) {
-    header("Location: backend/logout.php");
+    header("Location: index.php");
     exit;
 }
 
@@ -49,9 +49,9 @@ if (empty($result) || date('Y-m-d H:i:s') >= $result[0]['user_reset_token_expire
 
                     <h3 class="login_card-title text-center mb-4">Reset Password</h3>
 
-                    <form id="formWithPassword" action="backend/reset_password.php" method="POST">
+                    <form id="resetPasswordForm" action="backend/reset_password.php" method="POST">
 
-                    <input type="text" class="form-control" name="token" required hidden value="<?php echo $_GET['token']; ?>">
+                        <input type="text" class="form-control" name="token" required hidden value="<?php echo $_GET['token']; ?>">
 
                         <!-- Password and Confirm Password -->
                         <div class="row mb-3">
@@ -86,7 +86,7 @@ if (empty($result) || date('Y-m-d H:i:s') >= $result[0]['user_reset_token_expire
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            confirmPassword();
+            confirmPassword('resetPasswordForm');
             handleStatus('reset');
         });
     </script>

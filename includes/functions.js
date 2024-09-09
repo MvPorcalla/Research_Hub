@@ -346,14 +346,14 @@ function formatDateTime(timestamp) {
 // =========================================================================
 
 // Function confirm password
-function confirmPassword() {
+function confirmPassword(formId) {
 
-    const form = document.getElementById('formWithPassword');
+    const form = document.getElementById(formId);
 
     form.addEventListener('submit', function (e) {
 
-        const password = document.getElementById('password').value;
-        const confirmPassword = document.getElementById('confirmPassword').value;
+        const password = form.querySelector('#password').value;
+        const confirmPassword = form.querySelector('#confirmPassword').value;
 
         // Check if the password and confirm password fields match
         if (password !== confirmPassword) {

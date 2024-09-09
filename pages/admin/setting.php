@@ -192,13 +192,13 @@
                                                             <div class="col-md-6">
                                                                 <div class="mb-3">
                                                                     <label for="newPassword" class="form-label fw-bold">New Password</label>
-                                                                    <input type="password" class="form-control" id="newPassword" name="newPassword" required>
+                                                                    <input type="password" class="form-control" id="password" name="newPassword" required>
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-6">
                                                                 <div class="mb-3">
                                                                     <label for="confirmNewPassword" class="form-label fw-bold">Confirm New Password</label>
-                                                                    <input type="password" class="form-control" id="confirmNewPassword" name="confirmNewPassword" required>
+                                                                    <input type="password" class="form-control" id="confirmPassword" name="confirmNewPassword" required>
                                                                 </div>                                                        
                                                             </div>
                                                         </div>
@@ -226,7 +226,7 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            confirmPassword();
+            confirmPassword('editPasswordForm');
             handleStatus('editInfo');
         });
     </script>
