@@ -1,14 +1,4 @@
-<?php
-    include_once "..\..\includes\db.php";
-
-    if (!isset($_SESSION['user_type'])) {
-        header("location: ../../index.php");
-        exit;
-    } elseif ($_SESSION['user_type'] != 'A') {
-        header("location: ../../backend/logout.php");
-        exit;
-    }
-?>
+<?php include_once './../admin/includes/session_check.php'; ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -16,10 +6,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HOME PAGE - LNHS Research Hub</title>
-    <?php include './../admin/components/links-head-css.php'; ?>
-
+    <?php include './../admin/includes/links_head-css.php'; ?>
 </head>
-<!-- <body > class=" overflow-x-hidden " -->
+<body>
     <!-- header -->
     <?php include './../admin/components/header.php'; ?>
 
@@ -109,7 +98,7 @@
     ?>
 
     <!-- Bootstrap JS -->
-    <?php include './../admin/components/links-footer-script.php'; ?>
+    <?php include './../admin/includes/links_footer-script.php'; ?>
     
     <script src="../../includes/functions.js"></script>
     <script src="../../scripts/fetchAbstract.js"></script>

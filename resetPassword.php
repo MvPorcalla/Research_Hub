@@ -82,7 +82,7 @@ if (empty($result) || date('Y-m-d H:i:s') >= $result[0]['user_reset_token_expire
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="includes\functions.js"></script>
+    <script src="includes/functions.js"></script>
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {

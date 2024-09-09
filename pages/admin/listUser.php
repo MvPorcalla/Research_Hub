@@ -1,14 +1,4 @@
-<?php
-include_once "..\..\includes\db.php";
-
-if (!isset($_SESSION['user_type'])) {
-    header("location: ../../index.php");
-    exit;
-} elseif ($_SESSION['user_type'] != 'A') {
-    header("location: ../../backend/logout.php");
-    exit;
-}
-?>
+<?php include_once './../admin/includes/session_check.php'; ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -17,56 +7,7 @@ if (!isset($_SESSION['user_type'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User List - LNHS Research Hub</title>
-    <?php include './../admin/components/links-head-css.php'; ?>
-
-    <style>
-        .btn {
-            position: relative;
-        }
-        .input-group {
-            position: relative;
-        }
-        .form-control {
-            padding-right: 50px; /* Adjusted to accommodate the button */
-        }
-        .btn-search {
-            position: absolute;
-            right: 10px;
-            top: 50%;
-            transform: translateY(-50%);
-            border-radius: 50%;
-        }
-
-        #search {
-            width: 100%;
-            padding: 8px;
-            box-sizing: border-box;
-        }
-        #suggestions {
-            position: absolute;
-            top: 100%;
-            left: 0;
-            width: 100%;
-            max-height: 200px;
-            border: 1px solid #ddd;
-            border-top: none;
-            background-color: var(--bg-base-lt);
-            border-radius: 10px;
-            border:1px solid #000;
-            z-index: 1000;
-            overflow-y: auto;
-            display: none;
-        }
-        #suggestions div {
-            padding: 8px;
-            cursor: pointer;
-        }
-        #suggestions div:hover {
-            background-color: #f0f0f0;
-        }
-    </style>
-
-
+    <?php include './../admin/includes/links_head-css.php'; ?>
 </head>
 
 <body>
@@ -78,7 +19,6 @@ if (!isset($_SESSION['user_type'])) {
         <div class="row text-center">
             <!-- sidebar -->
             <?php include './../admin/components/sidebar.php'; ?>
-
 
             <!-- Main content area -->
             <main class="col-md-9 ms-sm-auto col-lg-9 px-md-4">
@@ -100,20 +40,14 @@ if (!isset($_SESSION['user_type'])) {
                                     </li>
                                 </ul>
                             </div>
-
                             <div class="col-md-7">
                                 <?php include './../admin/components/searchbar.php' ?>
                             </div>
-                            
                         </div>
 
-
                         <!-- Content Table -->
-
                         <div id="users-table" class="container mt-3 side-container text-light mt-1">
-
                             <!-- student list -->
-
                             <div class="tab-content " id="myTabContent">
                                 <div class="tab-pane fade show active" id="student-list" role="tabpanel" aria-labelledby="student-list-tab">
                                     <div class="row">
@@ -132,13 +66,11 @@ if (!isset($_SESSION['user_type'])) {
                                                                 <th class="col-md-1">Actions</th>
                                                             </tr>
                                                         </thead>
-
                                                         <tbody>
                                                             <!-- Data will be dynamically inserted here -->
                                                         </tbody>
                                                     </table>
                                                 </div>
-
                                             </div>
                                         </div>
                                     </div>
@@ -162,29 +94,24 @@ if (!isset($_SESSION['user_type'])) {
                                                                 <th>Actions</th>
                                                             </tr>
                                                         </thead>
-
                                                         <tbody>
                                                             <!-- Data will be dynamically inserted here -->
                                                         </tbody>
                                                     </table>
                                                 </div>
-
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-
-
                             </div>
                         </div>
                     </div>
                 </div>
             </main>
-
         </div>
     </div>
 
-    <?php include './../admin/components/links-footer-script.php'; ?>
+    <?php include './../admin/includes/links_footer-script.php'; ?>
 
     <script src="../../includes/functions.js"></script>
     <script src="../../scripts/searchfetch.js"></script>

@@ -1,14 +1,4 @@
-<?php
-include_once "..\..\includes\db.php";
-
-if (!isset($_SESSION['user_type'])) {
-    header("location: ../../index.php");
-    exit;
-} elseif ($_SESSION['user_type'] != 'A') {
-    header("location: ../../backend/logout.php");
-    exit;
-}
-?>
+<?php include_once './../admin/includes/session_check.php'; ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -33,13 +23,12 @@ if (!isset($_SESSION['user_type'])) {
             <!-- sidebar -->
             <?php include './../admin/components/sidebar.php'; ?>
             
-
             <!-- Main content area -->
             <main class="col-md-9 ms-sm-auto col-lg-9 px-md-4">
                 <div class="container">
                     <div class="row">
                         <div class="my-3">
-                            <h1 class="admin_title">Student List</h1>
+                            <h1 class="admin_title">Guest List</h1>
                         </div>
                         
                         <!-- Search Bar -->
@@ -72,8 +61,7 @@ if (!isset($_SESSION['user_type'])) {
                                             <th>First Name</th>
                                             <th>Last Name</th>
                                             <th>Middle Initial</th>
-                                            <th>LRN</th>
-                                            <th>Track/Strand</th>
+                                            <th>School</th>
                                             <th>Actions</th>
                                         </tr>
                                     </thead>
@@ -84,30 +72,28 @@ if (!isset($_SESSION['user_type'])) {
                                         // Example: Assuming you have a database connection established and you are fetching records
                                         // Replace $user with your actual database query results
                                         $user = [
-                                            ['user_firstname' => 'Shesh', 'user_mi' => 'S', 'user_lastname' => 'Das', 'rn_lrnid' => '123456789098', 'user_trackstrand'  => 'S'],
+                                            ['user_firstname' => 'Pogi', 'user_mi' => 'S', 'user_lastname' => 'ko', 'user_school' => 'MORMS', 'user_trackstrand'  => 'S'],
                                             // Add more user as needed
-                                        ];
+                                            ];
 
-                                        foreach ($user as $user) {
+                                            foreach ($user as $user) {
 
-                                            $fname = $user['user_firstname'];
-                                            $mi = $user['user_mi'];
-                                            $lname = $user['user_lastname'];
-                                            $lrn = $user['rn_lrnid'];
-                                            $track = $user['user_trackstrand'];
+                                                $fname = $user['user_firstname'];
+                                                $mi = $user['user_mi'];
+                                                $lname = $user['user_lastname'];
+                                                $school = $user['user_school'];
 
-                                            echo "<tr>
-                                                    <td>{$fname}</td>
-                                                    <td>{$mi}</td>
-                                                    <td>{$lname}</td>
-                                                    <td>{$lrn}</td>
-                                                    <td>{$track}</td>
-                                                    <td>
-                                                        <a href='#' class='btn btn-primary btn-sm'><i class='fas fa-edit'></i></a>
-                                                        <a href='#' class='btn btn-danger btn-sm'><i class='fas fa-trash-alt'></i></a>
-                                                    </td>
-                                                </tr>";
-                                        }
+                                                echo "<tr>
+                                                        <td>{$fname}</td>
+                                                        <td>{$mi}</td>
+                                                        <td>{$lname}</td>
+                                                        <td>{$school}</td>
+                                                        <td>
+                                                            <a href='#' class='btn btn-primary btn-sm'><i class='fas fa-edit'></i></a>
+                                                            <a href='#' class='btn btn-danger btn-sm'><i class='fas fa-trash-alt'></i></a>
+                                                        </td>
+                                                    </tr>";
+                                            }
                                         ?>
                                     </tbody>
                                 </table>

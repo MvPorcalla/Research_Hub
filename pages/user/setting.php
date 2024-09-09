@@ -1,14 +1,4 @@
-<?php
-include_once "..\..\includes\db.php";
-
-if (!isset($_SESSION['user_type'])) {
-    header("location: ../../index.php");
-    exit;
-} elseif ($_SESSION['user_type'] == 'A') {
-    header("location: ../../backend/logout.php");
-    exit;
-}
-?>
+<?php include './../user/includes/session_check.php'; ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -18,7 +8,7 @@ if (!isset($_SESSION['user_type'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Profile - LNHS Research Hub</title>
     <!-- Include the head-links-css.php file which contains all necessary CSS links for the page. -->
-    <?php include './../user/components/links-head-css.php'; ?>
+    <?php include './../user/includes/links_head-css.php'; ?>
 </head>
 
 <body>
@@ -229,7 +219,7 @@ if (!isset($_SESSION['user_type'])) {
     </div>
 
     <!-- Include the links-footer-script.php file which contains all necessary JavaScript links for the page. -->
-    <?php include './../user/components/links-footer-script.php'; ?>
+    <?php include './../user/includes/links_footer-script.php'; ?>
 
     <script src="../../includes/functions.js"></script>
     <script src="../../scripts/fetchOneRecord.js"></script>

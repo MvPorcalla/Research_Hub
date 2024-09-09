@@ -1,14 +1,4 @@
-<?php
-include_once "..\..\includes\db.php";
-
-if (!isset($_SESSION['user_type'])) {
-    header("location: ../../index.php");
-    exit;
-} elseif ($_SESSION['user_type'] != 'A') {
-    header("location: ../../backend/logout.php");
-    exit;
-}
-?>
+<?php include_once './../admin/includes/session_check.php'; ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -17,28 +7,7 @@ if (!isset($_SESSION['user_type'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LRN List - LNHS Research Hub</title>
-    <?php include './../admin/components/links-head-css.php'; ?>
-
-    <style>
-        .btn {
-            position: relative;
-        }
-        .input-group {
-            position: relative;
-        }
-        .form-control {
-            padding-right: 50px; /* Adjusted to accommodate the button */
-        }
-        .btn-search {
-            position: absolute;
-            right: 10px;
-            top: 50%;
-            transform: translateY(-50%);
-            border-radius: 50%;
-        }
-
-    </style>
-
+    <?php include './../admin/includes/links_head-css.php'; ?>
 </head>
 
 <body>
@@ -124,7 +93,7 @@ if (!isset($_SESSION['user_type'])) {
         </div>
     </div>
 
-    <?php include './../admin/components/links-footer-script.php'; ?>
+    <?php include './../admin/includes/links_footer-script.php'; ?>
 
     <script src="../../includes/functions.js"></script>
     <script src="../../scripts/searchfetch.js"></script>

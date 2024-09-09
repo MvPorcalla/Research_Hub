@@ -1,14 +1,4 @@
-<?php
-include_once "..\..\includes\db.php";
-
-if (!isset($_SESSION['user_type'])) {
-    header("location: ../../index.php");
-    exit;
-} elseif ($_SESSION['user_type'] == 'A') {
-    header("location: ../../backend/logout.php");
-    exit;
-}
-?>
+<?php include './../user/includes/session_check.php'; ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -18,42 +8,7 @@ if (!isset($_SESSION['user_type'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HOME PAGE - LNHS Research Hub</title>
     <!-- Include the head-links-css.php file which contains all necessary CSS links for the page. -->
-    <?php include './../user/components/links-head-css.php'; ?>
-
-    <style>
-        
-        .comment-container {
-            position: relative;
-            width: 100%;
-            height: auto;
-            border: 1px solid black;
-            border-radius: 8px;
-            padding: 10px;
-            max-height: 550px;
-            overflow-y: auto;
-        }
-
-        .comment-card {
-            margin-bottom: 10px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            background-color: #fff;
-        }
-
-        .comment-card .card-body {
-            padding: 10px;
-        }
-
-        .like-button {
-            cursor: pointer;
-        }
-
-        .liked {
-            color: blue !important;
-            font-weight: bold !important;
-        }
-
-    </style>
+    <?php include './../user/includes/links_head-css.php'; ?>
 </head>
 
 <body>
@@ -130,7 +85,7 @@ if (!isset($_SESSION['user_type'])) {
                                         </form>
 
                                         <!-- Comment List -->
-                                        <div id="commentsContainer" class="comment-container" data-user-id="<?php echo $_SESSION['user_id']; ?>">
+                                        <div id="commentsContainer" class="comment-modal-container" data-user-id="<?php echo $_SESSION['user_id']; ?>">
                                             <!-- Data will be dynamically inserted here -->
                                         </div>
                                        
@@ -149,12 +104,7 @@ if (!isset($_SESSION['user_type'])) {
                 </div>
             </main>
         </div>
-    </div>
-
-
-    
-
-    
+    </div>    
     
     <!-- toast -->
     <?php 
@@ -162,8 +112,7 @@ if (!isset($_SESSION['user_type'])) {
     ?>
 
     <!-- Include the links-footer-script.php file which contains all necessary JavaScript links for the page. -->
-    <?php include './../user/components/links-footer-script.php'; ?>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.min.js"></script>
+    <?php include './../user/includes/links_footer-script.php'; ?>
 
 
     <script src="../../includes/functions.js"></script>

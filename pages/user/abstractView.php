@@ -1,15 +1,8 @@
-<?php
-include_once "..\..\includes\db.php";
-
-if (!isset($_SESSION['user_type'])) {
-    header("location: ../../index.php");
-    exit;
-} elseif ($_SESSION['user_type'] == 'A') {
-    header("location: ../../backend/logout.php");
-    exit;
-}
-include "..\..\backend\history.php";
+<?php 
+    include_once './../user/includes/session_check.php'; 
+    include_once "../../backend/history.php";
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -18,60 +11,9 @@ include "..\..\backend\history.php";
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ABSTRACT - LNHS Research Hub</title>
     <!-- Include the head-links-css.php file which contains all necessary CSS links for the page. -->
-    <?php include './../user/components/links-head-css.php'; ?>
-
-    <style>
-        .pdf-container {
-            position: relative;
-            width: 100%;
-            height: 650px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            overflow: hidden;
-        }
-
-        .pdf-container iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
-
-        .comment-container {
-            position: relative;
-            width: 100%;
-            height: auto;
-            border: 1px solid black;
-            border-radius: 8px;
-            padding: 10px;
-            max-height: 600px;
-            overflow-y: auto;
-        }
-
-        .comment-card {
-            margin-bottom: 10px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            background-color: #fff;
-        }
-
-        .comment-card .card-body {
-            padding: 10px;
-        }
-
-        .like-button {
-            cursor: pointer;
-        }
-        
-        .liked {
-            color: blue !important; /* Change the icon color to blue */
-            font-weight: bold !important; /* Optional: make it bold */
-        }
-
-    </style>
+    <?php include './../user/includes/links_head-css.php'; ?>
 </head>
+
 <body>
     <!-- header -->
     <?php include './../admin/components/header.php'; ?>
@@ -123,7 +65,7 @@ include "..\..\backend\history.php";
     </div>
 
     <!-- Include the links-footer-script.php file which contains all necessary JavaScript links for the page. -->
-    <?php include './../user/components/links-footer-script.php'; ?>
+    <?php include './../user/includes/links_footer-script.php'; ?>
 
     <script src="../../includes/functions.js"></script>
     <script src="../../scripts/fetchAbstractComments.js"></script>

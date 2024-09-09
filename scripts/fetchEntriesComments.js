@@ -236,7 +236,7 @@ async function displayCommentsForEntry(entryId, entryComments) {
                             <div class="form-row align-items-center">
                                 <div class="col">
                                     <div class="input-group">
-                                        <textarea class="form-control" name="comment_content" rows="1" placeholder="Add a comment..."></textarea>
+                                        <textarea class="form-control" name="comment_content" rows="1" placeholder="Add a comment..." required></textarea>
                                         <button type="submit" class="btn btn-primary ms-2" title="Post Comment">
                                             <i class="fa-solid fa-paper-plane"></i>
                                         </button>

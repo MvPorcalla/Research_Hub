@@ -11,12 +11,6 @@ if (isset($_POST['currentPassword']) && isset($_POST['newPassword']) && isset($_
     $newPassword = $_POST['newPassword'];
     $confirmNewPassword = $_POST['confirmNewPassword'];
 
-    if ($newPassword !== $confirmNewPassword) {
-        $response['message'] = "New password and confirm password do not match!";
-        echo json_encode($response);
-        exit;
-    }
-
     $sql = "SELECT * FROM users WHERE user_id = ?";
     $filter = [$user_id];
     $result = query($conn, $sql, $filter);
