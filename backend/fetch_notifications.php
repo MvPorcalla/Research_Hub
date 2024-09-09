@@ -11,16 +11,7 @@ $response = [
 
 $user_id = $_SESSION['user_id'];
 $user_type = $_SESSION['user_type'];
-$user_lastlogin = $_SESSION['user_lastlogin']; // previous log in
-
-
-// FOR PENDING NOTIFICATION
-//========================= retrieve when admin last logged in
-//========================= count how many registered and became pending from admin's last log in to now
-// insert notification details to database in notifications table
-    // columns consisting the response[notifications][] + user_id + status
-    // status: A: Active, I: Inactive
-// remove/decrease count on notif bell once seen
+$user_lastlogin = $_SESSION['user_lastlogin']; // previous log in\
 
 $total_notif_count = 0;
 

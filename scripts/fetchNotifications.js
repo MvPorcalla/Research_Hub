@@ -92,7 +92,14 @@ async function fetchNotifications() {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-    fetchNotifications().then(() => { seenNotification(); });
+    fetchNotifications().then(() => {
+        
+        const notificationSeen = seenNotification();
+                                
+        const notificationCount = document.getElementById('notificationCount');
+        const notifCount = +notificationCount.innerText;
+        if (notifCount != 0) notificationCount.innerText = notifCount - notificationSeen;
+    });
 });
 
 function populateToastContent(liveToast, count, content, formattedTimePassed, formattedDateTime) {
@@ -122,7 +129,7 @@ function populateNotificationContent(notificationsContainer, entryId, entryConte
     if (notificationsContainer) {
         
         const notifHTML = `
-            <a class="dropdown-item d-flex justify-content-between align-items-center notif-link" href="forum.php?entry_id=${entryId}" data-notif-id="notif-${notifCount}">
+            <a class="dropdown-item d-flex justify-content-between align-items-center notif-link" href="forum.php?entry_id=${entryId}" data-notif-id="notif-${notifCount}" data-notif-count="${count}">
                 <div class="d-flex flex-column w-100">
                     <div class="d-flex justify-content-between align-items-center">
                         <div class="notif-content">
@@ -150,8 +157,11 @@ function populateNotificationContent(notificationsContainer, entryId, entryConte
 function seenNotification() {
     const notifLinks = document.querySelectorAll('.notif-link');
 
+    let notificationSeen = 0;
+
     notifLinks.forEach(link => {
-        const notifId = link.getAttribute('data-notif-id'); // Assuming each link has a unique data-id attribute
+        const notifId = link.getAttribute('data-notif-id');
+        const notifCount = link.getAttribute('data-notif-count');
 
         // Check if the notification has been marked as seen in sessionStorage
         if (sessionStorage.getItem(`notif-${notifId}`) === 'seen') {
@@ -160,6 +170,8 @@ function seenNotification() {
             const badge = link.querySelector('.badge');
             badge.classList.remove('bg-success');
             badge.classList.add('bg-secondary');
+
+            notificationSeen += +notifCount;
         }
 
         link.addEventListener("click", function(e) {
@@ -177,4 +189,6 @@ function seenNotification() {
             window.location.href = this.href;
         });
     });
+
+    return notificationSeen;
 }
