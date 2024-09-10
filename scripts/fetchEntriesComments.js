@@ -151,7 +151,18 @@ if (url.includes('forum.php')) {
         };
 
         // Fetch entries and comments, then get likes for each entry
-        fetchEntriesComments().then(() => { getLikes(); });
+        fetchEntriesComments()
+            .then(() => { getLikes(); })
+            .then(() => {
+                const commentForms = document.querySelectorAll('.forum-comment-form');
+
+                commentForms.forEach(form => {
+
+                    const entryId = form.querySelector('#entry_id').value;
+
+                    filterBadWords(`forumCommentForm_${entryId}`, `commentContent_${entryId}`, `error_${entryId}`);
+                });
+            });
     });
     
     // Function to display comment section for a specified entry and hide other comment sections
@@ -232,18 +243,19 @@ async function displayCommentsForEntry(entryId, entryComments) {
                 const addCommentForm = `
                     <!-- Comment Form for Main Entry -->
                     <div class="card-body mt-1">
-                        <form method="post" action="../../backend/comment.php">
+                        <form id="forumCommentForm_${entryId}" method="post" action="../../backend/comment.php" class="forum-comment-form">
                             <div class="form-row align-items-center">
                                 <div class="col">
                                     <div class="input-group">
-                                        <textarea class="form-control" name="comment_content" rows="1" placeholder="Add a comment..." required></textarea>
+                                        <textarea class="form-control" name="comment_content" id="commentContent_${entryId}" rows="1" placeholder="Add a comment..." required></textarea>
                                         <button type="submit" class="btn btn-primary ms-2" title="Post Comment">
                                             <i class="fa-solid fa-paper-plane"></i>
                                         </button>
                                     </div>
                                 </div>
                             </div>
-                            <input type="hidden" name="entry_id" value="${entryId}">
+                            <input type="hidden" id="entry_id" name="entry_id" value="${entryId}">
+                            <p id="error_${entryId}" style="color: red;"></p>
                         </form>
                     </div>
                 `;

@@ -43,7 +43,7 @@
                                 <div class="form-outline flex-grow-1 mb-2">
                                     <input type="hidden" name="record_id" value="<?php echo $_GET['abstractId']; ?>"> 
                                     <input type="hidden" name="user_id" value="<?php echo $_SESSION['user_id']; ?>">
-                                    <input type="text" id="addANote" name="comment_content" class="form-control border-dark" placeholder="+ Add comment..." maxlength="200" required />
+                                    <input type="text" id="comment_content" name="comment_content" class="form-control border-dark" placeholder="+ Add comment..." maxlength="200" required />
                                 </div>
                                 <!-- Submit Button -->
                                 <button type="submit" class="btn btn-primary ms-2 mb-2">
@@ -51,6 +51,7 @@
                                 </button>
                             </form>
 
+                            <p id="error" style="color: red;"></p>
 
                             <!-- Comment List -->
                             <div id="commentsContainer" class="comment-container" data-abstract-id="<?php echo $_GET['abstractId']; ?>" data-user-id="<?php echo $_SESSION['user_id']; ?>">
@@ -76,6 +77,7 @@
         document.addEventListener('DOMContentLoaded', function () {
             handleStatus('comment');
             displayComments().then(() => { getLikes(); });
+            filterBadWords('commentForm', 'comment_content', 'error')
         });
     </script>
 </body>
