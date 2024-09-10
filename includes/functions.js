@@ -18,7 +18,12 @@ function handleStatus(paramName) {
                 title: "Oops!",
                 text: "Account deactivated.",
                 backdrop: `rgba(255, 0, 0 ,0.2)`,
-            }
+            },
+            "registered": {
+                icon: "info",
+                title: "Registration Complete!",
+                text: "Please log in with your credentials."
+            },
         },
         'registration': {
             "success": {
