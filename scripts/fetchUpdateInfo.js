@@ -11,7 +11,7 @@ async function updateProfile() {
         showCancelButton: true,
         confirmButtonColor: '#d33',
         cancelButtonColor: '#3085d6',
-        confirmButtonText: 'Yes, update it!'
+        confirmButtonText: 'Update'
     }).then(async (result) => {
         // If the user confirms the update
         if (result.isConfirmed) {
@@ -76,7 +76,7 @@ async function updatePassword() {
         showCancelButton: true,
         confirmButtonColor: '#d33',
         cancelButtonColor: '#3085d6',
-        confirmButtonText: 'Yes, update it!'
+        confirmButtonText: 'Update'
     }).then(async (result) => {
         // If the user confirms the update
         if (result.isConfirmed) {
