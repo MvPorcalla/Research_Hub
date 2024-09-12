@@ -91,16 +91,19 @@ async function fetchNotifications() {
     }
 }
 
-document.addEventListener('DOMContentLoaded', function() {
-    fetchNotifications().then(() => {
-        
-        const notificationSeen = seenNotification();
-                                
-        const notificationCount = document.getElementById('notificationCount');
-        const notifCount = +notificationCount.innerText;
-        if (notifCount != 0) notificationCount.innerText = notifCount - notificationSeen;
+if (window.location.href.includes('user')) {
+    
+    document.addEventListener('DOMContentLoaded', function() {
+        fetchNotifications().then(() => {
+            
+            const notificationSeen = seenNotification();
+                                    
+            const notificationCount = document.getElementById('notificationCount');
+            const notifCount = +notificationCount.innerText;
+            if (notifCount != 0) notificationCount.innerText = notifCount - notificationSeen;
+        });
     });
-});
+}
 
 function populateToastContent(liveToast, count, content, formattedTimePassed, formattedDateTime) {
                         

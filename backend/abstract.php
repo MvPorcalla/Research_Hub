@@ -2,7 +2,7 @@
 include_once "../includes/db.php";
 
 // Check if the form is submitted with a title and a file upload status
-if (isset($_POST['title']) && ($_FILES['file']['error'] === UPLOAD_ERR_OK || $_FILES['file']['error'] === UPLOAD_ERR_NO_FILE)) {
+if (isset($_POST['title']) && ($_FILES['file']['error'] === UPLOAD_ERR_OK || $_FILES['file']['error'] === UPLOAD_ERR_NO_FILE || !isset($_FILES['file']))) {
 
     // Assign form values to variables
     $a_title = trim($_POST['title']);

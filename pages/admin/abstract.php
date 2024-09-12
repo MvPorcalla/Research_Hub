@@ -70,9 +70,17 @@
                                             </div>
 
                                             <!-- Upload Research File -->
-                                            <div class="mb-3">
-                                                <label for="file" class="form-label">Upload Research</label>
-                                                <input type="file" class="form-control" id="file" name="file" accept=".pdf" required>
+                                            <div class="mb-4">
+                                                <div class="row">
+                                                    <div class="col-md-9">
+                                                        <label for="file" class="form-label">Upload Research</label>
+                                                    </div>
+                                                    <div id="changeFileCheckbox" class="col-md-3 d-flex justify-content-end">
+                                                        <input type="checkbox" id="enableUpload" class="form-check-input me-2" onchange="toggleFileInput()" hidden>
+                                                        <label for="enableUpload" class="form-check-label" hidden>Change File</label>
+                                                    </div>
+                                                </div>
+                                                <input type="file" class="form-control mt-2" id="file" name="file" accept=".pdf ">
                                             </div>
 
                                             <!-- Submit Button -->
@@ -96,6 +104,21 @@
 
     <script src="../../includes/functions.js"></script>
     <script src="../../scripts/fetchOneRecord.js"></script>
+
+    <script>
+        function toggleFileInput() {
+            const checkbox = document.getElementById('enableUpload');
+            const fileInput = document.getElementById('file');
+
+            if (checkbox.checked) {
+                fileInput.disabled = false;
+                fileInput.required = true;
+            } else {
+                fileInput.disabled = true;
+                fileInput.required = false;
+            }
+        }
+    </script>
     
 </body>
 

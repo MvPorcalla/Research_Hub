@@ -69,7 +69,10 @@ document.addEventListener('DOMContentLoaded', async function() {
                 document.getElementById('authors').value = data.record_authors;
                 document.getElementById('monthYear').value = `${data.record_year}-${month}`;
                 document.getElementById('trackStrand').value = data.record_trackstrand;
-                document.getElementById('file').required = false; // Make file field optional
+
+                document.getElementById('changeFileCheckbox').querySelector('input').hidden = false;
+                document.getElementById('changeFileCheckbox').querySelector('label').hidden = false;
+                document.getElementById('file').disabled = true;
 
             } else if (document.getElementById('fileDisplay')) {
                 // Display the file if 'fileDisplay' element exists
