@@ -20,7 +20,6 @@
 
     <main>
         <!-- Register Section -->
-
         <div class="container">
             <div class="row">
                 <div class="">
@@ -32,7 +31,8 @@
                             <div class="card bg-transparent">
 
                                 <div class="card-body mx-5">
-                                    <form action="backend\register.php" method="POST" enctype="multipart/form-data">
+                                    <form id="registrationForm">
+                                        
                                         <!-- Role -->
                                         <div class="row mb-3" hidden>
                                             <label for="role" class="form-label">Role</label>
@@ -66,7 +66,7 @@
                                         <!-- School -->
                                         <div class="row mb-3">
                                             <div class="col-md-12">
-                                                <label for="text" class="form-label">School</label>
+                                                <label for="school" class="form-label">School</label>
                                                 <input type="text" class="form-control" id="school" name="school" required>
                                             </div>
                                         </div>
@@ -91,22 +91,27 @@
                                         </div>
 
                                     </form>
-
-                                    <div class="card-footer text-center">
-                                        <small>Already have an account? <a href="./login.php">Login here</a></small>
-                                    </div>
+                                </div>
+                                <div class="card-footer text-center">
+                                    <small>Already have an account? <a href="./login.php">Login here</a></small>
                                 </div>
                             </div>
+
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
+        </div>
 
     </main>
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="includes\functions.js"></script>
+    <script src="scripts\register.js"></script>
 </body>
 
 </html>

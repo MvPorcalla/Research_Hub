@@ -32,11 +32,13 @@
 
                                 <div class="card-body mx-5">
                                     <form id="registrationForm">
+                                        
                                         <!-- Role -->
                                         <div class="row mb-3" hidden>
                                             <label for="role" class="form-label">Role</label>
                                             <input type="text" class="form-control" id="role" name="role" required value="S">
                                         </div>
+
                                         <!-- Name, Last Name, M.I. -->
                                         <div class="row mb-3">
                                             <div class="col-md-5">
@@ -82,7 +84,6 @@
                                             </select>
                                         </div>
 
-
                                         <!-- Upload ID Image -->
                                         <div class="mb-3">
                                             <label for="idImage" class="form-label">Upload ID Image</label>
@@ -105,6 +106,7 @@
                                         <div class="d-grid">
                                             <button type="submit" class="btn btn-primary">Register</button>
                                         </div>
+
                                     </form>
                                 </div>
                                 <div class="card-footer text-center">
@@ -131,7 +133,7 @@
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             handleStatus('registration');
-            confirmPassword('registrationForm')
+            confirmPassword('registrationForm');
         });
     </script>
 </body>

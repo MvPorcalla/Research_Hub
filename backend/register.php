@@ -1,4 +1,7 @@
 <?php
+ini_set('log_errors', 1);
+ini_set('error_log', '../error_log.log');
+
 // ==================================== data connection ====================================
 include_once "..\includes\db.php";
 
@@ -6,7 +9,7 @@ include_once "..\includes\db.php";
 header('Content-Type: application/json');
 
 // ================================= initialize $response =================================
-$response =['status' => 'error', 'message' => '', 'redirect' => ''];
+$response = ['status' => 'error', 'message' => '', 'redirect' => ''];
 
 // checks if value of name="lrn" is set
 if ((isset($_POST['lrn']) || isset($_POST['email'])) && $_FILES['idImage']['error'] == '0') {
@@ -18,7 +21,7 @@ if ((isset($_POST['lrn']) || isset($_POST['email'])) && $_FILES['idImage']['erro
     $firstName = trim($_POST['firstName']);
     $middleInitial = trim($_POST['middleInitial'] ?? NULL);
 
-    $username = trim($_POST['username']);
+    $username = trim($_POST['username'] ?? NULL);
     $email = trim($_POST['email']);
 
     $lrn = trim($_POST['lrn'] ?? NULL);
@@ -26,8 +29,8 @@ if ((isset($_POST['lrn']) || isset($_POST['email'])) && $_FILES['idImage']['erro
     $school = trim($_POST['school'] ?? NULL);
     $reason = trim($_POST['reason'] ?? NULL);
 
-    $password = $_POST['password'];
-    $confirm_password = $_POST['confirmPassword'];
+    $password = trim($_POST['password'] ?? NULL); 
+    $confirm_password = trim($_POST['confirmPassword'] ?? NULL);
 
     // ================================= for ID image file =================================
     $fileName = "{$lastName}, {$firstName} {$middleInitial}";
@@ -37,19 +40,8 @@ if ((isset($_POST['lrn']) || isset($_POST['email'])) && $_FILES['idImage']['erro
     $temp = $_FILES['idImage']['tmp_name']; //temporary location
     $idImage = "../uploads/idImages/{$fileName}.{$fileext}"; //target location
 
-    // ================================== compare password ==================================
-    if ($password !== $confirm_password) {
-        $response['message'] = "Passwords do not match.";
-        echo json_encode($response);
-        exit();
-    }
-
-    // =================================== hash password ===================================
-    $pwdhash = password_hash($_POST['password'], PASSWORD_ARGON2ID);
-
-    // ============================== declare status and role  ==============================
+    // ================================== declare status  ==================================
     $status = ($role_symbol == 'G') ? 'P' : 'A';
-    $role = ($role_symbol == 'S') ? "Student" : "Guest";
 
     // ====================== prepare arguments for insert() function ======================
     $table = "users";
@@ -66,70 +58,84 @@ if ((isset($_POST['lrn']) || isset($_POST['email'])) && $_FILES['idImage']['erro
         'user_school' => $school,
         'user_reason' => $reason,
 
-        'user_pwdhash' => $pwdhash,
-        'user_type' => $role,
+        'user_type' => $role_symbol,
         'user_status' => $status
     ];
 
-    // =============== select row from `LRN` table with LRN ID matching $lrn ===============
-    // ======================= to check if LRN is valid to the school =======================
-    $sql = "SELECT `lrn_id`, `lrn_lrnid` FROM `lrn` WHERE `lrn_lrnid` = ?";
-    $filter = [$lrn];
-    $result = query($conn, $sql, $filter);
+    if (isset($_POST['password'])) {
 
-    // =================== if registering as student and result is empty ===================
-    // ================================== warn: wrong LRN ==================================
-    if (empty($result) && $role_symbol == 'S') {
- 
-        $response['message'] = "Your LRN does not exist in the database.";
-        echo json_encode($response);
-        exit();
+        // =============================== compare password ===============================
+        if ($password !== $confirm_password) {
+            $response['message'] = "Passwords do not match.";
+            echo json_encode($response);
+            exit();
+        }
+        // ================================= hash password =================================
+        $pwdhash = password_hash($_POST['password'], PASSWORD_ARGON2ID);
 
-    } else {
-        // ========== add keys and values to fields argument for insert() function ==========
-        $fields['lrn_id'] = $result[0]['lrn_id'];
-        $fields['user_status'] = ($role_symbol == 'G') ? 'P' : 'A';
+        $fields['user_pwdhash'] = $pwdhash;
+    }
 
-        // ============ select row from `users` table with LRN ID matching $lrn =============
-        // ======================= to check if LRN is already in use =======================
-        $sql = "SELECT u.lrn_id, lrn.lrn_id, lrn.lrn_lrnid, u.user_username, u.user_emailadd
-                FROM `users` u
-                JOIN `lrn` ON u.lrn_id = lrn.lrn_id
-                WHERE lrn.lrn_lrnid = ?
-                OR u.user_username = ?
-                OR u.user_emailadd = ?";
-        $filter = [$lrn, $username, $email];
+    if ($role_symbol == 'S') {
+        
+        // =============== select row from `LRN` table with LRN ID matching $lrn ============
+        // ======================= to check if LRN is valid to the school ===================
+        $sql = "SELECT `lrn_id`, `lrn_lrnid` FROM `lrn` WHERE `lrn_lrnid` = ?";
+        $filter = [$lrn];
         $result = query($conn, $sql, $filter);
 
+        // ================= if registering as student and result is empty =================
+        // ================================ warn: wrong LRN ================================
         if (empty($result)) {
-            // ================== move uploaded file to $idImage directory ==================
-            if (move_uploaded_file($temp, $idImage)) {
-                    // ==================== insert arguments to database ====================
-                    if (insert($conn, $table, $fields)) {
-                        
-                        $response['status'] = 'success';
-                        // =================== redirect according to role ===================
-                        ($role_symbol == 'G')
-                        ? $response['redirect'] = "index.php?registration=success"
-                        : $response['redirect'] = "login.php?login=success";
-                    } else {
-                        $response['message'] = "Your registration failed. Please try again.";
-                    }
-            } else {
-                // ========================= if moving file failed =========================
-                // ===================== warn: failed ID picture upload =====================
-                $response['message'] = "Your registration failed. Please try again.";
-            }
-        } else {
-            // =========== identify which field(s) matched to an existing account ===========
-            $matchedFields = [];
-            foreach ($result as $key => $row) {
-                if ($row['lrn_lrnid'] === $lrn) $matchedFields[] = 'LRN';
-                if ($row['user_username'] === $username) $matchedFields[] = 'username';
-                if ($row['user_emailadd'] === $email) $matchedFields[] = 'email address';
-            }
-            $response['message'] = "Your entered " . implode(', ', $matchedFields) . " already exists in the database";
+    
+            $response['message'] = "Your LRN does not exist in the database.";
+            echo json_encode($response);
+            exit();
+
         }
+        // ========== add keys and values to fields argument for insert() function ==========
+        $fields['lrn_id'] = $result[0]['lrn_id'];
+    }
+
+    // =========================== select rows from `users` table ===========================
+    // ============== to check if with LRN, username, email is already in use ==============
+    $sql = "SELECT u.lrn_id, lrn.lrn_id, lrn.lrn_lrnid, u.user_username, u.user_emailadd
+            FROM `users` u
+            JOIN `lrn` ON u.lrn_id = lrn.lrn_id
+            WHERE lrn.lrn_lrnid = ?
+            OR u.user_username = ?
+            OR u.user_emailadd = ?";
+    $filter = [$lrn, $username, $email];
+    $result = query($conn, $sql, $filter);
+
+    if (empty($result)) {
+        // ================== move uploaded file to $idImage directory ==================
+        if (move_uploaded_file($temp, $idImage)) {
+                // ==================== insert arguments to database ====================
+                if (insert($conn, $table, $fields)) {
+                    
+                    $response['status'] = 'success';
+                    // =================== redirect according to role ===================
+                    ($role_symbol == 'G')
+                        ? $response['redirect'] = "index.php?registration=success"
+                        : $response['redirect'] = "login.php?login=registered";
+                } else {
+                    $response['message'] = "Your registration failed. Please try again.";
+                }
+        } else {
+            // ========================= if moving file failed =========================
+            // ===================== warn: failed ID picture upload =====================
+            $response['message'] = "Your registration failed. Please try again.";
+        }
+    } else {
+        // =========== identify which field(s) matched to an existing account ===========
+        $matchedFields = [];
+        foreach ($result as $key => $row) {
+            if ($row['lrn_lrnid'] === $lrn) $matchedFields[] = 'LRN';
+            if ($row['user_username'] === $username) $matchedFields[] = 'username';
+            if ($row['user_emailadd'] === $email) $matchedFields[] = 'email address';
+        }
+        $response['message'] = "Your entered " . implode(', ', $matchedFields) . " already exists in the database";
     }
 }
 // ================================ pass info to register.js ================================

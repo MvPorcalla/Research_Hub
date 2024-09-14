@@ -31,11 +31,11 @@
                             <div class="card bg-transparent">
 
                                 <div class="card-body mx-5">
-                                    <form action="backend\register.php" method="POST" enctype="multipart/form-data">
+                                    <form id="registrationForm">
                                         <!-- Role -->
                                         <div class="row mb-3" hidden>
                                             <label for="role" class="form-label">Role</label>
-                                            <input type="text" class="form-control" id="role" name="role" required value="S">
+                                            <input type="text" class="form-control" id="role" name="role" required value="T">
                                         </div>
                                         <!-- Name, Last Name, M.I. -->
                                         <div class="row mb-3">
@@ -112,25 +112,12 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="includes\functions.js"></script>
+    <script src="scripts\register.js"></script>
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            const form = document.querySelector('form');
-            form.addEventListener('submit', function (e) {
-                const password = document.getElementById('password').value;
-                const confirmPassword = document.getElementById('confirmPassword').value;
-
-                if (password !== confirmPassword) {
-                    e.preventDefault(); // Prevent form submission
-                    Swal.fire({
-                        icon: "error",
-                        title: "Passwords do not match.",
-                        text: "Please try again."
-                    });
-                }
-            });
-
             handleStatus('registration');
+            confirmPassword('registrationForm')
         });
     </script>
 </body>
