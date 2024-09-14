@@ -1,8 +1,12 @@
 <?php
+ini_set('log_errors', 1);
+ini_set('error_log', '../error_log.log');
+
 include_once "../includes/db.php";
 
 // Get the JSON payload
 $data = json_decode(file_get_contents('php://input'), true);
+
 $recordId = $data['recordId'] ?? null;
 $entryId = $data['entryId'] ?? null;
 $commentId = $data['commentId'] ?? null;

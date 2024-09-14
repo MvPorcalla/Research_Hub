@@ -1,4 +1,7 @@
 <?php
+ini_set('log_errors', 1);
+ini_set('error_log', '../error_log.log');
+
 include_once "../includes/db.php";
 
 header('Content-Type: application/json'); // Set content type to JSON
@@ -45,4 +48,3 @@ if (isset($_POST['currentPassword']) && isset($_POST['newPassword']) && isset($_
 }
 
 echo json_encode($response);
-?>

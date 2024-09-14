@@ -29,5 +29,4 @@ if (isset($_POST['comment_content'])) {
         header("Location: $redirectUrl");
         exit;
     }
-    
 }
