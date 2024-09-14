@@ -82,34 +82,26 @@
                                                     <div class="card-body p-4">
                                                         <h1 class="setting-info-title">Notification</h1>
                                                         <hr class="border-2 border-secondary mb-2">
-                                                        <form>
+                                                        <form class="mt-4">
                                                             <div class="form-check">
-                                                                <input class="form-check-input" type="checkbox" id="emailNotifications" checked>
-                                                                <label class="form-check-label fw-bold" for="emailNotifications">
-                                                                    Send notifications by email
-                                                                </label>
-                                                                <p class='ms-3'>
-                                                                    You’ll still get other emails from Research Hub
-                                                                </p>
-                                                            </div>
-                                                            
-                                                            <div class="form-check mt-2">
-                                                                <input class="form-check-input" type="checkbox" id="comments">
-                                                                <label class="form-check-label fw-bold" for="comments">
-                                                                    Comments
+                                                                <input class="form-check-input" type="checkbox" id="notificationCheckbox">
+                                                                <label class="form-check-label fw-bold" for="notificationCheckbox">
+                                                                    Send notifications
                                                                 </label>
                                                             </div>
-                                                            <div class="form-check mt-2">
-                                                                <input class="form-check-input" type="checkbox" id="reactions">
-                                                                <label class="form-check-label fw-bold" for="reactions">
-                                                                    Reactions
-                                                                </label>
-                                                            </div>
-                                                            <div class="form-check mt-2">
-                                                                <input class="form-check-input" type="checkbox" id="newUploads">
-                                                                <label class="form-check-label fw-bold" for="newUploads">
-                                                                    New upload research
-                                                                </label>
+                                                            <div class="ms-4">
+                                                                <div class="form-check mt-2">
+                                                                    <input class="form-check-input" type="checkbox" id="newAbstracts">
+                                                                    <label class="form-check-label fw-bold" for="newAbstracts">
+                                                                        New Abstracts
+                                                                    </label>
+                                                                </div>
+                                                                <div class="form-check mt-2">
+                                                                    <input class="form-check-input" type="checkbox" id="likesComments">
+                                                                    <label class="form-check-label fw-bold" for="likesComments">
+                                                                        Likes and Comments
+                                                                    </label>
+                                                                </div>
                                                             </div>
                                                         </form>
                                                     </div>
@@ -231,7 +223,89 @@
         document.addEventListener('DOMContentLoaded', function () {
             confirmPassword('editPasswordForm');
             handleStatus('editInfo');
+
+            const notificationCheckbox = document.getElementById('notificationCheckbox');
+            const newAbstracts = document.getElementById('newAbstracts');
+            const likesComments = document.getElementById('likesComments');
+
+            // ================================== toggle notifications ==================================
+
+            if (notificationCheckbox) {
+                notificationCheckbox.addEventListener('change', function() {
+                    const notifTypes = [newAbstracts, likesComments];
+
+                    notifTypes.forEach(notif => {
+                        
+                        notif.checked = (notificationCheckbox.checked == true) ? true : false;
+                        notif.disabled = (notificationCheckbox.checked == true) ? true : false;
+                    });
+                });
+            }
+
+            // =============================== update database on change ===============================
+
+            const checkboxIDs = ['notificationCheckbox', 'newAbstracts', 'likesComments'];
+            checkboxIDs.forEach(id => {
+                const checkbox = document.getElementById(id);
+
+                checkbox.addEventListener('change', async function() {
+
+                    let status = (checkbox.checked == true) ? 'A' : 'I';
+
+                    try {
+                        // Send a POST request to toggle notification
+                        const response = await fetch('../../backend/toggle_notifications.php', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json' // Set the content type to JSON
+                            },
+                            body: JSON.stringify({ id, status }) // Send the id and status in the request body
+                        });
+
+                        // Check if the response is okay (status in the range 200-299)
+                        if (!response.ok) throw new Error('Network response was not ok');
+
+                        // Parse the JSON response
+                        const result = await response.json();
+
+                    } catch (error) {
+                        // Handle any errors that occur during the fetch operation
+                        console.error('Error:', error);
+                    }
+                });
+            });
+
+            // ================================ get notification status ================================
+
+            return fetch(`../../backend/get_notif_status.php`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.newAbstracts === 'A' && data.likesComments === 'A') {
+                        
+                        notificationCheckbox.checked = true;
+
+                        newAbstracts.disabled = true;
+                        likesComments.disabled = true;
+
+                        newAbstracts.checked = true;
+                        likesComments.checked = true;
+
+                    } else {
+
+                        notificationCheckbox.checked = false;
+
+                        newAbstracts.disabled = false;
+                        likesComments.disabled = false;
+
+                        newAbstracts.checked = (data.newAbstracts === 'A');
+                        likesComments.checked = (data.likes === 'A');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching notification status:', error);
+                });
         });
+
     </script>
 
 </body>
