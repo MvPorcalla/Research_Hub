@@ -18,7 +18,10 @@ async function fetchNotifications() {
 
             notificationsContainer.innerHTML = `
                 <li>
-                    <p style="width: 350px;" class="text-center mb-0 px-2">Likes and Comments notifications disabled. Enable them in Account Settings to receive notifications.</p>
+                    <p style="width: 370px;" class="text-center mb-0 px-2">
+                        Likes and Comments notifications disabled.<br>
+                        <small class="text-secondary">Enable in Account Settings to receive notifications.</small>
+                    </p>
                 </li>
             `;
         }

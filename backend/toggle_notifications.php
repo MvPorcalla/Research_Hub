@@ -23,7 +23,7 @@ if (isset($data['id'])) {
             'user_notif_abstracts' => $status
         ],
         'likesComments' => [
-            'user_notif_likes' => $status
+            'user_notif_likescomments' => $status
         ]
     };
 

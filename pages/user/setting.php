@@ -183,13 +183,13 @@
                                                         <div class="row">
                                                             <div class="col-md-6">
                                                                 <div class="mb-3">
-                                                                    <label for="newPassword" class="form-label fw-bold">New Password</label>
+                                                                    <label for="password" class="form-label fw-bold">New Password</label>
                                                                     <input type="password" class="form-control" id="password" name="newPassword" required>
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-6">
                                                                 <div class="mb-3">
-                                                                    <label for="confirmNewPassword" class="form-label fw-bold">Confirm New Password</label>
+                                                                    <label for="confirmPassword" class="form-label fw-bold">Confirm New Password</label>
                                                                     <input type="password" class="form-control" id="confirmPassword" name="confirmNewPassword" required>
                                                                 </div>                                                        
                                                             </div>
@@ -237,19 +237,18 @@
                     notifTypes.forEach(notif => {
                         
                         notif.checked = (notificationCheckbox.checked == true) ? true : false;
-                        notif.disabled = (notificationCheckbox.checked == true) ? true : false;
                     });
                 });
             }
 
             // =============================== update database on change ===============================
 
-            const checkboxIDs = ['notificationCheckbox', 'newAbstracts', 'likesComments'];
-            checkboxIDs.forEach(id => {
-                const checkbox = document.getElementById(id);
+            const checkboxes = [notificationCheckbox, newAbstracts, likesComments];
+            checkboxes.forEach(checkbox => {
 
                 checkbox.addEventListener('change', async function() {
 
+                    const id = checkbox.id;
                     let status = (checkbox.checked == true) ? 'A' : 'I';
 
                     try {
@@ -268,6 +267,8 @@
                         // Parse the JSON response
                         const result = await response.json();
 
+                        notificationCheckbox.checked = (newAbstracts.checked == true && likesComments.checked == true) ? true : false;
+
                     } catch (error) {
                         // Handle any errors that occur during the fetch operation
                         console.error('Error:', error);
@@ -284,18 +285,12 @@
                         
                         notificationCheckbox.checked = true;
 
-                        newAbstracts.disabled = true;
-                        likesComments.disabled = true;
-
                         newAbstracts.checked = true;
                         likesComments.checked = true;
 
                     } else {
 
                         notificationCheckbox.checked = false;
-
-                        newAbstracts.disabled = false;
-                        likesComments.disabled = false;
 
                         newAbstracts.checked = (data.newAbstracts === 'A');
                         likesComments.checked = (data.likes === 'A');
