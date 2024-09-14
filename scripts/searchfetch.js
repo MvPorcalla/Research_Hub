@@ -2,12 +2,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
     const queryInput = document.querySelector('#query');
     
-    let lrnTableBody, studentTableBody, guestTableBody, recordType;
+    let lrnTableBody, studentTableBody, teacherTableBody, guestTableBody, recordType;
 
     // Check if the 'users-table' element exists to determine which tables to initialize
     if (document.getElementById(`users-table`)) {
 
         studentTableBody = document.querySelector(`#students-table tbody`);
+        teacherTableBody = document.querySelector(`#teachers-table tbody`);
         guestTableBody = document.querySelector(`#guests-table tbody`);
 
     } else if (document.getElementById(`lrns-table`)) {
@@ -19,6 +20,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Object to map record types to their corresponding table bodies
     const tableBodies = {
         student: studentTableBody,
+        teacher: teacherTableBody,
         guest: guestTableBody,
         lrn: lrnTableBody
     };
@@ -49,6 +51,20 @@ document.addEventListener('DOMContentLoaded', function() {
                                             <td>${highlightText(record.user_mi, query)}</td>
                                             <td>${highlightText(record.lrn_lrnid, query)}</td>
                                             <td>${highlightText(record.user_trackstrand, query)}</td>
+                                            <td>
+                                                <a href="../../backend/delete.php?userId=${record.user_id}" class="btn btn-danger btn-sm delete-button"><i class='fas fa-trash-alt'></i></a>
+                                            </td>
+                                        </tr>
+                                    `;
+                                });
+                                break;
+                            case 'teacher':
+                                data.forEach(record => {
+                                    rows += `
+                                        <tr>
+                                            <td>${highlightText(record.user_lastname, query)}</td>
+                                            <td>${highlightText(record.user_firstname, query)}</td>
+                                            <td>${highlightText(record.user_mi, query)}</td>
                                             <td>
                                                 <a href="../../backend/delete.php?userId=${record.user_id}" class="btn btn-danger btn-sm delete-button"><i class='fas fa-trash-alt'></i></a>
                                             </td>
@@ -140,6 +156,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Fetch records for students and guests if the 'users-table' element is present
     if (document.getElementById(`users-table`)) {
         fetchRecords('student');
+        fetchRecords('teacher');
         fetchRecords('guest');
     } else {
         // Fetch records for LRN if the 'lrns-table' element is present
@@ -151,6 +168,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const query = queryInput.value.trim();
         if (document.getElementById(`users-table`)) {
             fetchRecords('student', query);
+            fetchRecords('teacher', query);
             fetchRecords('guest', query);
         } else {
             fetchRecords(recordType, query);
@@ -163,6 +181,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const query = queryInput.value.trim();
         if (document.getElementById(`users-table`)) {
             fetchRecords('student', query);
+            fetchRecords('teacher', query);
             fetchRecords('guest', query);
         } else {
             fetchRecords(recordType, query);

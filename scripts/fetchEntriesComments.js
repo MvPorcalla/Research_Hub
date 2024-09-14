@@ -167,12 +167,10 @@ if (url.includes('forum.php')) {
     
     // Function to display comment section for a specified entry and hide other comment sections
     function toggleComments(entryId) {
-        console.log('function');
 
         const commentsSection = document.getElementById(`comment-section-${entryId}`);
     
         if (commentsSection) {
-            console.log('toggle');
             // Toggle the display property of the comments section between 'block' and 'none'
             commentsSection.style.display = (commentsSection.style.display === 'none' || commentsSection.style.display === '') ? 'block' : 'none';
     

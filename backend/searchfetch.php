@@ -117,8 +117,8 @@ if (isset($_GET['record_type'])) {
                             )";
             }
 
-            // Append an ORDER BY clause to sort results by user_id in descending order
-            $sql .= "   ORDER BY `user_id` DESC";
+            // Append an ORDER BY clause to sort results by user_lastname in ascending order
+            $sql .= "   ORDER BY u.`user_lastname` ASC";
 
             // Prepare the SQL statement
             $stmt = $conn->prepare($sql);
@@ -126,6 +126,40 @@ if (isset($_GET['record_type'])) {
             // Bind parameters if a search query is provided (binds the same search query to all search conditions)
             if ($query !== '') {
                 $stmt->bind_param("sssss", $search_query, $search_query, $search_query, $search_query, $search_query);
+            }
+
+            break;
+
+        // ================================================== FETCH TEACHERS ==================================================
+        case 'teacher':
+
+            // Base SQL query to select users who are teachers (user_type = 'T') and active (user_status = 'A')
+            $sql = "SELECT * 
+                    FROM `users` 
+                    WHERE `user_type` = 'T' AND `user_status` = 'A'";
+
+            // Check if a search query is provided
+            if ($query !== '') {
+                // Escape and format the search query for use in the SQL statement
+                $search_query = "%" . $conn->real_escape_string($query) . "%";
+                
+                // Append conditions to the SQL query for searching by lastname, firstname, middle initial
+                $sql .= "  AND (
+                                `user_lastname` LIKE ?
+                                OR `user_firstname` LIKE ?
+                                OR `user_mi` LIKE ?
+                            )";
+            }
+
+            // Append an ORDER BY clause to sort results by user_lastname in ascending order
+            $sql .= "   ORDER BY `user_lastname` ASC";
+
+            // Prepare the SQL statement
+            $stmt = $conn->prepare($sql);
+
+            // Bind parameters if a search query is provided (binds the same search query to all search conditions)
+            if ($query !== '') {
+                $stmt->bind_param("sss", $search_query, $search_query, $search_query);
             }
 
             break;
@@ -152,8 +186,8 @@ if (isset($_GET['record_type'])) {
                             )";
             }
 
-            // Append an ORDER BY clause to sort results by user_id in descending order
-            $sql .= "   ORDER BY `user_id` DESC";
+            // Append an ORDER BY clause to sort results by user_lastname in ascending order
+            $sql .= "   ORDER BY `user_lastname` ASC";
 
             // Prepare the SQL statement
             $stmt = $conn->prepare($sql);

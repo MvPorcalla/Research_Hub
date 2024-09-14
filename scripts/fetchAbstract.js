@@ -89,7 +89,9 @@ document.addEventListener('DOMContentLoaded', () => {
                                             <i class="fas fa-heart"></i>
                                         </button>
                                         <button class="btn btn-outline-success btn-sm mx-1">
-                                            <i class="fas fa-download"></i>
+                                            <a href="../../uploads/records/${record.record_title}.pdf" download="${record.record_title}.pdf">
+                                                <i class="fas fa-download text-success"></i>
+                                            </a>
                                         </button>
                                     </div>
                                 </div>

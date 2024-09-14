@@ -1,7 +1,35 @@
 async function fetchNotifications() {
     try {
 
-        const response = await fetch('../../backend/fetch_notifications.php');
+        const notificationsContainer = document.getElementById('notificationsContainer');
+
+        const permissionResponse = await fetch('../../backend/get_notif_status.php');
+
+        // Handle any network errors
+        if (!permissionResponse.ok) throw new Error('Network response was not ok');
+
+        // Parse the JSON response
+        const permissionResult = await permissionResponse.json();
+
+        const newAbstracts = permissionResult.newAbstracts;
+        const likesComments = permissionResult.likesComments;
+
+        if (likesComments == 'I') {
+
+            notificationsContainer.innerHTML = `
+                <li>
+                    <p style="width: 350px;" class="text-center mb-0 px-2">Likes and Comments notifications disabled. Enable them in Account Settings to receive notifications.</p>
+                </li>
+            `;
+        }
+
+        const response = await fetch('../../backend/fetch_notifications.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json' // Set the content type to JSON
+            },
+            body: JSON.stringify({ newAbstracts, likesComments }) // Send the entryId in the request body
+        });
 
         // Handle any network errors
         if (!response.ok) throw new Error('Network response was not ok');
@@ -20,8 +48,6 @@ async function fetchNotifications() {
 
         // Iterate through the notifications array and handle each notification
         result.notifications.forEach(notification => {
-
-            const notificationsContainer = document.getElementById('notificationsContainer');
                         
             const liveToast = document.getElementById('liveToast');
 
@@ -32,12 +58,11 @@ async function fetchNotifications() {
 
             if (result.totalNotifCount === 0) {
                 
-                notifHTML = `
+                notificationsContainer.innerHTML = `
                     <li>
                         <p style="width: 350px;" class="text-center mb-0">No new notifications.</p>
                     </li>
                 `;
-                notificationsContainer.innerHTML = notifHTML;
     
             }
 
@@ -49,7 +74,7 @@ async function fetchNotifications() {
                         ? `There's a <span class="fw-bold text-danger">pending request</span>. Please review it at your convenience.`
                         : `There's <span class="fw-bold text-danger">${notification.count} pending requests</span>. Please review them at your convenience.`;
 
-                    populateToastContent(liveToast, notification.count, content, formattedTimePassed, formattedDateTime)
+                    populateToastContent(liveToast, notification.count, content, formattedTimePassed, formattedDateTime);
 
                     break;
             
@@ -58,9 +83,9 @@ async function fetchNotifications() {
                     content = (notification.count == 1)
                         ? `A <span class="fw-bold text-danger">new abstract</span> has been uploaded. Please review it at your convenience.`
                         : `${notification.count} <span class="fw-bold text-danger"> new abstracts has been uploaded</span>. Please review them at your convenience.`;
-
-                    populateToastContent(liveToast, notification.count, content, formattedTimePassed, formattedDateTime)
                     
+                    populateToastContent(liveToast, notification.count, content, formattedTimePassed, formattedDateTime);
+
                     break;
             
                 case 'comment':
@@ -68,7 +93,7 @@ async function fetchNotifications() {
                     type = `repl` + ((notification.count == 1) ? 'y' : 'ies');
 
                     populateNotificationContent(notificationsContainer, notification.entryId, notification.entryContent, notification.count, type, formattedDateTime, formattedTimePassed, notifCount);
-                    
+
                     break;
             
                 case 'like':
@@ -76,7 +101,7 @@ async function fetchNotifications() {
                     type = `like` + ((notification.count == 1) ? '' : 's');
 
                     populateNotificationContent(notificationsContainer,  notification.entryId, notification.entryContent, notification.count, type, formattedDateTime, formattedTimePassed, notifCount);
-                    
+
                     break;
             }
                                 
@@ -91,16 +116,19 @@ async function fetchNotifications() {
     }
 }
 
-document.addEventListener('DOMContentLoaded', function() {
-    fetchNotifications().then(() => {
-        
-        const notificationSeen = seenNotification();
-                                
-        const notificationCount = document.getElementById('notificationCount');
-        const notifCount = +notificationCount.innerText;
-        if (notifCount != 0) notificationCount.innerText = notifCount - notificationSeen;
+if (window.location.href.includes('user')) {
+    
+    document.addEventListener('DOMContentLoaded', function() {
+        fetchNotifications().then(() => {
+            
+            const notificationSeen = seenNotification();
+                                    
+            const notificationCount = document.getElementById('notificationCount');
+            const notifCount = +notificationCount.innerText;
+            if (notifCount != 0) notificationCount.innerText = notifCount - notificationSeen;
+        });
     });
-});
+}
 
 function populateToastContent(liveToast, count, content, formattedTimePassed, formattedDateTime) {
                         

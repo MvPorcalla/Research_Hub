@@ -128,7 +128,7 @@
         document.addEventListener('DOMContentLoaded', function () {
             handleStatus('login');
             handleStatus('comment');
-            filterBadWords('commentForm', 'comment_content', 'error')
+            filterBadWords('commentForm', 'comment_content', 'error');
         });
     </script>
     

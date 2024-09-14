@@ -8,11 +8,11 @@ include_once "../includes/db.php";
     $query = isset($_GET['query']) ? trim($_GET['query']) : '';
 
     // Only include the WHERE clause if there's a query
-    $sql = "SELECT record_title FROM records";
+    $sql = "SELECT record_title FROM records WHERE record_status = 'A'";
     if ($query !== '') {
         // Escape and prepare the query string
         $search_query = "%" . $conn->real_escape_string($query) . "%";
-        $sql .= " WHERE record_title LIKE ?";
+        $sql .= " AND record_title LIKE ?";
     }
 
     $stmt = $conn->prepare($sql);
@@ -31,4 +31,3 @@ include_once "../includes/db.php";
     $conn->close();
 
     echo json_encode($suggestions);
-?>

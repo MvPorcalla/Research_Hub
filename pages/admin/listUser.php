@@ -36,6 +36,9 @@
                                         <button class="nav-link active" id="student-list-tab" data-bs-toggle="tab" data-bs-target="#student-list" type="button" role="tab" aria-controls="student-list" aria-selected="true">Student List</button>
                                     </li>
                                     <li class="nav-item" role="presentation">
+                                        <button class="nav-link" id="teacher-list-tab" data-bs-toggle="tab" data-bs-target="#teacher-list" type="button" role="tab" aria-controls="teacher-list" aria-selected="false">Teacher List</button>
+                                    </li>
+                                    <li class="nav-item" role="presentation">
                                         <button class="nav-link" id="guest-list-tab" data-bs-toggle="tab" data-bs-target="#guest-list" type="button" role="tab" aria-controls="guest-list" aria-selected="false">Guest List</button>
                                     </li>
                                 </ul>
@@ -47,8 +50,10 @@
 
                         <!-- Content Table -->
                         <div id="users-table" class="container mt-3 side-container text-light mt-1">
-                            <!-- student list -->
                             <div class="tab-content " id="myTabContent">
+
+                                <!-- Student list -->
+
                                 <div class="tab-pane fade show active" id="student-list" role="tabpanel" aria-labelledby="student-list-tab">
                                     <div class="row">
                                         <div class="col">
@@ -64,6 +69,33 @@
                                                                 <th class="col-md-3">LRN</th>
                                                                 <th class="col-md-2">Track/Strand</th>
                                                                 <th class="col-md-1">Actions</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <!-- Data will be dynamically inserted here -->
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Teacher List -->
+
+                                <div class="tab-pane fade" id="teacher-list" role="tabpanel" aria-labelledby="teacher-list-tab">
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class=" bg-transparent">
+
+                                                <div class="table-responsive">
+                                                    <table class="table table-bordered table-striped teachers" id="teachers-table">
+                                                        <thead class="table-dark">
+                                                            <tr>
+                                                                <th>Last Name</th>
+                                                                <th>First Name</th>
+                                                                <th>Middle Initial</th>
+                                                                <th>Actions</th>
                                                             </tr>
                                                         </thead>
                                                         <tbody>
@@ -103,6 +135,7 @@
                                         </div>
                                     </div>
                                 </div>
+
                             </div>
                         </div>
                     </div>
