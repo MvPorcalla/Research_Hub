@@ -150,8 +150,13 @@ function populateToastContent(liveToast, count, content, formattedTimePassed, fo
         const toastBody = liveToast.querySelector('#toastBody');
         toastBody.innerHTML = content;
 
-        var toast = new bootstrap.Toast(liveToast);
-        toast.show();
+        if (sessionStorage.getItem('toast') !== 'seen') {
+
+            var toast = new bootstrap.Toast(liveToast);
+            toast.show();
+            sessionStorage.setItem('toast', 'seen');
+        }
+
     }
 }
 
