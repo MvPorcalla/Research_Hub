@@ -1,4 +1,8 @@
 <?php
+ini_set('log_errors', 1);
+ini_set('error_log', '../error_log.log');
+
+
 // =================================== FOR FETCHING ABSTRACTS, STUDENTS, GUESTS AND LRNS ===================================
 
 header('Content-Type: application/json');
@@ -213,21 +217,23 @@ if (isset($_GET['record_type'])) {
                 $search_query = "%" . $conn->real_escape_string($query) . "%";
                 
                 // Append conditions to the SQL query for searching by student name or LRN ID
-                $sql .= "  AND (
-                                `lrn_student` LIKE ?
+                $sql .= " AND (
+                                `lrn_lastname` LIKE ?
+                                OR `lrn_firstname` LIKE ?
+                                OR `lrn_mi` LIKE ?
                                 OR `lrn_lrnid` LIKE ?
                             )";
             }
 
             // Append an ORDER BY clause to sort results by lrn_id in descending order
-            $sql .= "   ORDER BY `lrn_id` DESC";
+            $sql .= " ORDER BY `lrn_id` DESC";
 
             // Prepare the SQL statement
             $stmt = $conn->prepare($sql);
 
-            // Bind parameters if a search query is provided (binds the same search query to both search conditions)
+            // Bind parameters if a search query is provided
             if ($query !== '') {
-                $stmt->bind_param("ss", $search_query, $search_query);
+                $stmt->bind_param("ssss", $search_query, $search_query, $search_query, $search_query);
             }
 
             break;

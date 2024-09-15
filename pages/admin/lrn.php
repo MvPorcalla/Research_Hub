@@ -35,20 +35,32 @@
                                         <form id="lrnForm" action="..\..\backend\lrn.php" method="POST">
 
                                             <!-- Full name -->
-                                             <div class="row mb-4">
-                                                <div class="col-md-12">
+                                            <div class="row mb-4">
+                                                <!-- <div class="col-md-12">
                                                     <label for="fullName" class="form-label">Full Name</label>
                                                     <input type="text" class="form-control" id="fullName" name="fullName" required>
+                                                </div> -->
+                                                <div class="col-md-5">
+                                                    <label for="lastName" class="form-label fw-bold">Last Name</label>
+                                                    <input type="text" class="form-control" id="lastName" name="lastName">
                                                 </div>
-                                             </div>
+                                                <div class="col-md-5">
+                                                    <label for="firstName" class="form-label fw-bold">First Name</label>
+                                                    <input type="text" class="form-control" id="firstName" name="firstName">
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <label for="middleInitial" class="form-label fw-bold">M.I.</label>
+                                                    <input type="text" class="form-control" id="middleInitial" name="middleInitial" maxlength="1">
+                                                </div>
+                                            </div>
 
-                                             <div class="row mb-4">
+                                            <div class="row mb-4">
                                                 <!-- LRN / Student Number -->
                                                 <div class="col-md-12">
-                                                    <label for="lrn" class="form-label">LRN / Student Number</label>
+                                                    <label for="lrn" class="form-label fw-bold">LRN / Student Number</label>
                                                     <input type="text" class="form-control" id="lrn" name="lrn" maxlength="12" required>
                                                 </div>
-                                             </div>
+                                            </div>
 
                                             <!-- Back and Submit Button -->
                                             <div class="row">

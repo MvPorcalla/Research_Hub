@@ -24,6 +24,7 @@ document.addEventListener('DOMContentLoaded', function() {
         guest: guestTableBody,
         lrn: lrnTableBody
     };
+    
 
     // Function to fetch records from the server based on record type and query
     function fetchRecords(recordType, query = '') {
@@ -91,7 +92,7 @@ document.addEventListener('DOMContentLoaded', function() {
                                 data.forEach(record => {
                                     rows += `
                                         <tr>
-                                            <td>${highlightText(record.lrn_student, query)}</td>
+                                            <td>${highlightText(`${record.lrn_firstname} ${record.lrn_mi} ${record.lrn_lastname}`, query)}</td>
                                             <td>${highlightText(record.lrn_lrnid, query)}</td>
                                             <td>
                                                 <a href="lrn.php?lrnId=${record.lrn_id}" class="btn btn-primary btn-sm"><i class='fas fa-edit'></i></a>

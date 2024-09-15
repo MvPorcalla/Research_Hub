@@ -82,7 +82,9 @@ document.addEventListener('DOMContentLoaded', async function() {
             // Populate fields for editing LRN
             document.getElementById('lrnTitle').textContent = 'Edit LRN - LNHS Research Hub';
             document.getElementById('lrnSubtitle').textContent = 'Edit Student LRN';
-            document.getElementById('fullName').value = data.lrn_student;
+            document.getElementById('lastName').value = data.lrn_lastname;
+            document.getElementById('firstName').value = data.lrn_firstname;
+            document.getElementById('middleInitial').value = data.lrn_mi;
             document.getElementById('lrn').value = data.lrn_lrnid;
 
         } else if (idType === 'userId') {

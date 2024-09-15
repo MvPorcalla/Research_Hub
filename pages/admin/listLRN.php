@@ -74,7 +74,7 @@
                                 <table class="table table-bordered table-striped LRNs" id="lrns-table">
                                     <thead class="table-dark">
                                         <tr class="col-md-12">
-                                            <th class="col-md-5">Name</th>
+                                            <th class="col-md-5">Full Name</th>
                                             <th class="col-md-5">LRN</th>
                                             <th class="col-md-2">Actions</th>
                                         </tr>

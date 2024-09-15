@@ -68,55 +68,19 @@
                                                         </div>
                                                     </div>
                                                 </div>
+
+                                                <div class="row mx-3 mt-2">
+                                                    <div class="col-md-12">
+                                                       <!-- what can i display here -->
+                                                        
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                 <!-- Notification -->
-                                 <div class="row mt-2">
-                                    <div class="col-md-12">
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <div class="card text-start">
-                                                    <div class="card-body p-4">
-                                                        <h1 class="setting-info-title">Notification</h1>
-                                                        <hr class="border-2 border-secondary mb-2">
-                                                        <form>
-                                                            <div class="form-check">
-                                                                <input class="form-check-input" type="checkbox" id="emailNotifications" checked>
-                                                                <label class="form-check-label fw-bold" for="emailNotifications">
-                                                                    Send notifications by email
-                                                                </label>
-                                                                <p class='ms-3'>
-                                                                    You’ll still get other emails from Research Hub
-                                                                </p>
-                                                            </div>
-                                                            
-                                                            <div class="form-check mt-2">
-                                                                <input class="form-check-input" type="checkbox" id="comments">
-                                                                <label class="form-check-label fw-bold" for="comments">
-                                                                    Comments
-                                                                </label>
-                                                            </div>
-                                                            <div class="form-check mt-2">
-                                                                <input class="form-check-input" type="checkbox" id="reactions">
-                                                                <label class="form-check-label fw-bold" for="reactions">
-                                                                    Reactions
-                                                                </label>
-                                                            </div>
-                                                            <div class="form-check mt-2">
-                                                                <input class="form-check-input" type="checkbox" id="newUploads">
-                                                                <label class="form-check-label fw-bold" for="newUploads">
-                                                                    New upload research
-                                                                </label>
-                                                            </div>
-                                                        </form>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div> 
-                                    </div>
 
+                                 <div class="row">
                                     <!-- Logout Button -->
                                     <div class="mt-3">
                                         <div class="col-md-12 text-center">
