@@ -160,7 +160,7 @@ if (url.includes('forum.php')) {
 
                     const entryId = form.querySelector('#entry_id').value;
 
-                    filterBadWords(`forumCommentForm_${entryId}`, `commentContent_${entryId}`, `error_${entryId}`);
+                    handleInputSubmit(`forumCommentForm_${entryId}`, `commentContent_${entryId}`, `error_${entryId}`);
                 });
             });
     });
@@ -241,7 +241,7 @@ async function displayCommentsForEntry(entryId, entryComments) {
                 const addCommentForm = `
                     <!-- Comment Form for Main Entry -->
                     <div class="card-body mt-1">
-                        <form id="forumCommentForm_${entryId}" method="post" action="../../backend/comment.php" class="forum-comment-form">
+                        <form id="forumCommentForm_${entryId}" class="forum-comment-form">
                             <div class="form-row align-items-center">
                                 <div class="col">
                                     <div class="input-group">

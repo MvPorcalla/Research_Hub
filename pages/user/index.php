@@ -67,12 +67,12 @@
                             <div class="modal-dialog modal-dialog-centered">
                                 <div class="modal-content">
                                     <div class="modal-header bg-primary text-white">
-                                        <h5 class="modal-titler" id="commentsModalLabel">Comments</h5>
+                                        <h5 class="modal-title" id="commentsModalLabel">Comments</h5>
                                     </div>
                                     <div class="modal-body">
 
                                         <!-- Comment Form -->
-                                        <form id="commentForm" method="POST" action="../../backend/comment.php" class="d-flex align-items-center">
+                                        <form id="commentForm" class="d-flex align-items-center">
                                             <div class="form-outline flex-grow-1 mb-2">
                                                 <input type="hidden" id="record_id" name="record_id"> 
                                                 <input type="hidden" name="user_id" value="<?php echo $_SESSION['user_id']; ?>">
@@ -128,7 +128,7 @@
         document.addEventListener('DOMContentLoaded', function () {
             handleStatus('login');
             handleStatus('comment');
-            filterBadWords('commentForm', 'comment_content', 'error');
+            handleInputSubmit('commentForm', 'comment_content', 'error');
         });
     </script>
     

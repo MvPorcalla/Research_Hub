@@ -466,10 +466,12 @@ function getLikes() {
 
 // =========================================================================
 
-function filterBadWords(formId, inputId, errorId) {
-
-    document.getElementById(formId).addEventListener('submit', function(event) {
-
+function handleInputSubmit(formId, inputId, errorId) {
+    const commentForm = document.getElementById(formId);
+    
+    // Ensure the event listener is attached only once
+    commentForm.addEventListener('submit', async function(event) {
+        
         // Array of words to filter out (add your list of cuss words here)
         const forbiddenWords = ['shit', 'damn', 'bitch']; // Replace with actual words
         const inputText = document.getElementById(inputId).value.toLowerCase();
@@ -480,11 +482,56 @@ function filterBadWords(formId, inputId, errorId) {
                 // Prevent form submission and show an error message
                 event.preventDefault();
                 document.getElementById(errorId).textContent = "Your input contains forbidden words. Please remove them and try again.";
-                return;
+                return;  // Stop further execution if forbidden words are found
             }
         }
-        
-        // If no forbidden words are found, allow form submission
+
+        // Clear error message if no forbidden words are found
         document.getElementById(errorId).textContent = "";
+
+        if (formId != 'askQuestionForm') {
+            event.preventDefault();
+
+            // Proceed to post the comment if there are no forbidden words
+            try {
+                const formData = new FormData(commentForm);
+                
+                // Send the form data to the backend using fetch
+                const response = await fetch('../../backend/comment.php', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                // Throw an error if the response is not OK
+                if (!response.ok) throw new Error('Network response was not ok');
+
+                // Parse the JSON response
+                const result = await response.json();
+
+                // If the update is successful, show a success alert and reload the page
+                if (result.status === 'success') {
+                    commentForm.reset();
+                    Swal.fire({
+                        title: 'Comment Posted!',
+                        icon: 'success'
+                    }).then(() => {
+                        // Reload the page after closing the SweetAlert
+                        window.location.reload();
+                    });
+                } else {
+                    // Show a warning alert if the update fails
+                    Swal.fire({
+                        title: 'Error!',
+                        text: 'Something went wrong. Please try again.',
+                        icon: 'error',
+                        backdrop: `rgba(255, 0, 0 ,0.2)`,
+                        confirmButtonText: 'OK'
+                    });
+                }
+            } catch (error) {
+                // Handle any errors that occur during the fetch operation
+                console.error('Error:', error);
+            }
+        }
     });
 }

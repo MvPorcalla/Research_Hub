@@ -1,4 +1,6 @@
 <?php
+ini_set('log_errors', 1);
+ini_set('error_log', '../error_log.log');
 
 // Include database connection file
 include_once "../includes/db.php";
@@ -23,7 +25,7 @@ if (isset($data['id'])) {
             'user_notif_abstracts' => $status
         ],
         'likesComments' => [
-            'user_notif_likes' => $status
+            'user_notif_likescomments' => $status
         ]
     };
 

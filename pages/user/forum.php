@@ -83,7 +83,7 @@
         document.addEventListener('DOMContentLoaded', function () {
             handleStatus('entry');
             handleStatus('comment');
-            filterBadWords('askQuestionForm','question', 'error');
+            handleInputSubmit('askQuestionForm','question', 'error');
         });
     </script>
 </body>

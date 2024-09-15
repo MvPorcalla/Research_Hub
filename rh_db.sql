@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 07, 2024 at 04:08 AM
+-- Generation Time: Sep 14, 2024 at 09:49 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -139,7 +139,9 @@ CREATE TABLE `users` (
   `user_type` char(1) NOT NULL COMMENT 'A = Admin / S = Student / G = Guest',
   `user_status` char(1) NOT NULL DEFAULT 'A' COMMENT 'A = Active / P = Pending / I = Inactive',
   `user_registration_timestamp` datetime NOT NULL DEFAULT current_timestamp(),
-  `user_lastlogin_timestamp` datetime NOT NULL DEFAULT current_timestamp()
+  `user_lastlogin_timestamp` datetime NOT NULL DEFAULT current_timestamp(),
+  `user_notif_abstracts` char(1) NOT NULL DEFAULT 'A' COMMENT 'A = Active / I = Inactive',
+  `user_notif_likescomments` char(1) NOT NULL DEFAULT 'A' COMMENT 'A = Active / I = Inactive'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --

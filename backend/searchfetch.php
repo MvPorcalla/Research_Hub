@@ -1,14 +1,12 @@
 <?php
 ini_set('log_errors', 1);
 ini_set('error_log', '../error_log.log');
-
-
 // =================================== FOR FETCHING ABSTRACTS, STUDENTS, GUESTS AND LRNS ===================================
-
-header('Content-Type: application/json');
 
 // Database connection
 include_once "../includes/db.php";
+
+header('Content-Type: application/json');
 
 // Get the search query and filters
 $query = isset($_GET['query']) ? trim($_GET['query']) : '';

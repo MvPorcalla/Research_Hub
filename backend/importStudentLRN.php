@@ -68,4 +68,3 @@ if (isset($_POST['save_excel_data'])) {
     header("Location: ../pages/admin/listLRN.php?importRecords=missing");
 }
 exit();
-?>
