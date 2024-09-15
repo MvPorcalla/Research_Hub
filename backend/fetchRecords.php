@@ -104,6 +104,9 @@ if ($results) {
             ],
             'comments' => [
                 'userName' => htmlspecialchars($result['user_username'], ENT_QUOTES, 'UTF-8'),
+                'lastName' => htmlspecialchars($result['user_lastname'], ENT_QUOTES, 'UTF-8'),
+                'firstName' => htmlspecialchars($result['user_firstname'], ENT_QUOTES, 'UTF-8'),
+                'middleInitial' => htmlspecialchars($result['user_mi'], ENT_QUOTES, 'UTF-8'),
                 'userIdImage' => htmlspecialchars($result['user_idpicture_imgdir'], ENT_QUOTES, 'UTF-8'),
                 'commentId' => htmlspecialchars($result['comment_id'], ENT_QUOTES, 'UTF-8'),
                 'commentContent' => htmlspecialchars($result['comment_content'], ENT_QUOTES, 'UTF-8'),

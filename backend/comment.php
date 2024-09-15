@@ -22,10 +22,24 @@ if (isset($_POST['comment_content'])) {
 
     if (isset($_POST['record_id']) || isset($_POST['entry_id'])) {
         $key = isset($_POST['record_id']) ? 'record_id' : 'entry_id';
-        $fields[$key] = $_POST[$key];
+        $value = $_POST[$key];
+        $fields[$key] = $value;
 
         $status = insert($conn, $table, $fields) ? "success" : "error";
         $response['status'] = $status;
+
+        if ($status == 'success') {
+            $sql = "SELECT *
+                    FROM `comments` c
+                    JOIN `users` u ON u.user_id = c.user_id
+                    WHERE {$key} = ?
+                    AND u.`user_id` = ?
+                    AND c.`comment_content` = ?
+                    AND c.`comment_status` = 'A'";
+            $filter = [ $value, $user_id, $comment_content ];
+            $result = query($conn, $sql, $filter);
+            $response['data'] = $result[0];
+        }
     }
 }
 echo json_encode($response);
