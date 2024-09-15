@@ -8,12 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Profile - LNHS Research Hub</title>
     <?php include './../admin/includes/links_head-css.php'; ?>
-
-        <!-- Cropper.js CSS -->
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.css" rel="stylesheet">
 </head>
-
-
 
 <body>
     <!-- header -->
@@ -43,14 +38,14 @@
                                                 <hr class="border-2 border-secondary mb-2">
 
                                                 <div class="row align-items-center">
-                                                   <!-- Image Column -->
+                                                    <!-- Image Column -->
                                                     <div class="col-md-2 text-center position-relative">
                                                         <img id="idImage" src="#" alt="User Image" class="setting-profile-pic img-fluid rounded-circle mb-2">
 
                                                         <!-- Form for File Upload -->
                                                         <form id="profilePicForm" enctype="multipart/form-data" style="display: inline;">
                                                             <!-- Hidden File Input for Profile Change -->
-                                                            <input type="file" id="profilePicInput" name="profilePic" class="d-none" accept="image/*" onchange="uploadProfilePic(event)">
+                                                            <input type="file" id="profilePicInput" name="profilePic" class="d-none" accept="image/*">
 
                                                             <!-- Edit Button (Change Profile) using Bootstrap positioned on the right -->
                                                             <button type="button" class="btn btn-sm btn-dark bg-secondary rounded-circle position-absolute bottom-0" style="right: 30px;" onclick="document.getElementById('profilePicInput').click();">
@@ -58,9 +53,29 @@
                                                             </button>
                                                         </form>
                                                     </div>
+                                                    <!-- Modal for Image Adjustment -->
+                                                    <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog modal-dialog-centered modal-lg"> <!-- Increase modal size -->
+                                                            <div class="modal-content">
+                                                                <div class="modal-header d-flex justify-content-center align-items-center">
+                                                                    <h5 class="modal-title fw-bold" id="imageModalLabel">Adjust Your Profile Picture</h5>
+                                                                    <button type="button" class="btn-close position-absolute end-0 top-0 mt-2 me-2" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                </div>
+                                                                <div class="modal-body text-center">
+                                                                    <!-- Container for image cropper -->
+                                                                    <div class="img-container d-flex justify-content-center align-items-center">
+                                                                        <img id="modalImage" src="#" alt="Selected Image" class="img-fluid">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                                    <button type="button" class="btn btn-primary" onclick="saveImage()">Save</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
 
 
-                                                    
                                                     <!-- Info Column -->
                                                     <div class="col-md-8 text-start">
                                                         <!-- Display Current Name -->
@@ -200,12 +215,11 @@
     </div>
 
     <?php include './../admin/includes/links_footer-script.php'; ?>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.js"></script>
-
+    
     <script src="../../includes/functions.js"></script>
     <script src="../../scripts/fetchOneRecord.js"></script>
     <script src="../../scripts/fetchUpdateInfo.js"></script>
+    <script src="../../scripts/fetchUpdateIdpicture.js"></script>
     <script src="../../scripts/logout.js"></script>
 
     <script>
@@ -213,42 +227,6 @@
             confirmPassword('editPasswordForm');
             handleStatus('editInfo');
         });
-    </script>
-
-    <script>
-function uploadProfilePic(event) {
-    const file = event.target.files[0];
-
-    if (file) {
-        const formData = new FormData();
-        formData.append('profilePic', file);
-
-        fetch('../../backend/update_idpicture.php', { // Replace with the path to your PHP script
-            method: 'POST',
-            body: formData
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.status === 'success') {
-                // Update the image preview
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    document.getElementById('idImage').src = e.target.result;
-                }
-                reader.readAsDataURL(file);
-
-                alert(data.message); // Show success message
-            } else {
-                alert(data.message); // Show error message
-            }
-        })
-        .catch(error => {
-            console.error('Error:', error);
-        });
-    }
-}
-
-
     </script>
 
 </body>

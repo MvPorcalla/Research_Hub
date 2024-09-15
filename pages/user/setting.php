@@ -40,8 +40,40 @@
 
                                                 <div class="row align-items-center">
                                                     <!-- Image Column -->
-                                                    <div class="col-md-2 text-center">
+                                                    <div class="col-md-2 text-center position-relative">
                                                         <img id="idImage" src="#" alt="User Image" class="setting-profile-pic img-fluid rounded-circle mb-2">
+
+                                                        <!-- Form for File Upload -->
+                                                        <form id="profilePicForm" enctype="multipart/form-data" style="display: inline;">
+                                                            <!-- Hidden File Input for Profile Change -->
+                                                            <input type="file" id="profilePicInput" name="profilePic" class="d-none" accept="image/*">
+
+                                                            <!-- Edit Button (Change Profile) using Bootstrap positioned on the right -->
+                                                            <button type="button" class="btn btn-sm btn-dark bg-secondary rounded-circle position-absolute bottom-0" style="right: 30px;" onclick="document.getElementById('profilePicInput').click();">
+                                                                <i class="fas fa-camera text-white"></i>
+                                                            </button>
+                                                        </form>
+                                                    </div>
+                                                    <!-- Modal for Image Adjustment -->
+                                                    <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog modal-dialog-centered modal-lg"> <!-- Increase modal size -->
+                                                            <div class="modal-content">
+                                                                <div class="modal-header d-flex justify-content-center align-items-center">
+                                                                    <h5 class="modal-title fw-bold" id="imageModalLabel">Adjust Your Profile Picture</h5>
+                                                                    <button type="button" class="btn-close position-absolute end-0 top-0 mt-2 me-2" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                </div>
+                                                                <div class="modal-body text-center">
+                                                                    <!-- Container for image cropper -->
+                                                                    <div class="img-container d-flex justify-content-center align-items-center">
+                                                                        <img id="modalImage" src="#" alt="Selected Image" class="img-fluid">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                                    <button type="button" class="btn btn-primary" onclick="saveImage()">Save</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
                                                     </div>
 
                                                     <!-- Info Column -->
@@ -216,6 +248,7 @@
     <script src="../../includes/functions.js"></script>
     <script src="../../scripts/fetchOneRecord.js"></script>
     <script src="../../scripts/fetchUpdateInfo.js"></script>
+    <script src="../../scripts/fetchUpdateIdpicture.js"></script>
     <script src="../../scripts/logout.js"></script>
 
     

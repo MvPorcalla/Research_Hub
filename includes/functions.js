@@ -472,8 +472,8 @@ function handleInputSubmit(formId, inputId, errorId) {
     // Ensure the event listener is attached only once
     commentForm.addEventListener('submit', async function(event) {
         
-        // Array of words to filter out (add your list of cuss words here)
-        const forbiddenWords = ['shit', 'damn', 'bitch']; // Replace with actual words
+        // Get the forbidden words array from the globally defined function
+        const forbiddenWords = getForbiddenWords();
         const inputText = document.getElementById(inputId).value.toLowerCase();
     
         // Check if the input contains any forbidden words

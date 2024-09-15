@@ -32,26 +32,64 @@ if (isset($_FILES['profilePic']) && isset($_SESSION['user_id'])) {
             $file = $_FILES['profilePic'];
 
             if ($file['error'] === UPLOAD_ERR_OK) {
-                $fileName = $lastname . ', ' . $firstname . ' ' . $mi . '.' . pathinfo($file['name'], PATHINFO_EXTENSION);
-                $uploadDir = '../uploads/idImages/';
-                $uploadFile = $uploadDir . $fileName;
+                // Determine the file extension
+                $fileExtension = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
 
-                if (move_uploaded_file($file['tmp_name'], $uploadFile)) {
-                    $sql = "UPDATE users SET user_idpicture_imgdir = ? WHERE user_id = ?";
-                    if ($stmt = $conn->prepare($sql)) {
-                        $stmt->bind_param('si', $uploadFile, $user_id); // 's' for string, 'i' for integer
-                        if ($stmt->execute()) {
-                            $response['status'] = 'success';
-                            $response['message'] = "Profile picture updated successfully!";
-                        } else {
-                            $response['message'] = "Database update failed!";
-                        }
-                        $stmt->close();
+                // Only allow png files
+                if ($fileExtension !== 'png') {
+                    // If not png, convert it to png
+                    $image = null;
+                    if ($fileExtension === 'jpg' || $fileExtension === 'jpeg') {
+                        $image = imagecreatefromjpeg($file['tmp_name']);
+                    } elseif ($fileExtension === 'gif') {
+                        $image = imagecreatefromgif($file['tmp_name']);
                     } else {
-                        $response['message'] = "Failed to prepare update statement!";
+                        $response['message'] = "Unsupported file type!";
+                        echo json_encode($response);
+                        exit();
+                    }
+
+                    // Create a new PNG file name
+                    $fileName = $lastname . ', ' . $firstname . ' ' . $mi . '.png';
+                    $uploadDir = '../uploads/idImages/';
+                    $uploadFile = $uploadDir . $fileName;
+
+                    // Save the image as PNG
+                    if (imagepng($image, $uploadFile)) {
+                        imagedestroy($image);
+                    } else {
+                        $response['message'] = "Failed to convert and save file!";
+                        echo json_encode($response);
+                        exit();
                     }
                 } else {
-                    $response['message'] = "File upload failed!";
+                    // If already PNG, just move the uploaded file
+                    $fileName = $lastname . ', ' . $firstname . ' ' . $mi . '.png';
+                    $uploadDir = '../uploads/idImages/';
+                    $uploadFile = $uploadDir . $fileName;
+
+                    if (move_uploaded_file($file['tmp_name'], $uploadFile)) {
+                        // Optionally, you could still convert the PNG file in this case if needed
+                    } else {
+                        $response['message'] = "File upload failed!";
+                        echo json_encode($response);
+                        exit();
+                    }
+                }
+
+                // Update the database with the new file path
+                $sql = "UPDATE users SET user_idpicture_imgdir = ? WHERE user_id = ?";
+                if ($stmt = $conn->prepare($sql)) {
+                    $stmt->bind_param('si', $uploadFile, $user_id); // 's' for string, 'i' for integer
+                    if ($stmt->execute()) {
+                        $response['status'] = 'success';
+                        $response['message'] = "Profile picture updated successfully!";
+                    } else {
+                        $response['message'] = "Database update failed!";
+                    }
+                    $stmt->close();
+                } else {
+                    $response['message'] = "Failed to prepare update statement!";
                 }
             } else {
                 $response['message'] = "No file uploaded or file upload error!";
