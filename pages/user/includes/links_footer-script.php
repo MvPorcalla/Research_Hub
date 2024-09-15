@@ -12,4 +12,6 @@
 <!-- Cropper.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.js"></script>
 
+<script src="../../includes/forbiddenWords.js"></script>
+
 <script src="../../scripts/fetchNotifications.js"></script>
