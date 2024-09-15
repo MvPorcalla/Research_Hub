@@ -511,13 +511,66 @@ function handleInputSubmit(formId, inputId, errorId) {
                 // If the update is successful, show a success alert and reload the page
                 if (result.status === 'success') {
                     commentForm.reset();
-                    Swal.fire({
-                        title: 'Comment Posted!',
-                        icon: 'success'
-                    }).then(() => {
-                        // Reload the page after closing the SweetAlert
-                        window.location.reload();
-                    });
+
+                    const { record_id, entry_id, user_id, user_username, user_idpicture_imgdir, user_lastname, user_firstname, user_mi, comment_id, comment_content, comment_timestamp } = result.data;
+                    
+                    const commentsContainer = document.getElementById('commentsContainer');
+                    const commentsElement = document.getElementById(`comments-${entry_id}`);
+
+                    // Build the user's full name
+                    const mi = (user_mi == '') ? '' : `${user_mi}. `;
+                    const fullName = `${user_firstname} ${mi}${user_lastname}`;
+                    
+                    const timestamp = comment_timestamp;
+                    const timePassed = timeAgo(timestamp); // Calculate the time passed since the entry was posted
+                    const formattedDateTime = formatDateTime(timestamp); // Format the timestamp for display
+
+                    let tileHTML = '';
+
+                    if (commentsContainer) {
+                        // Construct the HTML for each comment card
+                        tileHTML = `
+                            <div class="card comment-card">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between mb-2">
+                                        <div class="d-flex flex-row align-items-center">
+                                            <img title="${fullName}" src="../${user_idpicture_imgdir}" alt="${user_username}" class="img-fluid rounded-circle" style="width: 25px; height: 25px;" />
+                                            <p title="${fullName}" class="small mb-0 ms-2">${user_username}</p>
+                                        </div>
+                                        <div class="d-flex flex-row align-items-center">
+                                            <button class="btn px-0" onclick="window.location.href='../../backend/delete.php?abstract_id=${record_id}&comment_id=${comment_id}'">
+                                                <i class="fas fa-trash mx-2 fa-xs text-body" style="margin-top: -0.16rem;"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <p class="text-start">${comment_content}</p>
+                                    <div class="d-flex justify-content-between">
+                                        <div class="d-flex flex-row align-items-center">
+                                            <p title="${formattedDateTime}" style="cursor: pointer;"><small>${timePassed}</small></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                        // Append the constructed HTML to the comments container
+                        commentsContainer.insertAdjacentHTML("afterbegin", tileHTML);
+
+                    } else if (commentsElement) {
+                        tileHTML = `
+                            <div class="row">
+                                <div class="comment d-flex col-md-10">
+                                    <img src="../${user_idpicture_imgdir}" alt="${user_username}" class="img-fluid rounded-circle me-3" style="width: 30px; height: 30px;">
+                                    <p><strong>${user_username}:</strong> ${comment_content}</p>
+                                    <hr>
+                                </div>
+                                <div class="col-md-2">
+                                    <p title="${formattedDateTime}" style="cursor: pointer;"><small>${timePassed}</small></p>
+                                </div>
+                            </div>
+                        `;
+                        // Append the comment HTML to the comments element
+                        commentsElement.insertAdjacentHTML("afterbegin", tileHTML);
+                    }
                 } else {
                     // Show a warning alert if the update fails
                     Swal.fire({

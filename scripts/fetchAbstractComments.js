@@ -34,6 +34,10 @@ async function displayComments(abstractId = '') {
                 const timePassed = timeAgo(timestamp); // Calculate the time passed since the entry was posted
                 const formattedDateTime = formatDateTime(timestamp); // Format the timestamp for display
         
+                // Build the user's full name
+                const mi = (dataRow.middleInitial == '') ? '' : `${dataRow.middleInitial}. `;
+                const fullName = `${dataRow.firstName} ${mi}${dataRow.lastName}`;
+
                 var url = window.location.href;
                 var type = url.includes('admin') ? 'admin' : 'user';
         
@@ -71,8 +75,8 @@ async function displayComments(abstractId = '') {
                         <div class="card-body">
                             <div class="d-flex justify-content-between mb-2">
                                 <div class="d-flex flex-row align-items-center">
-                                    <img src="../${dataRow.userIdImage}" alt="avatar" class="img-fluid rounded-circle" style="width: 25px; height: 25px;" />
-                                    <p class="small mb-0 ms-2">${dataRow.userName}</p>
+                                    <img title="${fullName}" src="../${dataRow.userIdImage}" alt="${dataRow.userName}" class="img-fluid rounded-circle" style="width: 25px; height: 25px;" />
+                                    <p title="${fullName}" class="small mb-0 ms-2">${dataRow.userName}</p>
                                 </div>
                                 ${buttonHTML}
                             </div>

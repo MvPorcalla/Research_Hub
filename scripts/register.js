@@ -21,7 +21,7 @@ async function register() {
         if (result.status == 'error') {
             Swal.fire({
                 title: 'Warning!',
-                text: result.message || 'Your registration failed. Please try again.',
+                html: result.message || 'Your registration failed. Please try again.',
                 icon: 'warning',
                 confirmButtonText: 'OK'
             });

@@ -258,7 +258,7 @@ async function displayCommentsForEntry(entryId, entryComments) {
                     </div>
                 `;
                 // Append the comment form to the comments container
-                commentsContainer.innerHTML += addCommentForm;
+                commentsContainer.insertAdjacentHTML("afterbegin", addCommentForm);
             }
         } catch (error) {
             // Log any errors encountered during fetch
