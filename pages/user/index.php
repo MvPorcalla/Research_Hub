@@ -24,10 +24,10 @@
             <!-- Main content area -->
             <main class="col-md-9 ms-sm-auto col-lg-9 px-md-4">
                 <div class="container">
-                    <div class="row">
+                    <div class="row mt-4">
 
                         <!-- Search Bar -->
-                        <div class="row my-4">
+                        <div class="row mt-4 mb-1">
                              <!-- Filter Dropdowns -->
                              <div class="col-md-6 d-flex justify-content-end">
                                 <div class="d-flex align-items-center">
