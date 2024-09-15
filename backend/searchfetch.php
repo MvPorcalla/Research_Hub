@@ -224,7 +224,7 @@ if (isset($_GET['record_type'])) {
             }
 
             // Append an ORDER BY clause to sort results by lrn_id in descending order
-            $sql .= " ORDER BY `lrn_id` DESC";
+            $sql .= " ORDER BY `lrn_lastname` ASC";
 
             // Prepare the SQL statement
             $stmt = $conn->prepare($sql);
