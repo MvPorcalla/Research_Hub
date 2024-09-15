@@ -21,13 +21,13 @@
             <?php include './../admin/components/sidebar.php'; ?>
 
             <!-- Main content area -->
-            <main class="col-md-9 ms-sm-auto col-lg-9 px-md-4">
+            <main class="col-md-9 ms-sm-auto col-lg-9">
                 <div class="container">
                     <div class="row">
-                        <div class="my-3">
+                        <div class="my-1">
                             <h1 class="admin_title">User List</h1>
                         </div>
-
+                        
                         <!-- Search Bar -->
                         <div class="row">
                             <div class="col-md-5 d-flex justify-content-start">

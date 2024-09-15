@@ -24,7 +24,7 @@
             <main class="col-md-9 ms-sm-auto col-lg-9 px-md-4">
                 <div class="container">
                     <div class="row">
-                        <div class="my-3">
+                        <div class="my-1">
                             <h1 class="admin_title">LRN List</h1>
                         </div>
 

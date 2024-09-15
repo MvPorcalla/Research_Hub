@@ -36,10 +36,6 @@
 
                                             <!-- Full name -->
                                             <div class="row mb-4">
-                                                <!-- <div class="col-md-12">
-                                                    <label for="fullName" class="form-label">Full Name</label>
-                                                    <input type="text" class="form-control" id="fullName" name="fullName" required>
-                                                </div> -->
                                                 <div class="col-md-5">
                                                     <label for="lastName" class="form-label fw-bold">Last Name</label>
                                                     <input type="text" class="form-control" id="lastName" name="lastName">
