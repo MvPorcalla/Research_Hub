@@ -22,11 +22,13 @@ if (isset($_POST['save_excel_data'])) {
             foreach ($data as $index => $row) {
                 if ($index === 0) continue; // Skip the header row
 
-                $studentName = trim($row[0] ?? '');
-                $lrn = trim($row[1] ?? '');
+                $lastName = trim($row[0] ?? '');
+                $firstName = trim($row[1] ?? '');
+                $mi = trim($row[2] ?? '');
+                $lrn = trim($row[3] ?? '');
 
                 $dataCount++;
-                
+
                 if (strlen($lrn) != 12) {
                     $notTwelve++;
                     continue;
@@ -39,8 +41,11 @@ if (isset($_POST['save_excel_data'])) {
                 if (empty($result)) {
                     $table = 'lrn';
                     $fields = [
-                        'lrn_student' => $studentName,
-                        'lrn_lrnid' => $lrn
+                        'lrn_lastname' => $lastName,
+                        'lrn_firstname' => $firstName,
+                        'lrn_mi' => $mi,
+                        'lrn_lrnid' => $lrn,
+                        'lrn_status' => 'A' // Assuming new records are Active by default
                     ];
                     insert($conn, $table, $fields);
                 } else {
@@ -49,7 +54,7 @@ if (isset($_POST['save_excel_data'])) {
             }
 
             if ($existing > 0 || $notTwelve > 0) {
-                header("Location: ../pages/admin/listLRN.php?exceptions={$existing}-{$notTwelve}-{$dataCount}");                
+                header("Location: ../pages/admin/listLRN.php?exceptions={$existing}-{$notTwelve}-{$dataCount}");
             } else {
                 header("Location: ../pages/admin/listLRN.php?importRecords=success");
             }

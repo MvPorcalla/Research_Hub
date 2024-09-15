@@ -1,17 +1,21 @@
 <?php
 include_once "../includes/db.php";
 
-// Check if the form is submitted with a fullname
-if (isset($_POST['fullName'])) {
+// Check if the form is submitted with a lastname
+if (isset($_POST['lastName'])) {
 
     // Assign form values to variables
-    $l_student = $_POST['fullName'];
+    $l_lastName = $_POST['lastName'];
+    $l_firstName = $_POST['firstName'];
+    $l_mi = $_POST['middleInitial'];
     $l_lrn = $_POST['lrn'];
 
     // Prepare fields for database insertion
     $table = "lrn";
     $fields = [
-        'lrn_student' => $l_student,
+        'lrn_lastname' => $l_lastName,
+        'lrn_firstname' => $l_firstName,
+        'lrn_mi' => $l_mi,
         'lrn_lrnid' => $l_lrn
     ];
 
