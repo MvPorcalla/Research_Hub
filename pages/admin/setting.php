@@ -8,7 +8,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Profile - LNHS Research Hub</title>
     <?php include './../admin/includes/links_head-css.php'; ?>
+
+        <!-- Cropper.js CSS -->
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.css" rel="stylesheet">
 </head>
+
+
 
 <body>
     <!-- header -->
@@ -38,11 +43,24 @@
                                                 <hr class="border-2 border-secondary mb-2">
 
                                                 <div class="row align-items-center">
-                                                    <!-- Image Column -->
-                                                    <div class="col-md-2 text-center">
+                                                   <!-- Image Column -->
+                                                    <div class="col-md-2 text-center position-relative">
                                                         <img id="idImage" src="#" alt="User Image" class="setting-profile-pic img-fluid rounded-circle mb-2">
+
+                                                        <!-- Form for File Upload -->
+                                                        <form id="profilePicForm" enctype="multipart/form-data" style="display: inline;">
+                                                            <!-- Hidden File Input for Profile Change -->
+                                                            <input type="file" id="profilePicInput" name="profilePic" class="d-none" accept="image/*" onchange="uploadProfilePic(event)">
+
+                                                            <!-- Edit Button (Change Profile) using Bootstrap positioned on the right -->
+                                                            <button type="button" class="btn btn-sm btn-dark bg-secondary rounded-circle position-absolute bottom-0" style="right: 30px;" onclick="document.getElementById('profilePicInput').click();">
+                                                                <i class="fas fa-camera text-white"></i>
+                                                            </button>
+                                                        </form>
                                                     </div>
 
+
+                                                    
                                                     <!-- Info Column -->
                                                     <div class="col-md-8 text-start">
                                                         <!-- Display Current Name -->
@@ -183,6 +201,8 @@
 
     <?php include './../admin/includes/links_footer-script.php'; ?>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.js"></script>
+
     <script src="../../includes/functions.js"></script>
     <script src="../../scripts/fetchOneRecord.js"></script>
     <script src="../../scripts/fetchUpdateInfo.js"></script>
@@ -193,6 +213,42 @@
             confirmPassword('editPasswordForm');
             handleStatus('editInfo');
         });
+    </script>
+
+    <script>
+function uploadProfilePic(event) {
+    const file = event.target.files[0];
+
+    if (file) {
+        const formData = new FormData();
+        formData.append('profilePic', file);
+
+        fetch('../../backend/update_idpicture.php', { // Replace with the path to your PHP script
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === 'success') {
+                // Update the image preview
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById('idImage').src = e.target.result;
+                }
+                reader.readAsDataURL(file);
+
+                alert(data.message); // Show success message
+            } else {
+                alert(data.message); // Show error message
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    }
+}
+
+
     </script>
 
 </body>
