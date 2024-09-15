@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 14, 2024 at 09:49 PM
+-- Generation Time: Sep 15, 2024 at 09:20 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -92,7 +92,9 @@ CREATE TABLE `likes` (
 
 CREATE TABLE `lrn` (
   `lrn_id` int(11) NOT NULL,
-  `lrn_student` varchar(256) NOT NULL,
+  `lrn_lastname` varchar(256) NOT NULL,
+  `lrn_firstname` varchar(256) NOT NULL,
+  `lrn_mi` varchar(4) DEFAULT NULL,
   `lrn_lrnid` varchar(12) NOT NULL,
   `lrn_status` char(1) NOT NULL DEFAULT 'A' COMMENT 'A = Active / I = Inactive'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;

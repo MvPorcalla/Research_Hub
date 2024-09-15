@@ -80,15 +80,23 @@ if ((isset($_POST['lrn']) || isset($_POST['email'])) && $_FILES['idImage']['erro
         
         // =============== select row from `LRN` table with LRN ID matching $lrn ============
         // ======================= to check if LRN is valid to the school ===================
-        $sql = "SELECT `lrn_id`, `lrn_lrnid` FROM `lrn` WHERE `lrn_lrnid` = ?";
-        $filter = [$lrn];
+        $sql = "SELECT *
+                FROM `lrn`
+                WHERE `lrn_lrnid` = ?
+                AND `lrn_lastname` = ?
+                AND `lrn_firstname` = ?
+                AND `lrn_mi` = ?";
+        $filter = [$lrn, $lastName, $firstName, $middleInitial];
         $result = query($conn, $sql, $filter);
 
         // ================= if registering as student and result is empty =================
         // ================================ warn: wrong LRN ================================
         if (empty($result)) {
     
-            $response['message'] = "Your LRN does not exist in the database.";
+            $response['message'] = "
+                Your name and LRN do not match any record in the database.<br>
+                <small>Ensure your details are correct. Please contact the admin if you believe there has been a mistake.</small>
+            ";
             echo json_encode($response);
             exit();
 
