@@ -34,7 +34,7 @@
                         <div class="col-md-4">
 
                             <!-- Comment Form -->
-                            <form id="commentForm" method="POST" action="../../backend/comment.php" class="d-flex align-items-center">
+                            <form id="commentForm" class="d-flex align-items-center">
                                 <!-- Back Button -->
                                 <a href="#" class="btn btn-secondary me-2 mb-2" onclick="history.back(); return false;">
                                     <i class="fas fa-arrow-left"></i>
@@ -77,7 +77,7 @@
         document.addEventListener('DOMContentLoaded', function () {
             handleStatus('comment');
             displayComments().then(() => { getLikes(); });
-            filterBadWords('commentForm', 'comment_content', 'error')
+            handleInputSubmit('commentForm', 'comment_content', 'error');
         });
     </script>
 </body>

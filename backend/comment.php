@@ -1,5 +1,12 @@
 <?php
+ini_set('log_errors', 1);
+ini_set('error_log', '../error_log.log');
+
 include_once "..\includes\db.php";
+
+header('Content-Type: application/json'); // Set content type to JSON
+
+$response = ['status' => 'error'];
 
 if (isset($_POST['comment_content'])) {
 
@@ -10,23 +17,16 @@ if (isset($_POST['comment_content'])) {
     $table = 'comments';
     $fields = [
         'user_id' => $user_id,
-        'comment_content' => $comment_content,
+        'comment_content' => $comment_content
     ];
 
     if (isset($_POST['record_id']) || isset($_POST['entry_id'])) {
         $key = isset($_POST['record_id']) ? 'record_id' : 'entry_id';
         $fields[$key] = $_POST[$key];
-        
-        if (isset($_SERVER['HTTP_REFERER']) && strpos($_SERVER['HTTP_REFERER'], 'abstractView') !== false) {
-            $file = "abstractView.php?abstractId={$fields[$key]}&";
-        } else {
-            $file = 'index.php?';
-        }
 
-        $status = insert($conn, $table, $fields) ? "success" : "failed";
-        $redirectUrl = $key === 'record_id' ? "../pages/user/{$file}comment={$status}" : "../pages/user/forum.php?comment={$status}";
-        
-        header("Location: $redirectUrl");
-        exit;
+        $status = insert($conn, $table, $fields) ? "success" : "error";
+        $response['status'] = $status;
     }
 }
+echo json_encode($response);
+exit;
