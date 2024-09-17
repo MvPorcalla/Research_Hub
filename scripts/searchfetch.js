@@ -90,9 +90,10 @@ document.addEventListener('DOMContentLoaded', function() {
                                 break;
                             case 'lrn':
                                 data.forEach(record => {
+                                    const mi = (record.lrn_mi == '') ? '' : `${record.lrn_mi}. `;
                                     rows += `
                                         <tr>
-                                            <td>${highlightText(`${record.lrn_firstname} ${record.lrn_mi} ${record.lrn_lastname}`, query)}</td>
+                                            <td>${highlightText(`${record.lrn_firstname} ${mi}${record.lrn_lastname}`, query)}</td>
                                             <td>${highlightText(record.lrn_lrnid, query)}</td>
                                             <td>
                                                 <a href="lrn.php?lrnId=${record.lrn_id}" class="btn btn-primary btn-sm"><i class='fas fa-edit'></i></a>

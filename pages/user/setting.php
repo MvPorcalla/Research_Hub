@@ -261,7 +261,7 @@
             const newAbstracts = document.getElementById('newAbstracts');
             const likesComments = document.getElementById('likesComments');
 
-            // ================================== toggle notifications ==================================
+            // ==== toggle newAbstracts and likesComments checkbox on notificationCheckbox change ====
 
             if (notificationCheckbox) {
                 notificationCheckbox.addEventListener('change', function() {
@@ -301,6 +301,10 @@
                         const result = await response.json();
 
                         notificationCheckbox.checked = (newAbstracts.checked == true && likesComments.checked == true) ? true : false;
+
+                        const notificationsContainer = document.getElementById('notificationsContainer');
+                        notificationsContainer.innerHTML = '';
+                        fetchNotifications().then(() => { subtractSeenNotifs() });
 
                     } catch (error) {
                         // Handle any errors that occur during the fetch operation

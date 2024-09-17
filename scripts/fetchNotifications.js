@@ -13,8 +13,10 @@ async function fetchNotifications() {
 
         const newAbstracts = permissionResult.newAbstracts;
         const likesComments = permissionResult.likesComments;
+            
+        const notificationCount = document.getElementById('notificationCount');
 
-        if (likesComments == 'I') {
+        if (likesComments === 'I') {
 
             notificationsContainer.innerHTML = `
                 <li>
@@ -24,6 +26,7 @@ async function fetchNotifications() {
                     </p>
                 </li>
             `;
+            notificationCount.innerText = '';
         }
 
         const response = await fetch('../../backend/fetch_notifications.php', {
@@ -39,6 +42,7 @@ async function fetchNotifications() {
 
         // Parse the JSON response
         const result = await response.json();
+        if (result.totalNotifCount != 0 && likesComments !== 'I') notificationCount.innerText = result.totalNotifCount;
 
         let notifCount = 0;
 
@@ -59,17 +63,16 @@ async function fetchNotifications() {
             const formattedTimePassed = timeAgo(notification.latest);
             const formattedDateTime = formatDateTime(notification.latest);
 
-            if (result.totalNotifCount === 0) {
+            if (result.totalNotifCount === 0 && likesComments !== 'I') {
                 
                 notificationsContainer.innerHTML = `
                     <li>
                         <p style="width: 350px;" class="text-center mb-0">No new notifications.</p>
                     </li>
                 `;
-    
             }
 
-            if (notifCount != 0) notificationsContainer.innerHTML += `<hr class="my-0">`
+            if (notifCount != 0 && (notification.type === 'comment' || notification.type === 'like')) notificationsContainer.innerHTML += `<hr class="my-0">`
 
             switch (notification.type) {
                 case 'pending':
@@ -107,9 +110,6 @@ async function fetchNotifications() {
 
                     break;
             }
-                                
-            const notificationCount = document.getElementById('notificationCount');
-            if (result.totalNotifCount != 0) notificationCount.innerText = result.totalNotifCount;
 
             if (notification.type == 'comment' || notification.type == 'like') notifCount++;
         });
@@ -119,17 +119,18 @@ async function fetchNotifications() {
     }
 }
 
+function subtractSeenNotifs() {
+    const notificationSeen = seenNotification();
+                                    
+    const notificationCount = document.getElementById('notificationCount');
+    const notifCount = +notificationCount.innerText;
+    if (notifCount != 0) notificationCount.innerText = notifCount - notificationSeen;
+}
+
 if (window.location.href.includes('user')) {
     
     document.addEventListener('DOMContentLoaded', function() {
-        fetchNotifications().then(() => {
-            
-            const notificationSeen = seenNotification();
-                                    
-            const notificationCount = document.getElementById('notificationCount');
-            const notifCount = +notificationCount.innerText;
-            if (notifCount != 0) notificationCount.innerText = notifCount - notificationSeen;
-        });
+        fetchNotifications().then(() => { subtractSeenNotifs() });
     });
 }
 

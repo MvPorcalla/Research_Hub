@@ -19,6 +19,14 @@ if (url.includes('favorites.php')) {
                     // Parse the JSON data from the response
                     const data = await response.json();
 
+                    // Check if there is no data
+                    if (data.length === 0) {
+                        let tileHTML = `<p>No abstracts added to favorites yet.</p>`;
+                        // Append the generated HTML to the 'favoriteTiles' element
+                        favoriteTiles.innerHTML += tileHTML;
+                        return; // Exit the function if no data is found
+                    }
+
                     // Loop through the fetched data and generate HTML for each favorite record
                     data.forEach(dataRow => {
                         let tileHTML = `

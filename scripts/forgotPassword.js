@@ -64,10 +64,18 @@ forgotPasswordForm.addEventListener('submit', (e) => {
 
                 break;
             case 'I': // Inactive account
-                console.log('Notify user that the account associated with the email is deactivated');
+                Swal.fire({
+                    title: "Oops!",
+                    text: "The account associated with the email address provided is deactivated.",
+                    icon: "info"
+                });
                 break;
             case 'V': // Invalid account (email not connected to any account)
-                console.log('Notify user that the email provided is not connected to any account');
+                Swal.fire({
+                    title: "Oops!",
+                    text: "The email address provided is not connected to any account.",
+                    icon: "info"
+                });
                 break;
             default: // Handle any other errors
                 console.log('Error');

@@ -207,7 +207,7 @@ async function displayCommentsForEntry(entryId, entryComments) {
 
             // Display a message if no comments are found
             if (data.length === 0) {
-                commentsContainer.innerHTML = `<small>No comments yet.</small>`;
+                commentsContainer.innerHTML = `<small class="ms-5">No comments yet.</small>`;
             } else {
                 // Get the element where comments will be appended
                 const commentsElement = document.getElementById(`comments-${entryId}`);

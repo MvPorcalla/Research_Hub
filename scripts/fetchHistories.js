@@ -6,7 +6,16 @@ if (url.includes('history')) {
         fetch(`../../backend/fetch_histories.php`)
             .then(response => response.json()) // Parse the response as JSON
             .then(dataByDate => {
+
                 const container = document.getElementById('historyContainer');
+
+                // Check if there is no data
+                if (dataByDate.length === 0) {
+                    let tileHTML = `<p>No abstracts viewed yet.</p>`;
+                    // Append the generated HTML to the 'container' element
+                    container.innerHTML += tileHTML;
+                    return; // Exit the function if no data is found
+                }
                 
                 // Iterate over the fetched data grouped by date
                 for (const [date, recordsOnDate] of Object.entries(dataByDate)) {
