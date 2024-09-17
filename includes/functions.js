@@ -481,7 +481,7 @@ function handleInputSubmit(formId, inputId, errorId) {
             if (inputText.includes(forbiddenWords[i])) {
                 // Prevent form submission and show an error message
                 event.preventDefault();
-                document.getElementById(errorId).textContent = "Your input contains forbidden words. Please remove them and try again.";
+                document.getElementById(errorId).textContent = `Your input contains a forbidden word (${forbiddenWords[i]}). Please remove them and try again.`;
                 return;  // Stop further execution if forbidden words are found
             }
         }
@@ -515,7 +515,20 @@ function handleInputSubmit(formId, inputId, errorId) {
                     const { record_id, entry_id, user_id, user_username, user_idpicture_imgdir, user_lastname, user_firstname, user_mi, comment_id, comment_content, comment_timestamp } = result.data;
                     
                     const commentsContainer = document.getElementById('commentsContainer');
+                    const commentSection = document.getElementById(`comment-section-${entry_id}`);
                     const commentsElement = document.getElementById(`comments-${entry_id}`);
+
+                    const noComments = commentsContainer.querySelector('small') || commentSection.querySelector('small');
+                    if (noComments) {
+                        noComments.remove();
+                        if (commentSection) {
+                            commentSection.innerHTML = `
+                                <div id="comments-${entry_id}" class="card-body">
+                                    <!-- Data will be dynamically inserted here -->
+                                </div>
+                            `;
+                        }
+                    }
 
                     // Build the user's full name
                     const mi = (user_mi == '') ? '' : `${user_mi}. `;

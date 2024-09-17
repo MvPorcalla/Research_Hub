@@ -53,7 +53,7 @@ if (isset($_GET['record_type'])) {
 
             // Append an ORDER BY clause to sort the results first by record_year in descending order
             // Then, within each year, sort by record_month in descending order
-            $sql .= " ORDER BY `record_year` DESC, `record_month` DESC";
+            $sql .= " ORDER BY `record_year` DESC, `record_month` DESC, `record_timestamp` DESC";
 
             // Prepare and bind parameters
             $stmt = $conn->prepare($sql);

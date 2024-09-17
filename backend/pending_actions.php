@@ -16,7 +16,7 @@ $result = query($conn, $sql, [$user_id]);
 $row = $result[0];
 
 function generateRandomPassword($length = 12) {
-    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*()-_=+';
+    $characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
     $charactersLength = strlen($characters);
     $randomPassword = '';
     

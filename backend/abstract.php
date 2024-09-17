@@ -1,15 +1,27 @@
 <?php
 include_once "../includes/db.php";
 
+function sanitizeFilename($filename) {
+    // Define a regex pattern to match unwanted characters
+    $pattern = '/[^a-zA-Z0-9_\-\. ]/'; // Allows alphanumeric characters, underscores, hyphens, and dots
+
+    // Replace unwanted characters with an underscore
+    $sanitizedFilename = preg_replace($pattern, '_', $filename);
+
+    return $sanitizedFilename;
+}
+
 // Check if the form is submitted with a title and a file upload status
-if (isset($_POST['title']) && ($_FILES['file']['error'] === UPLOAD_ERR_OK || $_FILES['file']['error'] === UPLOAD_ERR_NO_FILE || !isset($_FILES['file']))) {
+if (isset($_POST['title']) && !isset($_FILES['file'])) {
 
     // Assign form values to variables
     $a_title = trim($_POST['title']);
     $a_authors = trim($_POST['authors']);
     $a_monthYear = trim($_POST['monthYear']);
     $a_trackStrand = trim($_POST['trackStrand'] ?? NULL);
-    $a_abstract = "../uploads/records/{$a_title}.pdf";
+    
+    $sanitized_title = sanitizeFilename($a_title);
+    $a_abstract = "../uploads/records/{$sanitized_title}.pdf";
 
     // Separate year and month
     [$year, $month] = explode('-', $a_monthYear);
@@ -30,7 +42,7 @@ if (isset($_POST['title']) && ($_FILES['file']['error'] === UPLOAD_ERR_OK || $_F
         $abstract_id = $_GET['abstractId'];
 
         // Handle file upload
-        if ($_FILES['file']['error'] === UPLOAD_ERR_OK) {
+        if (isset($_FILES['file'])) {
             $temp = $_FILES['file']['tmp_name'];
 
             if (!move_uploaded_file($temp, $a_abstract)) {
@@ -38,7 +50,7 @@ if (isset($_POST['title']) && ($_FILES['file']['error'] === UPLOAD_ERR_OK || $_F
                 exit;
             }
 
-        } elseif ($_FILES['file']['error'] === UPLOAD_ERR_NO_FILE) {
+        } else {
             // Fetch the file directory from the database
             $sql = "SELECT `record_filedir` FROM `records` WHERE `record_id` = ?";
             $filter = [$abstract_id];
@@ -68,7 +80,7 @@ if (isset($_POST['title']) && ($_FILES['file']['error'] === UPLOAD_ERR_OK || $_F
         exit;
     } else {
         // For new records, handle file upload if a file is provided
-        if ($_FILES['file']['error'] === UPLOAD_ERR_OK) {
+        if (isset($_FILES['file']) && $_FILES['file']['error'] === UPLOAD_ERR_OK) {
             $temp = $_FILES['file']['tmp_name'];
             $fields['record_status'] = 'A';
 

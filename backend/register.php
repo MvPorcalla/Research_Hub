@@ -78,8 +78,8 @@ if ((isset($_POST['lrn']) || isset($_POST['email'])) && $_FILES['idImage']['erro
 
     if ($role_symbol == 'S') {
         
-        // =============== select row from `LRN` table with LRN ID matching $lrn ============
-        // ======================= to check if LRN is valid to the school ===================
+        // =============== select row from `LRN` table with matching details ===============
+        // ========================= to check if details are valid =========================
         $sql = "SELECT *
                 FROM `lrn`
                 WHERE `lrn_lrnid` = ?
@@ -89,12 +89,12 @@ if ((isset($_POST['lrn']) || isset($_POST['email'])) && $_FILES['idImage']['erro
         $filter = [$lrn, $lastName, $firstName, $middleInitial];
         $result = query($conn, $sql, $filter);
 
-        // ================= if registering as student and result is empty =================
-        // ================================ warn: wrong LRN ================================
+        // ============================== if result is empty ==============================
+        // ================================ warn: no match ================================
         if (empty($result)) {
     
             $response['message'] = "
-                Your name and LRN do not match any record in the database.<br>
+                Your name and/or LRN do not match any record in the database.<br>
                 <small>Ensure your details are correct. Please contact the admin if you believe there has been a mistake.</small>
             ";
             echo json_encode($response);
@@ -106,14 +106,12 @@ if ((isset($_POST['lrn']) || isset($_POST['email'])) && $_FILES['idImage']['erro
     }
 
     // =========================== select rows from `users` table ===========================
-    // ============== to check if with LRN, username, email is already in use ==============
-    $sql = "SELECT u.lrn_id, lrn.lrn_id, lrn.lrn_lrnid, u.user_username, u.user_emailadd
-            FROM `users` u
-            JOIN `lrn` ON u.lrn_id = lrn.lrn_id
-            WHERE lrn.lrn_lrnid = ?
-            OR u.user_username = ?
-            OR u.user_emailadd = ?";
-    $filter = [$lrn, $username, $email];
+    // ================= to check if with username, email is already in use =================
+    $sql = "SELECT `user_username`, `user_emailadd`
+            FROM `users`
+            WHERE `user_username` = ?
+            OR `user_emailadd` = ?";
+    $filter = [$username, $email];
     $result = query($conn, $sql, $filter);
 
     if (empty($result)) {
@@ -123,10 +121,12 @@ if ((isset($_POST['lrn']) || isset($_POST['email'])) && $_FILES['idImage']['erro
                 if (insert($conn, $table, $fields)) {
                     
                     $response['status'] = 'success';
+                    
                     // =================== redirect according to role ===================
                     ($role_symbol == 'G')
                         ? $response['redirect'] = "index.php?registration=success"
                         : $response['redirect'] = "login.php?login=registered";
+
                 } else {
                     $response['message'] = "Your registration failed. Please try again.";
                 }
@@ -139,9 +139,8 @@ if ((isset($_POST['lrn']) || isset($_POST['email'])) && $_FILES['idImage']['erro
         // =========== identify which field(s) matched to an existing account ===========
         $matchedFields = [];
         foreach ($result as $key => $row) {
-            if ($row['lrn_lrnid'] === $lrn) $matchedFields[] = 'LRN';
-            if ($row['user_username'] === $username) $matchedFields[] = 'username';
-            if ($row['user_emailadd'] === $email) $matchedFields[] = 'email address';
+            if (strcasecmp($row['user_username'], $username) === 0) $matchedFields[] = 'username';
+            if (strcasecmp($row['user_emailadd'], $email) === 0) $matchedFields[] = 'email address';
         }
         $response['message'] = "Your entered " . implode(', ', $matchedFields) . " already exists in the database";
     }

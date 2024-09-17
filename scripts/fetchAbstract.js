@@ -68,6 +68,10 @@ document.addEventListener('DOMContentLoaded', () => {
                     </tr>
                 `;
             } else { // If the user is not on an admin page, create card elements
+                const filePath = record.record_filedir;
+                const lastSlashIndex = filePath.lastIndexOf('/');
+                const filename = filePath.substring(lastSlashIndex + 1);
+
                 rows += `
                     <div class="col-12 mb-2">
                         <div class="card">
@@ -89,7 +93,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                             <i class="fas fa-heart"></i>
                                         </button>
                                         <button class="btn btn-outline-success btn-sm mx-1">
-                                            <a href="../../uploads/records/${record.record_title}.pdf" download="${record.record_title}.pdf">
+                                            <a href="../${record.record_filedir}" download="${filename}">
                                                 <i class="fas fa-download text-success"></i>
                                             </a>
                                         </button>

@@ -22,7 +22,7 @@ async function displayComments(abstractId = '') {
 
             // Display a message indicating no comments are available
             let tileHTML = `<small>No comments yet.</small>`;
-            commentsContainer.innerHTML += tileHTML;
+            commentsContainer.innerHTML = tileHTML;
             
         } else {
 

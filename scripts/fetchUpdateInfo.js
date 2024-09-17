@@ -65,8 +65,9 @@ async function updateProfile() {
 
 // Function to handle password update
 async function updatePassword() {
+    const editPasswordForm = document.getElementById('editPasswordForm');
     // Get form data from the password edit form
-    const formData = new FormData(document.querySelector('#editPasswordForm'));
+    const formData = new FormData(editPasswordForm);
 
     // Show SweetAlert confirmation dialog before proceeding
     Swal.fire({
@@ -80,6 +81,8 @@ async function updatePassword() {
     }).then(async (result) => {
         // If the user confirms the update
         if (result.isConfirmed) {
+            editPasswordForm.reset();
+            
             try {
                 // Send the form data to the backend using fetch
                 const response = await fetch('../../backend/update_password.php', {
