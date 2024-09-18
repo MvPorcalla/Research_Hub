@@ -20,9 +20,6 @@
             background-color: #000; /* Fallback color */
             margin: 0;
         }
-
-        
-
     </style>
 </head>
 
@@ -36,7 +33,7 @@
     <main>
         <div class="container-fluid">
             <div class="row ms-5">
-                <div class="login-card py-5">
+                <div class="login-card login-card-position py-5">
                     <h3 class="text-center mb-5">MEMBER LOGIN</h3>
                     <div class="d-grid gap-3">
                         <a href="./login.php" class="btn btn-primary" role="button" aria-label="Login">Login</a>

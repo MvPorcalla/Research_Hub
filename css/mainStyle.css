@@ -77,16 +77,6 @@ main {
   padding-top: 10vh;
 }
 
-.login-card {
-  color: var(--text-base-ltr);
-  background: transparent;
-  width: 350px;
-  padding: 20px;
-  border: 1px solid black;
-  box-shadow: 5px 5px 10px black;
-  border-radius: 20px;
-}
-
 .container {
   height: 80vh;
 }
@@ -234,13 +224,23 @@ main {
 
 /* ========================================================================================= */
 
-/* ======================================== Register Student/Guest ======================================== */
+/* ======================================== Login Card | Register Student/Guest/teacher ======================================== */
 
 .card-body {
   color: var(--text-base-lt);
 }
 
 .login-card {
+  color: var(--text-base-ltr);
+  background: transparent;
+  width: 350px;
+  padding: 20px;
+  border: 1px solid black;
+  box-shadow: 5px 5px 10px black;
+  border-radius: 20px;
+}
+
+.login-card-position {
   position: absolute;
   top: 55%; /* Vertically center relative to parent container */
   left: 8%; /* Horizontally position relative to parent container */

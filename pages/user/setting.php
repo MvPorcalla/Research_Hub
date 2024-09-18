@@ -24,13 +24,13 @@
             <!-- Main content area -->
             <main class="col-md-9 ms-sm-auto col-lg-9 px-md-4 mt-5">
                 <div class="row">
+                <div class="text-center mb-4">
+                        <h1 class='admin-subtitle'>Account Setting</h1>
+                    </div>
                     <div class="container">
                         <div class='card border-dark bg-transparent'>
                             <div class="card-body">
                                 <div class="row">
-                                    <div class="my-1 text-center">
-                                        <h1 class='admin-subtitle'>Account Setting</h1>
-                                    </div>
                                     <!-- Personal Information -->
                                     <div class="col-md-12">
                                         <div class="card">
