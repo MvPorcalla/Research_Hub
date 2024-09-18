@@ -25,36 +25,47 @@ if (url.includes('pendingRequest.php')) {
                         let tileHTML = `
                             <div class="col-md-6 mb-4">
                                 <div class="card border-dark rounded-4 h-100">
-                                    <div class="card-body d-flex flex-column">
+                                    <div class="card-body d-flex flex-column mx-2">
+                                        <div class="row mt-2">
+                                            <div class="col-md-3">
+                                                <img src="../${dataRow.userIdImage}" alt="image" class="rounded-circle me-3" style="width: 90px; height: 90px;">
+                                            </div>
 
-                                        <h5 class="card-title text-center flex-grow-1">${dataRow.fname} ${dataRow.mi}. ${dataRow.lname}</h5>
-                                        <p class="card-text text-center">${dataRow.email}</p>
-                                        <p class="card-text text-center">${dataRow.school}</p>
-                                        
-                                        <div class="border border-secondary rounded p-2 mb-3">
-                                            <p class="card-text text-center fw-bold mb-1">Reason</p>
-                                            <p class="card-text text-center">${dataRow.reason}</p>
+                                            <div class="col-md-9 text-start">
+                                                <h4 class="card-title fw-bold flex-grow-1">${dataRow.fname} ${dataRow.mi}. ${dataRow.lname}</h4>
+                                                <h5 class="card-text">${dataRow.email}</h5>
+                                                <p class="card-text">${dataRow.school}</p>
+                                            </div>
                                         </div>
-                                        
-                                        <div class="d-flex justify-content-center mt-auto">
 
-                                            <form id="pendingForm_${dataRow.id}" method="POST">
-
-                                                <!-- Hidden input fields to store guest information for form submission -->
-                                                <input type="text" name="website_name" id="website_name" hidden value="Research Hub">
-                                                <input type="text" name="website_link" id="website_link" hidden value="http://localhost/research_Hub/">
-                                                <input type="text" name="user_name" id="user_name" hidden>
-                                                <input type="text" name="user_email" id="user_email" hidden>
-                                                <input type="text" name="temp_username" id="temp_username" hidden>
-                                                <input type="text" name="temp_password" id="temp_password" hidden>
-
-                                                <!-- Buttons for accepting or declining pending guests -->
-                                                <a id="accept_${dataRow.id}" class="btn btn-primary btn-sm me-2 accept pending">Accept</a>
-                                                <a id="decline_${dataRow.id}" class="btn btn-danger btn-sm decline pending">Decline</a>
-
-                                            </form>
-
+                                        <div class="row text-start mt-3">
+                                            <div class="col-md-12">
+                                                <h5 class="fw-bold mb-1">Reason</h5>
+                                                <div class="border border-secondary rounded p-2 mb-3 overflow-auto" style="background: #e5e7eb; height: 130px;">
+                                                    <p class="card-text mb-0">${dataRow.reason}</p>
+                                                </div>
+                                            </div>
                                         </div>
+
+                                        <div class="row">
+                                            <div class="d-flex justify-content-end mt-auto">
+                                                <form id="pendingForm_${dataRow.id}" method="POST">
+                                                    <!-- Hidden input fields to store guest information for form submission -->
+                                                    <input type="text" name="website_name" id="website_name" hidden value="Research Hub">
+                                                    <input type="text" name="website_link" id="website_link" hidden value="http://localhost/research_Hub/">
+                                                    <input type="text" name="user_name" id="user_name" hidden>
+                                                    <input type="text" name="user_email" id="user_email" hidden>
+                                                    <input type="text" name="temp_username" id="temp_username" hidden>
+                                                    <input type="text" name="temp_password" id="temp_password" hidden>
+
+                                                    <!-- Buttons for accepting or declining pending guests -->
+                                                    <a id="accept_${dataRow.id}" class="btn btn-primary btn-sm me-2 accept pending">Accept</a>
+                                                    <a id="decline_${dataRow.id}" class="btn btn-danger btn-sm decline pending">Decline</a>
+                                                </form>
+                                            </div>
+                                        </div>
+
+                                        
                                     </div>
                                 </div>
                             </div>
