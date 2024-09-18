@@ -240,6 +240,13 @@ main {
   color: var(--text-base-lt);
 }
 
+.login-card {
+  position: absolute;
+  top: 55%; /* Vertically center relative to parent container */
+  left: 8%; /* Horizontally position relative to parent container */
+  transform: translateY(-50%); /* Adjust for exact centering */
+}
+
 .login_card-title {
   font-size: var(--fs-3xl);
 }

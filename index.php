@@ -16,10 +16,13 @@
             background-attachment: fixed;
             background-size: cover;
             background-position: center;
-            background-repeat: repeat;
-            /* margin: 0; */
+            background-repeat: no-repeat;
+            background-color: #000; /* Fallback color */
+            margin: 0;
         }
+
         
+
     </style>
 </head>
 
@@ -29,11 +32,10 @@
         include 'includes/header.php';
     ?>
 
-    <!-- Hero Section -->
     <!-- main content -->
     <main>
-        <div class="container d-flex align-items-center justfy-content-center">
-            <div class="row ms-3 mt-5">
+        <div class="container-fluid">
+            <div class="row ms-5">
                 <div class="login-card py-5">
                     <h3 class="text-center mb-5">MEMBER LOGIN</h3>
                     <div class="d-grid gap-3">
