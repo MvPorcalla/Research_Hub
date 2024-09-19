@@ -601,3 +601,19 @@ function handleInputSubmit(formId, inputId, errorId) {
         }
     });
 }
+
+// =========================================================================
+
+function characterCounter(inputId, counterId) {
+        
+    const inputField = document.getElementById(inputId);
+    const charCounter = document.getElementById(counterId);
+    const maxLength = inputField.getAttribute('maxlength');
+
+    charCounter.textContent = `0/${maxLength}`;
+
+    inputField.addEventListener('input', function() {
+        const currentLength = inputField.value.length;
+        charCounter.textContent = `${currentLength}/${maxLength}`;
+    });
+}

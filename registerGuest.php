@@ -81,7 +81,10 @@
                                         <div class="row mb-3">
                                             <div class="col-md-12">
                                                 <label for="reason" class="form-label">Reason</label>
-                                                <textarea class="form-control" id="reason" name="reason" rows="4" required></textarea>
+                                                <textarea class="form-control" id="reason" name="reason" rows="3" required maxlength="250"></textarea>
+                                                <div class="text-end">
+                                                    <small id="charCounter" class="form-text text-muted"></small>
+                                                </div>
                                             </div>
                                         </div>
 
@@ -112,6 +115,10 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="includes\functions.js"></script>
     <script src="scripts\register.js"></script>
+
+    <script>
+        characterCounter('reason', 'charCounter');
+    </script>
 </body>
 
 </html>

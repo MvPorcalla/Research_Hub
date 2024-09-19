@@ -76,7 +76,10 @@
                                             <div class="form-outline flex-grow-1 mb-2">
                                                 <input type="hidden" id="record_id" name="record_id"> 
                                                 <input type="hidden" name="user_id" value="<?php echo $_SESSION['user_id']; ?>">
-                                                <input type="text" id="comment_content" name="comment_content" class="form-control border-dark" placeholder="+ Add comment..." maxlength="200" required />
+                                                <input type="text" id="comment_content" name="comment_content" class="form-control border-dark" style="padding-top: 11px; padding-bottom: 11px;" placeholder="+ Add comment..." maxlength="200" required />
+                                                <div class="bg-white px-1" style="position: absolute; right: 75px; top: 50px;">
+                                                    <small id="charCounter" class="form-text text-muted"></small>
+                                                </div>
                                             </div>
                                             <!-- Submit Button -->
                                             <button type="submit" class="btn btn-primary ms-2 mb-2">
@@ -129,6 +132,7 @@
             handleStatus('login');
             handleStatus('comment');
             handleInputSubmit('commentForm', 'comment_content', 'error');
+            characterCounter('comment_content', 'charCounter');
         });
     </script>
     

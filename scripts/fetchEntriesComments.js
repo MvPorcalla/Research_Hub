@@ -184,6 +184,8 @@ if (url.includes('forum.php')) {
                 // Hide all other comments sections
                 section.style.display = 'none';
             });
+
+            characterCounter(`commentContent_${entryId}`, `charCounter_${entryId}`);
         }
     }
     
@@ -245,10 +247,13 @@ async function displayCommentsForEntry(entryId, entryComments) {
                             <div class="form-row align-items-center">
                                 <div class="col">
                                     <div class="input-group">
-                                        <textarea class="form-control" name="comment_content" id="commentContent_${entryId}" rows="1" placeholder="Add a comment..." required></textarea>
+                                        <textarea class="form-control" name="comment_content" id="commentContent_${entryId}" rows="1" placeholder="Add a comment..." required maxlength="250"></textarea>
                                         <button type="submit" class="btn btn-primary ms-2" title="Post Comment">
                                             <i class="fa-solid fa-paper-plane"></i>
                                         </button>
+                                    </div>
+                                    <div class="text-end pe-5">
+                                        <small id="charCounter_${entryId}" class="form-text text-muted"></small>
                                     </div>
                                 </div>
                             </div>

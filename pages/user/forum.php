@@ -51,6 +51,9 @@
                                                 <div class="mb-3">
                                                     <label for="question" class="form-label">Your Question</label>
                                                     <textarea class="form-control" id="question" name="question" rows="4" placeholder="Type your question here..." maxlength="2000" required></textarea>
+                                                    <div class="text-end">
+                                                        <small id="charCounter" class="form-text text-muted"></small>
+                                                    </div>
                                                 </div>
                                                 <p id="error" style="color: red;"></p>
                                                 <button type="submit" class="btn btn-primary btn-block w-100">Submit</button>
@@ -84,6 +87,7 @@
             handleStatus('entry');
             handleStatus('comment');
             handleInputSubmit('askQuestionForm','question', 'error');
+            characterCounter('question', 'charCounter');
         });
     </script>
 </body>
