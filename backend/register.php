@@ -109,9 +109,11 @@ if ((isset($_POST['lrn']) || isset($_POST['email'])) && $_FILES['idImage']['erro
     // ================= to check if with username, email is already in use =================
     $sql = "SELECT `user_username`, `user_emailadd`
             FROM `users`
-            WHERE `user_username` = ?
-            OR `user_emailadd` = ?";
-    $filter = [$username, $email];
+            WHERE (
+                (`user_username` = ? AND ? != '')
+                OR `user_emailadd` = ?
+            )";
+    $filter = [$username, $username, $email];
     $result = query($conn, $sql, $filter);
 
     if (empty($result)) {
@@ -139,7 +141,7 @@ if ((isset($_POST['lrn']) || isset($_POST['email'])) && $_FILES['idImage']['erro
         // =========== identify which field(s) matched to an existing account ===========
         $matchedFields = [];
         foreach ($result as $key => $row) {
-            if (strcasecmp($row['user_username'], $username) === 0 && $username != '') $matchedFields[] = 'username';
+            if (strcasecmp($row['user_username'], $username) === 0) $matchedFields[] = 'username';
             if (strcasecmp($row['user_emailadd'], $email) === 0) $matchedFields[] = 'email address';
         }
         $response['message'] = "Your entered " . implode(', ', $matchedFields) . " already exists in the database";
