@@ -109,9 +109,11 @@ if ((isset($_POST['lrn']) || isset($_POST['email'])) && $_FILES['idImage']['erro
     // ================= to check if with username, email is already in use =================
     $sql = "SELECT `user_username`, `user_emailadd`
             FROM `users`
-            WHERE `user_username` = ?
-            OR `user_emailadd` = ?";
-    $filter = [$username, $email];
+            WHERE (
+                (`user_username` = ? AND ? != '')
+                OR `user_emailadd` = ?
+            )";
+    $filter = [$username, $username, $email];
     $result = query($conn, $sql, $filter);
 
     if (empty($result)) {

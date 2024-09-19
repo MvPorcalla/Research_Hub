@@ -159,7 +159,7 @@ main {
 
   .sidebar a {
     text-decoration: none;
-    padding: 40px;
+    padding: 3vh;
     display: block;
     color: var(--text-base);
     border: 1px solid var(--color-primary);
@@ -186,7 +186,7 @@ main {
   #teachers-table th,
   #guests-table th,
   #lrns-table th {
-    background: #2563eb;
+    background: #283c6b;
     color: #f2f2f2;
   }
   

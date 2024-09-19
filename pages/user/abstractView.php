@@ -34,7 +34,7 @@
                         <div class="col-md-4">
 
                             <!-- Comment Form -->
-                            <form id="commentForm" class="d-flex align-items-center">
+                            <form id="commentForm" class="d-flex align-items-start">
                                 <!-- Back Button -->
                                 <a href="#" class="btn btn-secondary me-2 mb-2" onclick="history.back(); return false;">
                                     <i class="fas fa-arrow-left"></i>
@@ -44,6 +44,9 @@
                                     <input type="hidden" name="record_id" value="<?php echo $_GET['abstractId']; ?>"> 
                                     <input type="hidden" name="user_id" value="<?php echo $_SESSION['user_id']; ?>">
                                     <input type="text" id="comment_content" name="comment_content" class="form-control border-dark" placeholder="+ Add comment..." maxlength="200" required />
+                                    <div class="text-end">
+                                        <small id="charCounter" class="form-text text-muted"></small>
+                                    </div>
                                 </div>
                                 <!-- Submit Button -->
                                 <button type="submit" class="btn btn-primary ms-2 mb-2">
@@ -78,6 +81,7 @@
             handleStatus('comment');
             displayComments().then(() => { getLikes(); });
             handleInputSubmit('commentForm', 'comment_content', 'error');
+            characterCounter('comment_content', 'charCounter');
         });
     </script>
 </body>

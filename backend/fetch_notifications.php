@@ -48,7 +48,7 @@ if ($user_type == 'A') {
 } else {
     // ============================ ABSTRACTS ============================
 
-    if (isset($data['newAbstracts']) && ($data['newAbstracts'] == 'A')) {
+    if (isset($new_abtracts) && ($new_abtracts == 'A')) {
 
         $sql = "SELECT
                     COUNT(*) AS abstract_count,
@@ -71,7 +71,7 @@ if ($user_type == 'A') {
 
     // ======================== COMMENTS AND LIKES ========================
 
-    if (isset($data['likesComments']) && ($data['likesComments'] == 'A')) {
+    if (isset($likes) && ($likes == 'A')) {
 
         $total_notif_count = 0;
 

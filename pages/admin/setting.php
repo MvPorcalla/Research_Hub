@@ -190,13 +190,13 @@
                                                         <div class="row">
                                                             <div class="col-md-6">
                                                                 <div class="mb-3">
-                                                                    <label for="newPassword" class="form-label fw-bold">New Password</label>
+                                                                    <label for="password" class="form-label fw-bold">New Password</label>
                                                                     <input type="password" class="form-control" id="password" name="newPassword" required>
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-6">
                                                                 <div class="mb-3">
-                                                                    <label for="confirmNewPassword" class="form-label fw-bold">Confirm New Password</label>
+                                                                    <label for="confirmPassword" class="form-label fw-bold">Confirm New Password</label>
                                                                     <input type="password" class="form-control" id="confirmPassword" name="confirmNewPassword" required>
                                                                 </div>                                                        
                                                             </div>

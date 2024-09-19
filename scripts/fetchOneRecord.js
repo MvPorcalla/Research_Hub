@@ -99,6 +99,7 @@ document.addEventListener('DOMContentLoaded', async function() {
             document.getElementById('firstName').value = data.user_firstname;
             document.getElementById('middleInitial').value = data.user_mi;
             document.getElementById('usernameField').value = data.user_username;
+            document.getElementById('sidebar-username').textContent = data.user_username;
         }
     } catch (error) {
         // Log any errors that occur during the fetch operation

@@ -263,6 +263,11 @@ function setupConfirmationDialog(buttonSelector, options) {
                 // Get the text content from the specified number of <td> elements
                 let tdElements = row.querySelectorAll('td');
                 let contents = Array.from(tdElements).slice(0, options.tdCount).map(td => td.textContent);
+
+                if (options.tdCount == 3) {
+                    contents = contents.slice(1).concat(contents[0]);
+                    contents[1] = contents[1] + '.';
+                }
                 
                 // Join the text content with a space
                 textContent = contents.join(' ');
@@ -518,7 +523,7 @@ function handleInputSubmit(formId, inputId, errorId) {
                     const commentSection = document.getElementById(`comment-section-${entry_id}`);
                     const commentsElement = document.getElementById(`comments-${entry_id}`);
 
-                    const noComments = commentsContainer.querySelector('small') || commentSection.querySelector('small');
+                    const noComments = (commentsContainer) ? commentsContainer.querySelector('.no-comments') : commentSection.querySelector('.no-comments');
                     if (noComments) {
                         noComments.remove();
                         if (commentSection) {
@@ -599,5 +604,21 @@ function handleInputSubmit(formId, inputId, errorId) {
                 console.error('Error:', error);
             }
         }
+    });
+}
+
+// =========================================================================
+
+function characterCounter(inputId, counterId) {
+        
+    const inputField = document.getElementById(inputId);
+    const charCounter = document.getElementById(counterId);
+    const maxLength = inputField.getAttribute('maxlength');
+
+    charCounter.textContent = `0/${maxLength}`;
+
+    inputField.addEventListener('input', function() {
+        const currentLength = inputField.value.length;
+        charCounter.textContent = `${currentLength}/${maxLength}`;
     });
 }
