@@ -55,7 +55,20 @@ if ($action == 'accept') {
         ]);
     }
 } else {
-    $fields['user_status'] = 'I';
-
-    if (update($conn, $table, $fields, $filter)) echo json_encode(['action' => 'deleted']);
+    $sql = "DELETE FROM `users` WHERE `user_id` = ?";
+    
+    // Prepare the statement to avoid SQL injection
+    $stmt = $conn->prepare($sql);
+    
+    // Bind the parameter (the record ID)
+    $stmt->bind_param("i", $user_id); // "i" indicates that the parameter is an integer
+    
+    // Step 4: Execute the query
+    if ($stmt->execute()) {
+        echo json_encode(['action' => 'deleted']);
+    }
+    
+    // Step 5: Close the statement and connection
+    $stmt->close();
+    $conn->close();
 }
