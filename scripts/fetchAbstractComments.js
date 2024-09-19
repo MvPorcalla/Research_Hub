@@ -21,7 +21,7 @@ async function displayComments(abstractId = '') {
         if (data.length == 0) {
 
             // Display a message indicating no comments are available
-            let tileHTML = `<small>No comments yet.</small>`;
+            let tileHTML = `<small class="no-comments">No comments yet.</small>`;
             commentsContainer.innerHTML = tileHTML;
             
         } else {

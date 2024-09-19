@@ -518,7 +518,7 @@ function handleInputSubmit(formId, inputId, errorId) {
                     const commentSection = document.getElementById(`comment-section-${entry_id}`);
                     const commentsElement = document.getElementById(`comments-${entry_id}`);
 
-                    const noComments = commentsContainer.querySelector('small') || commentSection.querySelector('small');
+                    const noComments = (commentsContainer) ? commentsContainer.querySelector('.no-comments') : commentSection.querySelector('.no-comments');
                     if (noComments) {
                         noComments.remove();
                         if (commentSection) {

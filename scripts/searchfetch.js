@@ -39,7 +39,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
                     // If no data is received, display a message indicating no records found
                     if (data.length === 0) {
-                        rows = '<tr><td colspan="5" class="text-center">No Abstract Records Found.</td></tr>';
+                        const type = {
+                            student: 'Students',
+                            guest: 'Guests',
+                            teacher: 'Teachers',
+                            lrn: 'LRNs'
+                        }[recordType] || 'Unknown';
+                        rows = `<tr><td colspan="5" class="text-center">No ${type} Records Found.</td></tr>`;
                     } else {
                         // Generate table rows based on the record type
                         switch (recordType) {
