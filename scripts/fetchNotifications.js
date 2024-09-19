@@ -1,3 +1,5 @@
+var url = window.location.href;
+
 async function fetchNotifications() {
     try {
 
@@ -63,7 +65,7 @@ async function fetchNotifications() {
             const formattedTimePassed = timeAgo(notification.latest);
             const formattedDateTime = formatDateTime(notification.latest);
 
-            if (result.totalNotifCount === 0 && likesComments !== 'I') {
+            if (result.totalNotifCount === 0 && likesComments !== 'I' && url.includes('user')) {
                 
                 notificationsContainer.innerHTML = `
                     <li>
@@ -120,19 +122,18 @@ async function fetchNotifications() {
 }
 
 function subtractSeenNotifs() {
-    const notificationSeen = seenNotification();
-                                    
-    const notificationCount = document.getElementById('notificationCount');
-    const notifCount = +notificationCount.innerText;
-    if (notifCount != 0) notificationCount.innerText = notifCount - notificationSeen;
+    if (url.includes('user')) {
+        const notificationSeen = seenNotification();
+                                        
+        const notificationCount = document.getElementById('notificationCount');
+        const notifCount = +notificationCount.innerText;
+        if (notifCount != 0) notificationCount.innerText = notifCount - notificationSeen;
+    }
 }
 
-if (window.location.href.includes('user')) {
-    
-    document.addEventListener('DOMContentLoaded', function() {
-        fetchNotifications().then(() => { subtractSeenNotifs() });
-    });
-}
+document.addEventListener('DOMContentLoaded', function() {
+    fetchNotifications().then(() => { subtractSeenNotifs() });
+});
 
 function populateToastContent(liveToast, count, content, formattedTimePassed, formattedDateTime) {
                         
