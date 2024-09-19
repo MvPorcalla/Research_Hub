@@ -75,6 +75,7 @@ if (isset($_POST['lastName'])) {
     if (update($conn, $table, $fields, $filter)) {
         $response['status'] = 'success';
         $response['message'] = "Profile updated successfully!";
+        $_SESSION['user_username'] = $username;
     } else {
         $response['message'] = "Failed to update profile!";
     }

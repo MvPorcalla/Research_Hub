@@ -41,7 +41,7 @@ if (url.includes('pendingRequest.php')) {
                                         <div class="row text-start mt-3">
                                             <div class="col-md-12">
                                                 <h5 class="fw-bold mb-1">Reason</h5>
-                                                <div class="border border-secondary rounded p-2 mb-3 overflow-auto" style="background: #e5e7eb; height: 130px;">
+                                                <div class="border border-secondary rounded p-2 mb-3 overflow-auto" style="background: #e5e7eb; height: 140px;">
                                                     <p class="card-text mb-0">${dataRow.reason}</p>
                                                 </div>
                                             </div>

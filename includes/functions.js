@@ -263,6 +263,11 @@ function setupConfirmationDialog(buttonSelector, options) {
                 // Get the text content from the specified number of <td> elements
                 let tdElements = row.querySelectorAll('td');
                 let contents = Array.from(tdElements).slice(0, options.tdCount).map(td => td.textContent);
+
+                if (options.tdCount == 3) {
+                    contents = contents.slice(1).concat(contents[0]);
+                    contents[1] = contents[1] + '.';
+                }
                 
                 // Join the text content with a space
                 textContent = contents.join(' ');
