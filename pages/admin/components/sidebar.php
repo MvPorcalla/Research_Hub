@@ -13,7 +13,7 @@
             <a class="nav-link" href="./listLRN.php">LRN List</a>
         </li>
         <li class="nav-item mb-1">
-            <a class="nav-link" href="./forum.php">Reaserch Hub Forum </a>
+            <a class="nav-link" href="./forum.php">Research Hub Forum </a>
         </li>
         <li class="nav-item mb-1 position-relative">
             <a class="nav-link" href="./pendingRequest.php">Pending Request</a>

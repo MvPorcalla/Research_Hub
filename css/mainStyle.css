@@ -159,7 +159,7 @@ main {
 
   .sidebar a {
     text-decoration: none;
-    padding: 40px;
+    padding: 3vh;
     display: block;
     color: var(--text-base);
     border: 1px solid var(--color-primary);
