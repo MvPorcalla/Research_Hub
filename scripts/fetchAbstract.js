@@ -58,12 +58,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 rows += `
                     <tr onclick="if (!event.target.closest('a')) { window.location.href='abstractView.php?abstractId=${record.record_id}'; }" style="cursor: pointer;">
                         <td>${highlightText(record.record_title, query)}</td>
-                        <td>${month} ${record.record_year}</td>
+                        <td class="text-center">${month} ${record.record_year}</td>
                         <td>${highlightText(record.record_authors, query)}</td>
-                        <td>${record.record_trackstrand}</td>
-                        <td>
-                            <a href="abstract.php?abstractId=${record.record_id}" class="btn btn-primary btn-sm"><i class='fas fa-edit'></i></a>
-                            <a href="../../backend/delete.php?abstractId=${record.record_id}" class="btn btn-danger btn-sm delete-button"><i class='fas fa-trash-alt'></i></a>
+                        <td class="text-center">${record.record_trackstrand}</td>
+                        <td class="text-center">
+                            <a href="abstract.php?abstractId=${record.record_id}" class="btn btn-outline-primary btn-sm">
+                                <i class='fas fa-edit'></i>
+                            </a>
+                            <a href="../../backend/delete.php?abstractId=${record.record_id}" class="btn btn-outline-danger btn-sm delete-button">
+                                <i class='fas fa-trash-alt'></i>
+                            </a>
                         </td>
                     </tr>
                 `;

@@ -24,8 +24,8 @@
             <main class="col-md-9 ms-sm-auto col-lg-9">
                 <div class="container">
                     <div class="row">
-                        <div class="my-1">
-                            <h1 class="admin_title">User List</h1>
+                        <div class="text-center mt-5 mb-4">
+                            <h1 class='admin-subtitle'>User Lists</h1>
                         </div>
                         
                         <!-- Search Bar -->
@@ -58,10 +58,9 @@
                                     <div class="row">
                                         <div class="col">
                                             <div class=" bg-transparent">
-
                                                 <div class="table-responsive">
-                                                    <table class="table table-bordered table-striped students" id="students-table">
-                                                        <thead class="table-dark">
+                                                    <table class="table table-bordered students" id="students-table">
+                                                        <thead>
                                                             <tr class="col-md-12">
                                                                 <th class="col-md-2">Last Name</th>
                                                                 <th class="col-md-2">First Name</th>
@@ -89,8 +88,8 @@
                                             <div class=" bg-transparent">
 
                                                 <div class="table-responsive">
-                                                    <table class="table table-bordered table-striped teachers" id="teachers-table">
-                                                        <thead class="table-dark">
+                                                    <table class="table table-bordered teachers" id="teachers-table">
+                                                        <thead>
                                                             <tr>
                                                                 <th>Last Name</th>
                                                                 <th>First Name</th>
@@ -116,8 +115,8 @@
                                             <div class=" bg-transparent">
 
                                                 <div class="table-responsive">
-                                                    <table class="table table-bordered table-striped guests" id="guests-table">
-                                                        <thead class="table-dark">
+                                                    <table class="table table-bordered guests" id="guests-table">
+                                                        <thead>
                                                             <tr>
                                                                 <th>Last Name</th>
                                                                 <th>First Name</th>

@@ -90,6 +90,7 @@ if ($results) {
             ],
             'pending' => [
                 'id' => htmlspecialchars($result['user_id'], ENT_QUOTES, 'UTF-8'),
+                'userIdImage' => htmlspecialchars($result['user_idpicture_imgdir'], ENT_QUOTES, 'UTF-8'),
                 'fname' => htmlspecialchars($result['user_firstname'], ENT_QUOTES, 'UTF-8'),
                 'mi' => htmlspecialchars($result['user_mi'], ENT_QUOTES, 'UTF-8'),
                 'lname' => htmlspecialchars($result['user_lastname'], ENT_QUOTES, 'UTF-8'),

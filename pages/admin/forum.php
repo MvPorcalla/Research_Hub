@@ -24,12 +24,11 @@
             <main class="col-md-9 ms-sm-auto col-lg-9 px-md-4">
                 <div class="container">
                     <div class="row">
-                        <div class="col-md-12 mt-4">
+                        <div class="col-md-12">
                             <!--  Content -->
-                            <div class="my-3 text-center">
+                            <div class="text-center mt-5 mb-4">
                                 <h1 class='admin-subtitle'>Research Hub Forum</h1>
                             </div>
-
 
                             <div id="entriesContainer" data-user-id="<?php echo $_SESSION['user_id']; ?>" class="container" data-entry-id="${entryId}">
                                 <!-- Data will be dynamically inserted here -->

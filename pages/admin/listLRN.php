@@ -24,8 +24,8 @@
             <main class="col-md-9 ms-sm-auto col-lg-9 px-md-4">
                 <div class="container">
                     <div class="row">
-                        <div class="my-1">
-                            <h1 class="admin_title">LRN List</h1>
+                        <div class="text-center mt-5 mb-4">
+                            <h1 class='admin-subtitle'>LRN Lists</h1>
                         </div>
 
                         <!-- Search Bar -->
@@ -71,8 +71,8 @@
                         <!-- Content Table -->
                         <div class="container mt-3 side-container">
                             <div class="table-responsive">
-                                <table class="table table-bordered table-striped LRNs" id="lrns-table">
-                                    <thead class="table-dark">
+                                <table class="table table-bordered LRNs" id="lrns-table">
+                                    <thead>
                                         <tr class="col-md-12">
                                             <th class="col-md-5">Full Name</th>
                                             <th class="col-md-5">LRN</th>

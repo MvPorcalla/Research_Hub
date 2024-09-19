@@ -8,6 +8,12 @@
     <title>HOME PAGE - LNHS Research Hub</title>
     <?php include './../admin/includes/links_head-css.php'; ?>
 </head>
+
+<style>
+   
+
+</style>
+
 <body>
     <!-- header -->
     <?php include './../admin/components/header.php'; ?>
@@ -21,9 +27,11 @@
             <main class="col-md-9 ms-sm-auto col-lg-9">
                 <div class="container">
                     <div class="row">
-
-                        <div class="my-1">
+                        <!-- <div class="my-1">
                             <h1 class="admin_title text-center">Research Records</h1>
+                        </div> -->
+                        <div class="text-center mt-5 mb-4">
+                            <h1 class='admin-subtitle'>Research Records</h1>
                         </div>
 
                         <!-- Search Bar and Filters -->
@@ -70,9 +78,9 @@
                         <!-- Content Table -->
                         <div class="container mt-3 side-container">
                             <div class="table-responsive">
-                                <table id="records-table" class="table table-bordered table-striped">
-                                    <thead class="table-dark">
-                                        <tr class="col-md-12">
+                                <table id="records-table" class="table table-bordered ">
+                                    <thead>
+                                        <tr class="col-md-12 text-center">
                                             <th class="col-md-4">Title</th>
                                             <th class="col-md-2">Month/Year</th>
                                             <th class="col-md-3">Author</th>

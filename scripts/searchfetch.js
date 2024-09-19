@@ -59,7 +59,7 @@ document.addEventListener('DOMContentLoaded', function() {
                                             <td>${highlightText(record.lrn_lrnid, query)}</td>
                                             <td>${highlightText(record.user_trackstrand, query)}</td>
                                             <td>
-                                                <a href="../../backend/delete.php?userId=${record.user_id}" class="btn btn-danger btn-sm delete-button"><i class='fas fa-trash-alt'></i></a>
+                                                <a href="../../backend/delete.php?userId=${record.user_id}" class="btn btn-outline-danger btn-sm delete-button"><i class='fas fa-trash-alt'></i></a>
                                             </td>
                                         </tr>
                                     `;
@@ -73,7 +73,7 @@ document.addEventListener('DOMContentLoaded', function() {
                                             <td>${highlightText(record.user_firstname, query)}</td>
                                             <td>${highlightText(record.user_mi, query)}</td>
                                             <td>
-                                                <a href="../../backend/delete.php?userId=${record.user_id}" class="btn btn-danger btn-sm delete-button"><i class='fas fa-trash-alt'></i></a>
+                                                <a href="../../backend/delete.php?userId=${record.user_id}" class="btn btn-outline-danger btn-sm delete-button"><i class='fas fa-trash-alt'></i></a>
                                             </td>
                                         </tr>
                                     `;
@@ -88,7 +88,7 @@ document.addEventListener('DOMContentLoaded', function() {
                                             <td>${highlightText(record.user_mi, query)}</td>
                                             <td>${highlightText(record.user_school, query)}</td>
                                             <td>
-                                                <a href="../../backend/delete.php?userId=${record.user_id}" class="btn btn-danger btn-sm delete-button"><i class='fas fa-trash-alt'></i></a>
+                                                <a href="../../backend/delete.php?userId=${record.user_id}" class="btn btn-outline-danger btn-sm delete-button"><i class='fas fa-trash-alt'></i></a>
                                             </td>
                                         </tr>
                                     `;
@@ -102,8 +102,8 @@ document.addEventListener('DOMContentLoaded', function() {
                                             <td>${highlightText(`${record.lrn_firstname} ${mi}${record.lrn_lastname}`, query)}</td>
                                             <td>${highlightText(record.lrn_lrnid, query)}</td>
                                             <td>
-                                                <a href="lrn.php?lrnId=${record.lrn_id}" class="btn btn-primary btn-sm"><i class='fas fa-edit'></i></a>
-                                                <a href="../../backend/delete.php?lrnId=${record.lrn_id}" class="btn btn-danger btn-sm delete-button"><i class='fas fa-trash-alt'></i></a>
+                                                <a href="lrn.php?lrnId=${record.lrn_id}" class="btn btn-outline-primary btn-sm"><i class='fas fa-edit'></i></a>
+                                                <a href="../../backend/delete.php?lrnId=${record.lrn_id}" class="btn btn-outline-danger btn-sm delete-button"><i class='fas fa-trash-alt'></i></a>
                                             </td>
                                         </tr>
                                     `;
