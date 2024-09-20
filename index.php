@@ -52,7 +52,21 @@
     
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            handleStatus('registration');
+
+            if (sessionStorage.getItem('showPendingAlert') === 'true') {
+                Swal.fire({
+                    title: "Registration Complete!",
+                    html: "Your registration is now awaiting admin approval.<br><small>A temporary username and password will be emailed if accepted.</small>",
+                    icon: "success"
+                }).then(() => {
+                    Swal.fire({
+                        title: "Note",
+                        html: "If you don't receive an email within a week, your request may be declined or auto-deleted. You can reapply then.",
+                        icon: "info"
+                    });
+                    sessionStorage.removeItem('showPendingAlert');
+                });
+            }
         });
     </script>
 </body>

@@ -25,13 +25,6 @@ function handleStatus(paramName) {
                 text: "Please log in with your credentials."
             },
         },
-        'registration': {
-            "success": {
-                icon: "success",
-                title: "Registration Complete!",
-                text: "Your registration is pending for approval by the admin."
-            }
-        },
         'token': {
             "invalid": {
                 icon: "warning",
