@@ -58,11 +58,11 @@
                                                 </div>
                                             </div>
 
-                                            <!-- Track/Strand -->
+                                            <!-- Strand -->
                                             <div class="mb-3">
-                                                <label for="trackStrand" class="form-label">Track/Strand</label>
+                                                <label for="trackStrand" class="form-label">Strand</label>
                                                 <select class="form-control" id="trackStrand" name="trackStrand" required>
-                                                    <option value="" disabled selected>Select your Track/Strand</option>
+                                                    <option value="" disabled selected>Select your Strand</option>
                                                     <option value="STEM">STEM (Science, Technology, Engineering, and Mathematics)</option>
                                                     <option value="ABM">ABM (Accountancy, Business, and Management)</option>
                                                     <option value="HUMSS">HUMSS (Humanities and Social Sciences)</option>

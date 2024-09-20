@@ -84,7 +84,7 @@
                                             <th class="col-md-4">Title</th>
                                             <th class="col-md-2">Month/Year</th>
                                             <th class="col-md-3">Author</th>
-                                            <th class="col-md-2">Track/Strand</th>
+                                            <th class="col-md-2">Strand</th>
                                             <th class="col-md-1">Actions</th>
                                         </tr>
                                     </thead>
