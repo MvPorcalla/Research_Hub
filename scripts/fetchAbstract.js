@@ -177,6 +177,10 @@ document.addEventListener('DOMContentLoaded', () => {
                     // Display comments and refresh likes after loading comments
                     displayComments(abstractId).then(() => { getLikes(); });
                 });
+
+                commentsModal.addEventListener('show.bs.modal', function () {
+                    document.getElementById('commentForm').reset();
+                });
                 
                 // Event listener for when the modal is hidden
                 commentsModal.addEventListener('hide.bs.modal', function () {
