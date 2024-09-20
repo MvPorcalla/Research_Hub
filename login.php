@@ -13,6 +13,19 @@
         .login-card {
             width: 100%; 
             max-width: 500px;
+            position: relative; /* Position relative for absolute children */
+            padding-top: 40px; /* Space for the logo */
+        }
+
+        .logo {
+            position: absolute; /* Absolute positioning for overlap */
+            top: -60px; /* Adjust to move the logo above the card */
+            left: 50%;
+            transform: translateX(-50%); /* Center the logo */
+            max-width: 130px; /* Adjust size as needed */
+            background-color: transparent; /* Optional: Background for visibility */
+            padding: 5px; /* Optional: Space around the logo */
+            border-radius: 10px; /* Optional: Rounded corners */
         }
     </style>
 </head>
@@ -27,8 +40,10 @@
         <!-- Login Section -->
         <div class="container d-flex justify-content-center align-items-center">
             <div class="card login-card">
+                <img src="./assets/icons/LNHS-icon.png" alt="LNHS Logo" class="logo rounded-circle">
+                
                 <div class="card-body p-4">
-                    <h3 class="login_card-title text-center mb-4">Login</h3>
+                    <h3 class="login_card-title text-center mt-3 mb-4">Login</h3>
                     <form action="backend\login.php" method="POST">
                         <div class="mb-3">
                             <label for="username" class="form-label">Username</label>
@@ -49,12 +64,11 @@
                     </form>
                     
                     <div class="card-footer text-center">
-                        <small>Dont have an account? <a href="./register.php">Register here</a></small>
+                        <small>Don't have an account? <a href="./register.php">Register here</a></small>
                     </div>
                 </div>
             </div>
         </div>
-
     </main>
 
     <!-- Bootstrap JS -->
