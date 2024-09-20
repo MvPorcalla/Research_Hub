@@ -18,7 +18,6 @@ document.addEventListener('DOMContentLoaded', () => {
             .then(response => response.json()) // Convert the response to JSON
             .then(data => {
                 populateTable(data); // Populate the table with the fetched data
-                getLikes(); // Fetch and update the likes for each record
             })
             .catch(error => {
                 // Handle any errors that occur during the fetch
@@ -72,6 +71,11 @@ document.addEventListener('DOMContentLoaded', () => {
                     </tr>
                 `;
             } else { // If the user is not on an admin page, create card elements
+                
+                let button = 'btn-outline-danger';
+                // Add or remove classes based on like status
+                button = (record.like_status === 'A') ? 'btn-danger' : 'btn-outline-danger';
+
                 const filePath = record.record_filedir;
                 const lastSlashIndex = filePath.lastIndexOf('/');
                 const filename = filePath.substring(lastSlashIndex + 1);
@@ -93,7 +97,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                         <button class="btn btn-outline-primary btn-sm mx-1" data-bs-toggle="modal" data-bs-target="#commentsModal" data-record-id="${record.record_id}" data-record-title="${record.record_title}">
                                             <i class="fas fa-comment"></i>
                                         </button>
-                                        <button class="btn btn-outline-danger btn-sm mx-1 like-button" data-record-id="${record.record_id}">
+                                        <button class="btn ${button} btn-sm mx-1 like-button" data-record-id="${record.record_id}">
                                             <i class="fas fa-heart"></i>
                                         </button>
                                         <button class="btn btn-outline-success btn-sm mx-1">
@@ -156,7 +160,6 @@ document.addEventListener('DOMContentLoaded', () => {
         
         // Check if the URL includes the user index page
         if (url.includes('pages/user/index.php')) {
-            getLikes(); // Call the function to get likes data
             
             const commentsModal = document.getElementById('commentsModal');
             
@@ -175,7 +178,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     abstractIdField.value = abstractId; // Set the abstract ID in the hidden input field
 
                     // Display comments and refresh likes after loading comments
-                    displayComments(abstractId).then(() => { getLikes(); });
+                    displayComments(abstractId);
                 });
 
                 commentsModal.addEventListener('show.bs.modal', function () {

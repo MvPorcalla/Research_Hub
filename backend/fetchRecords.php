@@ -51,8 +51,8 @@ $queries = [
     'LRNs' => "SELECT * FROM `lrn` WHERE lrn_status = 'A'",
     'pending' => "SELECT * FROM `users` WHERE `user_type` = 'G' AND `user_status` = 'P'",
     'favorites' => "SELECT * FROM `likes` l JOIN `records` r ON r.record_id = l.record_id WHERE l.user_id = {$user_id} and l.like_status = 'A' ORDER BY l.like_timestamp DESC",
-    'comments' => "SELECT * FROM `comments` c JOIN `users` u ON u.user_id = c.user_id WHERE {$comment_type} = {$record_id} AND `comment_status` = 'A' ORDER BY `comment_timestamp` DESC",
-    'entries' => "SELECT * FROM `forum_entry` e JOIN `users` u ON u.user_id = e.user_id WHERE e.entry_status = 'A' ORDER BY e.entry_timestamp DESC",
+    'comments' => "SELECT c.*, u.*, l.like_status FROM `comments` c JOIN `users` u ON u.user_id = c.user_id LEFT JOIN `likes` l  ON c.comment_id = l.comment_id  AND l.user_id = {$user_id} WHERE c.{$comment_type} = {$record_id} AND comment_status = 'A' ORDER BY `comment_timestamp` DESC;",
+    'entries' => "SELECT e.*, u.*, l.like_status FROM `forum_entry` e JOIN `users` u ON u.user_id = e.user_id LEFT JOIN `likes` l  ON e.entry_id = l.entry_id  AND l.user_id = {$user_id} WHERE e.entry_status = 'A' ORDER BY e.entry_timestamp DESC",
 ];
 
 $results = $queries[$fetchType] ? query($conn, $queries[$fetchType]) : null;
@@ -101,7 +101,8 @@ if ($results) {
             'favorites' => [
                 'id' => htmlspecialchars($result['like_id'], ENT_QUOTES, 'UTF-8'),
                 'record_id' => htmlspecialchars($result['record_id'], ENT_QUOTES, 'UTF-8'),
-                'title' => htmlspecialchars($result['record_title'], ENT_QUOTES, 'UTF-8')
+                'title' => htmlspecialchars($result['record_title'], ENT_QUOTES, 'UTF-8'),
+                'likeStatus' => htmlspecialchars($result['like_status'], ENT_QUOTES, 'UTF-8')
             ],
             'comments' => [
                 'userName' => htmlspecialchars($result['user_username'], ENT_QUOTES, 'UTF-8'),
@@ -112,7 +113,8 @@ if ($results) {
                 'commentId' => htmlspecialchars($result['comment_id'], ENT_QUOTES, 'UTF-8'),
                 'commentContent' => htmlspecialchars($result['comment_content'], ENT_QUOTES, 'UTF-8'),
                 'commentTimestamp' => htmlspecialchars($result['comment_timestamp'], ENT_QUOTES, 'UTF-8'),
-                'commentLikes' => htmlspecialchars($result['comment_likes'], ENT_QUOTES, 'UTF-8')
+                'commentLikes' => htmlspecialchars($result['comment_likes'], ENT_QUOTES, 'UTF-8'),
+                'likeStatus' => htmlspecialchars($result['like_status'], ENT_QUOTES, 'UTF-8')
             ],
             'entries' => [
                 'entryId' => htmlspecialchars($result['entry_id'], ENT_QUOTES, 'UTF-8'),
@@ -125,6 +127,7 @@ if ($results) {
                 'entryContent' => htmlspecialchars($result['entry_content'], ENT_QUOTES, 'UTF-8'),
                 'entryTimestamp' => htmlspecialchars($result['entry_timestamp'], ENT_QUOTES, 'UTF-8'),
                 'entryLikes' => htmlspecialchars($result['entry_likes'], ENT_QUOTES, 'UTF-8'),
+                'likeStatus' => htmlspecialchars($result['like_status'], ENT_QUOTES, 'UTF-8')
             ],
             default => []
         };

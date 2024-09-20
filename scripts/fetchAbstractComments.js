@@ -43,6 +43,9 @@ async function displayComments(abstractId = '') {
         
                 let buttonHTML;
                 let likesHTML = '';
+
+                let liked = '';
+                liked = (dataRow.likeStatus === 'A') ? "liked " : '';
                 
                 // Change the button HTML based on the user type
                 if (type === 'admin') {
@@ -62,7 +65,7 @@ async function displayComments(abstractId = '') {
                     buttonHTML = `
                         <div class="likes-section d-flex flex-row align-items-center">
                             <button class="btn like-button px-0" data-comment-id="${dataRow.commentId}">
-                                <i class="far fa-thumbs-up mx-2 fa-xs text-body" style="margin-top: -0.16rem;"></i>
+                                <i class="fas fa-thumbs-up ${liked}mx-2 fa-xs text-body" style="margin-top: -0.16rem;"></i>
                             </button>
                             <p class="small text-muted mb-0 me-2">${dataRow.commentLikes}</p>
                         </div>

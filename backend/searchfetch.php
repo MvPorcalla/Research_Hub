@@ -8,6 +8,8 @@ include_once "../includes/db.php";
 
 header('Content-Type: application/json');
 
+$user_id = $_SESSION['user_id'];
+
 // Get the search query and filters
 $query = isset($_GET['query']) ? trim($_GET['query']) : '';
 $month = isset($_GET['month']) ? trim($_GET['month']) : '';
@@ -23,7 +25,12 @@ if (isset($_GET['record_type'])) {
         case 'record':
             
             // Base SQL query to select records which are (record_status = 'A')
-            $sql = "SELECT * FROM `records` WHERE `record_status` = 'A'";
+            $sql = "SELECT r.*, l.user_id, l.like_status
+                    FROM `records` r
+                    LEFT JOIN `likes` l 
+                        ON r.record_id = l.record_id 
+                        AND l.user_id = ?
+                    WHERE r.record_status = 'A'";
 
             // Check if a search query is provided
             if ($query !== '') {
@@ -59,15 +66,16 @@ if (isset($_GET['record_type'])) {
             $stmt = $conn->prepare($sql);
 
             // Initialize an empty array to hold the parameter values for the prepared statement
-            $params = [];
+            $params = [$user_id];
 
             // Initialize an empty string to hold the types of the parameters (e.g., "s" for strings, "i" for integers)
-            $types = '';
+            $types = 'i';
 
 
             if ($query !== '') {
                 // If a search query is provided, add it to the parameters array twice (for matching two columns)
-                $params = [$search_query, $search_query];
+                $params[] = $search_query;
+                $params[] = $search_query;
                 // Add "ss" to types (two string types for the search query parameters)
                 $types .= "ss";
             }

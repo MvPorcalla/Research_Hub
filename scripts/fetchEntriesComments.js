@@ -77,6 +77,9 @@ if (url.includes('forum.php')) {
                             disabled = ' disabled'; // Disable buttons for admin view
                         }
 
+                        let liked = '';
+                        liked = (dataRow.likeStatus === 'A') ? " liked" : '';
+
                         // Generate the HTML for each entry tile
                         let tileHTML = `
                             <div class="card row-hover pos-relative py-3 px-3 mb-3 border-warning border-top-0 border-right-0 border-bottom-0 rounded-0">
@@ -101,7 +104,7 @@ if (url.includes('forum.php')) {
                                                     <!-- Likes with Like Button -->
                                                     <div class="d-inline-block text-center me-3 likes-section">
                                                         <button class="btn btn-link p-0 ms-1 text-decoration-none like-button" data-entry-id="${dataRow.entryId}"${disabled}>
-                                                            <i class="fa-solid fa-thumbs-up"></i> Like
+                                                            <i class="fa-solid fa-thumbs-up${liked}"></i> Like
                                                         </button>
                                                         <span class="ms-2">${dataRow.entryLikes}</span>
                                                     </div>
@@ -152,7 +155,6 @@ if (url.includes('forum.php')) {
 
         // Fetch entries and comments, then get likes for each entry
         fetchEntriesComments()
-            .then(() => { getLikes(); })
             .then(() => {
                 const commentForms = document.querySelectorAll('.forum-comment-form');
 
