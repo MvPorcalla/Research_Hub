@@ -9,7 +9,7 @@ include_once "..\includes\db.php";
 header('Content-Type: application/json');
 
 // ================================= initialize $response =================================
-$response = ['status' => 'error', 'message' => '', 'role' => ''];
+$response = ['status' => 'error', 'message' => '', 'redirect' => ''];
 
 // checks if value of name="lrn" is set
 if ((isset($_POST['lrn']) || isset($_POST['email'])) && $_FILES['idImage']['error'] == '0') {
@@ -123,7 +123,11 @@ if ((isset($_POST['lrn']) || isset($_POST['email'])) && $_FILES['idImage']['erro
                 if (insert($conn, $table, $fields)) {
                     
                     $response['status'] = 'success';
-                    $response['role'] = $role_symbol;
+                    
+                    // =================== redirect according to role ===================
+                    ($role_symbol == 'G')
+                        ? $response['redirect'] = "index.php?registration=success"
+                        : $response['redirect'] = "login.php?login=registered";
 
                 } else {
                     $response['message'] = "Your registration failed. Please try again.";

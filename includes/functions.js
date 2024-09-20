@@ -25,6 +25,13 @@ function handleStatus(paramName) {
                 text: "Please log in with your credentials."
             },
         },
+        'registration': {
+            "success": {
+                icon: "success",
+                title: "Registration Complete!",
+                html: "Your registration is now awaiting admin approval.<br><small>A temporary username and password will be emailed if accepted.</small>"
+            }
+        },
         'token': {
             "invalid": {
                 icon: "warning",

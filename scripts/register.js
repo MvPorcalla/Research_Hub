@@ -26,15 +26,8 @@ async function register() {
                 confirmButtonText: 'OK'
             });
         } else {
-            // Redirect according to role
-            if (result.role == 'G') {
-
-                sessionStorage.setItem('showPendingAlert', 'true');
-                window.location.href = "index.php";
-
-            } else {
-                window.location.href = "login.php?login=registered";
-            }
+            // Redirect the user to the URL specified in the result
+            window.location.href = result.redirect;
         }
 
     } catch (error) {
