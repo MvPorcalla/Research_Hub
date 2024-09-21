@@ -21,6 +21,7 @@ document.getElementById('logoutButton').addEventListener('click', function(event
             .then(response => response.json())
             .then(data => {
                 if (data.status === 'success') {
+                    sessionStorage.clear();
                     // Redirect to index.php if logout is successful
                     window.location.href = '../../index.php';
                 } else {

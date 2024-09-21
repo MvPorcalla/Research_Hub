@@ -29,7 +29,7 @@ function handleStatus(paramName) {
             "success": {
                 icon: "success",
                 title: "Registration Complete!",
-                text: "Your registration is pending for approval by the admin."
+                html: "Your registration is now awaiting admin approval.<br><small>A temporary username and password will be emailed if accepted.</small>"
             }
         },
         'token': {
@@ -376,96 +376,6 @@ function confirmPassword(formId) {
                 text: "Please try again."
             });
         }
-    });
-}
-
-// =========================================================================
-
-// Function to fetch user likes from the database
-function getLikes() {
-    // Get the element that contains the user ID based on different possible element IDs
-    let userIdElement = document.getElementById('abstractTiles') ||
-                        document.getElementById('favoriteTiles') ||
-                        document.getElementById('commentsContainer') ||
-                        document.getElementById('entriesContainer');
-
-    // Extract the user ID from the element's data attribute, or set to null if not found
-    const userId = userIdElement ? userIdElement.getAttribute('data-user-id') : null;
-
-    const buttons = document.querySelectorAll('.like-button');
-
-    // Create an array of fetch requests to get the like status for each button
-    const requests = Array.from(buttons).map(button => {
-
-        const abstractId = button.getAttribute('data-record-id');
-        const entryId = button.getAttribute('data-entry-id');
-        const commentId = button.getAttribute('data-comment-id');
-
-        // Check if the button is associated with a record
-        if (abstractId) {
-            // Fetch like status for the record and update button appearance accordingly
-            return fetch(`../../backend/get_like_status.php?record_type=record&recordId=${abstractId}&userId=${userId}`)
-                .then(response => response.json())
-                .then(data => {
-                    // Add or remove classes based on like status
-                    if (data.like_status === 'A') {
-                        button.classList.add('btn-danger');
-                        button.classList.remove('btn-outline-danger');
-                    } else {
-                        button.classList.add('btn-outline-danger');
-                        button.classList.remove('btn-danger');
-                    }
-                })
-                .catch(error => {
-                    // Log any errors encountered during the fetch request
-                    console.error('Error fetching like status:', error);
-                });
-
-        // Check if the button is associated with an entry
-        } else if (entryId) {
-            // Fetch like status for the entry and update the icon appearance accordingly
-            return fetch(`../../backend/get_like_status.php?record_type=entry&recordId=${entryId}&userId=${userId}`)
-                .then(response => response.json())
-                .then(data => {
-                    const icon = button.querySelector('svg');
-
-                    // Add or remove 'liked' class based on like status
-                    if (data.like_status == 'A') {
-                        icon.classList.add('liked');
-                    } else {
-                        icon.classList.remove('liked');
-                    }
-                })
-                .catch(error => {
-                    // Log any errors encountered during the fetch request
-                    console.error('Error fetching like status:', error);
-                });
-
-        // Check if the button is associated with a comment
-        } else if (commentId) {
-            // Fetch like status for the comment and update the icon appearance accordingly
-            return fetch(`../../backend/get_like_status.php?record_type=comment&recordId=${commentId}&userId=${userId}`)
-                .then(response => response.json())
-                .then(data => {
-                    const icon = button.querySelector('svg');
-
-                    // Add or remove 'liked' class based on like status
-                    if (data.like_status == 'A') {
-                        icon.classList.add('liked');
-                    } else {
-                        icon.classList.remove('liked');
-                    }
-                })
-                .catch(error => {
-                    // Log any errors encountered during the fetch request
-                    console.error('Error fetching like status:', error);
-                });
-        }
-    });
-
-    // Ensure all fetch requests are completed before logging success message
-    Promise.all(requests).then(() => {
-        console.log('All like statuses updated');
     });
 }
 

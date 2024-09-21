@@ -79,7 +79,7 @@
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             handleStatus('comment');
-            displayComments().then(() => { getLikes(); });
+            displayComments();
             handleInputSubmit('commentForm', 'comment_content', 'error');
             characterCounter('comment_content', 'charCounter');
         });

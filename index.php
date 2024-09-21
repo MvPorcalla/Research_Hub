@@ -51,9 +51,7 @@
     <script src="includes\functions.js"></script>
     
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            handleStatus('registration');
-        });
+        handleStatus('registration');
     </script>
 </body>
 

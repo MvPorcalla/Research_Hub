@@ -66,7 +66,7 @@
                                                                 <th class="col-md-2">First Name</th>
                                                                 <th class="col-md-2">Middle Initial</th>
                                                                 <th class="col-md-3">LRN</th>
-                                                                <th class="col-md-2">Track/Strand</th>
+                                                                <th class="col-md-2">Strand</th>
                                                                 <th class="col-md-1">Actions</th>
                                                             </tr>
                                                         </thead>

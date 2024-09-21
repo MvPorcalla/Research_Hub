@@ -107,7 +107,7 @@ if ((isset($_POST['lrn']) || isset($_POST['email'])) && $_FILES['idImage']['erro
 
     // =========================== select rows from `users` table ===========================
     // ================= to check if with username, email is already in use =================
-    $sql = "SELECT `user_username`, `user_emailadd`
+    $sql = "SELECT `user_username`, `user_emailadd`, `user_status`
             FROM `users`
             WHERE (
                 (`user_username` = ? AND ? != '')
@@ -141,10 +141,11 @@ if ((isset($_POST['lrn']) || isset($_POST['email'])) && $_FILES['idImage']['erro
         // =========== identify which field(s) matched to an existing account ===========
         $matchedFields = [];
         foreach ($result as $key => $row) {
-            if (strcasecmp($row['user_username'], $username) === 0) $matchedFields[] = 'username';
+            if (strcasecmp($row['user_username'], $username) === 0 && $username != '') $matchedFields[] = 'username';
             if (strcasecmp($row['user_emailadd'], $email) === 0) $matchedFields[] = 'email address';
+            $addtl = ($row['user_status'] == 'P') ? " under Pending Requests" : "";
         }
-        $response['message'] = "Your entered " . implode(', ', $matchedFields) . " already exists in the database";
+        $response['message'] = "Your entered " . implode(', ', $matchedFields) . " already exists in the database{$addtl}.";
     }
 }
 // ================================ pass info to register.js ================================

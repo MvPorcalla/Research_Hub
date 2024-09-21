@@ -29,6 +29,11 @@ if (url.includes('favorites.php')) {
 
                     // Loop through the fetched data and generate HTML for each favorite record
                     data.forEach(dataRow => {
+                
+                        let button = 'btn-outline-danger';
+                        // Add or remove classes based on like status
+                        button = (dataRow.likeStatus === 'A') ? 'btn-danger' : 'btn-outline-danger';
+
                         let tileHTML = `
                             <div class="col-12 mb-2">
                                 <div class="card border-dark rounded-4">
@@ -36,7 +41,7 @@ if (url.includes('favorites.php')) {
                                         <div class="row text-center">
                                             <div class="col-md-11 d-flex align-items-center justify-content-start border-end">${dataRow.title}</div>
                                             <div class="col-md-1 d-flex align-items-center justify-content-center">
-                                                <button class="btn btn-outline-danger btn-sm mx-1 like-button" data-record-id="${dataRow.record_id}">
+                                                <button class="btn ${button} btn-sm mx-1 like-button" data-record-id="${dataRow.record_id}">
                                                     <i class="fas fa-heart"></i>
                                                 </button>
                                             </div>
@@ -56,6 +61,6 @@ if (url.includes('favorites.php')) {
         };
 
         // Call the fetchFavorites function and, once complete, invoke the getLikes function
-        fetchFavorites().then(() => { getLikes(); });
+        fetchFavorites();
     });
 }
