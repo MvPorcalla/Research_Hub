@@ -12,7 +12,7 @@ function sanitizeFilename($filename) {
 }
 
 // Check if the form is submitted with a title and a file upload status
-if (isset($_POST['title']) && !isset($_FILES['file'])) {
+if (isset($_POST['title'])) {
 
     // Assign form values to variables
     $a_title = trim($_POST['title']);
@@ -85,7 +85,7 @@ if (isset($_POST['title']) && !isset($_FILES['file'])) {
             $fields['record_status'] = 'A';
 
             // Check if the title already exists
-            $sql = "SELECT `record_id`, `record_title` FROM `records` WHERE `record_title` = ?";
+            $sql = "SELECT `record_id`, `record_title` FROM `records` WHERE `record_title` = ? AND `record_status` = 'A'";
             $filter = [$a_title];
             $result = query($conn, $sql, $filter);
 

@@ -16,7 +16,7 @@
 
 <body>
     <!-- header -->
-    <?php include './../admin/components/header.php'; ?>
+    <?php include './../user/components/header.php'; ?>
 
     <!-- main content with sidebar -->
     <div class="container-fluid">
