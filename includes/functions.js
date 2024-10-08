@@ -431,19 +431,23 @@ function handleInputSubmit(formId, inputId, errorId) {
                     
                     const commentsContainer = document.getElementById('commentsContainer');
                     const commentSection = document.getElementById(`comment-section-${entry_id}`);
-                    const commentsElement = document.getElementById(`comments-${entry_id}`);
+
+                    let tileHTML = '';
 
                     const noComments = (commentsContainer) ? commentsContainer.querySelector('.no-comments') : commentSection.querySelector('.no-comments');
                     if (noComments) {
                         noComments.remove();
                         if (commentSection) {
-                            commentSection.innerHTML = `
+                            tileHTML = `
                                 <div id="comments-${entry_id}" class="card-body">
                                     <!-- Data will be dynamically inserted here -->
                                 </div>
                             `;
+                            commentSection.insertAdjacentHTML("beforeend", tileHTML);
                         }
                     }
+
+                    const commentsElement = document.getElementById(`comments-${entry_id}`);
 
                     // Build the user's full name
                     const mi = (user_mi == '') ? '' : `${user_mi}. `;
@@ -452,8 +456,6 @@ function handleInputSubmit(formId, inputId, errorId) {
                     const timestamp = comment_timestamp;
                     const timePassed = timeAgo(timestamp); // Calculate the time passed since the entry was posted
                     const formattedDateTime = formatDateTime(timestamp); // Format the timestamp for display
-
-                    let tileHTML = '';
 
                     if (commentsContainer) {
                         // Construct the HTML for each comment card
