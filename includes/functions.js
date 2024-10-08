@@ -427,7 +427,7 @@ function handleInputSubmit(formId, inputId, errorId) {
                 if (result.status === 'success') {
                     commentForm.reset();
 
-                    const { record_id, entry_id, user_id, user_username, user_idpicture_imgdir, user_lastname, user_firstname, user_mi, comment_id, comment_content, comment_timestamp } = result.data;
+                    const { record_id, entry_id, user_id, user_username, user_idpicture_imgdir, user_lastname, user_firstname, user_mi, comment_id, comment_content, comment_timestamp, comment_likes, like_status } = result.data;
                     
                     const commentsContainer = document.getElementById('commentsContainer');
                     const commentSection = document.getElementById(`comment-section-${entry_id}`);
@@ -457,6 +457,9 @@ function handleInputSubmit(formId, inputId, errorId) {
                     const timePassed = timeAgo(timestamp); // Calculate the time passed since the entry was posted
                     const formattedDateTime = formatDateTime(timestamp); // Format the timestamp for display
 
+                    let liked = '';
+                    liked = (like_status === 'A') ? "liked " : '';
+
                     if (commentsContainer) {
                         // Construct the HTML for each comment card
                         tileHTML = `
@@ -467,11 +470,12 @@ function handleInputSubmit(formId, inputId, errorId) {
                                             <img title="${fullName}" src="../${user_idpicture_imgdir}" alt="${user_username}" class="img-fluid rounded-circle" style="width: 25px; height: 25px;" />
                                             <p title="${fullName}" class="small mb-0 ms-2">${user_username}</p>
                                         </div>
-                                        <div class="d-flex flex-row align-items-center">
-                                            <button class="btn px-0" onclick="window.location.href='../../backend/delete.php?abstract_id=${record_id}&comment_id=${comment_id}'">
-                                                <i class="fas fa-trash mx-2 fa-xs text-body" style="margin-top: -0.16rem;"></i>
-                                            </button>
-                                        </div>
+                        <div class="likes-section d-flex flex-row align-items-center">
+                            <button class="btn like-button px-0" data-comment-id="${comment_id}">
+                                <i class="fas fa-thumbs-up ${liked}mx-2 fa-xs text-body" style="margin-top: -0.16rem;"></i>
+                            </button>
+                            <p class="small text-muted mb-0 me-2">${comment_likes}</p>
+                        </div>
                                     </div>
                                     <p class="text-start">${comment_content}</p>
                                     <div class="d-flex justify-content-between">

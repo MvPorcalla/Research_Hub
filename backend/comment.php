@@ -29,10 +29,11 @@ if (isset($_POST['comment_content'])) {
         $response['status'] = $status;
 
         if ($status == 'success') {
-            $sql = "SELECT *
+            $sql = "SELECT c.*, u.*, l.like_status
                     FROM `comments` c
                     JOIN `users` u ON u.user_id = c.user_id
-                    WHERE {$key} = ?
+                    LEFT JOIN `likes` l  ON c.comment_id = l.comment_id  AND l.user_id = {$user_id}
+                    WHERE c.{$key} = ?
                     AND u.`user_id` = ?
                     AND c.`comment_content` = ?
                     AND c.`comment_status` = 'A'";
