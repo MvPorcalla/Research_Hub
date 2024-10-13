@@ -31,7 +31,7 @@
                                 <!-- Data will be dynamically inserted here -->
                             </div>
                         </div>
-                    </div>
+                    </div>                    
                 </main>
             </div>
         </div>

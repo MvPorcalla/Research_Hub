@@ -28,13 +28,26 @@ if (url.includes('pendingRequest.php')) {
                                     <div class="card-body d-flex flex-column mx-2">
                                         <div class="row mt-2">
                                             <div class="col-md-3">
-                                                <img src="../${dataRow.userIdImage}" alt="image" class="rounded-circle me-3" style="width: 90px; height: 90px;">
+                                                <a href="#" data-bs-toggle="modal" data-bs-target="#imageModal">
+                                                    <img src="../${dataRow.userIdImage}" alt="image" class="me-3" style="width: 90px; height: 90px;">
+                                                </a>
                                             </div>
 
                                             <div class="col-md-9 text-start">
                                                 <h4 class="card-title fw-bold flex-grow-1">${dataRow.fname} ${dataRow.mi}. ${dataRow.lname}</h4>
                                                 <h5 class="card-text">${dataRow.email}</h5>
                                                 <p class="card-text">${dataRow.school}</p>
+                                            </div>
+                                        </div>
+
+                                        <!-- Modal for ID Image -->
+                                        <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered">
+                                                <div class="modal-content bg-transparent border-0">
+                                                    <div class="modal-body d-flex justify-content-center">
+                                                        <img src="../${dataRow.userIdImage}" alt="image" class="img-fluid w-100">
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
 
