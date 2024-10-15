@@ -427,7 +427,7 @@ function handleInputSubmit(formId, inputId, errorId) {
                 if (result.status === 'success') {
                     commentForm.reset();
 
-                    const { record_id, entry_id, user_id, user_username, user_idpicture_imgdir, user_lastname, user_firstname, user_mi, comment_id, comment_content, comment_timestamp, comment_likes, like_status } = result.data;
+                    const { record_id, entry_id, user_id, user_username, user_idpicture_imgdir, user_profilepic_imgdir, user_lastname, user_firstname, user_mi, comment_id, comment_content, comment_timestamp, comment_likes, like_status } = result.data;
                     
                     const commentsContainer = document.getElementById('commentsContainer');
                     const commentSection = document.getElementById(`comment-section-${entry_id}`);
@@ -467,7 +467,7 @@ function handleInputSubmit(formId, inputId, errorId) {
                                 <div class="card-body">
                                     <div class="d-flex justify-content-between mb-2">
                                         <div class="d-flex flex-row align-items-center">
-                                            <img title="${fullName}" src="../${user_idpicture_imgdir}" alt="${user_username}" class="img-fluid rounded-circle" style="width: 25px; height: 25px;" />
+                                            <img title="${fullName}" src="../${user_profilepic_imgdir}" alt="${user_username}" class="img-fluid rounded-circle" style="width: 25px; height: 25px;" />
                                             <p title="${fullName}" class="small mb-0 ms-2">${user_username}</p>
                                         </div>
                         <div class="likes-section d-flex flex-row align-items-center">
@@ -493,7 +493,7 @@ function handleInputSubmit(formId, inputId, errorId) {
                         tileHTML = `
                             <div class="row">
                                 <div class="comment d-flex col-md-10">
-                                    <img src="../${user_idpicture_imgdir}" alt="${user_username}" class="img-fluid rounded-circle me-3" style="width: 30px; height: 30px;">
+                                    <img src="../${user_profilepic_imgdir}" alt="${user_username}" class="img-fluid rounded-circle me-3" style="width: 30px; height: 30px;">
                                     <p><strong>${user_username}:</strong> ${comment_content}</p>
                                     <hr>
                                 </div>

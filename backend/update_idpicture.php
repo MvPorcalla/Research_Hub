@@ -54,7 +54,7 @@ if (isset($_FILES['profilePic']) && isset($_SESSION['user_id'])) {
 
                     // Create a new PNG file name
                     $fileName = $lastname . ', ' . $firstname . ' ' . $mi . '.png';
-                    $uploadDir = '../uploads/idImages/';
+                    $uploadDir = '../uploads/profilePictures/';
                     $uploadFile = $uploadDir . $fileName;
 
                     // Save the image as PNG
@@ -68,7 +68,7 @@ if (isset($_FILES['profilePic']) && isset($_SESSION['user_id'])) {
                 } else {
                     // If already PNG, just move the uploaded file
                     $fileName = $lastname . ', ' . $firstname . ' ' . $mi . '.png';
-                    $uploadDir = '../uploads/idImages/';
+                    $uploadDir = '../uploads/profilePictures/';
                     $uploadFile = $uploadDir . $fileName;
 
                     if (move_uploaded_file($file['tmp_name'], $uploadFile)) {
@@ -81,7 +81,7 @@ if (isset($_FILES['profilePic']) && isset($_SESSION['user_id'])) {
                 }
 
                 // Update the database with the new file path
-                $sql = "UPDATE users SET user_idpicture_imgdir = ? WHERE user_id = ?";
+                $sql = "UPDATE users SET user_profilepic_imgdir = ? WHERE user_id = ?";
                 if ($stmt = $conn->prepare($sql)) {
                     $stmt->bind_param('si', $uploadFile, $user_id); // 's' for string, 'i' for integer
                     if ($stmt->execute()) {

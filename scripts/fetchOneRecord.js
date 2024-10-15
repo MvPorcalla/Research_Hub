@@ -90,7 +90,7 @@ document.addEventListener('DOMContentLoaded', async function() {
         } else if (idType === 'userId') {
             // Populate fields for user profile
             const mi = (data.user_mi == '') ? ' ' : data.user_mi + '. ';
-            document.getElementById('idImage').src = `../${data.user_idpicture_imgdir}`;
+            document.getElementById('idImage').src = `../${data.user_profilepic_imgdir}`;
             document.getElementById('completeName').textContent = `${data.user_firstname} ${mi}${data.user_lastname}`;
             document.getElementById('userName').textContent = `@${data.user_username}`;
             document.getElementById('emailAdd').textContent = data.user_emailadd;
