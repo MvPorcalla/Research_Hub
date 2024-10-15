@@ -50,9 +50,9 @@ if (url.includes('forum.php')) {
                         // Generate the HTML for the entry poster (user who posted the entry)
                         let entryPoster = `
                             <div class="d-flex align-items-center">
-                                <img src="../${dataRow.imgDir}" alt="${dataRow.userName}" title="${fullName}" class="img-fluid rounded-circle me-3" style="width: 50px; height: 50px;">
+                                <img src="../${dataRow.profilePic}" alt="${dataRow.userName}" title="${fullName}" class="img-fluid rounded-circle me-3" style="width: 50px; height: 50px;">
                                 <div>
-                                    <h4 title="${fullName}" class="mb-0">@${dataRow.userName}</h4>
+                                    <h4 title="${fullName}" class="mb-0 text-primary fw-semibold">@${dataRow.userName}</h4>
                                     <p title="${formattedDateTime}" class="ms-1 mb-0">${timePassed}</p>
                                 </div>
                             </div>
@@ -218,7 +218,7 @@ async function displayCommentsForEntry(entryId, entryComments) {
                 
                 // Loop through each comment and create HTML for each
                 data.forEach(comment => {
-                    const { userIdImage, userName, commentContent, commentTimestamp } = comment;
+                    const { userProfilePic, userName, commentContent, commentTimestamp } = comment;
                     const commentTimePassed = timeAgo(commentTimestamp); // Calculate the time passed since the entry was posted
                     const commentFormattedDateTime = formatDateTime(commentTimestamp); // Format the timestamp for display
 
@@ -226,7 +226,7 @@ async function displayCommentsForEntry(entryId, entryComments) {
                     let tileHTML = `
                         <div class="row">
                             <div class="comment d-flex col-md-10">
-                                <img src="../${userIdImage}" alt="${userName}" class="img-fluid rounded-circle me-3" style="width: 30px; height: 30px;">
+                                <img src="../${userProfilePic}" alt="${userName}" class="img-fluid rounded-circle me-3" style="width: 30px; height: 30px;">
                                 <p><strong>${userName}:</strong> ${commentContent}</p>
                                 <hr>
                             </div>

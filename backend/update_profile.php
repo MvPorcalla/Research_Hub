@@ -59,11 +59,11 @@
         }
 
         // Prepare fields for database update
-        $old_imgdir = $current['user_idpicture_imgdir'];
+        $old_imgdir = $current['user_profilepic_imgdir'];
         $fileext = pathinfo($old_imgdir, PATHINFO_EXTENSION); //[ext]
 
         $new_filename = "{$lastname}, {$firstname} {$mi}";
-        $new_imgdir = "../uploads/idImages/{$new_filename}.{$fileext}";
+        $new_imgdir = "../uploads/profilePictures/{$new_filename}.{$fileext}";
 
         // Attempt to rename the file
         if (!rename($old_imgdir, $new_imgdir)) {
@@ -80,7 +80,7 @@
             'user_mi' => $mi,
             'user_username' => $username,
             'user_emailadd' => $email,
-            'user_idpicture_imgdir' => $new_imgdir
+            'user_profilepic_imgdir' => $new_imgdir
         ];
         $filter = ['user_id' => $_SESSION['user_id']];
 

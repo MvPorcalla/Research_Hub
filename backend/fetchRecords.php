@@ -30,13 +30,14 @@ if ($fetchType == 'entries' && isset($_GET['entry_id'])) {
             'entryId' => htmlspecialchars($row['entry_id'], ENT_QUOTES, 'UTF-8'),
             'userId' => htmlspecialchars($row['user_id'], ENT_QUOTES, 'UTF-8'),
             'userName' => htmlspecialchars($row['user_username'], ENT_QUOTES, 'UTF-8'),
-            'imgDir' => htmlspecialchars($row['user_idpicture_imgdir'], ENT_QUOTES, 'UTF-8'),
+            'profilePic' => htmlspecialchars($row['user_profilepic_imgdir'], ENT_QUOTES, 'UTF-8'),
             'lastName' => htmlspecialchars($row['user_lastname'], ENT_QUOTES, 'UTF-8'),
             'firstName' => htmlspecialchars($row['user_firstname'], ENT_QUOTES, 'UTF-8'),
             'mi' => htmlspecialchars($row['user_mi'], ENT_QUOTES, 'UTF-8'),
             'entryContent' => htmlspecialchars($row['entry_content'], ENT_QUOTES, 'UTF-8'),
             'entryTimestamp' => htmlspecialchars($row['entry_timestamp'], ENT_QUOTES, 'UTF-8'),
             'entryLikes' => htmlspecialchars($row['entry_likes'], ENT_QUOTES, 'UTF-8'),
+            'likeStatus' => htmlspecialchars($result['like_status'], ENT_QUOTES, 'UTF-8')
         ];
     }
 }
@@ -109,7 +110,7 @@ if ($results) {
                 'lastName' => htmlspecialchars($result['user_lastname'], ENT_QUOTES, 'UTF-8'),
                 'firstName' => htmlspecialchars($result['user_firstname'], ENT_QUOTES, 'UTF-8'),
                 'middleInitial' => htmlspecialchars($result['user_mi'], ENT_QUOTES, 'UTF-8'),
-                'userIdImage' => htmlspecialchars($result['user_idpicture_imgdir'], ENT_QUOTES, 'UTF-8'),
+                'userProfilePic' => htmlspecialchars($result['user_profilepic_imgdir'], ENT_QUOTES, 'UTF-8'),
                 'commentId' => htmlspecialchars($result['comment_id'], ENT_QUOTES, 'UTF-8'),
                 'commentContent' => htmlspecialchars($result['comment_content'], ENT_QUOTES, 'UTF-8'),
                 'commentTimestamp' => htmlspecialchars($result['comment_timestamp'], ENT_QUOTES, 'UTF-8'),
@@ -120,7 +121,7 @@ if ($results) {
                 'entryId' => htmlspecialchars($result['entry_id'], ENT_QUOTES, 'UTF-8'),
                 'userId' => htmlspecialchars($result['user_id'], ENT_QUOTES, 'UTF-8'),
                 'userName' => htmlspecialchars($result['user_username'], ENT_QUOTES, 'UTF-8'),
-                'imgDir' => htmlspecialchars($result['user_idpicture_imgdir'], ENT_QUOTES, 'UTF-8'),
+                'profilePic' => htmlspecialchars($result['user_profilepic_imgdir'], ENT_QUOTES, 'UTF-8'),
                 'lastName' => htmlspecialchars($result['user_lastname'], ENT_QUOTES, 'UTF-8'),
                 'firstName' => htmlspecialchars($result['user_firstname'], ENT_QUOTES, 'UTF-8'),
                 'mi' => htmlspecialchars($result['user_mi'], ENT_QUOTES, 'UTF-8'),

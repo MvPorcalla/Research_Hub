@@ -78,7 +78,7 @@ async function displayComments(abstractId = '') {
                         <div class="card-body">
                             <div class="d-flex justify-content-between mb-2">
                                 <div class="d-flex flex-row align-items-center">
-                                    <img title="${fullName}" src="../${dataRow.userIdImage}" alt="${dataRow.userName}" class="img-fluid rounded-circle" style="width: 25px; height: 25px;" />
+                                    <img title="${fullName}" src="../${dataRow.userProfilePic}" alt="${dataRow.userName}" class="img-fluid rounded-circle" style="width: 25px; height: 25px;" />
                                     <p title="${fullName}" class="small mb-0 ms-2">${dataRow.userName}</p>
                                 </div>
                                 ${buttonHTML}
