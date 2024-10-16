@@ -28,7 +28,7 @@ if (url.includes('pendingRequest.php')) {
                                     <div class="card-body d-flex flex-column mx-2">
                                         <div class="row mt-2">
                                             <div class="col-md-3">
-                                                <a href="#" data-bs-toggle="modal" data-bs-target="#imageModal">
+                                                <a href="#" data-bs-toggle="modal" data-bs-target="#imageModal_${dataRow.id}">
                                                     <img src="../${dataRow.userIdImage}" alt="image" class="me-3" style="width: 90px; height: 90px;">
                                                 </a>
                                             </div>
@@ -41,7 +41,7 @@ if (url.includes('pendingRequest.php')) {
                                         </div>
 
                                         <!-- Modal for ID Image -->
-                                        <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
+                                        <div class="modal fade" id="imageModal_${dataRow.id}" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
                                             <div class="modal-dialog modal-dialog-centered">
                                                 <div class="modal-content bg-transparent border-0">
                                                     <div class="modal-body d-flex justify-content-center">
