@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 15, 2024 at 09:20 PM
+-- Generation Time: Oct 16, 2024 at 04:13 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -133,6 +133,7 @@ CREATE TABLE `users` (
   `user_emailadd` varchar(64) NOT NULL,
   `user_trackstrand` varchar(5) DEFAULT NULL COMMENT 'ABM / HUMMS / STEM',
   `user_idpicture_imgdir` varchar(256) NOT NULL,
+  `user_profilepic_imgdir` varchar(256) NOT NULL DEFAULT '../uploads/profilePictures/no_profile.jpg',
   `user_school` varchar(128) DEFAULT NULL,
   `user_reason` varchar(512) DEFAULT NULL,
   `user_pwdhash` varchar(128) NOT NULL,
