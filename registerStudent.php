@@ -42,15 +42,15 @@
                                         <!-- Name, Last Name, M.I. -->
                                         <div class="row mb-3">
                                             <div class="col-md-5">
-                                                <label for="lastName" class="form-label">Last Name</label>
-                                                <input type="text" class="form-control" id="lastName" name="lastName" required>
+                                                <label for="lastName" class="form-label required">Last Name</label>
+                                                <input type="text" class="form-control  required" id="lastName" name="lastName" required>
                                             </div>
                                             <div class="col-md-5">
-                                                <label for="firstName" class="form-label">First Name</label>
+                                                <label for="firstName" class="form-label required">First Name</label>
                                                 <input type="text" class="form-control" id="firstName" name="firstName" required>
                                             </div>
                                             <div class="col-md-2">
-                                                <label for="middleInitial" class="form-label">M.I.</label>
+                                                <label for="middleInitial" class="form-label required">M.I.</label>
                                                 <input type="text" class="form-control" id="middleInitial" name="middleInitial" maxlength="1">
                                             </div>
                                         </div>
@@ -58,24 +58,24 @@
                                         <!-- Username and Email -->
                                         <div class="row mb-3">
                                             <div class="col-md-6">
-                                                <label for="username" class="form-label">Username</label>
+                                                <label for="username" class="form-label required">Username</label>
                                                 <input type="text" class="form-control" id="username" name="username" required>
                                             </div>
                                             <div class="col-md-6">
-                                                <label for="email" class="form-label">Email Address</label>
+                                                <label for="email" class="form-label required">Email Address</label>
                                                 <input type="email" class="form-control" id="email" name="email" required>
                                             </div>
                                         </div>
 
                                         <!-- LRN / Student Number -->
                                         <div class="mb-3">
-                                            <label for="lrn" class="form-label">Leaner's Reference Number (LRN)</label>
+                                            <label for="lrn" class="form-label required">Leaner's Reference Number (LRN)</label>
                                             <input type="text" class="form-control" id="lrn" name="lrn" maxlength="12" required>
                                         </div>
 
                                         <!-- Strand -->
                                         <div class="mb-3">
-                                            <label for="trackStrand" class="form-label">Strand</label>
+                                            <label for="trackStrand" class="form-label required">Strand</label>
                                             <select class="form-control" id="trackStrand" name="trackStrand" required>
                                                 <option value="" disabled selected>Select your Strand</option>
                                                 <option value="STEM">STEM (Science, Technology, Engineering, and Mathematics)</option>
@@ -86,18 +86,18 @@
 
                                         <!-- Upload ID Image -->
                                         <div class="mb-3">
-                                            <label for="idImage" class="form-label">Upload ID Image</label>
+                                            <label for="idImage" class="form-label required">Upload ID Image</label>
                                             <input type="file" class="form-control" id="idImage" name="idImage" accept="image/*" required>
                                         </div>
 
                                         <!-- Password and Confirm Password -->
                                         <div class="row mb-3">
                                             <div class="col-md-6">
-                                                <label for="password" class="form-label">Password</label>
+                                                <label for="password" class="form-label required">Password</label>
                                                 <input type="password" class="form-control" id="password" name="password" required>
                                             </div>
                                             <div class="col-md-6">
-                                                <label for="confirmPassword" class="form-label">Confirm Password</label>
+                                                <label for="confirmPassword" class="form-label required">Confirm Password</label>
                                                 <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" required>
                                             </div>
                                         </div>

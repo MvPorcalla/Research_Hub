@@ -92,6 +92,11 @@ main {
   background-color: var(--bg-base-lt);
 }
 
+.input-group {
+  position: relative; /* Ensures .suggestion-text is bounded by this container */
+  overflow: hidden; /* Prevents any content overflow */
+}
+
 .suggestion-text {
   position: absolute;
   top: 0;
@@ -119,6 +124,13 @@ main {
   overflow: hidden; /* Hide the overflowing text */
   text-overflow: ellipsis; /* Show ellipsis (...) for overflowing text */
 }
+
+/* registration Required fields (*) */
+.required::after {
+  content: " *";
+  color: red;
+}
+
 
 
 

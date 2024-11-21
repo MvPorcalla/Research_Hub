@@ -27,7 +27,7 @@
                         <h3>Sign Up</h3>
                     </div>
                     <div class="row justify-content-center">
-                        <div class="col-md-6">
+                        <div class="col-md-10">
                             <div class="card bg-transparent">
 
                                 <div class="card-body mx-5">
@@ -40,15 +40,15 @@
                                         <!-- Name, Last Name, M.I. -->
                                         <div class="row mb-3">
                                             <div class="col-md-5">
-                                                <label for="lastName" class="form-label">Last Name</label>
+                                                <label for="lastName" class="form-label required">Last Name</label>
                                                 <input type="text" class="form-control" id="lastName" name="lastName" required>
                                             </div>
                                             <div class="col-md-5">
-                                                <label for="firstName" class="form-label">First Name</label>
+                                                <label for="firstName" class="form-label required">First Name</label>
                                                 <input type="text" class="form-control" id="firstName" name="firstName" required>
                                             </div>
                                             <div class="col-md-2">
-                                                <label for="middleInitial" class="form-label">M.I.</label>
+                                                <label for="middleInitial" class="form-label required">M.I.</label>
                                                 <input type="text" class="form-control" id="middleInitial" name="middleInitial" maxlength="1">
                                             </div>
                                         </div>
@@ -56,7 +56,7 @@
                                         <!-- Username -->
                                         <div class="row mb-3">
                                             <div class="col-md-12">
-                                                <label for="username" class="form-label">Username</label>
+                                                <label for="username" class="form-label required">Username</label>
                                                 <input type="text" class="form-control" id="username" name="username" required>
                                             </div>
                                         </div>
@@ -64,25 +64,25 @@
                                         <!-- Email -->
                                         <div class="row mb-3">
                                             <div class="col-md-12">
-                                                <label for="email" class="form-label">Email Address</label>
+                                                <label for="email" class="form-label required">Email Address</label>
                                                 <input type="email" class="form-control" id="email" name="email" required>
                                             </div>
                                         </div>
 
                                         <!-- Upload ID Image -->
                                         <div class="mb-3">
-                                            <label for="idImage" class="form-label">Upload ID Image</label>
+                                            <label for="idImage" class="form-label required">Upload ID Image</label>
                                             <input type="file" class="form-control" id="idImage" name="idImage" accept="image/*" required>
                                         </div>
 
                                         <!-- Password and Confirm Password -->
                                         <div class="row mb-3">
                                             <div class="col-md-6">
-                                                <label for="password" class="form-label">Password</label>
+                                                <label for="password" class="form-label required">Password</label>
                                                 <input type="password" class="form-control" id="password" name="password" required>
                                             </div>
                                             <div class="col-md-6">
-                                                <label for="confirmPassword" class="form-label">Confirm Password</label>
+                                                <label for="confirmPassword" class="form-label required">Confirm Password</label>
                                                 <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" required>
                                             </div>
                                         </div>
