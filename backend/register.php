@@ -11,8 +11,8 @@ header('Content-Type: application/json');
 // ================================= initialize $response =================================
 $response = ['status' => 'error', 'message' => '', 'redirect' => ''];
 
-// checks if value of name="lrn" is set
-if ((isset($_POST['lrn']) || isset($_POST['email'])) && $_FILES['idImage']['error'] == '0') {
+// checks if email from form is set and if idImage was uploaded successfully
+if (isset($_POST['email']) && $_FILES['idImage']['error'] == '0') {
 
     // ======================== transfer value from form to variable ========================
     $role_symbol = $_POST['role'];
@@ -26,6 +26,7 @@ if ((isset($_POST['lrn']) || isset($_POST['email'])) && $_FILES['idImage']['erro
 
     $lrn = trim($_POST['lrn'] ?? NULL);
     $trackStrand = trim($_POST['trackStrand'] ?? NULL);
+    $employee_number = trim($_POST['employee_number'] ?? NULL);
     $school = trim($_POST['school'] ?? NULL);
     $reason = trim($_POST['reason'] ?? NULL);
 
@@ -85,8 +86,12 @@ if ((isset($_POST['lrn']) || isset($_POST['email'])) && $_FILES['idImage']['erro
                 WHERE `lrn_lrnid` = ?
                 AND `lrn_lastname` = ?
                 AND `lrn_firstname` = ?
-                AND `lrn_mi` = ?";
-        $filter = [$lrn, $lastName, $firstName, $middleInitial];
+                AND `lrn_mi` ";
+        $sql .= ($middleInitial == '') ? "IS NULL" : "= ?";
+        
+        $filter = [$lrn, $lastName, $firstName];
+        if ($middleInitial != '') $filter[] = $middleInitial;
+
         $result = query($conn, $sql, $filter);
 
         // ============================== if result is empty ==============================
@@ -94,7 +99,7 @@ if ((isset($_POST['lrn']) || isset($_POST['email'])) && $_FILES['idImage']['erro
         if (empty($result)) {
     
             $response['message'] = "
-                Your name and/or LRN do not match any record in the database.<br>
+                The provided name or LRN does not match any records in the database.<br>
                 <small>Ensure your details are correct. Please contact the admin if you believe there has been a mistake.</small>
             ";
             echo json_encode($response);
@@ -103,6 +108,40 @@ if ((isset($_POST['lrn']) || isset($_POST['email'])) && $_FILES['idImage']['erro
         }
         // ========== add keys and values to fields argument for insert() function ==========
         $fields['lrn_id'] = $result[0]['lrn_id'];
+    }
+
+    if ($role_symbol == 'T') {
+        
+        // =============== select row from `teachers` table with matching details ===============
+        // ========================= to check if details are valid =========================
+        $sql = "SELECT *
+                FROM `teachers`
+                WHERE `teacher_depedno` = ?
+                AND `teacher_lastname` = ?
+                AND `teacher_firstname` = ?
+                AND `teacher_mi` ";
+        $sql .= ($middleInitial == '') ? "IS NULL" : "= ?";
+
+        $filter = [$employee_number, $lastName, $firstName];
+        if ($middleInitial != '') $filter[] = $middleInitial;
+
+        $result = query($conn, $sql, $filter);
+
+        // ============================== if result is empty ==============================
+        // ================================ warn: no match ================================
+        if (empty($result)) {
+    
+            $response['message'] = "
+                $employee_number, $lastName, $firstName, $middleInitial <br>
+                The provided name or employee number does not match any records in the database.<br>
+                <small>Ensure your details are correct. Please contact the admin if you believe there has been a mistake.</small>
+            ";
+            echo json_encode($response);
+            exit();
+
+        }
+        // ========== add keys and values to fields argument for insert() function ==========
+        $fields['teacher_id'] = $result[0]['teacher_id'];
     }
 
     // =========================== select rows from `users` table ===========================

@@ -53,20 +53,22 @@
                                             </div>
                                         </div>
 
-                                        <!-- Username -->
+                                        <!-- Username and Email -->
                                         <div class="row mb-3">
-                                            <div class="col-md-12">
+                                            <div class="col-md-6">
                                                 <label for="username" class="form-label required">Username</label>
                                                 <input type="text" class="form-control" id="username" name="username" required>
                                             </div>
-                                        </div>
-
-                                        <!-- Email -->
-                                        <div class="row mb-3">
-                                            <div class="col-md-12">
+                                            <div class="col-md-6">
                                                 <label for="email" class="form-label required">Email Address</label>
                                                 <input type="email" class="form-control" id="email" name="email" required>
                                             </div>
+                                        </div>
+
+                                        <!-- DepEd Employee Number -->
+                                        <div class="mb-3">
+                                            <label for="employee_number" class="form-label required">DepEd Employee Number</label>
+                                            <input type="text" class="form-control" id="employee_number" name="employee_number" maxlength="7" required>
                                         </div>
 
                                         <!-- Upload ID Image -->
