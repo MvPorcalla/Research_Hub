@@ -2,7 +2,7 @@
 ini_set('log_errors', 1);
 ini_set('error_log', '../error_log.log');
 
-include_once "..\includes\db.php";
+include_once "../includes/db.php";
 
 header('Content-Type: application/json');
 

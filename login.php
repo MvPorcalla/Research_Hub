@@ -44,7 +44,7 @@
                 
                 <div class="card-body p-4">
                     <h3 class="login_card-title text-center mt-3 mb-4">Login</h3>
-                    <form action="backend\login.php" method="POST">
+                    <form action="backend/login.php" method="POST">
                         <div class="mb-3">
                             <label for="username" class="form-label">Username</label>
                             <input type="text" class="form-control" id="username" name="username" placeholder="Enter username" required>
@@ -75,7 +75,7 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="includes\functions.js"></script>
+    <script src="includes/functions.js"></script>
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {

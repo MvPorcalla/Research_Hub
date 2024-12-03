@@ -3,7 +3,7 @@ ini_set('log_errors', 1);
 ini_set('error_log', '../error_log.log');
 
 // ==================================== data connection ====================================
-include_once "..\includes\db.php";
+include_once "../includes/db.php";
 
 // ================================ Set content type to JSON ================================
 header('Content-Type: application/json');

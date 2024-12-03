@@ -32,7 +32,7 @@
                                 <div class="card border border-dark rounded-5 bg-transparent">
                                     <div class="card-body mx-5 text-start">
 
-                                        <form id="recordForm" action="..\..\backend\abstract.php" method="POST" enctype="multipart/form-data">
+                                        <form id="recordForm" action="../../backend/abstract.php" method="POST" enctype="multipart/form-data">
 
                                             <!-- Title -->
                                             <div class="row mb-3">

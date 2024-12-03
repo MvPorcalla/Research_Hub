@@ -1,5 +1,5 @@
 <?php
-include_once "..\..\includes\db.php";
+include_once "../../includes/db.php";
 
 $userId = $_SESSION['user_id'];
 $abstractId = $_GET['abstractId'];

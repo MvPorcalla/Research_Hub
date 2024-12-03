@@ -32,7 +32,7 @@
                             <div class="col-md-7">
                                 <div class="card border border-dark rounded-4 bg-transparent">
                                     <div class="card-body mx-5 text-start">
-                                        <form id="lrnForm" action="..\..\backend\lrn.php" method="POST">
+                                        <form id="lrnForm" action="../../backend/lrn.php" method="POST">
 
                                             <!-- Full name -->
                                             <div class="row mb-4">
