@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title id="lrnTitle">Add LRN - LNHS Research Hub</title>
+    <title id="employeeTitle">Add DepEd Employee Number - LNHS Research Hub</title>
     <?php include './../admin/includes/links_head-css.php'; ?>
 </head>
 
@@ -26,13 +26,13 @@
                 <div class="container">
                     <div class="row">
                         <div class="mt-5 mb-3">
-                            <h1 id="lrnSubtitle" class='admin-subtitle'>Add Student LRN</h1>
+                            <h1 id="employeeSubtitle" class='admin-subtitle'>Add DepEd Employee Number</h1>
                         </div>
                         <div class="row justify-content-center">
                             <div class="col-md-7">
                                 <div class="card border border-dark rounded-4 bg-transparent">
                                     <div class="card-body mx-5 text-start">
-                                        <form id="lrnForm" action="../../backend/lrn.php" method="POST">
+                                        <form id="employeeForm" action="../../backend/employee_no.php" method="POST">
 
                                             <!-- Full name -->
                                             <div class="row mb-4">
@@ -51,10 +51,10 @@
                                             </div>
 
                                             <div class="row mb-4">
-                                                <!-- LRN / Student Number -->
+                                                <!-- DepEd Employee Number -->
                                                 <div class="col-md-12">
-                                                    <label for="lrn" class="form-label fw-bold">LRN / Student Number</label>
-                                                    <input type="text" class="form-control" pattern="\d{12}" minlength="12" maxlength="12" id="lrn" name="lrn" required>
+                                                    <label for="employeeNo" class="form-label fw-bold">DepEd Employee Number</label>
+                                                    <input type="text" pattern="\d{7}" minlength="7" maxlength="7" class="form-control" id="employeeNo" name="employeeNo" required>
                                                 </div>
                                             </div>
 
