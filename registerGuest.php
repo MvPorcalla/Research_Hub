@@ -50,7 +50,7 @@
                                                 <input type="text" class="form-control" id="firstName" name="firstName" required>
                                             </div>
                                             <div class="col-md-2">
-                                                <label for="middleInitial" class="form-label required">M.I.</label>
+                                                <label for="middleInitial" class="form-label">M.I.</label>
                                                 <input type="text" class="form-control" id="middleInitial" name="middleInitial" maxlength="1">
                                             </div>
                                         </div>

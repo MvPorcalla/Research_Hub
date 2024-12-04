@@ -12,7 +12,7 @@ header('Content-Type: application/json');
 $response = ['status' => 'error', 'message' => '', 'redirect' => ''];
 
 // checks if email from form is set and if idImage was uploaded successfully
-if (isset($_POST['email']) && $_FILES['idImage']['error'] == '0') {
+if (isset($_POST['email'])) {
 
     // ======================== transfer value from form to variable ========================
     $role_symbol = $_POST['role'];
@@ -33,13 +33,7 @@ if (isset($_POST['email']) && $_FILES['idImage']['error'] == '0') {
     $password = trim($_POST['password'] ?? NULL); 
     $confirm_password = trim($_POST['confirmPassword'] ?? NULL);
 
-    // ================================= for ID image file =================================
-    $fileName = "{$lastName}, {$firstName} {$middleInitial}";
-    $file = $_FILES['idImage']['name']; //[basename.ext]
-    $fileext = pathinfo($file, PATHINFO_EXTENSION); //[ext]
-
-    $temp = $_FILES['idImage']['tmp_name']; //temporary location
-    $idImage = "../uploads/idImages/{$fileName}.{$fileext}"; //target location
+    $idImage = NULL;
 
     // ================================== declare status  ==================================
     $status = ($role_symbol == 'G') ? 'P' : 'A';
@@ -86,12 +80,8 @@ if (isset($_POST['email']) && $_FILES['idImage']['error'] == '0') {
                 WHERE `lrn_lrnid` = ?
                 AND `lrn_lastname` = ?
                 AND `lrn_firstname` = ?
-                AND `lrn_mi` ";
-        $sql .= ($middleInitial == '') ? "IS NULL" : "= ?";
-        
-        $filter = [$lrn, $lastName, $firstName];
-        if ($middleInitial != '') $filter[] = $middleInitial;
-
+                AND `lrn_mi` = ?";
+        $filter = [$lrn, $lastName, $firstName, $middleInitial];
         $result = query($conn, $sql, $filter);
 
         // ============================== if result is empty ==============================
@@ -119,12 +109,8 @@ if (isset($_POST['email']) && $_FILES['idImage']['error'] == '0') {
                 WHERE `teacher_depedno` = ?
                 AND `teacher_lastname` = ?
                 AND `teacher_firstname` = ?
-                AND `teacher_mi` ";
-        $sql .= ($middleInitial == '') ? "IS NULL" : "= ?";
-
-        $filter = [$employee_number, $lastName, $firstName];
-        if ($middleInitial != '') $filter[] = $middleInitial;
-
+                AND `teacher_mi` = ?";
+        $filter = [$employee_number, $lastName, $firstName, $middleInitial];
         $result = query($conn, $sql, $filter);
 
         // ============================== if result is empty ==============================
@@ -132,7 +118,6 @@ if (isset($_POST['email']) && $_FILES['idImage']['error'] == '0') {
         if (empty($result)) {
     
             $response['message'] = "
-                $employee_number, $lastName, $firstName, $middleInitial <br>
                 The provided name or employee number does not match any records in the database.<br>
                 <small>Ensure your details are correct. Please contact the admin if you believe there has been a mistake.</small>
             ";
@@ -156,26 +141,27 @@ if (isset($_POST['email']) && $_FILES['idImage']['error'] == '0') {
     $result = query($conn, $sql, $filter);
 
     if (empty($result)) {
-        // ================== move uploaded file to $idImage directory ==================
-        if (move_uploaded_file($temp, $idImage)) {
-                // ==================== insert arguments to database ====================
-                if (insert($conn, $table, $fields)) {
-                    
-                    $response['status'] = 'success';
-                    
-                    // =================== redirect according to role ===================
-                    ($role_symbol == 'G')
-                        ? $response['redirect'] = "index.php?registration=success"
-                        : $response['redirect'] = "login.php?login=registered";
 
-                } else {
-                    $response['message'] = "Your registration failed. Please try again.";
-                }
+        if (isset($_FILES['idImage']) && $_FILES['idImage']['error'] == 0) {
+            $fileName = "{$lastName}, {$firstName} {$middleInitial}";
+            $fileext = pathinfo($_FILES['idImage']['name'], PATHINFO_EXTENSION);
+            $idImage = "../uploads/idImages/{$fileName}.{$fileext}";
+        
+            // Move uploaded file and insert to database
+            if (move_uploaded_file($_FILES['idImage']['tmp_name'], $idImage)) {
+                $response = insert($conn, $table, $fields) 
+                    ? ['status' => 'success', 'redirect' => "index.php?registration=success"]
+                    : ['message' => "Your registration failed. Please try again."];
+            } else {
+                $response['message'] = "Failed to upload your ID picture. Please try again.";
+            }
         } else {
-            // ========================= if moving file failed =========================
-            // ===================== warn: failed ID picture upload =====================
-            $response['message'] = "Your registration failed. Please try again.";
+            // Insert to database without file
+            $response = insert($conn, $table, $fields) 
+                ? ['status' => 'success', 'redirect' => "login.php?login=registered"]
+                : ['message' => "Your registration failed. Please try again."];
         }
+        
     } else {
         // =========== identify which field(s) matched to an existing account ===========
         $matchedFields = [];

@@ -50,7 +50,7 @@
                                                 <input type="text" class="form-control" id="firstName" name="firstName" required>
                                             </div>
                                             <div class="col-md-2">
-                                                <label for="middleInitial" class="form-label required">M.I.</label>
+                                                <label for="middleInitial" class="form-label">M.I.</label>
                                                 <input type="text" class="form-control" id="middleInitial" name="middleInitial" maxlength="1">
                                             </div>
                                         </div>
@@ -82,12 +82,6 @@
                                                 <option value="ABM">ABM (Accountancy, Business, and Management)</option>
                                                 <option value="HUMSS">HUMSS (Humanities and Social Sciences)</option>
                                             </select>
-                                        </div>
-
-                                        <!-- Upload ID Image -->
-                                        <div class="mb-3">
-                                            <label for="idImage" class="form-label required">Upload ID Image</label>
-                                            <input type="file" class="form-control" id="idImage" name="idImage" accept="image/*" required>
                                         </div>
 
                                         <!-- Password and Confirm Password -->

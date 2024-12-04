@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 19, 2024 at 09:08 AM
+-- Generation Time: Dec 04, 2024 at 08:09 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -120,12 +120,28 @@ CREATE TABLE `records` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `teachers`
+--
+
+CREATE TABLE `teachers` (
+  `teacher_id` int(11) NOT NULL,
+  `teacher_lastname` varchar(256) NOT NULL,
+  `teacher_firstname` varchar(256) NOT NULL,
+  `teacher_mi` varchar(4) DEFAULT NULL,
+  `teacher_depedno` varchar(7) NOT NULL,
+  `teacher_status` char(1) NOT NULL DEFAULT 'A' COMMENT '	A = Active / I = Inactive'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `users`
 --
 
 CREATE TABLE `users` (
   `user_id` int(11) NOT NULL,
   `lrn_id` int(11) DEFAULT NULL,
+  `teacher_id` int(11) DEFAULT NULL,
   `user_lastname` varchar(64) NOT NULL,
   `user_firstname` varchar(64) NOT NULL,
   `user_mi` varchar(4) DEFAULT NULL,
@@ -199,11 +215,18 @@ ALTER TABLE `records`
   ADD PRIMARY KEY (`record_id`);
 
 --
+-- Indexes for table `teachers`
+--
+ALTER TABLE `teachers`
+  ADD PRIMARY KEY (`teacher_id`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`user_id`),
-  ADD KEY `lrn_id` (`lrn_id`);
+  ADD KEY `lrn_id` (`lrn_id`),
+  ADD KEY `teacher_id` (`teacher_id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -244,6 +267,12 @@ ALTER TABLE `lrn`
 --
 ALTER TABLE `records`
   MODIFY `record_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `teachers`
+--
+ALTER TABLE `teachers`
+  MODIFY `teacher_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `users`
@@ -290,7 +319,8 @@ ALTER TABLE `likes`
 -- Constraints for table `users`
 --
 ALTER TABLE `users`
-  ADD CONSTRAINT `users_ibfk_1` FOREIGN KEY (`lrn_id`) REFERENCES `lrn` (`lrn_id`) ON UPDATE CASCADE;
+  ADD CONSTRAINT `users_ibfk_1` FOREIGN KEY (`lrn_id`) REFERENCES `lrn` (`lrn_id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `users_ibfk_2` FOREIGN KEY (`teacher_id`) REFERENCES `teachers` (`teacher_id`) ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
