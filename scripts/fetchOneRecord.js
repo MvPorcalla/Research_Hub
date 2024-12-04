@@ -20,6 +20,12 @@ document.addEventListener('DOMContentLoaded', async function() {
             idValue = urlParams.get('lrnId');
             formId = 'lrnForm';
 
+        // Check for 'teacherId' in URL parameters
+        } else if (urlParams.has('teacherId')) {
+            idType = 'teacherId';
+            idValue = urlParams.get('teacherId');
+            formId = 'employeeForm';
+
         // If no URL parameters, but the 'completeName' element exists, set userId
         } else if (element) {
             userId = element.getAttribute('data-user-id');
@@ -86,6 +92,15 @@ document.addEventListener('DOMContentLoaded', async function() {
             document.getElementById('firstName').value = data.lrn_firstname;
             document.getElementById('middleInitial').value = data.lrn_mi;
             document.getElementById('lrn').value = data.lrn_lrnid;
+
+        } else if (idType === 'teacherId') {
+            // Populate fields for editing LRN
+            document.getElementById('employeeTitle').textContent = 'Edit DepEd Employee Number - LNHS Research Hub';
+            document.getElementById('employeeSubtitle').textContent = 'Edit DepEd Employee Number';
+            document.getElementById('lastName').value = data.teacher_lastname;
+            document.getElementById('firstName').value = data.teacher_firstname;
+            document.getElementById('middleInitial').value = data.teacher_mi;
+            document.getElementById('employeeNo').value = data.teacher_depedno;
 
         } else if (idType === 'userId') {
             // Populate fields for user profile
