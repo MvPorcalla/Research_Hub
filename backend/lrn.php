@@ -26,7 +26,7 @@ if (isset($_POST['lastName'])) {
         // Update the existing record
         $filter = ['lrn_id' => $lrn_id];
         $status = update($conn, $table, $fields, $filter) ? 'success' : 'failed';
-        header("Location: ../pages/admin/listLRN.php?editRecord={$status}");
+        header("Location: ../pages/admin/listIDPage.php?editRecord={$status}");
         exit;
     } else {
 
@@ -39,7 +39,7 @@ if (isset($_POST['lastName'])) {
             ? $status = insert($conn, $table, $fields) ? 'success' : 'failed'
             : $status = 'existing';
 
-        header("Location: ../pages/admin/listLRN.php?addRecord={$status}");
+        header("Location: ../pages/admin/listIDPage.php?addRecord={$status}");
         exit;
     }
 }

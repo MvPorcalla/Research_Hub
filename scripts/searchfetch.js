@@ -11,6 +11,15 @@ document.addEventListener('DOMContentLoaded', function() {
         teacherTableBody = document.querySelector(`#teachers-table tbody`);
         guestTableBody = document.querySelector(`#guests-table tbody`);
 
+    } else if (document.getElementById(`lrns-table`) || document.getElementById(`employees-table`)) {
+
+        lrnTableBody = document.querySelector(`#lrns-table tbody`);
+        recordType = 'lrn';
+
+        employeeTableBody = document.querySelector(`#employees-table tbody`);
+        recordType = 'employee';
+
+
     } else if (document.getElementById(`lrns-table`)) {
 
         lrnTableBody = document.querySelector(`#lrns-table tbody`);
@@ -197,7 +206,8 @@ document.addEventListener('DOMContentLoaded', function() {
         fetchRecords('guest');
     } else {
         // Fetch records for LRN if the 'lrns-table' element is present
-        fetchRecords(recordType);
+        fetchRecords('lrn');
+        fetchRecords('employee');
     }
 
     // Add event listener to handle input changes in the search query field
@@ -208,7 +218,8 @@ document.addEventListener('DOMContentLoaded', function() {
             fetchRecords('teacher', query);
             fetchRecords('guest', query);
         } else {
-            fetchRecords(recordType, query);
+            fetchRecords('lrn', query);
+            fetchRecords('employee', query);
         }
     });
 
@@ -221,7 +232,8 @@ document.addEventListener('DOMContentLoaded', function() {
             fetchRecords('teacher', query);
             fetchRecords('guest', query);
         } else {
-            fetchRecords(recordType, query);
+            fetchRecords('lrn', query);
+            fetchRecords('employee', query);
         }
     });
 });

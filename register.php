@@ -7,6 +7,7 @@
     <title>REGISTER - LNHS Research Hub</title>
     <link rel="icon" href="./assets/icons/LNHS-icon.png" type="image/png">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href='https://unpkg.com/boxicons/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="css/mainStyle.css">
     
     <style>
@@ -37,8 +38,11 @@
         <div class="container py-5 mt-5">
             <div class="row justify-content-center">
             <div class="col-md-6 text-center">
-                <img class="register-icon mb-4" src="./assets/icons/Vector.png" alt="icon">
-                <h1 class="register-text mb-5">Register</h1>
+                <!-- <img class="register-icon mb-4" src="./assets/icons/Vector.png" alt="icon"> -->
+                <i class='bx bx-user-circle register-icon mb-3'></i>
+                <i class="fa-regular fa-user"></i>
+
+                <h1 class="register-text mb-5 obitron">Register</h1>
             </div>
             <div class="row d-flex item-align-center justify-content-center">
                 <!-- Student Card -->

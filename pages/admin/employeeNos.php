@@ -16,7 +16,7 @@
 
     <!-- main content with sidebar -->
     <div class="container-fluid">
-        <div class="row text-center">
+        <div class="row">
             <!-- sidebar -->
             <?php include './../admin/components/sidebar.php'; ?>
 
@@ -25,7 +25,7 @@
             <main class="col-md-9 ms-sm-auto col-lg-9 px-md-4">
                 <div class="container">
                     <div class="row">
-                        <div class="mt-5 mb-3">
+                        <div class="mt-5 mb-3  text-center">
                             <h1 id="employeeSubtitle" class='admin-subtitle'>Add DepEd Employee Number</h1>
                         </div>
                         <div class="row justify-content-center">

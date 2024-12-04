@@ -8,9 +8,9 @@ if (isset($_POST['save_excel_data'])) {
 
     $number_type = $_POST['number_type'];    
 
-    [$path, $table, $column, $id, $digit] = match($number_type) {
-        'lrn' => ['listLRN', 'lrn', 'lrn', 'lrnid', 12],
-        'den' => ['listEmployeeNos', 'teachers', 'teacher', 'depedno', 7],
+    [$table, $column, $id, $digit] = match($number_type) {
+        'lrn' => ['lrn', 'lrn', 'lrnid', 12],
+        'den' => ['teachers', 'teacher', 'depedno', 7],
     };
 
     if (isset($_FILES['file']) && $_FILES['file']['error'] === UPLOAD_ERR_OK) {
@@ -63,15 +63,15 @@ if (isset($_POST['save_excel_data'])) {
             }
 
             if ($existing > 0 || $notNumber > 0) {
-                header("Location: ../pages/admin/{$path}.php?exceptions={$existing}-{$notNumber}-{$digit}-{$dataCount}");
+                header("Location: ../pages/admin/ListIDPage.php?exceptions={$existing}-{$notNumber}-{$digit}-{$dataCount}");
             } else {
-                header("Location: ../pages/admin/{$path}.php?importRecords=success");
+                header("Location: ../pages/admin/ListIDPage.php?importRecords=success");
             }
         } else {
-            header("Location: ../pages/admin/{$path}.php?importRecords=invalid");
+            header("Location: ../pages/admin/ListIDPage.php?importRecords=invalid");
         }
     } else {
-        header("Location: ../pages/admin/{$path}.php?importRecords=error");
+        header("Location: ../pages/admin/ListIDPage.php?importRecords=error");
     }
 }
 exit();

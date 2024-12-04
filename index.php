@@ -260,11 +260,14 @@
             </div>
         </div>
 
-        <!-- LNHS Research Hub Icon -->
-        <div id="lNHS-icon-container">
-            <img src="./assets/icons/LNHS-icon.png" alt="LNHS Research Hub Icon" class="ms-5" id="lNHS-icon">
-            <p>LNHS Facebook page</p>
-        </div>
+      <!-- LNHS Research Hub Icon -->
+      <a href="https://www.facebook.com/LigaoNationalHS" target="_blank" id="lNHS-link">
+          <div id="lNHS-icon-container">
+              <img src="./assets/icons/LNHS-icon.png" alt="LNHS Research Hub Icon" class="ms-5" id="lNHS-icon">
+              <p>LNHS Facebook page</p>
+          </div>
+      </a>
+
 
 
     </div>

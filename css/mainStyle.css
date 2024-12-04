@@ -168,6 +168,8 @@ textarea.form-control {
   top: 0;
   width: 100%;
   min-height: 10vh;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6); /* Shadow effect */
+
 }
 .header-bg {
   background-color: var(--header-color);
@@ -245,13 +247,15 @@ textarea.form-control {
 /* ======================================== Register ======================================== */
 
 .register-icon {
-  width: 65px;
-  height: 65px;
+  font-size: 85px;
+  color:#545454;
 }
 
 .register-text {
   font-size: var(--fs-3xl);
-  color: var(--text-base-lt);
+  font-weight: var(--fw-extrabold);
+  color: #033673;
+  font-family: var(--orbitron);
 }
 
 .register_card {
@@ -264,6 +268,11 @@ textarea.form-control {
   align-items: center;
   justify-content: center;
   box-shadow: 5px 5px 10px black;
+  transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition for both background and text color */
+}
+
+.register_card:hover {
+  background-color: #17a8c4; /* Darker shade on hover */
 }
 
 .register_card-text {
@@ -271,7 +280,17 @@ textarea.form-control {
   font-family: var(--font-secondary);
   font-size: var(--fs-2xl);
   font-weight: var(--fw-bold);
+  transition: color 0.3s ease; /* Smooth transition for text color */
 }
+
+.register_card:hover .register_card-text {
+  color: white; /* Change text color to white on hover */
+}
+
+.register_card-text:hover {
+  color: white; /* Ensure the text color remains white even if hovered directly */
+}
+
 
 /* ========================================================================================= */
 

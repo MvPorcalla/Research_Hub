@@ -24,7 +24,7 @@
                 <main class="col-md-9 ms-sm-auto col-lg-9 px-md-4">
                     <div class="container">
                         <div class="row">
-                            <div class="mt-5 mb-3">
+                            <div class="mt-5 mb-3 text-center">
                                 <h1 class='admin-subtitle'>Pending Approval</h1>
                             </div>
                             <div id="pendingTiles" class="row">

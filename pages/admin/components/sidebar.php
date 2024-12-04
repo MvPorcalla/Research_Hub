@@ -14,15 +14,11 @@
             </a>
         </li>
         <li class="nav-item mb-1">
-            <a class="nav-link sidebar-title" href="./listLRN.php">
+            <a class="nav-link sidebar-title" href="./listIDPage.php">
                 <i class="fas fa-id-card fa-xl me-3"></i> LRN & Employee No. Lists
             </a>
         </li>
-        <li class="nav-item mb-1">
-            <a class="nav-link sidebar-title" href="./listEmployeeNos.php">
-                <i class="fas fa-briefcase fa-xl me-3"></i> Employee Numbers List
-            </a>
-        </li>
+
         <li class="nav-item mb-1">
             <a class="nav-link sidebar-title" href="./forum.php">
                 <i class="fas fa-comments fa-xl me-3"></i> Research Hub Forum

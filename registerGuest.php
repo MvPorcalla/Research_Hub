@@ -25,13 +25,13 @@
         <div class="container">
             <div class="row">
                 <div class="">
-                    <div class="text-center m-3">
-                        <h3 class="orbitron">Sign Up</h3>
-                    </div>
+                    
                     <div class="row justify-content-center">
                         <div class="col-md-10">
-                            <div class="card my-4 py-3">
-
+                            <div class="card mt-5 my-4 py-3">
+                                <div class="text-center m-3">
+                                    <h3 class="orbitron">Register</h3>
+                                </div>
                                 <div class="card-body mx-5">
                                     <form id="registrationForm">
                                         

@@ -1,0 +1,5 @@
+[04-Dec-2024 16:50:33 Asia/Manila] PHP Warning:  Undefined variable $stmt in C:\xampp\htdocs\Research_Hub\backend\searchfetch.php on line 284
+[04-Dec-2024 16:50:33 Asia/Manila] PHP Fatal error:  Uncaught Error: Call to a member function execute() on null in C:\xampp\htdocs\Research_Hub\backend\searchfetch.php:284
+Stack trace:
+#0 {main}
+  thrown in C:\xampp\htdocs\Research_Hub\backend\searchfetch.php on line 284
