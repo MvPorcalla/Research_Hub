@@ -89,7 +89,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                         <canvas id="pdf-canvas-${record.record_id}" class="img-fluid border border-dark rounded" alt="PDF " width="85" height="110"></canvas>                                    
                                     </div>
                                     <div class="col-md-8 d-flex flex-column align-items-start justify-content-center border-end">
-                                        <p class="mb-1">${highlightText(record.record_title, query)}</p>
+                                        <p class="mb-1 text-primary">${highlightText(record.record_title, query)}</p>
                                         <small>${highlightText(record.record_authors, query)}</small>
                                         <small>${record.record_trackstrand}</small>
                                     </div>
