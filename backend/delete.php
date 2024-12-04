@@ -51,6 +51,28 @@ if (isset($_GET['abstractId'])) {
         header("location: ../pages/admin/listLRN.php?deleteRecord=failed");
         exit();
     }
+} else if (isset($_GET['teacherId'])) {
+
+    $table = "teachers";
+    $fields = ['teacher_status' => 'I'];
+    $filter = ['teacher_id' => $_GET['teacherId']];
+
+    if (update($conn, $table, $fields, $filter)) {
+
+        $table = "users";
+        $fields = ['user_status' => 'I'];
+        $filter = ['teacher_id' => $_GET['teacherId']];
+
+        if (update($conn, $table, $fields, $filter)) {
+
+            header("location: ../pages/admin/listEmployeeNos.php?deleteRecord=success");
+            exit();
+        }
+
+    } else {
+        header("location: ../pages/admin/listEmployeeNos.php?deleteRecord=failed");
+        exit();
+    }
 
 } else if (isset($_GET['historyId'])) {
 
