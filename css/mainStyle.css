@@ -197,7 +197,8 @@ main {
   #students-table th,
   #teachers-table th,
   #guests-table th,
-  #lrns-table th {
+  #lrns-table th,
+  #employees-table th {
     background: #283c6b;
     color: #f2f2f2;
   }

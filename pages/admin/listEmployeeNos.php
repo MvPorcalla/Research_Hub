@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LRN List - LNHS Research Hub</title>
+    <title>Employee Numbers List - LNHS Research Hub</title>
     <?php include './../admin/includes/links_head-css.php'; ?>
 </head>
 
@@ -25,13 +25,13 @@
                 <div class="container">
                     <div class="row">
                         <div class="text-center mt-5 mb-4">
-                            <h1 class='admin-subtitle'>LRN Lists</h1>
+                            <h1 class='admin-subtitle'>Employee Numbers Lists</h1>
                         </div>
 
                         <!-- Search Bar -->
                         <div class="row">
                             <div class="col-md-5 d-flex justify-content-start">
-                                <a href="lrn.php" class="btn btn-secondary px-3">Add</a>
+                                <a href="employeeNos.php" class="btn btn-secondary px-3">Add</a>
                                 <a href="#" class="btn btn-success ms-3 px-3" data-bs-toggle="modal" data-bs-target="#importModal">Import</a>
                             </div>
                             
@@ -45,13 +45,13 @@
                                 <div class="modal-dialog modal-dialog-centered">
                                     <div class="modal-content">
                                         <div class="modal-header bg-success text-white">
-                                            <h5 class="modal-title" id="importModalLabel">Import Student LRN</h5>
+                                            <h5 class="modal-title" id="importModalLabel">Import DepEd Employee Numbers</h5>
                                             <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body">
 
                                         <form id="importForm" action="../../backend/importStudentLRN.php" method="post" enctype="multipart/form-data">
-                                            <input class="form-control" type="text" id="number_type" name="number_type" hidden value="lrn">
+                                            <input class="form-control" type="text" id="number_type" name="number_type" hidden value="den">
                                             <div class="mb-3">
                                                 <label for="fileInput" class="form-label">Select Excel file to import</label>
                                                 <input class="form-control" type="file" id="fileInput" name="file" accept=".xlsx, .xls" required>
@@ -72,11 +72,11 @@
                         <!-- Content Table -->
                         <div class="container mt-3 side-container">
                             <div class="table-responsive">
-                                <table class="table table-bordered LRNs" id="lrns-table">
+                                <table class="table table-bordered employees" id="employees-table">
                                     <thead>
                                         <tr class="col-md-12">
                                             <th class="col-md-5">Full Name</th>
-                                            <th class="col-md-5">LRN</th>
+                                            <th class="col-md-5">DepEd Employee Number</th>
                                             <th class="col-md-2">Actions</th>
                                         </tr>
                                     </thead>

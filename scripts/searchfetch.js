@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     const queryInput = document.querySelector('#query');
     
-    let lrnTableBody, studentTableBody, teacherTableBody, guestTableBody, recordType;
+    let lrnTableBody, employeeTableBody, studentTableBody, teacherTableBody, guestTableBody, recordType;
 
     // Check if the 'users-table' element exists to determine which tables to initialize
     if (document.getElementById(`users-table`)) {
@@ -15,6 +15,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
         lrnTableBody = document.querySelector(`#lrns-table tbody`);
         recordType = 'lrn';
+
+    } else if (document.getElementById(`employees-table`)) {
+
+        employeeTableBody = document.querySelector(`#employees-table tbody`);
+        recordType = 'employee';
     }
 
     // Object to map record types to their corresponding table bodies
@@ -22,9 +27,9 @@ document.addEventListener('DOMContentLoaded', function() {
         student: studentTableBody,
         teacher: teacherTableBody,
         guest: guestTableBody,
-        lrn: lrnTableBody
+        lrn: lrnTableBody,
+        employee: employeeTableBody
     };
-    
 
     // Function to fetch records from the server based on record type and query
     function fetchRecords(recordType, query = '') {
@@ -43,12 +48,14 @@ document.addEventListener('DOMContentLoaded', function() {
                             student: 'Students',
                             guest: 'Guests',
                             teacher: 'Teachers',
-                            lrn: 'LRNs'
+                            lrn: 'LRNs',
+                            employee: 'DepEd Employee Numbers'
                         }[recordType] || 'Unknown';
                         rows = `<tr><td colspan="5" class="text-center">No ${type} Records Found.</td></tr>`;
                     } else {
                         // Generate table rows based on the record type
                         switch (recordType) {
+                            
                             case 'student':
                                 data.forEach(record => {
                                     rows += `
@@ -109,6 +116,21 @@ document.addEventListener('DOMContentLoaded', function() {
                                     `;
                                 });
                                 break;
+                            case 'employee':
+                                data.forEach(record => {
+                                    const mi = (record.teacher_mi == '') ? '' : `${record.teacher_mi}. `;
+                                    rows += `
+                                        <tr>
+                                            <td>${highlightText(`${record.teacher_firstname} ${mi}${record.teacher_lastname}`, query)}</td>
+                                            <td>${highlightText(record.teacher_depedno, query)}</td>
+                                            <td>
+                                                <a href="employeeNos.php?teacherId=${record.teacher_id}" class="btn btn-outline-primary btn-sm"><i class='fas fa-edit'></i></a>
+                                                <a href="../../backend/delete.php?teacherId=${record.teacher_id}" class="btn btn-outline-danger btn-sm delete-button"><i class='fas fa-trash-alt'></i></a>
+                                            </td>
+                                        </tr>
+                                    `;
+                                });
+                                break;
                         }
                     }
     
@@ -122,6 +144,13 @@ document.addEventListener('DOMContentLoaded', function() {
                             options = {
                                 multiTd: false,
                                 actionText: "You are about to delete the LRN of:",
+                                confirmButtonText: "Delete"
+                            };
+                            break;
+                        case 'employee':
+                            options = {
+                                multiTd: false,
+                                actionText: "You are about to delete the DepEd Employee Number of:",
                                 confirmButtonText: "Delete"
                             };
                             break;

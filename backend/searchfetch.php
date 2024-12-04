@@ -231,8 +231,43 @@ if (isset($_GET['record_type'])) {
                             )";
             }
 
-            // Append an ORDER BY clause to sort results by lrn_id in descending order
+            // Append an ORDER BY clause to sort results by lrn_lastname in ascending order
             $sql .= " ORDER BY `lrn_lastname` ASC";
+
+            // Prepare the SQL statement
+            $stmt = $conn->prepare($sql);
+
+            // Bind parameters if a search query is provided
+            if ($query !== '') {
+                $stmt->bind_param("ssss", $search_query, $search_query, $search_query, $search_query);
+            }
+
+            break;
+
+        // =================================================== FETCH EMPLOYEE NUMBERS ===================================================
+        case 'employee':
+
+            // Base SQL query to select records from the 'teachers' table where 'teacher_status' is active ('A')
+            $sql = "SELECT *
+                    FROM `teachers` 
+                    WHERE `teacher_status` = 'A'";
+
+            // Check if a search query is provided
+            if ($query !== '') {
+                // Escape and format the search query for use in the SQL statement
+                $search_query = "%" . $conn->real_escape_string($query) . "%";
+                
+                // Append conditions to the SQL query for searching by student name or LRN ID
+                $sql .= " AND (
+                                `teacher_lastname` LIKE ?
+                                OR `teacher_firstname` LIKE ?
+                                OR `teacher_mi` LIKE ?
+                                OR `teacher_depedno` LIKE ?
+                            )";
+            }
+
+            // Append an ORDER BY clause to sort results by teacher_lastname in ascending order
+            $sql .= " ORDER BY `teacher_lastname` ASC";
 
             // Prepare the SQL statement
             $stmt = $conn->prepare($sql);
