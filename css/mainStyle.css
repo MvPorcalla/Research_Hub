@@ -247,14 +247,14 @@ textarea.form-control {
 /* ======================================== Register ======================================== */
 
 .register-icon {
-  font-size: 85px;
-  color:#545454;
+  font-size: 95px;
+  color:#363636;
 }
 
 .register-text {
   font-size: var(--fs-3xl);
   font-weight: var(--fw-extrabold);
-  color: #033673;
+  color: #363636;
   font-family: var(--orbitron);
 }
 
