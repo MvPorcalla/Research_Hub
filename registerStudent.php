@@ -10,6 +10,7 @@
     <link rel="icon" href="./assets/icons/LNHS-icon.png" type="image/png">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/mainStyle.css">
+    <link rel="stylesheet" href="css/bgStyle.css">
 </head>
 
 <body>
@@ -24,11 +25,11 @@
             <div class="row">
                 <div class="">
                     <div class="text-center m-3">
-                        <h3>Sign Up</h3>
+                        <h3 class="orbitron">Sign Up</h3>
                     </div>
                     <div class="row justify-content-center">
                         <div class="col-md-10">
-                            <div class="card bg-transparent">
+                            <div class="card my-4 py-3">
 
                                 <div class="card-body mx-5">
                                     <form id="registrationForm">

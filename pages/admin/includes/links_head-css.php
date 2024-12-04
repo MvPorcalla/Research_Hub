@@ -12,3 +12,5 @@
 
 <!-- Custom CSS for the main styling of the website -->
 <link rel="stylesheet" href="../../css/mainStyle.css">
+<link rel="stylesheet" href="../../css/bgStyle.css">
+

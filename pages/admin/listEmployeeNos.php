@@ -16,7 +16,7 @@
 
     <!-- main content with sidebar -->
     <div class="container-fluid">
-        <div class="row text-center">
+        <div class="row">
             <!-- sidebar -->
             <?php include './../admin/components/sidebar.php'; ?>
 
@@ -31,9 +31,14 @@
                         <!-- Search Bar -->
                         <div class="row">
                             <div class="col-md-5 d-flex justify-content-start">
-                                <a href="employeeNos.php" class="btn btn-secondary px-3">Add</a>
-                                <a href="#" class="btn btn-success ms-3 px-3" data-bs-toggle="modal" data-bs-target="#importModal">Import</a>
+                                <a href="employeeNos.php" class="btn btn-secondary px-3">
+                                    <i class="fas fa-plus me-2"></i> Add
+                                </a>
+                                <a href="#" class="btn btn-success ms-3 px-3" data-bs-toggle="modal" data-bs-target="#importModal">
+                                    <i class="fa-solid fa-file-import me-2"></i> Import
+                                </a>
                             </div>
+                            
                             
 
                             <div class="col-md-7">

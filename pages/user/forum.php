@@ -17,7 +17,7 @@
 
     <!-- main content with sidebar -->
     <div class="container-fluid">
-        <div class="row ">
+        <div class="row">
             <!-- sidebar -->
             <?php include './../user/components/sidebar.php'; ?>
 

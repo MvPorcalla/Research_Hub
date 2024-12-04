@@ -37,8 +37,10 @@
                         <!-- Search Bar and Filters -->
                         <div class="row align-items-center">
                             <!-- Add Button -->
-                            <div class="col-md-1">
-                                <a href="./abstract.php" class="btn btn-secondary px-3">Add</a>
+                            <div class="col-md-1 d-flex justify-content-center align-items-center">
+                                <a href="./abstract.php" class="btn btn-secondary px-3 d-flex align-items-center">
+                                    <i class="fas fa-plus me-2"></i> Add
+                                </a>
                             </div>
 
                             <!-- Filter Dropdowns -->

@@ -134,6 +134,7 @@
             handleInputSubmit('commentForm', 'comment_content', 'error');
             characterCounter('comment_content', 'charCounter');
         });
+        
     </script>
     
 </body>

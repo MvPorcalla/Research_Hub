@@ -11,6 +11,9 @@
   --font-primary: 'Poppins', sans-serif;
   --font-secondary: 'Abhaya Libre', Times, serif;
   --font-cursive: 'Clicker Script', cursive;
+
+  --archivo: 'Archivo Black', sans-serif;
+  --orbitron: "Orbitron", sans-serif;
   
 
   /* heading font sizes */
@@ -48,7 +51,9 @@
   --text-base-lt: #393939;
   --text-base-ltr: #f1f1f1;
 
-  --color-primary: #C1D1E5;
+  --color-primary: #AFE3FF;
+
+  --header-color: #64A3C5;
 
 } 
 
@@ -134,8 +139,23 @@ main {
   color: red;
 }
 
+/* Style for input fields */
+input.form-control {
+  border: 1px solid #4489DA; /* Default border color */
+}
 
+/* Style for textarea */
+textarea.form-control {
+  border: 1px solid #4489DA; /* Default border color */
+}
 
+/* font */
+.orbitron {
+  font-family: var(--orbitron);
+}
+.archivo {
+  font-family: var(--archivo);
+}
 
 /* ======================================== ======== ======================================== */
 
@@ -150,7 +170,7 @@ main {
   min-height: 10vh;
 }
 .header-bg {
-  background-color: var(--color-primary);
+  background-color: var(--header-color);
 }
 .header-icon {
     width: 65px;
@@ -179,19 +199,34 @@ main {
     color: var(--text-base);
     border: 1px solid var(--color-primary);
     background-color: var(--color-primary);
-    border-radius: 20px;
+    border-radius: 30px;
     margin: 5px;
-  }
+    box-shadow: inset 0 5px 10px rgba(0, 0, 0, 0.4); /* Adds the inset shadow effect */
+}
 
-  .sidebar a:hover {
-    background-color: var(--bg-base-ltr);
-  }
+.sidebar a:hover {
+    background-color: #219EBC;
+    box-shadow: inset 0 5px 15px rgba(0, 0, 0, 0.7); /* Darkens the effect on hover */
+    color: white;
+}
+
+.sidebar a.active {
+    background-color: #219EBC; /* Change this to any color to indicate active link */
+    color: white;
+    box-shadow: inset 0 5px 15px rgba(0, 0, 0, 0.7);
+}
+
+
 
   .sidebar-text {
     font-family: var(--font-secondary);
-      font-size: var(--fs-3xl);
+    font-size: var(--fs-3xl);
   }
 
+  .sidebar-title {
+    font-size: var(--fs-lg);
+    font-weight: var(--fw-semibold);
+  }
 
 /* ======================================== table header style ======================================== */
   /* background: linear-gradient(to right, #0369a1, #0284c7, #0ea5e9, #0284c7);  */
@@ -248,7 +283,7 @@ main {
 
 .login-card {
   color: var(--text-base-ltr);
-  background: transparent;
+  background: white;
   width: 350px;
   padding: 20px;
   border: 1px solid black;
@@ -264,8 +299,10 @@ main {
 }
 
 .login_card-title {
+  font-family: var(--orbitron);
   font-size: var(--fs-3xl);
 }
+
 
 /* ========================================================================================= */
 

@@ -26,6 +26,8 @@ if (empty($result) || date('Y-m-d H:i:s') >= $result[0]['user_reset_token_expire
     <link rel="icon" href="./assets/icons/LNHS-icon.png" type="image/png">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/mainStyle.css">
+    <link rel="stylesheet" href="css/bgStyle.css">
+
 
     <style>
         .login-card {
