@@ -5,6 +5,14 @@ require '../vendor/autoload.php';
 use PhpOffice\PhpSpreadsheet\IOFactory;
 
 if (isset($_POST['save_excel_data'])) {
+
+    $number_type = $_POST['number_type'];    
+
+    [$path, $table, $column, $id, $digit] = match($number_type) {
+        'lrn' => ['listLRN', 'lrn', 'lrn', 'lrnid', 12],
+        'den' => ['listEmployeeNos', 'teachers', 'teacher', 'depedno', 7],
+    };
+
     if (isset($_FILES['file']) && $_FILES['file']['error'] === UPLOAD_ERR_OK) {
         $fileName = $_FILES['file']['name'];
         $fileExt = pathinfo($fileName, PATHINFO_EXTENSION);
@@ -16,7 +24,7 @@ if (isset($_POST['save_excel_data'])) {
             $data = $spreadsheet->getActiveSheet()->toArray();
 
             $existing = 0;
-            $notTwelve = 0;
+            $notNumber = 0;
             $dataCount = 0;
 
             foreach ($data as $index => $row) {
@@ -25,27 +33,28 @@ if (isset($_POST['save_excel_data'])) {
                 $lastName = trim($row[0] ?? '');
                 $firstName = trim($row[1] ?? '');
                 $mi = trim($row[2] ?? '');
-                $lrn = trim($row[3] ?? '');
+                $number = trim($row[3] ?? '');
 
                 $dataCount++;
 
-                if (strlen($lrn) != 12) {
-                    $notTwelve++;
+                if (($number_type == "lrn" && strlen($number) != 12) || ($number_type == "den" && strlen($number) != 7)) {
+                    $notNumber++;
                     continue;
-                }
+                }                
 
-                $sql = "SELECT `lrn_lrnid` FROM `lrn` WHERE `lrn_lrnid` = ?";
-                $filter = [$lrn];
+                $sql = ($number_type == "lrn")
+                    ? "SELECT `lrn_lrnid` FROM `lrn` WHERE `lrn_lrnid` = ?"
+                    : "SELECT `teacher_depedno` FROM `teachers` WHERE `teacher_depedno` = ?";
+                $filter = [$number];
                 $result = query($conn, $sql, $filter);
 
                 if (empty($result)) {
-                    $table = 'lrn';
                     $fields = [
-                        'lrn_lastname' => $lastName,
-                        'lrn_firstname' => $firstName,
-                        'lrn_mi' => $mi,
-                        'lrn_lrnid' => $lrn,
-                        'lrn_status' => 'A' // Assuming new records are Active by default
+                        "{$column}_lastname" => $lastName,
+                        "{$column}_firstname" => $firstName,
+                        "{$column}_mi" => $mi,
+                        "{$column}_{$id}" => $number,
+                        "{$column}_status" => 'A' // Assuming new records are Active by default
                     ];
                     insert($conn, $table, $fields);
                 } else {
@@ -53,18 +62,16 @@ if (isset($_POST['save_excel_data'])) {
                 }
             }
 
-            if ($existing > 0 || $notTwelve > 0) {
-                header("Location: ../pages/admin/listLRN.php?exceptions={$existing}-{$notTwelve}-{$dataCount}");
+            if ($existing > 0 || $notNumber > 0) {
+                header("Location: ../pages/admin/{$path}.php?exceptions={$existing}-{$notNumber}-{$digit}-{$dataCount}");
             } else {
-                header("Location: ../pages/admin/listLRN.php?importRecords=success");
+                header("Location: ../pages/admin/{$path}.php?importRecords=success");
             }
         } else {
-            header("Location: ../pages/admin/listLRN.php?importRecords=invalid");
+            header("Location: ../pages/admin/{$path}.php?importRecords=invalid");
         }
     } else {
-        header("Location: ../pages/admin/listLRN.php?importRecords=error");
+        header("Location: ../pages/admin/{$path}.php?importRecords=error");
     }
-} else {
-    header("Location: ../pages/admin/listLRN.php?importRecords=missing");
 }
 exit();

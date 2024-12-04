@@ -173,48 +173,51 @@ function handleStatus(paramName) {
         if (paramName === 'exceptions') {
             // Split status into parts for detailed error handling
             const parts = status.split("-");
-            const existingData = parts[0];
-            const notTwelveData = parts[1];
-            const totalData = parts[2];
+            const existingData = Number(parts[0]);
+            const notNumberData = Number(parts[1]);
+            const digitFormat = Number(parts[2]);
+            const totalData = Number(parts[3]);            
+
+            const numberType = digitFormat === 12 ? "LRN" : "DepEd Employee Number";
 
             // Determine appropriate message based on the parts
             if (existingData == totalData) {
                 message = {
                     icon: "info",
-                    title: "Records Already Exists",
-                    text: `The records within the file already exist in the list.`
+                    title: "Records Already Exist",
+                    text: "All records in the file already exist in the list."
                 };
-            } else if (notTwelveData == totalData) {
+            } else if (notNumberData == totalData) {
                 message = {
                     icon: "warning",
                     title: "Records Not Imported!",
-                    text: `The records within the file do not follow the 12-digit format of LRNs.`
+                    text: `All records in the file do not follow the ${digitFormat}-digit format for ${numberType}s.`
                 };
-            } else if (Number(existingData) == 0) {
+            } else if (existingData == 0 && notNumberData > 0) {
                 message = {
                     icon: "warning",
                     title: "Records Imported!",
-                    html: `Successfully imported file records to the list.<hr><small><em>There were <strong>${notTwelveData} non-12-digit LRN(s)</strong> out of <strong>${totalData} records</strong>. Please <strong>fix</strong> format of non-12-digit LRNs and try again.</em></small>`
+                    html: `Successfully imported records.<hr><small><em>${notNumberData} non-${digitFormat}-digit ${numberType}(s) out of ${totalData} records. Please fix and try again.</em></small>`
                 };
-            } else if (Number(notTwelveData) == 0) {
+            } else if (notNumberData == 0 && existingData > 0) {
                 message = {
                     icon: "info",
                     title: "Records Imported!",
-                    html: `Successfully imported file records to the list.<hr><small><em>There were <strong>${existingData} existing record(s)</strong> out of <strong>${totalData} records</strong>.</em></small>`
+                    html: `Successfully imported records.<hr><small><em>${existingData} existing record(s) out of ${totalData} records.</em></small>`
                 };
-            } else if (Number(existingData) + Number(notTwelveData) == Number(totalData)) {
+            } else if (existingData + notNumberData == totalData) {
                 message = {
                     icon: "info",
-                    title: "Records Not Imported!",
-                    html: `There were <strong>${existingData} existing record(s)</strong> and <strong>${notTwelveData} non-12-digit LRN(s)</strong> out of <strong>${totalData} records</strong>. Please <strong>fix</strong> format of non-12-digit LRNs and try again.</small>`
+                    title: "Records Not Fully Imported!",
+                    html: `${existingData} existing record(s) and ${notNumberData} non-${digitFormat}-digit ${numberType}(s) out of ${totalData} records. Please fix and try again.`
                 };
             } else {
                 message = {
                     icon: "info",
                     title: "Records Imported!",
-                    html: `<strong>Successfully imported file records to the list.</strong><hr><small>There were <strong>${existingData} existing record(s)</strong> and <strong>${notTwelveData} non-12-digit LRN(s)</strong> out of <strong>${totalData} records</strong>. Please <strong>fix</strong> format of non-12-digit LRNs and try again.</small>`
+                    html: `<strong>Successfully imported records.</strong><hr><small>${existingData} existing record(s) and ${notNumberData} non-${digitFormat}-digit ${numberType}(s) out of ${totalData} records. Please fix and try again.</small>`
                 };
-            }
+            }                   
         } else {
             // Retrieve the message for the specified status and paramName
             const paramMessages = messages[paramName] || {};
