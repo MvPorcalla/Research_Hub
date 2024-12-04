@@ -1,6 +1,4 @@
 document.addEventListener('DOMContentLoaded', function() {
-
-    const queryInput = document.querySelector('#query');
     
     let lrnTableBody, employeeTableBody, studentTableBody, teacherTableBody, guestTableBody, recordType;
 
@@ -19,16 +17,6 @@ document.addEventListener('DOMContentLoaded', function() {
         employeeTableBody = document.querySelector(`#employees-table tbody`);
         recordType = 'employee';
 
-
-    } else if (document.getElementById(`lrns-table`)) {
-
-        lrnTableBody = document.querySelector(`#lrns-table tbody`);
-        recordType = 'lrn';
-
-    } else if (document.getElementById(`employees-table`)) {
-
-        employeeTableBody = document.querySelector(`#employees-table tbody`);
-        recordType = 'employee';
     }
 
     // Object to map record types to their corresponding table bodies
@@ -210,30 +198,26 @@ document.addEventListener('DOMContentLoaded', function() {
         fetchRecords('employee');
     }
 
-    // Add event listener to handle input changes in the search query field
-    queryInput.addEventListener('input', function() {
-        const query = queryInput.value.trim();
-        if (document.getElementById(`users-table`)) {
-            fetchRecords('student', query);
-            fetchRecords('teacher', query);
-            fetchRecords('guest', query);
-        } else {
-            fetchRecords('lrn', query);
-            fetchRecords('employee', query);
+    const inputs = [
+        { id: '#userQuery', types: ['student', 'teacher', 'guest'], form: '#user-search-form' },
+        { id: '#lrnQuery', types: ['lrn'], form: '#lrn-search-form' },
+        { id: '#denQuery', types: ['employee'], form: '#den-search-form' },
+    ];
+    
+    inputs.forEach(({ id, types, form }) => {
+        const input = document.querySelector(id);
+        if (input) {
+            input.addEventListener('input', () => {
+                const query = input.value.trim();
+                types.forEach(type => fetchRecords(type, query));
+            });
+    
+            document.querySelector(form).addEventListener('submit', event => {
+                event.preventDefault();
+                const query = input.value.trim();
+                types.forEach(type => fetchRecords(type, query));
+            });
         }
     });
-
-    // Add event listener to handle form submission for search
-    document.querySelector('#search-form').addEventListener('submit', function(event) {
-        event.preventDefault();
-        const query = queryInput.value.trim();
-        if (document.getElementById(`users-table`)) {
-            fetchRecords('student', query);
-            fetchRecords('teacher', query);
-            fetchRecords('guest', query);
-        } else {
-            fetchRecords('lrn', query);
-            fetchRecords('employee', query);
-        }
-    });
+    
 });
