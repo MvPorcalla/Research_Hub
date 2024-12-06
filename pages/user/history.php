@@ -23,7 +23,7 @@
 
             <!-- Main content area -->
             <main class="col-md-9 ms-sm-auto col-lg-9 px-md-4">
-                <div class="container">
+                <div class="container text-center">
                     <div class="row">
                         <div class="mt-5 mb-3">
                             <h1 class="admin-subtitle">History</h1>

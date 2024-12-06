@@ -23,7 +23,7 @@
 
             <!-- Main content area -->
             <main class="col-md-9 ms-sm-auto col-lg-9 px-md-4">
-                <div class="container">
+                <div class="container text-center">
                     <div id="favoriteTiles" class="row" data-user-id="<?php echo $_SESSION['user_id']; ?>">
 
                         <div class="mt-5 mb-3">
