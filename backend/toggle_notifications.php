@@ -1,6 +1,4 @@
 <?php
-ini_set('log_errors', 1);
-ini_set('error_log', '../error_log.log');
 
 // Include database connection file
 include_once "../includes/db.php";
