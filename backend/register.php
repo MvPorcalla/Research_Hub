@@ -1,4 +1,6 @@
 <?php
+ini_set('log_errors', 1);
+ini_set('error_log', '../error_log.log');
 
 // ==================================== data connection ====================================
 include_once "../includes/db.php";
@@ -47,7 +49,6 @@ if (isset($_POST['email'])) {
         'user_emailadd' => $email,
 
         'user_trackstrand' => $trackStrand,
-        'user_idpicture_imgdir' => $idImage,
         'user_school' => $school,
         'user_reason' => $reason,
 
@@ -147,6 +148,8 @@ if (isset($_POST['email'])) {
             $fileName = "{$lastName}, {$firstName} {$middleInitial}";
             $fileext = pathinfo($_FILES['idImage']['name'], PATHINFO_EXTENSION);
             $idImage = "../uploads/idImages/{$fileName}.{$fileext}";
+
+            $fields['user_idpicture_imgdir'] = $idImage;
         
             // Move uploaded file and insert to database
             if (move_uploaded_file($_FILES['idImage']['tmp_name'], $idImage)) {
