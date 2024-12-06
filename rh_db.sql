@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 04, 2024 at 08:09 AM
+-- Generation Time: Dec 06, 2024 at 10:07 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -148,11 +148,11 @@ CREATE TABLE `users` (
   `user_username` varchar(64) NOT NULL,
   `user_emailadd` varchar(64) NOT NULL,
   `user_trackstrand` varchar(5) DEFAULT NULL COMMENT 'ABM / HUMMS / STEM',
-  `user_idpicture_imgdir` varchar(256) NOT NULL,
+  `user_idpicture_imgdir` varchar(256) DEFAULT NULL,
   `user_profilepic_imgdir` varchar(256) NOT NULL DEFAULT '../assets/images/no_profile.jpg',
   `user_school` varchar(128) DEFAULT NULL,
   `user_reason` varchar(512) DEFAULT NULL,
-  `user_pwdhash` varchar(128) NOT NULL,
+  `user_pwdhash` varchar(128) DEFAULT NULL,
   `user_reset_token` varchar(255) DEFAULT NULL,
   `user_reset_token_expire` datetime DEFAULT NULL,
   `user_type` char(1) NOT NULL COMMENT 'A = Admin / S = Student / G = Guest',
@@ -226,7 +226,7 @@ ALTER TABLE `teachers`
 ALTER TABLE `users`
   ADD PRIMARY KEY (`user_id`),
   ADD KEY `lrn_id` (`lrn_id`),
-  ADD KEY `teacher_id` (`teacher_id`);
+  ADD KEY `users_ibfk_2` (`teacher_id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
