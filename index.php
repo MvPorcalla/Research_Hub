@@ -225,52 +225,50 @@
 
 <body>
     <!-- Background Image -->
-    <div id="background"></div>
+    <div id="background">
 
-    <!-- Main Content -->
-    <div id="content">
-        <!-- Header -->
-        <?php include 'includes/header.php'; ?>
-        
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-8 ms-5 mt-4">
-                    <div class="ms-5">
-                        <!-- <img src="./assets/images/hpTitle.png" class="img-fluid" alt="Sample Image"> -->
-                        <div class="title-container">
-                            <h1 class="hpTitle px-5">Start Your <br> Research Journey <br> With Research Hub</h1>
-                        </div>
+      <!-- Main Content -->
+      <div id="content">
+          <!-- Header -->
+          <?php include 'includes/header.php'; ?>
+          
+          <div class="container-fluid">
+              <div class="row">
+                  <div class="col-md-8 ms-5 mt-4">
+                      <div class="ms-5">
+                          <!-- <img src="./assets/images/hpTitle.png" class="img-fluid" alt="Sample Image"> -->
+                          <div class="title-container">
+                              <h1 class="hpTitle px-5">Start Your <br> Research Journey <br> With Research Hub</h1>
+                          </div>
 
-                        <div class="mt-3 d-flex justify-content-start">
-                        <!-- Login Link -->
-                        <a href="./login.php" class="btn animated-btn login-btn-color me-3" role="button" aria-label="Login">
-                            <strong class="button-title ">LOGIN</strong>
-                            <div id="container-border"></div>
-                        </a>
+                          <div class="mt-3 d-flex justify-content-start">
+                          <!-- Login Link -->
+                          <a href="./login.php" class="btn animated-btn login-btn-color me-3" role="button" aria-label="Login">
+                              <strong class="button-title ">LOGIN</strong>
+                              <div id="container-border"></div>
+                          </a>
 
-                        <!-- Register Link -->
-                        <a href="./register.php" class="btn animated-btn register-btn-color" role="button" aria-label="Register">
-                            <strong class="button-title ">REGISTER</strong>
-                            <div id="container-border"></div>
-                        </a>
-                    </div>
+                          <!-- Register Link -->
+                          <a href="./register.php" class="btn animated-btn register-btn-color" role="button" aria-label="Register">
+                              <strong class="button-title ">REGISTER</strong>
+                              <div id="container-border"></div>
+                          </a>
+                      </div>
 
-                </div>
-            </div>
-        </div>
-
-      <!-- LNHS Research Hub Icon -->
-      <a href="https://www.facebook.com/LigaoNationalHS" target="_blank" id="lNHS-link">
-          <div id="lNHS-icon-container">
-              <img src="./assets/icons/LNHS-icon.png" alt="LNHS Research Hub Icon" class="ms-5" id="lNHS-icon">
-              <p>LNHS Facebook page</p>
+                  </div>
+              </div>
           </div>
-      </a>
 
+        <!-- LNHS Research Hub Icon -->
+        <a href="https://www.facebook.com/LigaoNationalHS" target="_blank" id="lNHS-link">
+            <div id="lNHS-icon-container">
+                <img src="./assets/icons/LNHS-icon.png" alt="LNHS Research Hub Icon" class="ms-5" id="lNHS-icon">
+                <p>LNHS Facebook page</p>
+            </div>
+        </a>
 
-
+      </div>
     </div>
-
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
@@ -278,6 +276,7 @@
     <script src="includes/functions.js"></script>
 
     <script>
+        handleStatus('registration');
         const images = [
             './assets/images/hp_1.png',
             './assets/images/hp_2.png',
