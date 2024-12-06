@@ -11,6 +11,7 @@ if (isset($_POST['question'])) {
     $fields = [
         'user_id' => $user_id,
         'entry_content' => $question,
+        'entry_timestamp' => $current_timestamp //db.php
     ];
 
     $status = insert($conn, $table, $fields) ? "success" : "failed";

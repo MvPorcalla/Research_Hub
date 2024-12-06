@@ -10,7 +10,7 @@ $token = $_GET['token'];
 $sql = "SELECT * FROM `users` WHERE `user_reset_token` = ?";
 $result = query($conn, $sql, [$token]);
 
-if (empty($result) || date('Y-m-d H:i:s') >= $result[0]['user_reset_token_expire']) {
+if (empty($result) || $current_timestamp >= $result[0]['user_reset_token_expire']) {
     header("Location: forgotPassword.php?token=invalid");
     exit;
 }

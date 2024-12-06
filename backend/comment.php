@@ -15,7 +15,8 @@ if (isset($_POST['comment_content'])) {
     $table = 'comments';
     $fields = [
         'user_id' => $user_id,
-        'comment_content' => $comment_content
+        'comment_content' => $comment_content,
+        'comment_timestamp' => $current_timestamp //db.php
     ];
 
     if (isset($_POST['record_id']) || isset($_POST['entry_id'])) {

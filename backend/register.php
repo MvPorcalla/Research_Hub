@@ -52,7 +52,10 @@ if (isset($_POST['email'])) {
         'user_reason' => $reason,
 
         'user_type' => $role_symbol,
-        'user_status' => $status
+        'user_status' => $status,
+
+        'user_registration_timestamp' => $current_timestamp,
+        'user_lastlogin_timestamp' => $current_timestamp
     ];
 
     if (isset($_POST['password'])) {

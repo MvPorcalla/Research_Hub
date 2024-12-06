@@ -14,3 +14,5 @@
     session_start();
     date_default_timezone_set('Asia/Manila');
     include_once "sql_utilities.php";
+    
+    $current_timestamp = date('Y-m-d H:i:s');

@@ -36,7 +36,7 @@ if (isset($_POST['username'])) {
             $_SESSION['user_lastlogin'] = $row['user_lastlogin_timestamp'];
 
             $table = 'users';
-            $fields = [ 'user_lastlogin_timestamp' => date('Y-m-d H:i:s') ];
+            $fields = [ 'user_lastlogin_timestamp' => $current_timestamp ];
             $filter = [ 'user_id' => $row['user_id'] ];
 
             update($conn, $table, $fields, $filter);

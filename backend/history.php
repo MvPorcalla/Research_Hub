@@ -4,16 +4,14 @@ include_once "../../includes/db.php";
 $userId = $_SESSION['user_id'];
 $abstractId = $_GET['abstractId'];
 
-$currentTimestamp = date('Y-m-d H:i:s');
-
 $table = 'histories';
 $fields = [
-    'history_timestamp' => $currentTimestamp,
+    'history_timestamp' => $current_timestamp,
     'history_status' => 'A'
 ];
 
 $sql = "SELECT * FROM `histories` WHERE `user_id` = ? AND `record_id` = ? AND DATE(`history_timestamp`) = DATE(?)";
-$filter = [$userId, $abstractId, $currentTimestamp];
+$filter = [$userId, $abstractId, $current_timestamp];
 $result = query($conn, $sql, $filter);
 
 

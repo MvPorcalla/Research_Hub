@@ -38,7 +38,7 @@ if ($recordId !== null) {
     $sql = "SELECT * FROM `likes` WHERE `user_id` = ? AND `record_id` = ?";
     $result = query($conn, $sql, [$userId, $recordId]);
 
-    $fields = ['like_timestamp' => date('Y-m-d H:i:s')];
+    $fields = ['like_timestamp' => $current_timestamp];
 
     if (!empty($result)) {
 
@@ -65,7 +65,7 @@ if ($recordId !== null) {
     $sql = "SELECT * FROM `likes` WHERE `user_id` = ? AND `comment_id` = ?";
     $result = query($conn, $sql, [$userId, $commentId]);
 
-    $fields = ['like_timestamp' => date('Y-m-d H:i:s')];
+    $fields = ['like_timestamp' => $current_timestamp];
 
     if (!empty($result)) {
 
@@ -98,7 +98,7 @@ if ($recordId !== null) {
     $sql = "SELECT * FROM `likes` WHERE `user_id` = ? AND `entry_id` = ?";
     $result = query($conn, $sql, [$userId, $entryId]);
 
-    $fields = ['like_timestamp' => date('Y-m-d H:i:s')];
+    $fields = ['like_timestamp' => $current_timestamp];
 
     if (!empty($result)) {
         $like = $result[0];

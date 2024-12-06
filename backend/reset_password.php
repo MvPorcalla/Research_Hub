@@ -9,7 +9,7 @@ if (isset($_POST['token']) && isset($_POST['password'])) {
     $table = 'users';
     $fields = [
         'user_pwdhash' => $pwdhash,
-        'user_reset_token_expire' => date('Y-m-d H:i:s')
+        'user_reset_token_expire' => $current_timestamp
     ];
     $filter = ['user_reset_token' => $token];
 

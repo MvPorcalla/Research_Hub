@@ -34,7 +34,8 @@ if (isset($_POST['title'])) {
         'record_year' => $year,
         'record_month' => $month,
         'record_trackstrand' => $a_trackStrand,
-        'record_filedir' => $a_abstract
+        'record_filedir' => $a_abstract,
+        'record_timestamp' => $current_timestamp,
     ];
 
     // If editing an existing record
