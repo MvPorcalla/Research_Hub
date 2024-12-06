@@ -14,7 +14,7 @@
             </a>
         </li>
         <li class="nav-item mb-1">
-            <a class="nav-link sidebar-title" href="./listIDPage.php">
+            <a class="nav-link sidebar-title" href="./ListIDPage.php">
                 <i class="fas fa-id-card fa-xl me-3"></i> LRN & Employee No. Lists
             </a>
         </li>
