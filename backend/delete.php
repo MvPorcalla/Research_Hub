@@ -43,12 +43,12 @@ if (isset($_GET['abstractId'])) {
 
         if (update($conn, $table, $fields, $filter)) {
 
-            header("location: ../pages/admin/listLRN.php?deleteRecord=success");
+            header("location: ../pages/admin/ListIDPage.php?deleteRecord=success");
             exit();
         }
 
     } else {
-        header("location: ../pages/admin/listLRN.php?deleteRecord=failed");
+        header("location: ../pages/admin/ListIDPage.php?deleteRecord=failed");
         exit();
     }
 } else if (isset($_GET['teacherId'])) {
@@ -65,12 +65,12 @@ if (isset($_GET['abstractId'])) {
 
         if (update($conn, $table, $fields, $filter)) {
 
-            header("location: ../pages/admin/listEmployeeNos.php?deleteRecord=success");
+            header("location: ../pages/admin/ListIDPage.php?deleteRecord=success");
             exit();
         }
 
     } else {
-        header("location: ../pages/admin/listEmployeeNos.php?deleteRecord=failed");
+        header("location: ../pages/admin/ListIDPage.php?deleteRecord=failed");
         exit();
     }
 
