@@ -237,7 +237,6 @@
                 <div class="col-md-8 ms-5 mt-4">
                     <div class="ms-5">
                         <!-- <img src="./assets/images/hpTitle.png" class="img-fluid" alt="Sample Image"> -->
-
                         <div class="title-container">
                             <h1 class="hpTitle px-5">Start Your <br> Research Journey <br> With Research Hub</h1>
                         </div>
