@@ -73,7 +73,6 @@
                                 </div>
                             </div>
 
-
                         <!-- Content Table -->
                         <div class="container mt-3 side-container">
                             <div class="table-responsive">
