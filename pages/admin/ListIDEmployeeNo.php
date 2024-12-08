@@ -48,7 +48,7 @@
                         <form id="importForm" action="../../backend/importStudentLRN.php" method="post" enctype="multipart/form-data">
                             <input type="hidden" name="number_type" value="den">
                             <div class="mb-3">
-                                <label for="fileInput" class="form-label">Select Excel file to import</label>
+                                <label for="fileInput" class="form-label required">Select Excel file to import</label>
                                 <input type="file" class="form-control" id="fileInput" name="file" accept=".xlsx, .xls" required>
                                 <div class="form-text">Only Excel files (.xlsx, .xls) are allowed.</div>
                             </div>

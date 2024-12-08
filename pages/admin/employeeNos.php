@@ -37,12 +37,12 @@
                                             <!-- Full name -->
                                             <div class="row mb-4">
                                                 <div class="col-md-5">
-                                                    <label for="lastName" class="form-label fw-bold">Last Name</label>
-                                                    <input type="text" class="form-control" id="lastName" name="lastName">
+                                                    <label for="lastName" class="form-label required fw-bold">Last Name</label>
+                                                    <input type="text" class="form-control" id="lastName" name="lastName" required>
                                                 </div>
                                                 <div class="col-md-5">
-                                                    <label for="firstName" class="form-label fw-bold">First Name</label>
-                                                    <input type="text" class="form-control" id="firstName" name="firstName">
+                                                    <label for="firstName" class="form-label required fw-bold">First Name</label>
+                                                    <input type="text" class="form-control" id="firstName" name="firstName" required>
                                                 </div>
                                                 <div class="col-md-2">
                                                     <label for="middleInitial" class="form-label fw-bold">M.I.</label>
@@ -53,7 +53,7 @@
                                             <div class="row mb-4">
                                                 <!-- DepEd Employee Number -->
                                                 <div class="col-md-12">
-                                                    <label for="employeeNo" class="form-label fw-bold">DepEd Employee Number</label>
+                                                    <label for="employeeNo" class="form-label required fw-bold">DepEd Employee Number</label>
                                                     <input type="text" pattern="\d{7}" minlength="7" maxlength="7" class="form-control" id="employeeNo" name="employeeNo" required>
                                                 </div>
                                             </div>

@@ -78,6 +78,7 @@ document.addEventListener('DOMContentLoaded', async function() {
 
                 document.getElementById('changeFileCheckbox').querySelector('input').hidden = false;
                 document.getElementById('changeFileCheckbox').querySelector('label').hidden = false;
+                document.getElementById('fileLabel').classList.remove('required');
                 document.getElementById('file').disabled = true;
 
             } else if (document.getElementById('fileDisplay')) {

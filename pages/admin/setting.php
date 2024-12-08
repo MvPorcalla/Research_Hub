@@ -182,7 +182,7 @@
                                                         <div class="row">
                                                             <div class="col-md-12">
                                                                 <div class="mb-3">
-                                                                    <label for="currentPassword" class="form-label fw-bold">Current Password</label>
+                                                                    <label for="currentPassword" class="form-label required fw-bold">Current Password</label>
                                                                     <input type="password" class="form-control" id="currentPassword" name="currentPassword" required>
                                                                 </div>
                                                             </div>
@@ -190,13 +190,13 @@
                                                         <div class="row">
                                                             <div class="col-md-6">
                                                                 <div class="mb-3">
-                                                                    <label for="password" class="form-label fw-bold">New Password</label>
+                                                                    <label for="password" class="form-label required fw-bold">New Password</label>
                                                                     <input type="password" class="form-control" id="password" name="newPassword" required>
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-6">
                                                                 <div class="mb-3">
-                                                                    <label for="confirmPassword" class="form-label fw-bold">Confirm New Password</label>
+                                                                    <label for="confirmPassword" class="form-label required fw-bold">Confirm New Password</label>
                                                                     <input type="password" class="form-control" id="confirmPassword" name="confirmNewPassword" required>
                                                                 </div>                                                        
                                                             </div>

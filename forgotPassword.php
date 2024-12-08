@@ -39,7 +39,7 @@
                         <input type="text" name="reset_link" id="reset_link" hidden>
 
                         <div class="my-5">
-                            <label for="email" class="form-label">Email Address</label>
+                            <label for="email" class="form-label required">Email Address</label>
                             <input type="email" class="form-control" id="email" name="user_email" placeholder="Enter your email address" required autocomplete="email">
                         </div>
 

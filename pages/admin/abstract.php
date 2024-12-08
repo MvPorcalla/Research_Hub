@@ -37,7 +37,7 @@
                                             <!-- Title -->
                                             <div class="row mb-3">
                                                 <div class="col-md-12">
-                                                    <label for="title" class="form-label">Title</label>
+                                                    <label for="title" class="form-label required">Title</label>
                                                     <input type="text" class="form-control" id="title" name="title" required>
                                                 </div>
                                             </div>
@@ -45,7 +45,7 @@
                                             <!-- Author -->
                                             <div class="row mb-3">
                                                 <div class="col-md-12">
-                                                    <label for="authors" class="form-label">Authors</label>
+                                                    <label for="authors" class="form-label required">Authors</label>
                                                     <input type="text" class="form-control" id="authors" name="authors" required>
                                                 </div>
                                             </div>
@@ -53,14 +53,14 @@
                                             <!-- Month - Year -->
                                             <div class="row mb-3">
                                                 <div class="col-md-12">
-                                                    <label for="monthYear" class="form-label">Year</label>
+                                                    <label for="monthYear" class="form-label required">Year</label>
                                                     <input type="month" class="form-control" id="monthYear" name="monthYear" required>
                                                 </div>
                                             </div>
 
                                             <!-- Strand -->
                                             <div class="mb-3">
-                                                <label for="trackStrand" class="form-label">Strand</label>
+                                                <label for="trackStrand" class="form-label required">Strand</label>
                                                 <select class="form-control" id="trackStrand" name="trackStrand" required>
                                                     <option value="" disabled selected>Select your Strand</option>
                                                     <option value="STEM">STEM (Science, Technology, Engineering, and Mathematics)</option>
@@ -73,7 +73,7 @@
                                             <div class="mb-4">
                                                 <div class="row">
                                                     <div class="col-md-9">
-                                                        <label for="file" class="form-label">Upload Research</label>
+                                                        <label id="fileLabel" for="file" class="form-label required">Upload Research</label>
                                                     </div>
                                                     <div id="changeFileCheckbox" class="col-md-3 d-flex justify-content-end">
                                                         <input type="checkbox" id="enableUpload" class="form-check-input me-2" onchange="toggleFileInput()" hidden>
@@ -109,13 +109,16 @@
         function toggleFileInput() {
             const checkbox = document.getElementById('enableUpload');
             const fileInput = document.getElementById('file');
+            const fileLabel = document.getElementById('fileLabel');
 
             if (checkbox.checked) {
                 fileInput.disabled = false;
                 fileInput.required = true;
+                fileLabel.classList.toggle('required');
             } else {
                 fileInput.disabled = true;
                 fileInput.required = false;
+                fileLabel.classList.toggle('required');
             }
         }
     </script>

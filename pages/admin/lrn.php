@@ -37,12 +37,12 @@
                                             <!-- Full name -->
                                             <div class="row mb-4">
                                                 <div class="col-md-5">
-                                                    <label for="lastName" class="form-label fw-bold">Last Name</label>
-                                                    <input type="text" class="form-control" id="lastName" name="lastName">
+                                                    <label for="lastName" class="form-label required fw-bold">Last Name</label>
+                                                    <input type="text" class="form-control" id="lastName" name="lastName" required>
                                                 </div>
                                                 <div class="col-md-5">
-                                                    <label for="firstName" class="form-label fw-bold">First Name</label>
-                                                    <input type="text" class="form-control" id="firstName" name="firstName">
+                                                    <label for="firstName" class="form-label required fw-bold">First Name</label>
+                                                    <input type="text" class="form-control" id="firstName" name="firstName" required>
                                                 </div>
                                                 <div class="col-md-2">
                                                     <label for="middleInitial" class="form-label fw-bold">M.I.</label>
@@ -53,7 +53,7 @@
                                             <div class="row mb-4">
                                                 <!-- LRN / Student Number -->
                                                 <div class="col-md-12">
-                                                    <label for="lrn" class="form-label fw-bold">LRN / Student Number</label>
+                                                    <label for="lrn" class="form-label required fw-bold">LRN / Student Number</label>
                                                     <input type="text" class="form-control" pattern="\d{12}" minlength="12" maxlength="12" id="lrn" name="lrn" required>
                                                 </div>
                                             </div>

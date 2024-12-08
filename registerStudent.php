@@ -43,7 +43,7 @@
                                         <div class="row mb-3">
                                             <div class="col-md-5">
                                                 <label for="lastName" class="form-label required">Last Name</label>
-                                                <input type="text" class="form-control  required" id="lastName" name="lastName" required>
+                                                <input type="text" class="form-control" id="lastName" name="lastName" required>
                                             </div>
                                             <div class="col-md-5">
                                                 <label for="firstName" class="form-label required">First Name</label>

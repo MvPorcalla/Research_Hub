@@ -58,13 +58,13 @@ if (empty($result) || $current_timestamp >= $result[0]['user_reset_token_expire'
                         <!-- Password and Confirm Password -->
                         <div class="row mb-3">
                             <div class="col-md-12">
-                                <label for="password" class="form-label">Enter your new password</label>
+                                <label for="password" class="form-label required">Enter your new password</label>
                                 <input type="password" class="form-control" id="password" name="password" required>
                             </div>
                         </div>
                         <div class="row mb-3">
                             <div class="col-md-12">
-                                <label for="confirmPassword" class="form-label">Confirm your new password</label>
+                                <label for="confirmPassword" class="form-label required">Confirm your new password</label>
                                 <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" required>
                             </div>
                         </div>
