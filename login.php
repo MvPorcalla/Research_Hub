@@ -40,7 +40,9 @@
     <main>
         <!-- Login Section -->
         <div class="container d-flex justify-content-center align-items-center">
-            <div class="card login-card">                
+            <div class="card login-card">  
+                <img src="./assets/icons/LNHS-icon.png" alt="LNHS Logo" class="logo rounded-circle">
+              
                 <div class="card-body p-4">
                     <h3 class="login_card-title text-center mt-3 mb-4">Login</h3>
                     <form action="backend/login.php" method="POST">

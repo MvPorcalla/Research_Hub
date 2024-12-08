@@ -121,24 +121,26 @@
           background-image: linear-gradient(#161a25, #161a25),
             linear-gradient(
               137.48deg,
-              #0000FF 5%,
-              #00c6ff 25%, 
-              #000000 50%, 
-              #800080 75%,
-              #4B0082 95%  
-            );
-        }
-        .register-btn-color {
-          background-image: linear-gradient(#161a25, #161a25),
-            linear-gradient(
-              137.48deg,
-              #f5434f  5%,    
-              #631e29 25%,  
+              #0ea5e9 5%,
+              #0284c7 25%,
               #000000 50%,
-              #f44336 75%,   
-              #ff6f00 95%   
+              #1d4ed8 75%,
+              #1e40af 95% 
             );
         }
+
+        .register-btn-color {
+    background-image: linear-gradient(#161a25, #161a25),
+      linear-gradient(
+        137.48deg,
+        #4338ca 5%,
+        #3730a3 25%,
+        #000000 50%,
+        #7e22ce 75%,
+        #6b21a8 95%
+      );
+}
+
 
         #container-border {
           position: absolute;

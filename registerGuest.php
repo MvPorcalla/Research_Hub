@@ -24,8 +24,7 @@
         <!-- Register Section -->
         <div class="container">
             <div class="row">
-                <div class="">
-                    
+                <div class="mt-3">
                     <div class="row justify-content-center">
                         <div class="col-md-10">
                             <div class="card mt-5 my-4 py-3">
@@ -106,7 +105,6 @@
                     </div>
                 </div>
             </div>
-        </div>
         </div>
 
     </main>
